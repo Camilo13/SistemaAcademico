@@ -1,0 +1,113 @@
+/* ============================================================
+   componentes/botones.css
+   Sistema de botones — I.E.A. Akwe Uus Yat.
+   Cargado globalmente en todos los layouts autenticados.
+
+   Jerarquía semántica:
+   .btn-primario    → guardar, actualizar        (verde oscuro)
+   .btn-secundario  → crear, agregar             (verde claro)
+   .btn-neutro      → cancelar, volver           (gris)
+   .btn-advertencia → desactivar, suspender      (ámbar)
+   .btn-peligro     → eliminar                   (rojo)
+   ============================================================ */
+
+/* ============================================================
+   Base
+   ============================================================ */
+.btn {
+    display         : inline-flex;
+    align-items     : center;
+    justify-content : center;
+    gap             : 0.4rem;
+
+    padding         : 0.65rem 1.4rem;
+    font-family     : var(--fuente-base);
+    font-size       : var(--texto-md);
+    font-weight     : var(--peso-semi);
+    line-height     : 1;
+
+    border-radius   : var(--radio-md);
+    border          : none;
+    cursor          : pointer;
+    text-decoration : none;
+    white-space     : nowrap;
+    box-sizing      : border-box;
+
+    transition      : background  var(--transicion-normal),
+                      transform   var(--transicion-rapida),
+                      box-shadow  var(--transicion-normal);
+}
+
+/* Normalizar <button> */
+button.btn { -webkit-appearance: none; appearance: none; }
+
+.btn:hover  { transform: translateY(-2px); box-shadow: var(--sombra-md); }
+.btn:active { transform: translateY(0);    box-shadow: none; }
+
+/* ============================================================
+   Variantes
+   ============================================================ */
+
+/* Guardar / Actualizar */
+.btn-primario        { background: #166534; color: #ffffff; }
+.btn-primario:hover  { background: #15803d; }
+.btn-primario:active { background: #065f46; }
+
+/* Crear / Agregar */
+.btn-secundario        { background: #22c55e; color: #ffffff; }
+.btn-secundario:hover  { background: #16a34a; }
+.btn-secundario:active { background: #15803d; }
+
+/* Cancelar / Volver */
+.btn-neutro        { background: #e5e7eb; color: #374151; }
+.btn-neutro:hover  { background: #d1d5db; }
+.btn-neutro:active { background: #c4c9d1; }
+
+/* Desactivar / Suspender */
+.btn-advertencia        { background: #d97706; color: #ffffff; }
+.btn-advertencia:hover  { background: #b45309; }
+.btn-advertencia:active { background: #92400e; }
+
+/* Eliminar */
+.btn-peligro        { background: #dc2626; color: #ffffff; }
+.btn-peligro:hover  { background: #b91c1c; }
+.btn-peligro:active { background: #991b1b; }
+
+/* Compatibilidad: btn-warning verde (versión anterior) */
+.btn-warning        { background: #16a34a; color: #ffffff; }
+.btn-warning:hover  { background: #15803d; }
+.btn-warning:active { background: #166534; }
+
+/* ============================================================
+   Tamaños
+   ============================================================ */
+.btn-sm { padding: 0.45rem 0.9rem;  font-size: var(--texto-sm); }
+.btn-xs { padding: 0.3rem  0.65rem; font-size: var(--texto-xs); }
+
+/* ============================================================
+   Estado deshabilitado
+   ============================================================ */
+.btn:disabled,
+.btn.btn-deshabilitado {
+    opacity        : 0.55;
+    cursor         : not-allowed;
+    pointer-events : none;
+    box-shadow     : none;
+    transform      : none;
+}
+
+/* ============================================================
+   Contenedor de acciones en formulario / tabla
+   ============================================================ */
+.acciones {
+    display     : flex;
+    flex-wrap   : wrap;
+    align-items : center;
+    gap         : 0.4rem;
+}
+.acciones form { margin: 0; }
+
+/* ============================================================
+   Utilidad
+   ============================================================ */
+.oculto { display: none !important; }

@@ -1,0 +1,138 @@
+/* ============================================================
+   modulos/solicitudes/gestion/index.css
+   Vista: Listado de solicitudes pendientes (admin).
+   Cargado en: gestion/index.blade.php — @push('styles')
+
+   Reutiliza del layout global:
+     academico-index.css → .contenedor-modulo, .cabecera,
+                           .cabecera-info, .cabecera-subtitulo
+     academico-form.css  → .tarjeta-form, .alerta-error
+     tablas.css          → .badge-*, .alerta-error
+     botones.css         → .btn, .btn-sm y variantes
+   ============================================================ */
+
+/* ── Grid de tarjetas ── */
+.solicitudes-grid {
+    display               : grid;
+    grid-template-columns : repeat(auto-fill, minmax(320px, 1fr));
+    gap                   : 1.4rem;
+}
+
+/* ── Tarjeta individual ── */
+.solicitud-card {
+    background    : var(--fondo-tarjeta);
+    border        : 1px solid var(--borde-color);
+    border-left   : 3px solid #22c55e;
+    border-radius : var(--radio-lg);
+    padding       : 1.3rem 1.4rem;
+    display       : flex;
+    flex-direction: column;
+    gap           : 1rem;
+    box-shadow    : var(--sombra-sm);
+    transition    : box-shadow var(--transicion-normal),
+                    transform  var(--transicion-rapida);
+}
+
+.solicitud-card:hover {
+    box-shadow: var(--sombra-md);
+    transform : translateY(-2px);
+}
+
+/* ── Cabecera de tarjeta (avatar + nombre) ── */
+.solicitud-card-header {
+    display    : flex;
+    align-items: center;
+    gap        : 0.9rem;
+}
+
+.solicitud-avatar {
+    width           : 42px;
+    height          : 42px;
+    border-radius   : 50%;
+    background      : #f0fdf4;
+    border          : 1.5px solid #a7f3d0;
+    display         : flex;
+    align-items     : center;
+    justify-content : center;
+    font-size       : 1.1rem;
+    color           : #065f46;
+    flex-shrink     : 0;
+}
+
+.solicitud-nombre {
+    font-size  : var(--texto-base);
+    font-weight: var(--peso-semi);
+    color      : var(--color-texto-subtitulo);
+    margin     : 0 0 0.3rem;
+}
+
+/* ── Lista de datos ── */
+.solicitud-datos {
+    list-style    : none;
+    padding       : 0;
+    margin        : 0;
+    display       : flex;
+    flex-direction: column;
+    gap           : 0.3rem;
+}
+
+.solicitud-datos li {
+    font-size  : var(--texto-sm);
+    color      : var(--color-texto-cuerpo);
+    display    : flex;
+    align-items: center;
+    gap        : 0.5rem;
+}
+
+.solicitud-datos i {
+    color      : #10b981;
+    font-size  : var(--texto-xs);
+    flex-shrink: 0;
+    width      : 14px;
+    text-align : center;
+}
+
+/* ── Acciones de la tarjeta ── */
+.solicitud-acciones {
+    display        : flex;
+    flex-wrap      : wrap;
+    gap            : 0.5rem;
+    justify-content: flex-end;
+    margin-top     : auto;
+    padding-top    : 0.75rem;
+    border-top     : 1px solid var(--borde-color);
+}
+
+.solicitud-acciones form { margin: 0; }
+
+/* ── Estado vacío ── */
+.solicitudes-vacio {
+    text-align    : center;
+    padding       : 3rem 2rem;
+    display       : flex;
+    flex-direction: column;
+    align-items   : center;
+    gap           : 1rem;
+    color         : var(--color-texto-tenue);
+}
+
+.solicitudes-vacio i { color: #22c55e; }
+.solicitudes-vacio p { margin: 0; font-size: var(--texto-base); }
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+    .solicitudes-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 480px) {
+    .solicitud-acciones {
+        flex-direction: column;
+        align-items   : stretch;
+    }
+    .solicitud-acciones .btn,
+    .solicitud-acciones form,
+    .solicitud-acciones form .btn {
+        width          : 100%;
+        justify-content: center;
+    }
+}

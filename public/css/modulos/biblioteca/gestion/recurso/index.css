@@ -1,0 +1,136 @@
+/* ============================================================
+   modulos/biblioteca/gestion/recurso/index.css
+   Vista: Listado de recursos de una materia (admin).
+
+   Reutiliza del layout global:
+     academico-index.css → .contenedor-modulo, .cabecera,
+                           .cabecera-info, .cabecera-subtitulo
+     academico-form.css  → .tarjeta-form, .alerta-error
+     botones.css         → .btn-primario, .btn-secundario,
+                           .btn-neutro, .btn-peligro,
+                           .btn-advertencia, .btn-sm
+     materia/index.css   → .materia-badge, .badge-visible,
+                           .badge-oculta
+
+   Este archivo solo aporta el grid de tarjetas y sus
+   elementos internos específicos de recursos.
+   ============================================================ */
+
+/* ── Grid ── */
+.recursos-grid {
+    display               : grid;
+    grid-template-columns : repeat(auto-fill, minmax(280px, 1fr));
+    gap                   : 1.4rem;
+}
+
+/* ── Tarjeta ── */
+.recurso-card {
+    background    : var(--fondo-tarjeta);
+    border        : 1px solid var(--borde-color);
+    border-left   : 3px solid #22c55e;
+    border-radius : var(--radio-lg);
+    padding       : 1.3rem 1.4rem;
+    display       : flex;
+    flex-direction: column;
+    gap           : 0.6rem;
+    box-shadow    : var(--sombra-sm);
+    transition    : box-shadow var(--transicion-normal),
+                    transform  var(--transicion-rapida);
+}
+
+.recurso-card:hover {
+    box-shadow: var(--sombra-md);
+    transform : translateY(-2px);
+}
+
+/* ── Cabecera de tarjeta ── */
+.recurso-card-header {
+    display        : flex;
+    align-items    : center;
+    justify-content: space-between;
+    gap            : 0.5rem;
+    flex-wrap      : wrap;
+}
+
+/* ── Badge tipo ── */
+.recurso-tipo-badge {
+    font-size     : var(--texto-xs);
+    font-weight   : var(--peso-semi);
+    color         : #374151;
+    display       : flex;
+    align-items   : center;
+    gap           : 0.3rem;
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-wide);
+}
+
+.recurso-tipo-badge i { color: #10b981; }
+
+/* ── Título ── */
+.recurso-titulo {
+    font-size  : var(--texto-base);
+    font-weight: var(--peso-semi);
+    color      : var(--color-texto-subtitulo);
+    margin     : 0;
+    line-height: var(--leading-tight);
+}
+
+/* ── Descripción truncada ── */
+.recurso-descripcion {
+    font-size         : var(--texto-sm);
+    color             : var(--color-texto-secundario);
+    line-height       : var(--leading-relaxed);
+    margin            : 0;
+    flex              : 1;
+    display            : -webkit-box;
+    -webkit-box-orient : vertical;
+    -webkit-line-clamp : 3;
+    overflow           : hidden;
+    line-clamp         : 3;
+}
+
+/* ── Autor ── */
+.recurso-autor {
+    font-size  : var(--texto-xs);
+    color      : var(--color-texto-tenue);
+    display    : flex;
+    align-items: center;
+    gap        : 0.35rem;
+    margin     : 0;
+}
+
+.recurso-autor i { color: #10b981; }
+
+/* ── Acciones de la tarjeta ── */
+.recurso-acciones {
+    display    : flex;
+    flex-wrap  : wrap;
+    gap        : 0.5rem;
+    margin-top : 0.3rem;
+    padding-top: 0.75rem;
+    border-top : 1px solid var(--borde-color);
+}
+
+/* ── Estado vacío ── */
+.recurso-vacio {
+    text-align    : center;
+    padding       : 3rem 2rem;
+    display       : flex;
+    flex-direction: column;
+    align-items   : center;
+    gap           : 1rem;
+    color         : var(--color-texto-tenue);
+}
+
+.recurso-vacio i { color: #22c55e; }
+.recurso-vacio p { margin: 0; font-size: var(--texto-base); }
+
+/* ── Responsive ── */
+@media (max-width: 640px) {
+    .recursos-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 480px) {
+    .recurso-acciones         { flex-direction: column; }
+    .recurso-acciones .btn    { width: 100%; justify-content: center; }
+}

@@ -1,0 +1,23 @@
+/* ============================================================
+   modulos/portal/eventos/eventos.css
+   Vistas: index, create, edit — Eventos del portal (admin).
+
+   Reutiliza del layout global:
+     academico-index.css → .contenedor-modulo, .cabecera,
+                           .cabecera-info, .cabecera-subtitulo
+     academico-form.css  → .tarjeta-form, .grid-campos, .campo,
+                           .campo-ancho, .campo-check, .label-check,
+                           .acciones-form, .tarjeta-accion,
+                           .tarjeta-peligro, .seccion-titulo-form,
+                           .seccion-desc, .acciones-secundarias,
+                           .info-registro, .error-campo
+     tablas.css          → .tabla, .tabla-contenedor, .col-acciones,
+                           .btn-icono.editar, .estado, .estado-activo,
+                           .estado-inactivo, .fila-vacia, .paginacion,
+                           .alerta-error
+     botones.css         → .btn-primario, .btn-neutro, .btn-peligro,
+                           .btn-advertencia, .btn-secundario
+
+   Este archivo no necesita agregar nada extra.
+   Se mantiene como placeholder para futuros overrides.
+   ============================================================ */

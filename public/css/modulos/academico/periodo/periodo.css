@@ -1,0 +1,81 @@
+/* ============================================================
+   modulos/academico/periodo/periodo.css
+   Vistas: index, create, edit — Periodos académicos.
+
+   Reutiliza del layout global:
+     academico-index.css → .contenedor-modulo, .cabecera,
+                           .cabecera-info, .cabecera-subtitulo
+     academico-form.css  → .tarjeta-form, .grid-campos, .campo,
+                           .campo-ancho, .acciones-form,
+                           .tarjeta-accion, .tarjeta-peligro,
+                           .seccion-titulo-form, .seccion-desc,
+                           .acciones-secundarias, .info-registro,
+                           .error-campo, .nota-campo
+     tablas.css          → .tabla, .tabla-contenedor, .col-acciones,
+                           .btn-icono.editar, .estado, .estado-*,
+                           .fila-vacia, .alerta-error
+     botones.css         → .btn-primario, .btn-neutro, .btn-peligro,
+                           .btn-advertencia, .btn-secundario, .btn-sm
+
+   Este archivo aporta:
+     — chips de resumen del index (.periodo-resumen)
+     — estados de periodo que no están en tablas.css
+       (.estado-abierto, .estado-cerrado)
+   ============================================================ */
+
+/* ── Chips de resumen ── */
+.periodo-resumen {
+    display  : flex;
+    flex-wrap: wrap;
+    gap      : 0.75rem;
+}
+
+.periodo-chip {
+    display       : flex;
+    align-items   : center;
+    gap           : 0.65rem;
+    background    : var(--fondo-tarjeta);
+    border        : 1px solid var(--borde-color);
+    border-radius : var(--radio-md);
+    padding       : 0.65rem 1.1rem;
+    box-shadow    : var(--sombra-sm);
+    min-width     : 110px;
+}
+
+.periodo-chip i {
+    font-size: var(--texto-lg);
+    color    : #10b981;
+    flex-shrink: 0;
+}
+
+.periodo-chip-label {
+    display    : block;
+    font-size  : var(--texto-xs);
+    color      : var(--color-texto-tenue);
+    line-height: 1.2;
+}
+
+.periodo-chip-valor {
+    display    : block;
+    font-size  : var(--texto-xl);
+    font-weight: var(--peso-bold);
+    color      : var(--color-texto-subtitulo);
+    line-height: 1.2;
+}
+
+/* ── Estados propios del periodo ── */
+.estado-abierto {
+    background: #d1fae5;
+    color     : #065f46;
+}
+
+.estado-cerrado {
+    background: #fee2e2;
+    color     : #991b1b;
+}
+
+/* ── Responsive ── */
+@media (max-width: 480px) {
+    .periodo-resumen { display: grid; grid-template-columns: repeat(3, 1fr); }
+    .periodo-chip    { min-width: 0; }
+}

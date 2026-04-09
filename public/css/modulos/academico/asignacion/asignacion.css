@@ -1,0 +1,39 @@
+/* ============================================================
+   modulos/academico/asignacion/asignacion.css
+   Vistas: index, create, edit — Asignaciones docentes.
+
+   Reutiliza del layout global (todo excepto los filtros).
+   Este archivo solo aporta la fila de filtros del index.
+   ============================================================ */
+
+/* ── Fila de filtros ── */
+.asignacion-filtros {
+    display    : flex;
+    flex-wrap  : wrap;
+    align-items: center;
+    gap        : 0.6rem;
+}
+
+.asignacion-filtros select {
+    padding      : 0.45rem 0.75rem;
+    border       : 1px solid var(--borde-color);
+    border-radius: var(--radio-md);
+    font-size    : var(--texto-sm);
+    color        : var(--color-texto-cuerpo);
+    background   : var(--fondo-tarjeta);
+    cursor       : pointer;
+    transition   : border-color var(--transicion-normal);
+    min-width    : 180px;
+}
+
+.asignacion-filtros select:focus {
+    outline     : none;
+    border-color: #22c55e;
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+    .asignacion-filtros        { flex-direction: column; align-items: stretch; }
+    .asignacion-filtros select { width: 100%; }
+    .asignacion-filtros .btn   { width: 100%; justify-content: center; }
+}

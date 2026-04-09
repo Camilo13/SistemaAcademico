@@ -1,0 +1,50 @@
+/* ============================================================
+   componentes/resumen.css
+   Bloque de resumen visual (solicitudes, confirmaciones).
+   Cargado globalmente en todos los layouts autenticados.
+   ============================================================ */
+
+/* ── Contenedor del resumen ── */
+.resumen {
+    display   : grid;
+    gap       : 1rem;
+    margin-top: 1rem;
+}
+
+/* ── Bloque individual ── */
+.resumen-bloque {
+    background  : #f9fafb;
+    border-left : 4px solid #22c55e;
+    padding     : 1rem 1.2rem;
+    border-radius: var(--radio-md);
+}
+
+.resumen-bloque h4 {
+    margin     : 0 0 0.5rem;
+    font-size  : var(--texto-base);
+    font-weight: var(--peso-semi);
+    color      : #065f46;
+}
+
+.resumen-bloque p {
+    margin     : 0.25rem 0;
+    font-size  : var(--texto-sm);
+    color      : var(--color-texto-cuerpo);
+}
+
+.resumen-bloque p strong {
+    color      : #111827;
+    font-weight: var(--peso-semi);
+}
+
+/* Variante de seguridad (azul) */
+.resumen-seguridad {
+    border-left-color: #0284c7;
+    background       : #f0f9ff;
+}
+
+/* ── Responsive ── */
+@media (min-width: 768px) {
+    .resumen { grid-template-columns: 1fr 1fr; }
+    .resumen-seguridad { grid-column: span 2; }
+}

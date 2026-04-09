@@ -1,0 +1,128 @@
+/* ============================================================
+   modulos/biblioteca/gestion/materia/index.css
+   Vista: Listado de materias de biblioteca.
+   Cargado en: gestion/materia/index.blade.php — @push('styles')
+
+   Reutiliza del layout global:
+     academico-index.css → .contenedor-modulo, .cabecera
+     academico-form.css  → .tarjeta-form, .alerta-error
+     botones.css         → .btn y variantes
+
+   Este archivo aporta solo el grid de tarjetas de catálogo,
+   que es diferente al layout de tabla usado en otros módulos.
+   ============================================================ */
+
+/* ── Grid de materias ── */
+.materias-grid {
+    display               : grid;
+    grid-template-columns : repeat(auto-fill, minmax(260px, 1fr));
+    gap                   : 1.4rem;
+}
+
+/* ── Tarjeta de materia ── */
+.materia-card {
+    background    : var(--fondo-tarjeta);
+    border        : 1px solid var(--borde-color);
+    border-left   : 3px solid #22c55e;
+    border-radius : var(--radio-lg);
+    padding       : 1.4rem;
+    display       : flex;
+    flex-direction: column;
+    gap           : 0.65rem;
+    box-shadow    : var(--sombra-sm);
+    position      : relative;
+    transition    : box-shadow var(--transicion-normal),
+                    transform  var(--transicion-rapida);
+}
+
+.materia-card:hover {
+    box-shadow: var(--sombra-md);
+    transform : translateY(-2px);
+}
+
+/* ── Badge de visibilidad ── */
+.materia-badge {
+    display      : inline-flex;
+    align-items  : center;
+    gap          : 0.3rem;
+    font-size    : var(--texto-xs);
+    font-weight  : var(--peso-semi);
+    padding      : 0.2rem 0.6rem;
+    border-radius: var(--radio-pill);
+    align-self   : flex-start;
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-wide);
+}
+
+.badge-visible { background: #d1fae5; color: #065f46; }
+.badge-oculta  { background: #f3f4f6; color: #6b7280; }
+
+/* ── Nombre ── */
+.materia-nombre {
+    font-size  : var(--texto-base);
+    font-weight: var(--peso-semi);
+    color      : var(--color-texto-subtitulo);
+    margin     : 0;
+    line-height: var(--leading-tight);
+}
+
+/* ── Descripción ── */
+.materia-descripcion {
+    font-size  : var(--texto-sm);
+    color      : var(--color-texto-secundario);
+    line-height: var(--leading-relaxed);
+    margin     : 0;
+    flex       : 1;
+
+    /* Truncar a 3 líneas */
+    display            : -webkit-box;
+    -webkit-line-clamp : 3;
+    -webkit-box-orient : vertical;
+    overflow           : hidden;
+}
+
+/* ── Contador de recursos ── */
+.materia-recursos-count {
+    font-size  : var(--texto-xs);
+    color      : var(--color-texto-tenue);
+    display    : flex;
+    align-items: center;
+    gap        : 0.4rem;
+    margin     : 0;
+}
+
+.materia-recursos-count i { color: #10b981; }
+
+/* ── Acciones ── */
+.materia-acciones {
+    display  : flex;
+    flex-wrap: wrap;
+    gap      : 0.5rem;
+    margin-top: 0.3rem;
+    padding-top: 0.75rem;
+    border-top: 1px solid var(--borde-color);
+}
+
+/* ── Estado vacío ── */
+.materia-vacio {
+    text-align    : center;
+    padding       : 3rem 2rem;
+    display       : flex;
+    flex-direction: column;
+    align-items   : center;
+    gap           : 1rem;
+    color         : var(--color-texto-tenue);
+}
+
+.materia-vacio i { color: #22c55e; }
+.materia-vacio p { margin: 0; font-size: var(--texto-base); }
+
+/* ── Responsive ── */
+@media (max-width: 640px) {
+    .materias-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 480px) {
+    .materia-acciones { flex-direction: column; }
+    .materia-acciones .btn { width: 100%; justify-content: center; }
+}

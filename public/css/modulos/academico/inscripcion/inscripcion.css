@@ -1,0 +1,58 @@
+/* ============================================================
+   modulos/academico/inscripcion/inscripcion.css
+   Vistas: index, create, edit — Inscripciones.
+
+   Reutiliza del layout global (todo excepto lo de abajo).
+   Este archivo aporta:
+     — Filtros del index
+     — Estado 'finalizado' (no existe en tablas.css)
+     — Accesos rápidos en el edit
+   ============================================================ */
+
+/* ── Filtros ── */
+.inscripcion-filtros {
+    display    : flex;
+    flex-wrap  : wrap;
+    align-items: center;
+    gap        : 0.6rem;
+}
+
+.inscripcion-filtros select {
+    padding      : 0.45rem 0.75rem;
+    border       : 1px solid var(--borde-color);
+    border-radius: var(--radio-md);
+    font-size    : var(--texto-sm);
+    color        : var(--color-texto-cuerpo);
+    background   : var(--fondo-tarjeta);
+    cursor       : pointer;
+    transition   : border-color var(--transicion-normal);
+    min-width    : 190px;
+}
+
+.inscripcion-filtros select:focus {
+    outline     : none;
+    border-color: #22c55e;
+}
+
+/* ── Estado finalizado (complementa tablas.css) ── */
+.estado-finalizado {
+    background: #ecfdf5;
+    color     : #047857;
+}
+
+/* ── Accesos rápidos en el edit ── */
+.inscripcion-accesos {
+    display    : flex;
+    flex-wrap  : wrap;
+    gap        : 0.5rem;
+    margin-top : 1rem;
+    padding-top: 0.75rem;
+    border-top : 1px solid var(--borde-color);
+}
+
+/* ── Responsive ── */
+@media (max-width: 640px) {
+    .inscripcion-filtros        { flex-direction: column; align-items: stretch; }
+    .inscripcion-filtros select { width: 100%; }
+    .inscripcion-filtros .btn   { width: 100%; justify-content: center; }
+}

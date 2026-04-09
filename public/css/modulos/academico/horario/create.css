@@ -1,0 +1,69 @@
+/* ============================================================
+   modulos/academico/horario/create.css
+   Vista: Crear franja horaria.
+   Cargado en: horario/create.blade.php — @push('styles')
+
+   Dependencias globales (ya en el layout):
+     academico-form.css → .contenedor-modulo, .tarjeta-form,
+                          .grid-campos, .campo, .acciones-form
+     botones.css        → .btn y variantes
+     tipografia.css     → variables CSS
+   ============================================================ */
+
+/* ── Panel de referencia de bloques horarios ──
+   Muestra bloques disponibles con hora inicio/fin/duración. */
+.info-bloques {
+    background   : #f8fafc;
+    border       : 1px solid var(--borde-color);
+    border-radius: var(--radio-md);
+    padding      : 1rem;
+}
+
+.info-bloques-titulo {
+    font-size   : var(--texto-sm);
+    font-weight : var(--peso-semi);
+    color       : var(--color-texto-subtitulo);
+    margin      : 0 0 0.75rem;
+    display     : flex;
+    align-items : center;
+    gap         : 0.4rem;
+}
+
+/* Tabla de bloques dentro del panel */
+.tabla-bloques {
+    width           : 100%;
+    border-collapse : collapse;
+    font-size       : var(--texto-xs);
+}
+
+.tabla-bloques th {
+    padding        : 0.4rem 0.8rem;
+    background     : #f0fdf4;
+    color          : #065f46;
+    font-weight    : var(--peso-semi);
+    text-align     : left;
+    border-bottom  : 1px solid #d1fae5;
+    text-transform : uppercase;
+    letter-spacing : var(--tracking-wider);
+}
+
+.tabla-bloques td {
+    padding      : 0.45rem 0.8rem;
+    border-bottom: 1px solid #f3f4f6;
+    color        : var(--color-texto-cuerpo);
+}
+
+.tabla-bloques tbody tr:last-child td { border-bottom: none; }
+
+/* Fila de pausa / recreo */
+.tabla-bloques .fila-pausa td {
+    background : #fef9c3;
+    color      : #854d0e;
+    font-weight: var(--peso-semi);
+    font-style : italic;
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+    .info-bloques { overflow-x: auto; }
+}

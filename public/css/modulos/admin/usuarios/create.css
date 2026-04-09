@@ -1,0 +1,47 @@
+/* ============================================================
+   modulos/admin/usuarios/create.css
+   Vista: Crear usuario.
+   Comparte los mismos estilos que edit.css.
+   ============================================================ */
+
+/* Barra de fortaleza de contraseña */
+.fortaleza-password {
+    height       : 5px;
+    background   : var(--borde-color);
+    border-radius: var(--radio-pill);
+    overflow     : hidden;
+    margin-top   : 0.3rem;
+}
+
+.fortaleza-barra {
+    height     : 100%;
+    width      : 0%;
+    border-radius: var(--radio-pill);
+    transition : width 0.35s ease, background 0.35s ease;
+}
+
+.fortaleza-barra.debil  { width: 33%;  background: #dc2626; }
+.fortaleza-barra.media  { width: 66%;  background: #d97706; }
+.fortaleza-barra.fuerte { width: 100%; background: #16a34a; }
+
+.fortaleza-label {
+    font-size  : var(--texto-xs);
+    margin-top : 0.25rem;
+    font-weight: var(--peso-semi);
+    color      : var(--color-texto-secundario);
+    min-height : 1.2em;
+}
+
+/* Separador de sección dentro del grid */
+.separador-seccion {
+    grid-column   : 1 / -1;
+    font-size     : var(--texto-base);
+    font-weight   : var(--peso-semi);
+    color         : var(--color-texto-subtitulo);
+    display       : flex;
+    align-items   : center;
+    gap           : 0.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom : 2px solid var(--borde-color);
+    margin-top    : 0.5rem;
+}

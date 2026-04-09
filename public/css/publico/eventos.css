@@ -1,0 +1,208 @@
+/* ============================================================
+   publico/eventos.css
+   Página de eventos institucionales — portal público.
+   Cargado en: publico/eventos.blade.php
+   Dependencias: layout/menupublico.css
+   ============================================================ */
+
+:root {
+    --ev-titulo   : #004d2a;
+    --ev-acento   : #388e3c;
+    --ev-texto    : #555555;
+    --ev-fondo    : #fcfcf7;
+    --ev-sombra   : rgba(0, 0, 0, 0.08);
+    --ev-sombra-md: rgba(0, 0, 0, 0.15);
+}
+
+/* ── Sección principal ── */
+.seccion-eventos {
+    padding         : 64px 1.5rem 72px;
+    background-color: var(--ev-fondo);
+    text-align      : center;
+}
+
+.contenedor { max-width: 1200px; margin: 0 auto; }
+
+/* ── Encabezado ── */
+.titulo-seccion {
+    font-size    : 2.4rem;
+    font-weight  : 800;
+    color        : var(--ev-titulo);
+    margin-bottom: 0.75rem;
+}
+
+.descripcion-seccion {
+    max-width  : 660px;
+    margin     : 0 auto 3rem;
+    font-size  : 1.05rem;
+    color      : var(--ev-texto);
+    line-height: 1.7;
+}
+
+/* ── Grid de eventos ── */
+.eventos-grid {
+    display              : grid;
+    grid-template-columns: 1fr;
+    gap                  : 1.6rem;
+    text-align           : left;
+}
+
+@media (min-width: 640px) {
+    .eventos-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (min-width: 1024px) {
+    .eventos-grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+/* ── Tarjeta de evento ── */
+.evento-card {
+    display      : flex;
+    align-items  : stretch;
+    background   : #ffffff;
+    border-radius: 1.1rem;
+    overflow     : hidden;
+    box-shadow   : 0 6px 20px var(--ev-sombra);
+    border-left  : 5px solid var(--ev-acento);
+    transition   : transform 0.28s ease, box-shadow 0.28s ease;
+    height       : 100%;
+}
+
+.evento-card:hover {
+    transform : translateY(-5px);
+    box-shadow: 0 12px 30px var(--ev-sombra-md);
+}
+
+/* ── Bloque de fecha ── */
+.evento-fecha {
+    background     : var(--ev-titulo);
+    color          : #ffffff;
+    min-width      : 90px;
+    padding        : 1.2rem 0.8rem;
+    display        : flex;
+    flex-direction : column;
+    align-items    : center;
+    justify-content: center;
+    flex-shrink    : 0;
+}
+
+.evento-fecha .dia {
+    font-size  : 2.2rem;
+    font-weight: 800;
+    line-height: 1;
+}
+
+.evento-fecha .mes {
+    font-size     : 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-top    : 0.25rem;
+    opacity       : 0.88;
+}
+
+/* ── Contenido del evento ── */
+.evento-contenido {
+    padding        : 1.2rem 1.3rem;
+    display        : flex;
+    flex-direction : column;
+    gap            : 0.4rem;
+    flex           : 1;
+}
+
+.evento-contenido h3 {
+    font-size    : 1.05rem;
+    font-weight  : 700;
+    color        : var(--ev-titulo);
+    margin       : 0;
+    line-height  : 1.35;
+}
+
+/* ── Meta (hora y lugar) ── */
+.evento-meta {
+    display  : flex;
+    flex-wrap: wrap;
+    gap      : 0.6rem 1rem;
+    font-size: 0.85rem;
+}
+
+.evento-hora  { color: var(--ev-titulo); font-weight: 600; }
+.evento-lugar { color: var(--ev-acento); font-weight: 600; }
+
+/* ── Descripción colapsable ── */
+.evento-descripcion {
+    font-size  : 0.95rem;
+    color      : var(--ev-texto);
+    line-height: 1.65;
+    margin     : 0;
+    position   : relative;
+}
+
+.colapsado {
+    max-height: 72px;
+    overflow  : hidden;
+}
+
+/* Degradado al pie cuando está colapsado */
+.colapsado::after {
+    content   : '';
+    position  : absolute;
+    bottom    : 0;
+    left      : 0;
+    width     : 100%;
+    height    : 36px;
+    background: linear-gradient(to bottom, transparent, #ffffff);
+}
+
+/* ── Botón "Ver más / Ver menos" ── */
+.btn-ver-mas {
+    background : none;
+    border     : none;
+    color      : var(--ev-acento);
+    font-weight: 700;
+    font-size  : 0.88rem;
+    cursor     : pointer;
+    padding    : 0.2rem 0;
+    align-self : flex-start;
+    transition : color 0.2s;
+}
+.btn-ver-mas:hover {
+    color          : var(--ev-titulo);
+    text-decoration: underline;
+}
+
+/* ── Sin eventos ── */
+.sin-eventos {
+    grid-column: 1 / -1;
+    text-align : center;
+    padding    : 3rem 1rem;
+    color      : #9ca3af;
+    font-style : italic;
+    font-size  : 1rem;
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+    .seccion-eventos   { padding: 48px 1rem 56px; }
+    .titulo-seccion    { font-size: 2rem; }
+
+    /* En móvil la tarjeta se apila verticalmente */
+    .evento-card {
+        flex-direction: column;
+        border-left   : none;
+        border-top    : 5px solid var(--ev-acento);
+    }
+
+    .evento-fecha {
+        flex-direction: row;
+        justify-content: center;
+        gap            : 0.5rem;
+        padding        : 1rem;
+        min-width      : unset;
+    }
+
+    .evento-fecha .dia { font-size: 1.8rem; }
+}
+
+@media (max-width: 480px) {
+    .titulo-seccion { font-size: 1.7rem; }
+}

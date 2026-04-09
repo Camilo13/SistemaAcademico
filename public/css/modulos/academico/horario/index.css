@@ -1,0 +1,104 @@
+/* ============================================================
+   modulos/academico/horario/index.css
+   Vista: Listado de horarios por grupo.
+   Cargado en: horario/index.blade.php — @push('styles')
+
+   Dependencias globales (ya en el layout):
+     academico-index.css → .contenedor-modulo, .cabecera,
+                           .barra-bulk
+     tablas.css          → .tabla, .btn-icono
+     botones.css         → .btn y variantes
+     tipografia.css      → variables CSS
+   ============================================================ */
+
+/* ── Grid de tarjetas de grupos ──
+   Cada card muestra el grupo, grado, progreso de franjas
+   y el botón para ver/editar el horario completo.           */
+.grupos-grid {
+    display               : grid;
+    grid-template-columns : repeat(auto-fill, minmax(280px, 1fr));
+    gap                   : 1rem;
+}
+
+.grupo-card {
+    background    : var(--fondo-tarjeta);
+    border        : 1px solid var(--borde-color);
+    border-radius : var(--radio-lg);
+    padding       : 1.2rem;
+    display       : flex;
+    flex-direction: column;
+    gap           : 0.75rem;
+    box-shadow    : var(--sombra-sm);
+    transition    : box-shadow var(--transicion-normal),
+                    transform  var(--transicion-rapida);
+}
+.grupo-card:hover {
+    box-shadow: var(--sombra-md);
+    transform : translateY(-2px);
+}
+
+.grupo-card-header {
+    display    : flex;
+    align-items: flex-start;
+    gap        : 0.75rem;
+}
+
+.grupo-icon {
+    width           : 40px;
+    height          : 40px;
+    border-radius   : 50%;
+    background      : #f0fdf4;
+    border          : 1.5px solid #86efac;
+    display         : flex;
+    align-items     : center;
+    justify-content : center;
+    color           : #16a34a;
+    font-size       : 1rem;
+    flex-shrink     : 0;
+}
+
+.grupo-info h3 {
+    font-size  : var(--texto-sm);
+    font-weight: var(--peso-semi);
+    color      : #0f172a;
+    margin     : 0 0 0.2rem;
+}
+
+.grupo-meta {
+    font-size  : var(--texto-xs);
+    color      : var(--color-texto-secundario);
+    display    : flex;
+    align-items: center;
+    gap        : 0.3rem;
+}
+
+/* Barra de progreso de franjas cargadas */
+.progreso-barra {
+    height       : 6px;
+    background   : #e5e7eb;
+    border-radius: var(--radio-pill);
+    overflow     : hidden;
+}
+
+.progreso-fill {
+    height       : 100%;
+    background   : linear-gradient(90deg, #22c55e, #16a34a);
+    border-radius: var(--radio-pill);
+    transition   : width 0.4s ease;
+}
+
+.progreso-label {
+    font-size: var(--texto-xs);
+    color    : var(--color-texto-secundario);
+}
+
+.btn-bloque { width: 100%; justify-content: center; }
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+    .grupos-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 480px) {
+    .grupo-card { padding: 1rem; }
+}

@@ -1,0 +1,212 @@
+/* ============================================================
+   componentes/horario-cuadricula.css
+   Cuadrícula semanal de horarios — compartida entre:
+     · Admin      → modulos/academico/horario/grupo.blade.php
+     · Docente    → modulos/docente/horario/index.blade.php
+     · Estudiante → modulos/estudiante/horario/index.blade.php
+
+   Clases presentes en las vistas:
+     .cuadricula-contenedor  .cuadricula
+     .col-bloque  .col-hora  .col-dia
+     .fila-pausa  .fila-pausa.almuerzo
+     .fila-bloque
+     .celda-bloque  .num-bloque
+     .celda-hora
+     .celda-clase.libre  .celda-clase.ocupada
+     .celda-vacia
+     .clase-card  .clase-materia  .clase-docente  .clase-grupo
+     .btn-eliminar-franja   (solo admin)
+     .alerta-info  .alerta-error
+   ============================================================ */
+
+/* ── Contenedor con scroll horizontal en móvil ── */
+.cuadricula-contenedor {
+    overflow-x    : auto;
+    background    : #ffffff;
+    border-radius : 0.9rem;
+    border        : 1px solid #e5e7eb;
+    box-shadow    : 0 4px 14px rgba(0, 0, 0, 0.05);
+}
+
+/* ── Tabla base ── */
+.cuadricula {
+    width           : 100%;
+    border-collapse : collapse;
+    font-size       : var(--texto-sm, 0.85rem);
+    min-width       : 700px;
+}
+
+/* ── Cabecera ── */
+.cuadricula thead tr {
+    background: #f0fdf4;
+}
+
+.cuadricula th {
+    padding        : 0.75rem 0.6rem;
+    text-align     : center;
+    font-size      : var(--texto-xs, 0.75rem);
+    font-weight    : var(--peso-semi, 600);
+    color          : #065f46;
+    border-bottom  : 2px solid #22c55e;
+    text-transform : uppercase;
+    letter-spacing : 0.04em;
+    white-space    : nowrap;
+}
+
+.cuadricula th.col-bloque { width: 60px; }
+.cuadricula th.col-hora   { width: 120px; text-align: left; padding-left: 1rem; }
+.cuadricula th.col-dia    { min-width: 130px; }
+
+/* ── Filas de pausa (refrigerio / almuerzo) ── */
+.fila-pausa td {
+    background   : #fef9c3;
+    color        : #854d0e;
+    font-size    : var(--texto-xs, 0.75rem);
+    font-weight  : var(--peso-semi, 600);
+    text-align   : center;
+    padding      : 0.35rem 1rem;
+    border-top   : 1px dashed #fde68a;
+    border-bottom: 1px dashed #fde68a;
+}
+
+.fila-pausa.almuerzo td {
+    background  : #fce7f3;
+    color       : #9d174d;
+    border-color: #fbcfe8;
+}
+
+/* ── Filas de bloque ── */
+.fila-bloque:hover td { background: #f9fafb; }
+
+.fila-bloque td {
+    border-bottom : 1px solid #e5e7eb;
+    vertical-align: middle;
+}
+
+/* Número de bloque */
+.celda-bloque {
+    text-align: center;
+    padding   : 0.6rem 0.4rem;
+}
+
+.num-bloque {
+    display         : inline-flex;
+    align-items     : center;
+    justify-content : center;
+    width           : 28px;
+    height          : 28px;
+    border-radius   : 50%;
+    background      : #f0fdf4;
+    border          : 1.5px solid #86efac;
+    color           : #065f46;
+    font-size       : var(--texto-xs, 0.75rem);
+    font-weight     : var(--peso-bold, 700);
+}
+
+/* Celda de hora */
+.celda-hora {
+    padding    : 0.6rem 1rem;
+    color      : var(--color-texto-secundario, #6b7280);
+    font-size  : var(--texto-xs, 0.75rem);
+    white-space: nowrap;
+    font-weight: var(--peso-semi, 600);
+}
+
+/* ── Celdas de clase ── */
+.celda-clase {
+    padding       : 0.5rem 0.6rem;
+    text-align    : center;
+    vertical-align: middle;
+}
+
+.celda-clase.libre   { background: #fafafa; }
+.celda-clase.ocupada { background: #f0fdf4; }
+
+.celda-vacia {
+    color    : #d1d5db;
+    font-size: var(--texto-xs, 0.75rem);
+}
+
+/* ── Tarjeta de clase ── */
+.clase-card {
+    background    : #ffffff;
+    border        : 1px solid #bbf7d0;
+    border-left   : 3px solid #22c55e;
+    border-radius : 0.45rem;
+    padding       : 0.45rem 0.6rem;
+    display       : flex;
+    flex-direction: column;
+    gap           : 0.25rem;
+    position      : relative;
+    text-align    : left;
+}
+
+.clase-materia {
+    font-size  : var(--texto-xs, 0.75rem);
+    font-weight: var(--peso-bold, 700);
+    color      : #065f46;
+    line-height: 1.2;
+}
+
+.clase-docente,
+.clase-grupo {
+    font-size  : var(--texto-xs, 0.75rem);
+    color      : var(--color-texto-secundario, #6b7280);
+    display    : flex;
+    align-items: center;
+    gap        : 0.3rem;
+}
+
+/* ── Botón eliminar franja (solo admin) ── */
+.btn-eliminar-franja {
+    position     : absolute;
+    top          : 3px;
+    right        : 3px;
+    background   : none;
+    border       : none;
+    cursor       : pointer;
+    color        : #d1d5db;
+    font-size    : 0.65rem;
+    padding      : 2px 4px;
+    border-radius: 3px;
+    transition   : color 0.15s, background 0.15s;
+    line-height  : 1;
+}
+
+.btn-eliminar-franja:hover {
+    color     : #dc2626;
+    background: #fee2e2;
+}
+
+/* ── Alertas — paleta verde institucional ──
+   (antes en azul, corregido para consistencia con la app)
+   ── */
+.alerta-info {
+    background   : #f0fdf4;
+    border       : 1px solid #bbf7d0;
+    border-left  : 4px solid #22c55e;
+    border-radius: 0.6rem;
+    padding      : 0.9rem 1.1rem;
+    color        : #166534;
+    font-size    : var(--texto-sm, 0.85rem);
+    display      : flex;
+    align-items  : center;
+    gap          : 0.6rem;
+}
+
+.alerta-info i { color: #16a34a; flex-shrink: 0; }
+
+.alerta-error {
+    background   : #fef2f2;
+    border       : 1px solid #fecaca;
+    border-left  : 4px solid #ef4444;
+    border-radius: 0.6rem;
+    padding      : 0.9rem 1.1rem;
+    color        : #991b1b;
+    font-size    : var(--texto-sm, 0.85rem);
+    display      : flex;
+    align-items  : center;
+    gap          : 0.6rem;
+}
+
+.alerta-error i { color: #dc2626; flex-shrink: 0; }

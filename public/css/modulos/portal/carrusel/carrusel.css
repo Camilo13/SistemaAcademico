@@ -1,0 +1,153 @@
+/* ============================================================
+   modulos/portal/carrusel/carrusel.css
+   Vistas: index, create, edit — Carrusel del portal (admin).
+   Compartido por las tres vistas.
+
+   Reutiliza del layout global:
+     academico-index.css → .contenedor-modulo, .cabecera,
+                           .cabecera-info, .cabecera-subtitulo
+     academico-form.css  → .tarjeta-form, .grid-campos, .campo,
+                           .campo-ancho, .campo-check, .label-check,
+                           .acciones-form, .tarjeta-accion,
+                           .tarjeta-peligro, .seccion-titulo-form,
+                           .seccion-desc, .acciones-secundarias,
+                           .info-registro, .error-campo, .nota-campo
+     tablas.css          → .btn-icono.editar, .btn-icono.eliminar,
+                           .estado, .estado-activo, .estado-inactivo
+     botones.css         → .btn-primario, .btn-neutro, .btn-peligro,
+                           .btn-advertencia, .btn-secundario, .btn-sm
+
+   Este archivo solo aporta el grid de imágenes del index
+   y el preview de imagen en create/edit.
+   ============================================================ */
+
+/* ── Grid de imágenes (index) ── */
+.carrusel-grid {
+    display               : grid;
+    grid-template-columns : repeat(auto-fill, minmax(220px, 1fr));
+    gap                   : 1.2rem;
+}
+
+/* ── Tarjeta de imagen ── */
+.carrusel-item {
+    background    : var(--fondo-tarjeta);
+    border        : 1px solid var(--borde-color);
+    border-radius : var(--radio-lg);
+    overflow      : hidden;
+    display       : flex;
+    flex-direction: column;
+    box-shadow    : var(--sombra-sm);
+    transition    : box-shadow var(--transicion-normal),
+                    transform  var(--transicion-rapida);
+}
+
+.carrusel-item:hover {
+    box-shadow: var(--sombra-md);
+    transform : translateY(-2px);
+}
+
+/* ── Imagen de la tarjeta ── */
+.carrusel-imagen {
+    height  : 150px;
+    overflow: hidden;
+}
+
+.carrusel-imagen img {
+    width     : 100%;
+    height    : 100%;
+    object-fit: cover;
+    transition: transform 0.35s ease;
+}
+
+.carrusel-item:hover .carrusel-imagen img {
+    transform: scale(1.04);
+}
+
+/* ── Info (orden + estado) ── */
+.carrusel-info {
+    display        : flex;
+    justify-content: space-between;
+    align-items    : center;
+    padding        : 0.55rem 0.8rem;
+    font-size      : var(--texto-xs);
+    border-top     : 1px solid var(--borde-color);
+}
+
+.carrusel-orden {
+    display    : flex;
+    align-items: center;
+    gap        : 0.3rem;
+    color      : var(--color-texto-secundario);
+    font-weight: var(--peso-semi);
+}
+
+.carrusel-orden i { color: #10b981; }
+
+/* ── Acciones de la tarjeta ── */
+.carrusel-acciones {
+    display        : flex;
+    justify-content: flex-end;
+    gap            : 0.4rem;
+    padding        : 0.55rem 0.8rem;
+    border-top     : 1px solid var(--borde-color);
+}
+
+.carrusel-acciones form { margin: 0; }
+
+/* ── Estado vacío (index) ── */
+.carrusel-vacio {
+    text-align    : center;
+    padding       : 3rem 2rem;
+    display       : flex;
+    flex-direction: column;
+    align-items   : center;
+    gap           : 1rem;
+    color         : var(--color-texto-tenue);
+}
+
+.carrusel-vacio i { color: #a7f3d0; }
+.carrusel-vacio p { margin: 0; font-size: var(--texto-base); }
+
+/* ── Preview de imagen (create / edit) ── */
+.carrusel-preview {
+    height          : 200px;
+    border          : 2px dashed #d1d5db;
+    border-radius   : var(--radio-lg);
+    display         : flex;
+    flex-direction  : column;
+    align-items     : center;
+    justify-content : center;
+    gap             : 0.5rem;
+    color           : #9ca3af;
+    font-size       : var(--texto-sm);
+    overflow        : hidden;
+    transition      : border-color var(--transicion-normal);
+}
+
+.carrusel-preview i { font-size: 2rem; color: #d1d5db; }
+
+.carrusel-preview img {
+    width     : 100%;
+    height    : 100%;
+    object-fit: cover;
+}
+
+/* Preview con imagen actual ya cargada */
+.carrusel-preview-actual {
+    border-color : #a7f3d0;
+    border-style : solid;
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+    .carrusel-grid { grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); }
+}
+
+@media (max-width: 480px) {
+    .carrusel-grid   { grid-template-columns: 1fr 1fr; }
+    .carrusel-imagen { height: 130px; }
+}
+
+@media (max-width: 360px) {
+    .carrusel-grid { grid-template-columns: 1fr; }
+}

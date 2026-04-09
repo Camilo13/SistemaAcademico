@@ -1,0 +1,243 @@
+/* ============================================================
+   componentes/academico-index.css
+   Vistas index del módulo académico y admin.
+   Paleta: #065f46 · #166534 · #22c55e · #16a34a · #374151
+   Sin morados, sin azules fuera de paleta.
+   ============================================================ */
+
+/* ── Contenedor raíz unificado ── */
+.contenedor-modulo {
+    padding        : 1.8rem;
+    display        : flex;
+    flex-direction : column;
+    gap            : 1.5rem;
+    position       : relative;
+}
+
+/* ── Cabecera ── */
+.cabecera {
+    display         : flex;
+    justify-content : space-between;
+    align-items     : center;
+    flex-wrap       : wrap;
+    gap             : 1rem;
+}
+
+.cabecera h2 {
+    font-size   : var(--texto-xl);
+    font-weight : var(--peso-bold);
+    color       : var(--color-texto-subtitulo);
+    display     : flex;
+    align-items : center;
+    gap         : 0.6rem;
+    margin      : 0;
+}
+
+.cabecera-info {
+    display        : flex;
+    flex-direction : column;
+    gap            : 0.15rem;
+}
+
+.cabecera-info h2 {
+    font-size   : var(--texto-xl);
+    font-weight : var(--peso-bold);
+    color       : var(--color-texto-subtitulo);
+    display     : flex;
+    align-items : center;
+    gap         : 0.6rem;
+    margin      : 0;
+}
+
+.cabecera-subtitulo {
+    font-size  : var(--texto-sm);
+    color      : var(--color-texto-secundario);
+}
+
+/* ============================================================
+   Barra de acciones BULK — Opción B (verde suave)
+   Oculta por defecto. JS agrega .visible al seleccionar filas.
+   ============================================================ */
+.barra-bulk {
+    display         : none;
+    align-items     : center;
+    justify-content : space-between;
+    flex-wrap       : wrap;
+    gap             : 0.75rem;
+
+    background    : #f0fdf4;
+    color         : #065f46;
+    padding       : 0.85rem 1.3rem;
+    border-radius : var(--radio-lg);
+    border        : 1px solid #a7f3d0;
+    border-bottom : 2px solid #22c55e;
+    box-shadow    : var(--sombra-sm);
+
+    position      : sticky;
+    top           : 1rem;
+    z-index       : var(--z-bulk-bar);
+}
+
+.barra-bulk.visible {
+    display   : flex;
+    animation : bulk-entrada 0.22s ease;
+}
+
+@keyframes bulk-entrada {
+    from { opacity: 0; transform: translateY(-8px); }
+    to   { opacity: 1; transform: translateY(0);    }
+}
+
+/* ── Info y contador ── */
+.bulk-info {
+    display     : flex;
+    align-items : center;
+    gap         : 0.6rem;
+    font-size   : var(--texto-sm);
+    font-weight : var(--peso-semi);
+    color       : #065f46;
+}
+
+.bulk-info i { color: #16a34a; font-size: var(--texto-base); }
+
+.bulk-contador {
+    background    : #16a34a;
+    color         : #ffffff;
+    font-weight   : var(--peso-bold);
+    font-size     : var(--texto-sm);
+    padding       : 0.15rem 0.6rem;
+    border-radius : var(--radio-pill);
+    min-width     : 1.6rem;
+    text-align    : center;
+}
+
+/* ── Acciones bulk ── */
+.bulk-acciones {
+    display     : flex;
+    align-items : center;
+    gap         : 0.5rem;
+    flex-wrap   : wrap;
+}
+
+.btn-bulk {
+    display         : inline-flex;
+    align-items     : center;
+    gap             : 0.4rem;
+    padding         : 0.45rem 1rem;
+    border-radius   : var(--radio-md);
+    border          : none;
+    font-family     : var(--fuente-base);
+    font-size       : var(--texto-sm);
+    font-weight     : var(--peso-semi);
+    cursor          : pointer;
+    text-decoration : none;
+    white-space     : nowrap;
+    transition      : background var(--transicion-normal),
+                      transform  var(--transicion-rapida);
+}
+.btn-bulk:hover { transform: translateY(-1px); }
+
+/* Editar — modo usuarios, solo con 1 seleccionado */
+.btn-bulk-editar       { background: #d1fae5; color: #065f46; }
+.btn-bulk-editar:hover { background: #a7f3d0; }
+
+/* Eliminar */
+.btn-bulk-eliminar       { background: #fee2e2; color: #991b1b; }
+.btn-bulk-eliminar:hover { background: #fecaca; }
+
+/* Limpiar selección */
+.btn-bulk-limpiar       { background: #e5e7eb; color: #374151; border: 1px solid #d1d5db; }
+.btn-bulk-limpiar:hover { background: #d1d5db; color: #111827; }
+
+/* Separador visual */
+.bulk-separador {
+    width      : 1px;
+    height     : 1.4rem;
+    background : #a7f3d0;
+    flex-shrink: 0;
+}
+
+/* ── Fila seleccionada ── */
+.tabla tbody tr.fila-seleccionada td { background-color: #f0fdf4 !important; }
+
+/* ============================================================
+   Badges genéricos
+   ============================================================ */
+.badge {
+    display       : inline-flex;
+    align-items   : center;
+    gap           : 0.3rem;
+    padding       : 0.28rem 0.65rem;
+    border-radius : var(--radio-pill);
+    font-size     : var(--texto-xs);
+    font-weight   : var(--peso-semi);
+    white-space   : nowrap;
+}
+
+/* Estados — paleta institucional, sin morados */
+.badge-activo,    .badge-activa     { background: #d1fae5; color: #065f46; }
+.badge-inactivo,  .badge-inactiva   { background: #fee2e2; color: #991b1b; }
+.badge-abierto                      { background: #d1fae5; color: #065f46; }
+.badge-cerrado                      { background: #fee2e2; color: #991b1b; }
+.badge-retirado                     { background: #fef3c7; color: #92400e; }
+.badge-finalizado                   { background: #ecfdf5; color: #047857; }
+.badge-en-curso                     { background: #d1fae5; color: #047857; }
+.badge-pendiente                    { background: #f3f4f6; color: #6b7280; }
+
+/* ============================================================
+   Chips de resumen (usuarios)
+   ============================================================ */
+.resumen-usuarios {
+    display  : flex;
+    flex-wrap: wrap;
+    gap      : 0.75rem;
+}
+
+.resumen-chip {
+    display       : flex;
+    align-items   : center;
+    gap           : 0.5rem;
+    background    : #f8fafc;
+    border        : 1px solid var(--borde-color);
+    border-radius : var(--radio-md);
+    padding       : 0.6rem 1rem;
+    font-size     : var(--texto-sm);
+    color         : var(--color-texto-secundario);
+}
+
+.resumen-chip span  { font-size: var(--texto-lg); font-weight: var(--peso-bold); color: #0f172a; }
+.resumen-chip label { font-size: var(--texto-xs); color: var(--color-texto-secundario); }
+.resumen-chip i     { font-size: var(--texto-base); }
+
+/* Bordes de color por tipo — paleta institucional */
+.chip-admin      { border-left: 3px solid #065f46; }
+.chip-docente    { border-left: 3px solid #374151; }
+.chip-estudiante { border-left: 3px solid #16a34a; }
+.chip-inactivo   { border-left: 3px solid #9ca3af; }
+
+/* ── Celda de correo con overflow ── */
+.celda-correo {
+    max-width     : 200px;
+    overflow      : hidden;
+    text-overflow : ellipsis;
+    white-space   : nowrap;
+}
+
+/* ============================================================
+   Responsive
+   ============================================================ */
+@media (max-width: 768px) {
+    .contenedor-modulo { padding: 1.2rem; }
+    .cabecera          { flex-direction: column; align-items: flex-start; }
+    .cabecera .btn     { width: 100%; justify-content: center; }
+    .barra-bulk        { border-radius: var(--radio-md); padding: 0.7rem 1rem; }
+    .bulk-acciones     { width: 100%; }
+    .btn-bulk          { flex: 1; justify-content: center; }
+    .resumen-usuarios  { display: grid; grid-template-columns: repeat(3, 1fr); }
+    .celda-correo      { max-width: 120px; }
+}
+
+@media (max-width: 480px) {
+    .contenedor-modulo { padding: 0.9rem; }
+    .resumen-usuarios  { grid-template-columns: repeat(2, 1fr); }
+}

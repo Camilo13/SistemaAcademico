@@ -1,0 +1,169 @@
+/* ============================================================
+   modulos/perfil/perfil.css
+   Vista: Mi Perfil — compatible con admin, docente y estudiante.
+   Cargado en: modulos/Perfil/Perfil.blade.php — @push('styles')
+
+   Reutiliza del layout global:
+     tipografia.css  → variables CSS, escala de texto
+     botones.css     → .btn, .btn-primario, .btn-secundario, .btn-neutro
+     formularios.css → .formulario, .grupo-formulario
+     tarjetas.css    → .card, .card-titulo, .perfil-lista,
+                       .perfil-label, .perfil-valor
+
+   Este archivo SOLO aporta:
+     .perfil           → contenedor + animación de entrada
+     .perfil-header    → bloque de título y descripción
+     .perfil-grid      → layout de dos columnas
+     .perfil-acciones  → fila de botones del formulario
+     .perfil-avatar    → círculo con inicial/ícono por rol
+     .campo-readonly   → estilo de dato no editable
+   ============================================================ */
+
+/* ── Contenedor principal ── */
+.perfil {
+    padding       : 1.8rem;
+    display       : flex;
+    flex-direction: column;
+    gap           : 1.5rem;
+    animation     : perfil-entrada 0.35s ease-out;
+}
+
+@keyframes perfil-entrada {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0);    }
+}
+
+/* ── Encabezado ── */
+.perfil-header {
+    display    : flex;
+    align-items: center;
+    gap        : 1rem;
+    flex-wrap  : wrap;
+}
+
+.perfil-titulo {
+    font-size  : var(--texto-2xl);
+    font-weight: var(--peso-bold);
+    color      : var(--color-texto-subtitulo);
+    margin     : 0;
+}
+
+.perfil-descripcion {
+    font-size  : var(--texto-sm);
+    color      : var(--color-texto-secundario);
+    margin     : 0;
+}
+
+/* ── Avatar con inicial / ícono según rol ── */
+.perfil-avatar {
+    width           : 56px;
+    height          : 56px;
+    border-radius   : 50%;
+    display         : flex;
+    align-items     : center;
+    justify-content : center;
+    font-size       : 1.5rem;
+    font-weight     : var(--peso-bold);
+    flex-shrink     : 0;
+    /* Color base — sobrescrito por variante de rol */
+    background      : #f0fdf4;
+    color           : #065f46;
+    border          : 2px solid #a7f3d0;
+}
+
+.perfil-avatar.rol-administrador { background: #d1fae5; color: #065f46; border-color: #6ee7b7; }
+.perfil-avatar.rol-docente        { background: #f3f4f6; color: #374151; border-color: #d1d5db; }
+.perfil-avatar.rol-estudiante     { background: #ecfdf5; color: #16a34a; border-color: #a7f3d0; }
+
+/* ── Grid de las dos tarjetas ── */
+.perfil-grid {
+    display              : grid;
+    grid-template-columns: 1fr 1fr;
+    gap                  : 1.5rem;
+    align-items          : start;
+}
+
+/* ── Badge de rol dentro de la tarjeta de info ── */
+.badge-rol {
+    display      : inline-flex;
+    align-items  : center;
+    gap          : 0.3rem;
+    padding      : 0.25rem 0.7rem;
+    border-radius: var(--radio-pill);
+    font-size    : var(--texto-xs);
+    font-weight  : var(--peso-semi);
+}
+
+.badge-rol.rol-administrador { background: #d1fae5; color: #065f46; }
+.badge-rol.rol-docente        { background: #f3f4f6; color: #374151; }
+.badge-rol.rol-estudiante     { background: #ecfdf5; color: #16a34a; }
+
+/* ── Campo de solo lectura (datos de identidad) ── */
+.campo-readonly {
+    display        : flex;
+    flex-direction : column;
+    gap            : 0.3rem;
+}
+
+.campo-readonly .campo-label {
+    font-size  : var(--texto-xs);
+    font-weight: var(--peso-semi);
+    color      : var(--color-texto-secundario);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-wide);
+}
+
+.campo-readonly .campo-valor {
+    font-size  : var(--texto-base);
+    color      : var(--color-texto-cuerpo);
+    font-weight: var(--peso-medio);
+    padding    : 0.55rem 0.8rem;
+    background : #f3f4f6;
+    border-radius: var(--radio-md);
+    border     : 1px solid var(--borde-color);
+}
+
+/* ── Acciones del formulario ── */
+.perfil-acciones {
+    display        : flex;
+    justify-content: flex-end;
+    gap            : 0.8rem;
+    margin-top     : 1rem;
+    flex-wrap      : wrap;
+}
+
+/* ── Separador interno entre secciones de la tarjeta ── */
+.perfil-separador {
+    border     : none;
+    border-top : 1px solid var(--borde-color);
+    margin     : 0.5rem 0;
+}
+
+/* ── Nota de campos no editables ── */
+.perfil-nota-readonly {
+    font-size  : var(--texto-xs);
+    color      : var(--color-texto-tenue);
+    display    : flex;
+    align-items: center;
+    gap        : 0.3rem;
+    margin-top : 0.25rem;
+}
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
+    .perfil-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 768px) {
+    .perfil { padding: 1.2rem; }
+}
+
+@media (max-width: 480px) {
+    .perfil           { padding: 0.9rem; }
+    .perfil-titulo    { font-size: var(--texto-xl); }
+    .perfil-acciones  {
+        flex-direction: column;
+        align-items   : stretch;
+    }
+    .perfil-acciones .btn { width: 100%; justify-content: center; }
+}

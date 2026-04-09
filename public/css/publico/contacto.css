@@ -1,0 +1,173 @@
+/* ============================================================
+   publico/contacto.css
+   Página de contacto — portal público.
+   Cargado en: publico/contacto.blade.php
+   Dependencias: layout/menupublico.css
+   ============================================================ */
+
+/* ── Contenedor principal ── */
+.contenido-principal {
+    max-width: 1100px;
+    margin   : 0 auto;
+    padding  : 3rem 1.5rem 4rem;
+}
+
+/* ── Encabezado ── */
+.titulo-centrado {
+    text-align   : center;
+    margin-bottom: 2.5rem;
+}
+
+.titulo-centrado .titulo {
+    font-size    : 2.4rem;
+    font-weight  : 800;
+    color        : #166534;
+    margin-bottom: 0.75rem;
+}
+
+.titulo-centrado .intro {
+    font-size  : 1.05rem;
+    color      : #444444;
+    max-width  : 680px;
+    margin     : 0 auto;
+    line-height: 1.7;
+}
+
+/* ── Tarjeta principal ── */
+.tarjeta-contacto {
+    background   : #ffffff;
+    border-radius: 1.2rem;
+    padding      : 2.5rem;
+    box-shadow   : 0 6px 24px rgba(0, 0, 0, 0.07);
+}
+
+/* ── Columnas ── */
+.columnas {
+    display  : flex;
+    flex-wrap: wrap;
+    gap      : 2.5rem;
+}
+
+.columna {
+    flex     : 1;
+    min-width: 280px;
+}
+
+/* ── Subtítulos internos ── */
+.subtitulo {
+    font-size    : 1.35rem;
+    font-weight  : 700;
+    color        : #166534;
+    margin-bottom: 1rem;
+    padding-left : 0.6rem;
+    border-left  : 4px solid #22c55e;
+}
+
+/* ── Info de contacto ── */
+.info-contacto p {
+    display    : flex;
+    align-items: flex-start;
+    gap        : 0.6rem;
+    margin-bottom: 0.85rem;
+    color      : #333333;
+    font-size  : 0.98rem;
+    line-height: 1.5;
+}
+
+.icono {
+    color      : #22c55e;
+    margin-top : 0.15rem;
+    flex-shrink: 0;
+}
+
+.link-contacto {
+    color          : #15803d;
+    text-decoration: none;
+    transition     : color 0.2s;
+}
+.link-contacto:hover {
+    color          : #16a34a;
+    text-decoration: underline;
+}
+
+/* ── Sección WhatsApp y redes ── */
+.espacio-arriba { margin-top: 2rem; }
+
+.texto {
+    font-size    : 0.98rem;
+    color        : #444444;
+    margin-bottom: 1rem;
+    line-height  : 1.6;
+}
+
+/* ── Botones de redes sociales ── */
+.btn-social {
+    display        : inline-flex;
+    align-items    : center;
+    gap            : 0.5rem;
+    padding        : 0.65rem 1.4rem;
+    border-radius  : 50px;
+    font-weight    : 600;
+    font-size      : 0.95rem;
+    text-decoration: none;
+    transition     : transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+    margin-bottom  : 0.5rem;
+}
+
+.btn-social:hover { transform: translateY(-2px); }
+
+.btn-social .icono-btn { font-size: 1.15rem; }
+
+/* WhatsApp */
+.whatsapp {
+    background: #25d366;
+    color     : #ffffff;
+    box-shadow: 0 4px 14px rgba(37, 211, 102, 0.35);
+}
+.whatsapp:hover { background: #1ebe5d; box-shadow: 0 6px 18px rgba(37, 211, 102, 0.45); }
+
+/* Facebook */
+.facebook {
+    background: #1877f2;
+    color     : #ffffff;
+    box-shadow: 0 4px 14px rgba(24, 119, 242, 0.3);
+}
+.facebook:hover { background: #1558b0; }
+
+/* Instagram */
+.instagram {
+    background: linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+    color     : #ffffff;
+    box-shadow: 0 4px 14px rgba(188, 24, 136, 0.3);
+}
+.instagram:hover { opacity: 0.9; }
+
+/* Twitter / X */
+.twitter {
+    background: #000000;
+    color     : #ffffff;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);
+}
+.twitter:hover { background: #1a1a1a; }
+
+/* ── Columna derecha: mapa ── */
+.mapa-iframe {
+    width        : 100%;
+    height       : 340px;
+    border       : none;
+    border-radius: 1rem;
+    box-shadow   : 0 4px 16px rgba(0,0,0,0.08);
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+    .tarjeta-contacto { padding: 1.5rem 1.2rem; }
+    .titulo-centrado .titulo { font-size: 1.9rem; }
+    .mapa-iframe { height: 260px; }
+}
+
+@media (max-width: 480px) {
+    .contenido-principal { padding: 2rem 1rem 3rem; }
+    .titulo-centrado .titulo { font-size: 1.6rem; }
+    .columna { min-width: 100%; }
+}

@@ -1,0 +1,71 @@
+/* ============================================================
+   modulos/admin/usuarios/edit.css
+   Vista: Editar usuario.
+   Cargado en: admin/usuarios/edit.blade.php — @push('styles')
+
+   El layout global ya carga academico-form.css que provee:
+     .contenedor-modulo, .tarjeta-form, .grid-campos, .campo,
+     .acciones-form, .tarjeta-accion, .seccion-titulo-form,
+     .seccion-desc, .acciones-secundarias, .info-registro,
+     .campo-ancho, .campo-check, .label-check, .error-campo
+
+   Este archivo agrega solo lo exclusivo de esta vista:
+     .fortaleza-password → barra de fortaleza de contraseña
+     .fortaleza-barra    → fill animado de la barra
+     .fortaleza-label    → texto descriptivo (Débil/Media/Fuerte)
+     .separador-seccion  → divisor dentro del grid
+     .relaciones-subtitulo → encabezado de tablas informativas
+   ============================================================ */
+
+/* ── Barra de fortaleza de contraseña ── */
+.fortaleza-password {
+    height       : 5px;
+    background   : var(--borde-color);
+    border-radius: var(--radio-pill);
+    overflow     : hidden;
+    margin-top   : 0.3rem;
+}
+
+.fortaleza-barra {
+    height       : 100%;
+    width        : 0%;
+    border-radius: var(--radio-pill);
+    transition   : width 0.35s ease, background 0.35s ease;
+}
+
+.fortaleza-barra.debil  { width: 33%;  background: #dc2626; }
+.fortaleza-barra.media  { width: 66%;  background: #d97706; }
+.fortaleza-barra.fuerte { width: 100%; background: #16a34a; }
+
+.fortaleza-label {
+    font-size  : var(--texto-xs);
+    margin-top : 0.25rem;
+    font-weight: var(--peso-semi);
+    color      : var(--color-texto-secundario);
+    min-height : 1.2em;
+}
+
+/* ── Separador de sección dentro del grid (create/edit) ── */
+.separador-seccion {
+    grid-column  : 1 / -1;
+    font-size    : var(--texto-base);
+    font-weight  : var(--peso-semi);
+    color        : var(--color-texto-subtitulo);
+    display      : flex;
+    align-items  : center;
+    gap          : 0.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom : 2px solid var(--borde-color);
+    margin-top   : 0.5rem;
+}
+
+/* ── Subtítulo de tablas de relaciones (solo lectura) ── */
+.relaciones-subtitulo {
+    font-size    : var(--texto-sm);
+    font-weight  : var(--peso-semi);
+    color        : var(--color-texto-subtitulo);
+    display      : flex;
+    align-items  : center;
+    gap          : 0.4rem;
+    margin       : 0 0 0.6rem;
+}

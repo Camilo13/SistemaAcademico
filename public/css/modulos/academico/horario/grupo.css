@@ -1,0 +1,50 @@
+/* ============================================================
+   modulos/academico/horario/grupo.css
+   Vista: Cuadrícula de horario de un grupo específico.
+   Cargado en: horario/grupo.blade.php — @push('styles')
+
+   Dependencias globales (ya en el layout):
+     horario-cuadricula.css → .cuadricula-horario y todo el grid
+     tablas.css             → .tabla, estados
+     botones.css            → .btn y variantes
+     tipografia.css         → variables CSS
+   ============================================================ */
+
+/* ── Leyenda de pausas / recreos ── */
+.leyenda-pausas {
+    display  : flex;
+    gap      : 1.5rem;
+    font-size: var(--texto-xs);
+    color    : var(--color-texto-secundario);
+    flex-wrap: wrap;
+}
+
+.leyenda-pausas span {
+    display    : flex;
+    align-items: center;
+    gap        : 0.35rem;
+}
+
+/* ── Lista de asignaciones activas del grupo ── */
+.resumen-asignaciones {
+    display       : flex;
+    flex-direction: column;
+    gap           : 0.75rem;
+}
+
+/* Separador de sección */
+.seccion-titulo-horario {
+    font-size     : var(--texto-base);
+    font-weight   : var(--peso-semi);
+    color         : var(--color-texto-subtitulo);
+    display       : flex;
+    align-items   : center;
+    gap           : 0.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom : 2px solid var(--borde-color);
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+    .leyenda-pausas { flex-direction: column; gap: 0.5rem; }
+}

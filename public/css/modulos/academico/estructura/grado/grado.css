@@ -1,0 +1,50 @@
+/* ============================================================
+   modulos/academico/estructura/grado/grado.css
+   Vistas: index, create, edit — Grados académicos.
+
+   Reutiliza del layout global:
+     academico-index.css → .contenedor-modulo, .cabecera,
+                           .barra-bulk, .tabla-contenedor
+     academico-form.css  → .tarjeta-form, .grid-campos, .campo,
+                           .campo-check, .label-check, .nota-campo,
+                           .acciones-form, .tarjeta-accion,
+                           .tarjeta-peligro, .seccion-titulo-form,
+                           .seccion-desc, .acciones-secundarias,
+                           .info-registro, .error-campo
+     tablas.css          → .tabla, .estado, .btn-icono.editar,
+                           .alerta-error, .fila-vacia, .paginacion
+     botones.css         → todas las variantes de .btn
+
+   Este archivo aporta solo los filtros del index.
+   ============================================================ */
+
+/* ── Fila de filtros ── */
+.grado-filtros {
+    display    : flex;
+    flex-wrap  : wrap;
+    align-items: center;
+    gap        : 0.6rem;
+}
+
+.grado-filtros select {
+    padding      : 0.45rem 0.75rem;
+    border       : 1px solid var(--borde-color);
+    border-radius: var(--radio-md);
+    font-size    : var(--texto-sm);
+    color        : var(--color-texto-cuerpo);
+    background   : var(--fondo-tarjeta);
+    cursor       : pointer;
+    transition   : border-color var(--transicion-normal);
+    min-width    : 180px;
+}
+
+.grado-filtros select:focus {
+    outline     : none;
+    border-color: #22c55e;
+}
+
+/* ── Responsive ── */
+@media (max-width: 480px) {
+    .grado-filtros        { flex-direction: column; align-items: stretch; }
+    .grado-filtros select { width: 100%; }
+}

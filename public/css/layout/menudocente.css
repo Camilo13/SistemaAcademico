@@ -1,0 +1,274 @@
+/* ============================================================
+   layout/menudocente.css
+   Barra lateral + área de contenido — Panel Docente.
+
+   ✅ SCROLL FIX: .barra-lateral usa height:100vh + overflow-y:auto
+      para que el menú sea desplazable cuando hay muchas opciones.
+      Sin esto las opciones inferiores quedaban ocultas en móvil.
+   ============================================================ */
+
+/* ── Variables del layout ── */
+:root {
+    --menu-ancho        : 240px;
+    --menu-ancho-tablet : 200px;
+    --menu-ancho-movil  : 270px;
+    --menu-fondo-top    : #d1fae5;
+    --menu-fondo-bot    : #ecfdf5;
+    --menu-texto        : #1f2937;
+    --menu-hover-fondo  : #10b981;
+    --menu-hover-texto  : #ffffff;
+    --menu-icono        : #10b981;
+}
+
+/* ============================================================
+   Barra lateral
+   ============================================================ */
+.barra-lateral {
+    width          : var(--menu-ancho);
+    background     : linear-gradient(180deg, var(--menu-fondo-top), var(--menu-fondo-bot));
+    color          : #065f46;
+    display        : flex;
+    flex-direction : column;
+    padding        : 1.5rem 1rem 1.5rem;
+
+    /* ✅ Scroll: altura fija = ventana + overflow activado */
+    height         : 100vh;
+    overflow-y     : auto;
+    overflow-x     : hidden;
+
+    position       : fixed;
+    left           : 0;
+    top            : 0;
+    box-shadow     : 2px 0 12px rgba(0,0,0,0.1);
+    z-index        : var(--z-menu);
+    transition     : transform var(--transicion-normal);
+
+    /* Scrollbar sutil */
+    scrollbar-width : thin;
+    scrollbar-color : #a7f3d0 transparent;
+}
+.barra-lateral::-webkit-scrollbar       { width: 4px; }
+.barra-lateral::-webkit-scrollbar-track { background: transparent; }
+.barra-lateral::-webkit-scrollbar-thumb { background: #a7f3d0; border-radius: 4px; }
+
+/* ── Logo ── */
+.barra-logo {
+    font-size     : 1.15rem;
+    font-weight   : var(--peso-bold);
+    text-align    : center;
+    margin-bottom : 2rem;
+    color         : #065f46;
+    flex-shrink   : 0;
+    line-height   : var(--leading-tight);
+}
+
+/* ── Navegación ── */
+.barra-nav { flex: 1; min-height: 0; }
+
+.barra-nav .lista-menu {
+    list-style : none;
+    padding    : 0;
+    margin     : 0;
+}
+
+.lista-menu li { margin: 0.5rem 0; }
+
+.lista-menu li a {
+    display        : flex;
+    align-items    : center;
+    gap            : 0.75rem;
+    padding        : 0.72rem 1rem;
+    color          : var(--menu-texto);
+    text-decoration: none;
+    border-radius  : var(--radio-md);
+    font-size      : var(--texto-md);
+    font-weight    : var(--peso-medio);
+    transition     : background var(--transicion-normal),
+                     color      var(--transicion-normal),
+                     transform  var(--transicion-rapida);
+}
+
+.lista-menu li a:hover {
+    background : var(--menu-hover-fondo);
+    color      : var(--menu-hover-texto);
+    transform  : translateX(3px);
+}
+
+/* Íconos */
+.icono {
+    font-size  : 1.05rem;
+    color      : var(--menu-icono);
+    flex-shrink: 0;
+    transition : color var(--transicion-normal);
+}
+.lista-menu li a:hover .icono { color: var(--menu-hover-texto); }
+
+/* ── Botón salir ── */
+.barra-salida {
+    margin-top : 1.5rem;
+    padding-top: 1rem;
+    border-top : 1px solid #a7f3d0;
+    flex-shrink: 0;
+}
+
+.boton-salir {
+    width           : 100%;
+    padding         : 0.7rem;
+    border          : none;
+    border-radius   : var(--radio-md);
+    background      : #065f46;
+    color           : #ffffff;
+    font-family     : var(--fuente-base);
+    font-weight     : var(--peso-semi);
+    font-size       : var(--texto-md);
+    cursor          : pointer;
+    display         : flex;
+    align-items     : center;
+    justify-content : center;
+    gap             : 0.5rem;
+    transition      : background var(--transicion-normal),
+                      transform  var(--transicion-rapida);
+}
+.boton-salir:hover  { background: #047857; }
+.boton-salir:active { transform: scale(0.99); }
+
+/* ============================================================
+   Contenido principal
+   ============================================================ */
+.contenido {
+    margin-left : var(--menu-ancho);
+    padding     : 2rem;
+    background  : var(--fondo-pagina);
+    min-height  : 100vh;
+    transition  : margin-left var(--transicion-normal);
+}
+
+/* ============================================================
+   Botón hamburguesa
+   ============================================================ */
+.boton-menu {
+    display      : none;
+    position     : fixed;
+    top          : 1rem;
+    left         : 1rem;
+    background   : #10b981;
+    color        : #ffffff;
+    border       : none;
+    border-radius: var(--radio-md);
+    padding      : 0.6rem 0.85rem;
+    font-size    : 1.1rem;
+    cursor       : pointer;
+    z-index      : var(--z-hamburger);
+    line-height  : 1;
+    transition   : background var(--transicion-normal);
+}
+.boton-menu:hover { background: #065f46; }
+.boton-menu i     { pointer-events: none; }
+
+/* ============================================================
+   Submenús desplegables
+   ============================================================ */
+.menu-padre .menu-toggle {
+    width           : 100%;
+    background      : none;
+    border          : none;
+    display         : flex;
+    justify-content : space-between;
+    align-items     : center;
+    padding         : 0.72rem 1rem;
+    font-family     : var(--fuente-base);
+    font-size       : var(--texto-md);
+    font-weight     : var(--peso-medio);
+    color           : var(--menu-texto);
+    border-radius   : var(--radio-md);
+    cursor          : pointer;
+    transition      : background var(--transicion-normal),
+                      color      var(--transicion-normal);
+}
+.menu-padre .menu-toggle:hover              { background: var(--menu-hover-fondo); color: var(--menu-hover-texto); }
+.menu-padre .menu-toggle:hover .icono       { color: var(--menu-hover-texto); }
+
+/* Submenú oculto por defecto */
+.submenu {
+    list-style  : none;
+    padding-left: 0.6rem;
+    margin-top  : 0.25rem;
+    max-height  : 0;
+    overflow    : hidden;
+    transition  : max-height 0.35s ease;
+}
+.submenu.activo { max-height: 700px; }
+
+.submenu li { margin: 0.25rem 0; }
+
+.submenu li a {
+    font-size : var(--texto-base);
+    padding   : 0.5rem 0.9rem;
+}
+
+/* Título separador dentro del submenú */
+.submenu-titulo {
+    font-size      : var(--texto-xs);
+    text-transform : uppercase;
+    letter-spacing : var(--tracking-wider);
+    color          : #6b7280;
+    margin-top     : 0.8rem;
+    margin-bottom  : 0.2rem;
+    padding-left   : 0.9rem;
+}
+
+/* Flecha animada */
+.flecha { transition: transform var(--transicion-normal); flex-shrink: 0; }
+.flecha.rotar { transform: rotate(180deg); }
+
+/* ============================================================
+   Responsive
+   ============================================================ */
+
+/* Tablet */
+@media (max-width: 1024px) {
+    .barra-lateral { width: var(--menu-ancho-tablet); }
+    .contenido     { margin-left: var(--menu-ancho-tablet); }
+}
+
+/* Móvil — menú superpuesto sobre el contenido */
+@media (max-width: 768px) {
+
+    .barra-lateral {
+        width     : var(--menu-ancho-movil);
+        max-width : 85vw;
+        transform : translateX(-100%);  /* oculto por defecto */
+    }
+
+    /* Espacio para el botón hamburguesa en el logo */
+    .barra-logo {
+        margin-left: 2.8rem;
+        text-align : left;
+    }
+
+    /* Visible al activar */
+    .barra-lateral.activa { transform: translateX(0); }
+
+    .contenido {
+        margin-left : 0;
+        padding     : 1.5rem;
+        padding-top : 4rem;   /* deja espacio al botón hamburguesa */
+    }
+
+    .boton-menu { display: flex; align-items: center; }
+}
+
+/* Móvil pequeño */
+@media (max-width: 480px) {
+    .barra-lateral { width: 88vw; }
+
+    .contenido {
+        padding     : 1rem;
+        padding-top : 3.5rem;
+    }
+
+    .lista-menu li a {
+        font-size : var(--texto-base);
+        padding   : 0.65rem 0.8rem;
+    }
+}

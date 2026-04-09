@@ -1,0 +1,140 @@
+/* ============================================================
+   modulos/biblioteca/lectura/lectura.css
+   Vistas de lectura — Biblioteca Digital.
+   Compartido por materia/index y recurso/index.
+
+   Reutiliza del layout global:
+     academico-index.css → .contenedor-modulo, .cabecera,
+                           .cabecera-info, .cabecera-subtitulo
+     botones.css         → .btn-primario, .btn-neutro, .btn-sm
+   Este archivo solo aporta el grid de tarjetas de lectura.
+   ============================================================ */
+
+/* ── Grid ── */
+.lectura-grid {
+    display               : grid;
+    grid-template-columns : repeat(auto-fill, minmax(260px, 1fr));
+    gap                   : 1.4rem;
+}
+
+/* ── Tarjeta ── */
+.lectura-card {
+    background    : var(--fondo-tarjeta);
+    border        : 1px solid var(--borde-color);
+    border-radius : var(--radio-lg);
+    padding       : 1.5rem;
+    display       : flex;
+    flex-direction: column;
+    gap           : 0.65rem;
+    box-shadow    : var(--sombra-sm);
+    transition    : box-shadow var(--transicion-normal),
+                    transform  var(--transicion-rapida);
+}
+
+.lectura-card:hover {
+    box-shadow: var(--sombra-md);
+    transform : translateY(-3px);
+}
+
+/* ── Ícono de materia ── */
+.lectura-card-icono {
+    width           : 44px;
+    height          : 44px;
+    border-radius   : 50%;
+    background      : #f0fdf4;
+    border          : 1.5px solid #a7f3d0;
+    display         : flex;
+    align-items     : center;
+    justify-content : center;
+    font-size       : 1.2rem;
+    color           : #065f46;
+    flex-shrink     : 0;
+}
+
+/* ── Tipo de recurso ── */
+.lectura-recurso-tipo {
+    font-size     : var(--texto-xs);
+    font-weight   : var(--peso-semi);
+    color         : #374151;
+    display       : flex;
+    align-items   : center;
+    gap           : 0.35rem;
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-wide);
+}
+
+.lectura-recurso-tipo i { color: #10b981; }
+
+/* ── Título ── */
+.lectura-card-titulo {
+    font-size  : var(--texto-base);
+    font-weight: var(--peso-semi);
+    color      : var(--color-texto-subtitulo);
+    margin     : 0;
+    line-height: var(--leading-tight);
+}
+
+/* ── Descripción truncada ── */
+.lectura-card-desc {
+    font-size         : var(--texto-sm);
+    color             : var(--color-texto-secundario);
+    line-height       : var(--leading-relaxed);
+    margin            : 0;
+    flex              : 1;
+    display            : -webkit-box;
+    -webkit-box-orient : vertical;
+    -webkit-line-clamp : 3;
+    overflow           : hidden;
+    line-clamp         : 3;
+}
+
+/* ── Meta (contador / autor) ── */
+.lectura-card-meta {
+    font-size  : var(--texto-xs);
+    color      : var(--color-texto-tenue);
+    display    : flex;
+    align-items: center;
+    gap        : 0.35rem;
+    margin     : 0;
+}
+
+.lectura-card-meta i { color: #10b981; }
+
+/* ── Acciones ── */
+.lectura-card-acciones {
+    margin-top : auto;
+    padding-top: 0.75rem;
+    border-top : 1px solid var(--borde-color);
+}
+
+/* ── Estado vacío ── */
+.lectura-vacio {
+    text-align    : center;
+    padding       : 4rem 2rem;
+    display       : flex;
+    flex-direction: column;
+    align-items   : center;
+    gap           : 1rem;
+    color         : var(--color-texto-tenue);
+    background    : var(--fondo-tarjeta);
+    border        : 1px solid var(--borde-color);
+    border-radius : var(--radio-lg);
+    box-shadow    : var(--sombra-sm);
+}
+
+.lectura-vacio i { color: #a7f3d0; }
+.lectura-vacio p { margin: 0; font-size: var(--texto-base); }
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+    .lectura-grid { gap: 1rem; }
+}
+
+@media (max-width: 640px) {
+    .lectura-grid { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 480px) {
+    .lectura-grid                        { grid-template-columns: 1fr; }
+    .lectura-card-acciones .btn          { width: 100%; justify-content: center; }
+}

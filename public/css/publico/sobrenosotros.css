@@ -1,0 +1,539 @@
+/* ============================================== */
+/* ============= 0. VARIABLES GLOBALES ========== */
+/* ============================================== */
+:root {
+    /* ⚠️ PALETA DE COLORES TIERRA Y NATURALEZA (COHERENCIA CON LA PÁGINA DE INICIO) */
+    --color-primario-oscuro: #006400; /* Verde Bosque oscuro (para títulos) */
+    --color-primario: #388e3c; /* Verde medio (para acentos, hover, bordes) */
+    --color-fondo-claro: #fcfcf7; /* Blanco roto/Crema (fondo cálido) */
+    --color-texto-principal: #333333; 
+    --color-texto-secundario: #555555; 
+    
+    /* Variables de Sombra y Borde */
+    --color-sombra-suave: rgba(0, 0, 0, 0.08); 
+    --color-sombra-media: rgba(0, 0, 0, 0.15); 
+    --color-borde-tarjeta: #e0e0e0; 
+}
+
+/* CENTRADO Y CONTENEDOR GENERAL */
+.contenedor,
+.contenedor-hero {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2%;
+}
+
+/* ============================================== */
+/* ============= SECCIÓN HERO (Verdes y Círculos) */
+/* ============================================== */
+.seccion-hero {
+    background-color: var(--color-fondo-claro); /* Fondo claro y cálido */
+    text-align: center;
+    padding: 80px 2%;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Pseudo-elementos decorativos con círculos en el fondo del Hero */
+.seccion-hero::before,
+.seccion-hero::after,
+.seccion-hero .contenedor-hero::before,
+.seccion-hero .contenedor-hero::after {
+    content: ''; 
+    position: absolute; 
+    /* ⚠️ CAMBIO: Usamos el color primario con transparencia para los círculos */
+    background-color: rgba(56, 142, 60, 0.1); 
+    border-radius: 50%;
+    z-index: 0;
+}
+
+/* Posiciones, tamaños y animaciones (se mantienen, pero la variable es ahora verde) */
+.seccion-hero::before {
+    top: -50px; left: -50px;
+    width: 200px; height: 200px;
+    animation: moveCircle1 15s infinite alternate;
+}
+.seccion-hero::after {
+    bottom: -50px; right: -50px;
+    width: 150px; height: 150px;
+    animation: moveCircle2 18s infinite alternate;
+}
+.seccion-hero .contenedor-hero::before { 
+    top: 20%; right: 10%;
+    width: 80px; height: 80px;
+    background-color: rgba(56, 142, 60, 0.08); /* Ligeramente más transparente */
+    animation: moveCircle3 12s infinite alternate;
+}
+.seccion-hero .contenedor-hero::after { 
+    bottom: 25%; left: 15%;
+    width: 100px; height: 100px;
+    background-color: rgba(56, 142, 60, 0.09); /* Ligeramente más transparente */
+    animation: moveCircle4 16s infinite alternate;
+}
+
+/* Animaciones */
+@keyframes moveCircle1 { from { transform: translate(0, 0); } to { transform: translate(20px, 30px); } }
+@keyframes moveCircle2 { from { transform: translate(0, 0); } to { transform: translate(-20px, -30px); } }
+@keyframes moveCircle3 { from { transform: translate(0, 0); } to { transform: translate(-15px, 20px); } }
+@keyframes moveCircle4 { from { transform: translate(0, 0); } to { transform: translate(15px, -20px); } }
+
+/* Estilos para el texto del Hero */
+.contenedor-hero h1 {
+    font-size: 3rem; 
+    margin-bottom: 15px; 
+    /* ✅ CAMBIO APLICADO: Título 'Sobre Nosotros' en color verde principal */
+    color: var(--color-primario); 
+    position: relative; z-index: 1; 
+}
+.contenedor-hero p {
+    max-width: 800px;
+    margin: 0 auto;
+    font-size: 1.3rem; 
+    color: var(--color-texto-secundario); 
+    line-height: 1.6;
+    position: relative; z-index: 1;
+}
+
+/* ============================================== */
+/* ============= SECCIONES GENERALES ============ */
+/* ============================================== */
+.seccion-logo-historia-alternada,
+.seccion-valores-ilustrados-moderna,
+.seccion-proyectos-destacados,
+.seccion-instalaciones-galeria,
+.seccion-manual {
+    padding: 80px 0; 
+}
+
+/* ESTILO GENERAL PARA TODOS LOS TÍTULOS H2 */
+h2 {
+    font-size: 2.5rem;
+    /* ⚠️ CAMBIO: Títulos H2 en Verde Bosque */
+    color: var(--color-primario-oscuro); 
+    margin-bottom: 50px; 
+    text-align: center;
+}
+
+/* ============================================== */
+/* ============= SECCIÓN LOGO E HISTORIA ======== */
+/* ============================================== */
+.seccion-logo-historia-alternada .contenedor {
+    display: flex;
+    flex-direction: column;
+    gap: 80px;
+}
+
+.contenido-alternado {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+}
+
+@media (min-width: 992px) {
+    .contenido-alternado {
+        flex-direction: row;
+        text-align: left;
+        align-items: flex-start;
+    }
+    .contenido-alternado.reverso {
+        flex-direction: row-reverse;
+    }
+}
+
+.imagen-lado {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.imagen-lado img {
+    max-width: 100%;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px var(--color-sombra-media);
+    transition: transform 0.4s ease-in-out;
+}
+
+.imagen-lado img:hover {
+    transform: scale(1.05);
+}
+
+.texto-lado {
+    flex: 1.5;
+    text-align: center;
+}
+
+@media (min-width: 992px) {
+    .texto-lado {
+        text-align: left;
+    }
+}
+
+.texto-lado h2 { 
+    font-size: 2rem;
+    /* ⚠️ CAMBIO: Títulos en Verde Bosque */
+    color: var(--color-primario-oscuro);
+    margin-bottom: 20px;
+}
+
+.texto-lado p {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: var(--color-texto-secundario);
+}
+
+/* ============================================== */
+/* ============= SECCIÓN VALORES ILUSTRADOS ===== */
+/* ============================================== */
+.seccion-valores-ilustrados-moderna h2 {
+    margin-bottom: 50px;
+}
+
+.valores-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+}
+
+.valor-item {
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px var(--color-sombra-suave);
+    text-align: center;
+    transition: all 0.3s ease;
+    border-bottom: 4px solid transparent; 
+}
+
+.valor-item:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 30px var(--color-sombra-media);
+    /* ⚠️ CAMBIO: Resalte en Verde Primario */
+    border-bottom-color: var(--color-primario); 
+}
+
+.valor-item img {
+    width: 90px; height: 90px;
+    object-fit: contain;
+    margin-bottom: 20px;
+}
+
+.valor-item h3 {
+    font-size: 1.5rem;
+    /* ⚠️ CAMBIO: Títulos de valores en Verde Primario */
+    color: var(--color-primario); 
+    margin-bottom: 10px;
+}
+
+.valor-item p {
+    font-size: 1rem;
+    color: var(--color-texto-secundario);
+    line-height: 1.5;
+}
+
+/* ============================================== */
+/* ============= SECCIÓN PROYECTOS DESTACADOS === */
+/* ============================================== */
+.seccion-proyectos-destacados h2 {
+    margin-bottom: 15px; 
+}
+
+.seccion-proyectos-destacados .subtitulo-proyectos {
+    text-align: center;
+    font-size: 1.15rem;
+    color: var(--color-texto-secundario);
+    max-width: 800px;
+    margin: 0 auto 50px auto; 
+    line-height: 1.6;
+}
+
+.proyectos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px; 
+}
+
+.proyecto-card {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden; 
+    box-shadow: 0 6px 15px var(--color-sombra-suave);
+    cursor: pointer; 
+}
+
+.proyecto-card img {
+    width: 100%;
+    height: 250px; 
+    object-fit: cover; 
+    display: block;
+    transition: transform 0.4s ease; 
+}
+
+.proyecto-card:hover img {
+    transform: scale(1.1); 
+}
+
+.overlay-proyecto {
+    position: absolute;
+    bottom: 0; left: 0; right: 0; 
+    /* Fondo de degradado oscuro se mantiene para contraste */
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0)); 
+    color: #fff;
+    padding: 20px;
+    transform: translateY(100%); 
+    transition: transform 0.4s ease-in-out; 
+}
+
+.proyecto-card:hover .overlay-proyecto {
+    transform: translateY(0); 
+}
+
+.overlay-proyecto h3 {
+    font-size: 1.3rem;
+    margin-bottom: 5px;
+}
+
+.overlay-proyecto p {
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+/* ============================================== */
+/* ============= SECCIÓN INSTALACIONES ========== */
+/* ============================================== */
+.seccion-instalaciones-galeria h2 {
+    margin-bottom: 50px;
+}
+
+.galeria-moderna {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+.instalacion-card { 
+    position: relative;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 8px 20px var(--color-sombra-suave);
+    cursor: pointer;
+}
+
+.instalacion-card img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.instalacion-card:hover img {
+    transform: scale(1.05); 
+}
+
+.overlay-instalacion {
+    position: absolute;
+    bottom: 0; left: 0; right: 0; 
+    /* Fondo de degradado oscuro se mantiene para contraste */
+    background:linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0));
+    color: #fff;
+    padding: 20px;
+    transform: translateY(100%); 
+    transition: transform 0.4s ease-in-out, opacity 0.4s ease-in-out; 
+    opacity: 0;
+}
+
+.instalacion-card:hover .overlay-instalacion {
+    transform: translateY(0); 
+    opacity: 1; 
+}
+
+.overlay-instalacion h3 {
+    font-size: 1.3rem;
+    margin-bottom: 5px;
+}
+
+.overlay-instalacion p {
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+/* ============================================== */
+/* ============= SECCIÓN MANUAL (BOTÓN) ========= */
+/* ============================================== */
+.seccion-manual {
+    padding: 50px 20px;
+    text-align: center;
+}
+
+.btn-manual {
+    padding: 15px 30px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 50px; 
+    /* ⚠️ CAMBIO: Botón en Verde Profundo */
+    background: var(--color-primario-oscuro); 
+    color: white;
+    cursor: pointer;
+    /* Sombra del botón con el color primario para acento */
+    box-shadow: 0 4px 15px rgba(56, 142, 60, 0.3); 
+    transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.btn-manual:hover {
+    /* ⚠️ CAMBIO: Hover en Verde un poco más claro */
+    background: #338137; 
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(56, 142, 60, 0.4);
+}
+
+/* ============================================== */
+/* ============= MODAL DE CONVIVENCIA =========== */
+/* ============================================== */
+
+/* --- Fondo del modal --- */
+.modal {
+    display: none; 
+    position: fixed; 
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4); 
+    backdrop-filter: blur(5px); 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* --- Contenido del modal --- */
+.modal-content {
+    background-color: #ffffff; /* Se mantiene blanco para que el PDF resalte */
+    border-radius: 12px;
+    width: 90%; 
+    max-width: 1000px; 
+    height: 90vh; 
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); 
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    position: relative;
+    transform: scale(0.95);
+    opacity: 0;
+    transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+}
+
+/* --- Animación de entrada con JS --- */
+.modal.mostrar-modal .modal-content {
+    transform: scale(1);
+    opacity: 1;
+}
+
+/* --- Título del modal --- */
+.modal-content .titulo {
+    text-align: center;
+    margin-bottom: 15px;
+    font-size: 1.8rem;
+    color: var(--color-primario-oscuro); /* ⚠️ Título del modal en Verde Bosque */
+    font-weight: bold;
+}
+
+/* --- Visor de PDF (iframe) --- */
+.modal-content iframe {
+    flex: 1; 
+    width: 100%;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    background-color: #fff; 
+}
+
+/* --- Botón de cerrar (la "X") --- */
+.cerrar {
+    position: absolute;
+    top: 15px;
+    right: 25px;
+    font-size: 32px;
+    font-weight: 300; 
+    cursor: pointer;
+    color: var(--color-primario); /* ⚠️ La X en color Verde Primario */
+    transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.cerrar:hover {
+    color: #d9534f; /* Se mantiene en rojo para indicar "cerrar/peligro" */
+    transform: rotate(90deg); 
+}
+
+/* --- Botón de descargar (ejemplo) --- */
+.btn-descargar {
+    margin-top: 15px;
+    padding: 12px 20px;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 50px;
+    text-decoration: none;
+    /* ⚠️ Se mantiene un color funcional (ej. verde claro funcional) */
+    background: #4CAF50;
+    color: #fff;
+    text-align: center;
+    display: inline-block;
+    transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.btn-descargar:hover {
+    background: #388E3C;
+    transform: translateY(-2px);
+}
+
+
+/* ============================================== */
+/* ============= 3. ESTILOS RESPONSIVOS ========= */
+/* ============================================== */
+@media (max-width: 768px) {
+    .seccion-hero { padding: 60px 15px; }
+
+    .contenedor-hero h1 { font-size: 2.5rem; }
+    .contenedor-hero p { font-size: 1.1rem; }
+    
+    .seccion-logo-historia-alternada,
+    .seccion-valores-ilustrados-moderna,
+    .seccion-proyectos-destacados,
+    .seccion-instalaciones-galeria,
+    .seccion-manual {
+        padding: 60px 15px; 
+    }
+
+    h2 { font-size: 2rem; margin-bottom: 40px; }
+    .texto-lado h2 { font-size: 1.8rem; }
+    .texto-lado p { font-size: 1rem; }
+    
+    .valores-grid {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 20px;
+    }
+    
+    .proyectos-grid {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+    }
+
+    .galeria-moderna {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 15px;
+    }
+    
+    .modal-content {
+        width: 95%;
+        height: 95vh;
+        margin: 0;
+        padding: 15px;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .modal-content .titulo { font-size: 1.5rem; margin-bottom: 10px; }
+    
+    .cerrar { font-size: 28px; top: 10px; right: 15px; }
+}

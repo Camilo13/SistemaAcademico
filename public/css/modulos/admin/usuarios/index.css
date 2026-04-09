@@ -1,0 +1,14 @@
+/* ============================================================
+   modulos/admin/usuarios/index.css
+   Vista: Listado de usuarios.
+   Cargado en: admin/usuarios/index.blade.php — @push('styles')
+
+   Los chips, badges, tabla, barra-bulk y filtros vienen de:
+     academico-index.css → .contenedor-modulo, .resumen-usuarios,
+                           .resumen-chip, .chip-*, .barra-bulk,
+                           .celda-correo
+     tablas.css          → .tabla, .estado, .btn-icono, .col-check
+     botones.css         → .btn y variantes
+   Este archivo no necesita agregar nada extra para el index.
+   Se mantiene como placeholder para overrides futuros.
+   ============================================================ */

@@ -1,0 +1,350 @@
+
+/* ============================================================
+   Contenedor responsivo
+   ============================================================ */
+.tabla-contenedor {
+    overflow-x    : auto;
+    background    : var(--fondo-tarjeta);
+    border-radius : var(--radio-lg);
+    border        : 1px solid var(--borde-color);
+    box-shadow    : var(--sombra-sm);
+}
+
+/* ============================================================
+   Tabla base
+   ============================================================ */
+.tabla {
+    width           : 100%;
+    border-collapse : collapse;
+    font-size       : var(--texto-base);
+}
+
+/* ── Cabecera ── */
+.tabla thead { background-color: #f0fdf4; }
+
+.tabla th {
+    padding        : 0.9rem 1rem;
+    text-align     : left;
+    font-size      : var(--texto-xs);
+    font-weight    : var(--peso-semi);
+    color          : #065f46;
+    border-bottom  : 2px solid #22c55e;
+    text-transform : uppercase;
+    letter-spacing : var(--tracking-wider);
+    white-space    : nowrap;
+    vertical-align : middle;
+}
+
+/* ── Cuerpo ── */
+.tabla td {
+    padding        : 0.85rem 1rem;
+    border-bottom  : 1px solid var(--borde-color);
+    color          : var(--color-texto-cuerpo);
+    vertical-align : middle;
+    transition     : background-color var(--transicion-rapida);
+}
+
+.tabla tbody tr:last-child td { border-bottom: none; }
+.tabla tbody tr:hover td      { background-color: #f9fafb; }
+
+/* ── Columna acciones (ancho mínimo, sin wrap) ── */
+.tabla .col-acciones { width: 1%; white-space: nowrap; }
+
+/* ── Columna checkbox (selección bulk) ── */
+.tabla .col-check {
+    width      : 44px;
+    text-align : center;
+    padding    : 0.85rem 0.5rem;
+}
+.tabla th.col-check { padding: 0.9rem 0.5rem; }
+
+/* Checkboxes dentro de la tabla */
+.checkbox-tabla,
+.checkbox-todos {
+    width       : 16px;
+    height      : 16px;
+    cursor      : pointer;
+    display     : block;
+    margin      : 0 auto;
+}
+.checkbox-tabla { accent-color: #16a34a; }
+.checkbox-todos { accent-color: #065f46; }
+
+/* ── Fila vacía ── */
+.tabla .fila-vacia td {
+    text-align   : center;
+    padding      : 2.5rem 1rem;
+    color        : var(--color-texto-tenue);
+    font-style   : italic;
+    font-size    : var(--texto-base);
+    border-bottom: none;
+}
+
+/* ── Fila seleccionada (clase JS) ── */
+.tabla tbody tr.fila-seleccionada td { background-color: #f0fdf4 !important; }
+
+/* ── Fila alerta (reprobado / peligro) ── */
+.tabla .fila-alerta td { background-color: #fff5f5; }
+
+/* ============================================================
+   Botones ícono de acciones
+   ============================================================ */
+.btn-icono {
+    width           : 34px;
+    height          : 34px;
+    display         : inline-flex;
+    align-items     : center;
+    justify-content : center;
+    border-radius   : var(--radio-md);
+    border          : none;
+    cursor          : pointer;
+    font-size       : 0.85rem;
+    text-decoration : none;
+    flex-shrink     : 0;
+    transition      : background var(--transicion-normal),
+                      transform  var(--transicion-rapida);
+}
+.btn-icono:hover { transform: translateY(-1px); }
+
+/* ── Variantes — 100% en paleta institucional ── */
+.btn-icono.editar           { background: #d1fae5; color: #065f46; }
+.btn-icono.editar:hover     { background: #a7f3d0; }
+
+.btn-icono.ver              { background: #ecfdf5; color: #047857; }
+.btn-icono.ver:hover        { background: #d1fae5; }
+
+.btn-icono.activar          { background: #d1fae5; color: #065f46; }
+.btn-icono.activar:hover    { background: #a7f3d0; }
+
+.btn-icono.desactivar       { background: #fef9c3; color: #854d0e; }
+.btn-icono.desactivar:hover { background: #fef08a; }
+
+.btn-icono.finalizar        { background: #ecfdf5; color: #047857; }
+.btn-icono.finalizar:hover  { background: #d1fae5; }
+
+.btn-icono.eliminar         { background: #fee2e2; color: #991b1b; }
+.btn-icono.eliminar:hover   { background: #fecaca; }
+
+.btn-icono.boletin          { background: #ecfdf5; color: #065f46; }
+.btn-icono.boletin:hover    { background: #d1fae5; }
+
+/* ============================================================
+   Badges de estado
+   Uso: <span class="estado estado-activo">Activo</span>
+   ============================================================ */
+.estado {
+    display      : inline-flex;
+    align-items  : center;
+    gap          : 0.3rem;
+    padding      : 0.28rem 0.65rem;
+    border-radius: var(--radio-pill);
+    font-size    : var(--texto-xs);
+    font-weight  : var(--peso-semi);
+    white-space  : nowrap;
+}
+
+.estado-activo,    .estado-activa     { background: #d1fae5; color: #065f46; }
+.estado-inactivo,  .estado-inactiva   { background: #fee2e2; color: #991b1b; }
+.estado-abierto                       { background: #d1fae5; color: #065f46; }
+.estado-cerrado                       { background: #fee2e2; color: #991b1b; }
+.estado-retirado,  .estado-retirada   { background: #fef3c7; color: #92400e; }
+.estado-finalizado,.estado-finalizada { background: #ecfdf5; color: #047857; }
+.estado-en-curso                      { background: #d1fae5; color: #047857; }
+.estado-pendiente                     { background: #f3f4f6; color: #6b7280; }
+
+/* ── Badges de rol — paleta institucional ── */
+.badge-admin      { background: #d1fae5; color: #065f46; }
+.badge-docente    { background: #f3f4f6; color: #374151; }
+.badge-estudiante { background: #ecfdf5; color: #16a34a; }
+
+/* ── Badges genéricos (usados en academico-index.css) ── */
+.badge {
+    display      : inline-flex;
+    align-items  : center;
+    gap          : 0.3rem;
+    padding      : 0.28rem 0.65rem;
+    border-radius: var(--radio-pill);
+    font-size    : var(--texto-xs);
+    font-weight  : var(--peso-semi);
+    white-space  : nowrap;
+}
+
+.badge-activo,   .badge-activa    { background: #d1fae5; color: #065f46; }
+.badge-inactivo, .badge-inactiva  { background: #fee2e2; color: #991b1b; }
+
+/* ── Chips de nota académica ── */
+.nota-chip {
+    display      : inline-block;
+    padding      : 0.2rem 0.65rem;
+    border-radius: var(--radio-pill);
+    font-size    : var(--texto-sm);
+    font-weight  : var(--peso-bold);
+}
+.nota-aprobada  { background: #d1fae5; color: #065f46; }
+.nota-reprobada { background: #fee2e2; color: #991b1b; }
+.nota-sin       { background: #f3f4f6; color: #6b7280; }
+
+/* ============================================================
+   Panel de filtros
+   ============================================================ */
+.panel-filtros {
+    display      : flex;
+    flex-wrap    : wrap;
+    align-items  : flex-end;
+    gap          : 1rem;
+    background   : var(--fondo-tarjeta);
+    border       : 1px solid var(--borde-color);
+    border-radius: var(--radio-lg);
+    padding      : 1rem 1.2rem;
+}
+
+.filtro {
+    display       : flex;
+    flex-direction: column;
+    gap           : 0.3rem;
+    min-width     : 150px;
+}
+
+.filtro label {
+    font-size     : var(--texto-xs);
+    font-weight   : var(--peso-semi);
+    color         : #065f46;
+    display       : flex;
+    align-items   : center;
+    gap           : 0.3rem;
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-wide);
+}
+
+.filtro select,
+.filtro input[type="text"],
+.filtro input[type="date"] {
+    padding      : 0.55rem 0.75rem;
+    border       : 1px solid #d1d5db;
+    border-radius: var(--radio-md);
+    font-size    : var(--texto-sm);
+    font-family  : var(--fuente-base);
+    background   : var(--fondo-input);
+    color        : var(--color-texto-cuerpo);
+    transition   : border-color var(--transicion-normal),
+                   box-shadow   var(--transicion-normal);
+}
+
+.filtro select:focus,
+.filtro input:focus {
+    outline     : none;
+    border-color: var(--borde-focus);
+    background  : var(--fondo-input-focus);
+    box-shadow  : 0 0 0 3px rgba(34, 197, 94, 0.15);
+}
+
+.filtro-buscar       { flex: 2; min-width: 200px; }
+.filtro-buscar input { width: 100%; }
+
+.filtro-acciones { display: flex; align-items: flex-end; gap: 0.5rem; }
+
+/* ============================================================
+   Paginación
+   ============================================================ */
+.paginacion {
+    display        : flex;
+    justify-content: flex-end;
+    padding        : 1rem 0.5rem 0;
+}
+
+/* ============================================================
+   Alertas inline
+   ============================================================ */
+.alerta-error,
+.alerta-exito,
+.alerta-advertencia {
+    display      : flex;
+    align-items  : center;
+    gap          : 0.5rem;
+    border-radius: var(--radio-md);
+    padding      : 0.8rem 1.1rem;
+    font-size    : var(--texto-sm);
+}
+.alerta-error       { background: #fee2e2; border: 1px solid #fca5a5; color: #991b1b; }
+.alerta-exito       { background: #d1fae5; border: 1px solid #6ee7b7; color: #065f46; }
+.alerta-advertencia { background: #fef9c3; border: 1px solid #fde68a; color: #854d0e; }
+
+/* ============================================================
+   Responsive
+   ============================================================ */
+
+/* Tablet */
+@media (max-width: 1024px) {
+    .tabla th,
+    .tabla td { padding: 0.75rem 0.85rem; }
+}
+
+/* Móvil */
+@media (max-width: 768px) {
+
+    .tabla th,
+    .tabla td { padding: 0.7rem; font-size: var(--texto-sm); }
+
+    .acciones              { flex-direction: column; align-items: stretch; }
+    .acciones > a,
+    .acciones > form       { width: 100%; }
+    .acciones > form > .btn,
+    .acciones > a.btn      { width: 100%; }
+
+    .panel-filtros { flex-direction: column; }
+    .filtro        { min-width: 100%; }
+}
+
+/* Tarjeta móvil pequeño — oculta thead, cada fila = card */
+@media (max-width: 600px) {
+
+    /* Ocultar checkbox en modo tarjeta */
+    .tabla td.col-check,
+    .tabla th.col-check { display: none; }
+
+    .tabla thead { display: none; }
+    .tabla       { border: none; }
+
+    .tabla tbody tr {
+        display       : block;
+        margin-bottom : 1rem;
+        border        : 1px solid var(--borde-color);
+        border-radius : var(--radio-lg);
+        padding       : 0.8rem;
+        background    : var(--fondo-tarjeta);
+        box-shadow    : var(--sombra-sm);
+    }
+
+    .tabla td {
+        display        : flex;
+        justify-content: space-between;
+        align-items    : flex-start;
+        border         : none;
+        border-bottom  : 1px solid #f3f4f6;
+        padding        : 0.5rem 0;
+        text-align     : right;
+        gap            : 1rem;
+        font-size      : var(--texto-sm);
+    }
+
+    .tabla td:last-child { border-bottom: none; }
+
+    /* Etiqueta izquierda generada por data-label */
+    .tabla td[data-label]::before {
+        content    : attr(data-label);
+        font-weight: var(--peso-semi);
+        color      : #065f46;
+        text-align : left;
+        flex-shrink: 0;
+    }
+
+    .acciones { flex-direction: row; justify-content: flex-end; }
+}
+
+@media (max-width: 480px) {
+    .tabla-contenedor {
+        border-radius: 0;
+        border-left  : none;
+        border-right : none;
+    }
+}

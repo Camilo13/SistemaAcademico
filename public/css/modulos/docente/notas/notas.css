@@ -1,0 +1,262 @@
+/* ============================================================
+   modulos/docente/notas/notas.css
+   Vistas: index, estudiantes, create, edit
+   Layout base: menudocente.css + tablas.css + botones.css
+   ============================================================ */
+
+/* ── Buscador (index) ── */
+.input-buscar {
+    padding      : 0.5rem 0.85rem;
+    border       : 1px solid var(--borde-color);
+    border-radius: var(--radio-md);
+    font-size    : var(--texto-sm);
+    color        : var(--color-texto-cuerpo);
+    background   : var(--fondo-tarjeta);
+    width        : 240px;
+    transition   : border-color var(--transicion-normal);
+}
+
+.input-buscar:focus {
+    outline     : none;
+    border-color: #22c55e;
+}
+
+/* ── Cards de asignaciones (index) ── */
+.asignaciones-lista {
+    display       : flex;
+    flex-direction: column;
+    gap           : 0.5rem;
+}
+
+.asignacion-item {
+    display        : flex;
+    align-items    : center;
+    gap            : 1rem;
+    padding        : 1rem 1.2rem;
+    background     : var(--fondo-tarjeta);
+    border         : 1px solid var(--borde-color);
+    border-radius  : var(--radio-md);
+    text-decoration: none;
+    color          : var(--color-texto-cuerpo);
+    transition     : border-color 0.15s, box-shadow 0.15s, transform 0.1s;
+    box-shadow     : var(--sombra-sm);
+}
+
+.asignacion-item:hover {
+    border-color: #22c55e;
+    box-shadow  : 0 2px 10px rgba(34,197,94,.12);
+    transform   : translateY(-1px);
+}
+
+.asignacion-icono {
+    width          : 44px;
+    height         : 44px;
+    border-radius  : 50%;
+    background     : #f0fdf4;
+    display        : flex;
+    align-items    : center;
+    justify-content: center;
+    font-size      : 1.1rem;
+    color          : #10b981;
+    flex-shrink    : 0;
+}
+
+.asignacion-datos { flex: 1; min-width: 0; }
+
+.asignacion-materia {
+    font-weight: var(--peso-semibold);
+    font-size  : var(--texto-base);
+    color      : var(--color-texto-subtitulo);
+    white-space: nowrap;
+    overflow   : hidden;
+    text-overflow: ellipsis;
+}
+
+.asignacion-grupo {
+    font-size : var(--texto-sm);
+    color     : var(--color-texto-tenue);
+    margin-top: 0.15rem;
+}
+
+.asignacion-flecha {
+    color     : var(--color-texto-tenue);
+    font-size : var(--texto-sm);
+    flex-shrink: 0;
+    transition: color 0.15s;
+}
+
+.asignacion-item:hover .asignacion-flecha { color: #10b981; }
+
+/* ── Ficha de contexto (estudiantes, create, edit) ── */
+.ficha-asignacion,
+.ficha-contexto {
+    display      : flex;
+    flex-wrap    : wrap;
+    gap          : 0.5rem;
+    padding      : 0.85rem 1.1rem;
+    background   : var(--fondo-tarjeta);
+    border       : 1px solid var(--borde-color);
+    border-radius: var(--radio-md);
+    box-shadow   : var(--sombra-sm);
+}
+
+.ficha-dato {
+    display       : flex;
+    flex-direction: column;
+    gap           : 0.1rem;
+    padding-right : 1.5rem;
+}
+
+.ficha-dato span {
+    font-size  : var(--texto-xs);
+    color      : var(--color-texto-tenue);
+    line-height: 1.2;
+}
+
+.ficha-dato strong {
+    font-size  : var(--texto-sm);
+    font-weight: var(--peso-semibold);
+    color      : var(--color-texto-subtitulo);
+}
+
+/* ── Tabla de estudiantes ── */
+.nombre-estudiante {
+    font-weight: var(--peso-semibold);
+    font-size  : var(--texto-sm);
+    color      : var(--color-texto-subtitulo);
+}
+
+.id-estudiante {
+    font-size : var(--texto-xs);
+    color     : var(--color-texto-tenue);
+    margin-top: 0.1rem;
+}
+
+.celda-nota {
+    text-align: center;
+    white-space: nowrap;
+}
+
+/* Icono de periodo cerrado en cabecera */
+.periodo-lock {
+    font-size   : 0.65rem;
+    color       : #dc2626;
+    margin-left : 4px;
+    opacity     : 0.75;
+}
+
+/* ── Chips de notas en la tabla ── */
+.nota-chip {
+    display      : inline-flex;
+    align-items  : center;
+    justify-content: center;
+    min-width    : 44px;
+    padding      : 0.2rem 0.6rem;
+    border-radius: 999px;
+    font-weight  : var(--peso-bold);
+    font-size    : var(--texto-sm);
+    text-decoration: none;
+    transition   : opacity 0.15s, transform 0.1s;
+}
+
+.nota-chip:hover { opacity: 0.82; transform: scale(1.04); }
+.nota-aprobada   { background: #d1fae5; color: #065f46; }
+.nota-reprobada  { background: #fee2e2; color: #991b1b; }
+
+.nota-sin {
+    display        : inline-flex;
+    align-items    : center;
+    justify-content: center;
+    color          : var(--color-texto-tenue);
+    font-size      : var(--texto-sm);
+}
+
+.nota-agregar {
+    display        : inline-flex;
+    align-items    : center;
+    justify-content: center;
+    width          : 26px;
+    height         : 26px;
+    border-radius  : 50%;
+    background     : #f0fdf4;
+    color          : #10b981;
+    text-decoration: none;
+    font-size      : 0.7rem;
+    border         : 1px solid #a7f3d0;
+    transition     : background 0.15s, border-color 0.15s;
+}
+
+.nota-agregar:hover { background: #d1fae5; border-color: #10b981; }
+
+/* ── Chips de promedio ── */
+.promedio-chip {
+    display      : inline-flex;
+    align-items  : center;
+    padding      : 0.2rem 0.65rem;
+    border-radius: 999px;
+    font-weight  : var(--peso-bold);
+    font-size    : var(--texto-sm);
+}
+
+.promedio-aprobado { background: #d1fae5; color: #065f46; }
+.promedio-reprobado{ background: #fee2e2; color: #991b1b; }
+.promedio-sin      { background: #f3f4f6; color: #9ca3af; }
+
+/* ── Preview de desempeño (create / edit) ── */
+.preview-nota {
+    display      : flex;
+    align-items  : center;
+    gap          : 0.5rem;
+    padding      : 0.6rem 0.9rem;
+    border-radius: var(--radio-md);
+    font-size    : var(--texto-sm);
+    font-weight  : var(--peso-semibold);
+    min-height   : 36px;
+    transition   : background 0.2s, color 0.2s;
+}
+
+.preview-nota:empty { display: none; }
+
+.preview-nota.superior { background: #d1fae5; color: #065f46; }
+.preview-nota.alto     { background: #dcfce7; color: #166534; }
+.preview-nota.basico   { background: #fef9c3; color: #854d0e; }
+.preview-nota.bajo     { background: #fee2e2; color: #991b1b; }
+
+/* ── Texto aprobado/reprobado (ficha edit) ── */
+.texto-aprobado  { color: #047857; font-weight: var(--peso-bold); }
+.texto-reprobado { color: #991b1b; font-weight: var(--peso-bold); }
+
+/* ── Alerta advertencia periodo cerrado ── */
+.alerta-advertencia {
+    display      : flex;
+    align-items  : center;
+    gap          : 0.5rem;
+    background   : #fffbeb;
+    border       : 1px solid #fcd34d;
+    border-radius: var(--radio-md);
+    padding      : 0.7rem 1rem;
+    font-size    : var(--texto-sm);
+    color        : #92400e;
+    margin-bottom: 0.75rem;
+}
+
+/* ── Sin registros ── */
+.sin-registros {
+    display        : flex;
+    align-items    : center;
+    gap            : 0.5rem;
+    color          : var(--color-texto-tenue);
+    font-size      : var(--texto-sm);
+    padding        : 2rem;
+    justify-content: center;
+}
+
+/* ── Responsive ── */
+@media (max-width: 640px) {
+    .ficha-asignacion,
+    .ficha-contexto    { flex-direction: column; }
+    .ficha-dato        { padding-right: 0; border-bottom: 1px solid var(--borde-color); padding-bottom: 0.5rem; }
+    .ficha-dato:last-child { border-bottom: none; }
+    .input-buscar      { width: 100%; }
+    .asignacion-materia { white-space: normal; }
+}

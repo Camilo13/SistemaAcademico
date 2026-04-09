@@ -1,0 +1,83 @@
+/* ============================================================
+   componentes/formularios.css
+   Formularios genéricos (login, solicitudes, perfil).
+   Cargado globalmente en todos los layouts autenticados.
+
+   Nota: Los formularios del módulo académico usan
+   academico-form.css, no este archivo.
+   ============================================================ */
+
+/* ── Formulario base ── */
+.formulario {
+    display       : flex;
+    flex-direction: column;
+    gap           : 1.2rem;
+}
+
+/* ── Grupo de campo (label + input) ── */
+.grupo-formulario {
+    display       : flex;
+    flex-direction: column;
+    gap           : 0.4rem;
+}
+
+.grupo-formulario label {
+    font-size  : var(--texto-md);
+    font-weight: var(--peso-semi);
+    color      : #166534;
+}
+
+/* ── Inputs del grupo ── */
+.grupo-formulario input[type="text"],
+.grupo-formulario input[type="email"],
+.grupo-formulario input[type="password"],
+.grupo-formulario input[type="number"],
+.grupo-formulario select,
+.grupo-formulario textarea {
+    padding      : 0.7rem 0.9rem;
+    border-radius: var(--radio-md);
+    border       : 1px solid #d1d5db;
+    font-family  : var(--fuente-base);
+    font-size    : var(--texto-base);
+    background   : var(--fondo-input);
+    color        : var(--color-texto-cuerpo);
+    transition   : border-color var(--transicion-normal),
+                   box-shadow   var(--transicion-normal),
+                   background   var(--transicion-normal);
+}
+
+.grupo-formulario input:focus,
+.grupo-formulario select:focus,
+.grupo-formulario textarea:focus {
+    outline     : none;
+    border-color: var(--borde-focus);
+    background  : var(--fondo-input-focus);
+    box-shadow  : 0 0 0 3px rgba(34, 197, 94, 0.2);
+}
+
+.grupo-formulario input:disabled,
+.grupo-formulario select:disabled {
+    background : #f3f4f6;
+    color      : var(--color-texto-secundario);
+    cursor     : not-allowed;
+}
+
+/* ── Acciones del formulario ── */
+.form-acciones {
+    margin-top : 1rem;
+    display    : flex;
+    justify-content: flex-end;
+    gap        : 0.8rem;
+    flex-wrap  : wrap;
+}
+
+/* ── Responsive ── */
+@media (max-width: 480px) {
+    .form-acciones {
+        flex-direction: column;
+    }
+    .form-acciones .btn {
+        width           : 100%;
+        justify-content : center;
+    }
+}

@@ -1,0 +1,297 @@
+/* ============================================================
+   componentes/academico-form.css
+   Formularios de los módulos académico y admin (create / edit).
+   Cargado por @push('styles') en cada vista create/edit.
+
+   ── CONTENEDOR UNIFICADO ───────────────────────────────────
+   .contenedor-modulo reemplaza a todos los .contenedor-X
+   anteriores (contenedor-grado, contenedor-sede, etc.).
+   Úsalo en el <div> raíz de CUALQUIER vista create/edit.
+
+   ── TARJETAS SECUNDARIAS DEL EDIT ─────────────────────────
+   .tarjeta-accion  → activar / desactivar  (borde ámbar)
+   .tarjeta-peligro → eliminar              (borde rojo)
+   Siempre van DEBAJO de la .tarjeta-form principal.
+   ============================================================ */
+
+/* ============================================================
+   Contenedor raíz de vista — UNIFICADO
+   ============================================================ */
+.contenedor-modulo {
+    padding        : 1.8rem;
+    display        : flex;
+    flex-direction : column;
+    gap            : 1.5rem;
+}
+
+/* ============================================================
+   Cabecera de vista
+   ============================================================ */
+.cabecera {
+    display         : flex;
+    justify-content : space-between;
+    align-items     : center;
+    flex-wrap       : wrap;
+    gap             : 1rem;
+}
+
+.cabecera h2 {
+    font-size   : var(--texto-xl);
+    font-weight : var(--peso-bold);
+    color       : var(--color-texto-subtitulo);
+    display     : flex;
+    align-items : center;
+    gap         : 0.6rem;
+    margin      : 0;
+}
+
+/* Cabecera con subtítulo debajo del título */
+.cabecera-info {
+    display       : flex;
+    flex-direction: column;
+    gap           : 0.15rem;
+}
+.cabecera-info h2  { /* mismo estilo que .cabecera h2 */
+    font-size   : var(--texto-xl);
+    font-weight : var(--peso-bold);
+    color       : var(--color-texto-subtitulo);
+    display     : flex;
+    align-items : center;
+    gap         : 0.6rem;
+    margin      : 0;
+}
+.cabecera-subtitulo {
+    font-size  : var(--texto-sm);
+    color      : var(--color-texto-secundario);
+}
+
+/* ============================================================
+   Tarjeta principal del formulario
+   ============================================================ */
+.tarjeta-form {
+    background     : var(--fondo-tarjeta);
+    border-radius  : var(--radio-lg);
+    padding        : 1.8rem;
+    border         : 1px solid var(--borde-color);
+    box-shadow     : var(--sombra-md);
+    display        : flex;
+    flex-direction : column;
+    gap            : 1.4rem;
+}
+
+/* Banner de información (solo en edit) */
+.info-registro {
+    background   : #f0fdf4;
+    border       : 1px solid #a7f3d0;
+    border-radius: var(--radio-md);
+    padding      : 0.75rem 1rem;
+    font-size    : var(--texto-sm);
+    color        : var(--color-texto-titulo);
+    display      : flex;
+    align-items  : center;
+    gap          : 0.5rem;
+    flex-wrap    : wrap;
+}
+
+/* ============================================================
+   Grid de campos
+   ── Default: 2 columnas
+   ── Las vistas con 1, 3 o 4 cols definen su propio override
+      en el CSS de módulo (.grid-periodo, etc.)
+   ============================================================ */
+.grid-campos {
+    display               : grid;
+    grid-template-columns : repeat(2, 1fr);
+    gap                   : 1rem;
+}
+
+/* Campo individual */
+.campo {
+    display        : flex;
+    flex-direction : column;
+    gap            : 0.35rem;
+}
+
+.campo label {
+    font-size   : var(--texto-sm);
+    font-weight : var(--peso-semi);
+    color       : var(--color-texto-subtitulo);
+    display     : flex;
+    align-items : center;
+    gap         : 0.4rem;
+}
+
+/* Asterisco obligatorio */
+.campo label span { color: #dc2626; }
+
+/* Inputs, selects, textareas */
+.campo input,
+.campo select,
+.campo textarea {
+    padding       : 0.6rem 0.8rem;
+    border        : 1px solid #d1d5db;
+    border-radius : var(--radio-md);
+    font-size     : var(--texto-sm);
+    font-family   : var(--fuente-base);
+    background    : var(--fondo-input);
+    color         : var(--color-texto-cuerpo);
+    transition    : border-color var(--transicion-normal),
+                    box-shadow   var(--transicion-normal),
+                    background   var(--transicion-normal);
+}
+
+.campo input:focus,
+.campo select:focus,
+.campo textarea:focus {
+    outline      : none;
+    border-color : var(--borde-focus);
+    background   : var(--fondo-input-focus);
+    box-shadow   : 0 0 0 3px rgba(34,197,94,0.18);
+}
+
+.campo input:disabled,
+.campo select:disabled,
+.campo textarea:disabled {
+    background : #f3f4f6;
+    color      : var(--color-texto-secundario);
+    cursor     : not-allowed;
+    opacity    : 0.8;
+}
+
+.campo textarea {
+    resize     : vertical;
+    min-height : 90px;
+    line-height: var(--leading-relaxed);
+}
+
+/* Campo a ancho completo del grid */
+.campo-ancho { grid-column: 1 / -1; }
+
+/* Error de validación */
+.error-campo {
+    color     : #dc2626;
+    font-size : var(--texto-xs);
+    display   : flex;
+    align-items: center;
+    gap       : 0.25rem;
+}
+
+/* Texto de ayuda */
+.nota-campo { font-size: var(--texto-xs); color: var(--color-texto-secundario); }
+
+/* Nota de unicidad */
+.nota-unicidad {
+    font-size   : var(--texto-xs);
+    color       : var(--color-texto-secundario);
+    display     : flex;
+    align-items : center;
+    gap         : 0.4rem;
+}
+
+/* ── Checkbox dentro del formulario ── */
+.campo-check {
+    grid-column : 1 / -1;
+    display     : flex;
+    align-items : center;
+    gap         : 0.5rem;
+    font-size   : var(--texto-base);
+    color       : var(--color-texto-cuerpo);
+    margin-top  : 0.25rem;
+    cursor      : pointer;
+}
+.campo-check input[type="checkbox"] {
+    width        : 17px;
+    height       : 17px;
+    accent-color : #16a34a;
+    cursor       : pointer;
+    flex-shrink  : 0;
+}
+.label-check {
+    font-size   : var(--texto-sm) !important;
+    font-weight : var(--peso-semi) !important;
+    color       : var(--color-texto-cuerpo) !important;
+    cursor      : pointer;
+}
+
+/* ── Acciones del formulario (Cancelar / Guardar) ── */
+.acciones-form {
+    display         : flex;
+    justify-content : flex-end;
+    gap             : 0.8rem;
+    margin-top      : 0.5rem;
+    flex-wrap       : wrap;
+}
+
+/* ============================================================
+   Tarjetas secundarias del edit
+   ============================================================ */
+.tarjeta-accion  { border-left: 4px solid #d97706; }
+.tarjeta-peligro { border-left: 4px solid #ef4444; }
+
+/* Título de sección dentro de tarjeta secundaria */
+.seccion-titulo-form {
+    font-size     : var(--texto-base);
+    font-weight   : var(--peso-semi);
+    color         : var(--color-texto-subtitulo);
+    display       : flex;
+    align-items   : center;
+    gap           : 0.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom : 1px solid var(--borde-color);
+    margin        : 0;
+}
+.seccion-titulo-form.peligro { color: #b91c1c; }
+
+/* Descripción */
+.seccion-desc {
+    font-size  : var(--texto-sm);
+    color      : var(--color-texto-secundario);
+    margin     : 0;
+    line-height: var(--leading-relaxed);
+}
+
+/* Acciones secundarias (botones de la tarjeta) */
+.acciones-secundarias {
+    display    : flex;
+    align-items: center;
+    gap        : 0.75rem;
+    flex-wrap  : wrap;
+    margin-top : 0.5rem;
+}
+
+/* ============================================================
+   Responsive
+   ============================================================ */
+@media (max-width: 992px) {
+    /* Grids de 3+ columnas pasan a 2 */
+    .grid-campos { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 768px) {
+
+    .contenedor-modulo { padding: 1.2rem; }
+    .tarjeta-form      { padding: 1.3rem; }
+
+    .cabecera {
+        flex-direction: column;
+        align-items   : flex-start;
+    }
+
+    .grid-campos {
+        grid-template-columns: 1fr;
+    }
+
+    .campo-ancho,
+    .campo-check { grid-column: 1; }
+
+    .acciones-form {
+        flex-direction : column;
+        align-items    : stretch;
+    }
+    .acciones-form .btn { width: 100%; justify-content: center; }
+}
+
+@media (max-width: 480px) {
+    .contenedor-modulo { padding: 0.9rem; }
+    .tarjeta-form      { padding: 1rem; }
+}
