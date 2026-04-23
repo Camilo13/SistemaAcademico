@@ -8,9 +8,9 @@
 @section('content')
 <div class="contenedor-notas-est">
 
-    {{-- Cabecera --}}
+    {{-- ── Cabecera ── --}}
     <div class="cabecera">
-        <div>
+        <div class="cabecera-info">
             <h2><i class="fa-solid fa-star"></i> Mis Notas</h2>
             <p class="cabecera-subtitulo">
                 @if($anioActivo)
@@ -23,6 +23,7 @@
     </div>
 
     @if(!$anioActivo || !$inscripcion)
+
         <div class="aviso-sin-anio">
             <i class="fa-solid fa-circle-info"></i>
             @if(!$anioActivo)
@@ -34,7 +35,31 @@
 
     @else
 
-        {{-- Tabs de periodos --}}
+        {{-- ── Ficha de contexto académico ── --}}
+        <div class="ficha-academica">
+            <div class="ficha-dato">
+                <span><i class="fa-solid fa-graduation-cap"></i> Grado</span>
+                <strong>{{ optional($inscripcion->grupo->grado)->nombre ?? '—' }}</strong>
+            </div>
+            <div class="ficha-dato">
+                <span><i class="fa-solid fa-users"></i> Grupo</span>
+                <strong>{{ optional($inscripcion->grupo)->nombre ?? '—' }}</strong>
+            </div>
+            @if(optional($inscripcion->grupo)->sede)
+                <div class="ficha-dato">
+                    <span><i class="fa-solid fa-school"></i> Sede</span>
+                    <strong>{{ $inscripcion->grupo->sede->nombre }}</strong>
+                </div>
+            @endif
+            <div class="ficha-dato">
+                <span><i class="fa-solid fa-book-open"></i> Materias activas</span>
+                <strong>
+                    {{ $inscripcion->inscripcionMaterias->where('estado', 'activa')->count() }}
+                </strong>
+            </div>
+        </div>
+
+        {{-- ── Tabs de periodos ── --}}
         @if($periodos->isNotEmpty())
             <div class="tabs-periodos">
                 <a href="{{ route('estudiante.notas.index') }}"
@@ -50,7 +75,7 @@
             </div>
         @endif
 
-        {{-- Lista de materias con notas --}}
+        {{-- ── Lista de materias con notas ── --}}
         @php
             $materiasInscritas = $inscripcion->inscripcionMaterias->where('estado', 'activa');
         @endphp
@@ -65,14 +90,15 @@
                             : null;
                         $aprobada = !is_null($promedio) && $promedio >= 3.0;
                     @endphp
-                    <div class="materia-nota-card" data-promedio="{{ $promedio ?? '' }}">
+                    <div class="materia-nota-card">
 
                         <div class="materia-nota-nombre">
                             <div class="materia-nombre">
                                 {{ optional($im->asignacion->materia)->nombre ?? '—' }}
                             </div>
                             <div class="materia-docente">
-                                {{ optional($im->asignacion->docente)->name ?? '—' }}
+                                <i class="fa-solid fa-chalkboard-teacher"></i>
+                                {{ optional($im->asignacion->docente)->nombre_completo ?? 'Sin docente' }}
                             </div>
                         </div>
 

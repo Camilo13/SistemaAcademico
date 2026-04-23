@@ -64,10 +64,10 @@ use App\Http\Controllers\Modulos\Estudiante\HorarioEstudianteController;
 // ── Docente ───────────────────────────────────────────────────────────────
 use App\Http\Controllers\Modulos\Docente\MisGruposController;
 use App\Http\Controllers\Modulos\Docente\NotaDocenteController;
+use App\Http\Controllers\Modulos\Docente\BoletinDocenteController;
 use App\Http\Controllers\Modulos\Docente\ResumenGrupoController;
 
 // ── Estudiante ────────────────────────────────────────────────────────────
-use App\Http\Controllers\Modulos\Estudiante\MiAcademicoController;
 use App\Http\Controllers\Modulos\Estudiante\NotaEstudianteController;
 use App\Http\Controllers\Modulos\Estudiante\BoletinEstudianteController;
 use App\Http\Controllers\Modulos\Docente\AsistenciaDocenteController;
@@ -557,6 +557,19 @@ Route::middleware(['auth', 'rol:docente'])
 
         /*
         |----------------------------------------------------------------------
+        | BOLETÍN — DOCENTE (solo lectura, solo sus grupos)
+        |----------------------------------------------------------------------
+        */
+        Route::controller(BoletinDocenteController::class)
+            ->prefix('boletin')
+            ->name('boletin.')
+            ->group(function () {
+
+                Route::get('/{inscripcion}', 'show')->name('show');
+            });
+
+        /*
+        |----------------------------------------------------------------------
         | RESUMEN DE GRUPO — DOCENTE (todos los estudiantes del grupo)
         |----------------------------------------------------------------------
         */
@@ -602,20 +615,6 @@ Route::middleware(['auth', 'rol:estudiante'])
     ->prefix('estudiante')
     ->name('estudiante.')
     ->group(function () {
-
-        /*
-        |----------------------------------------------------------------------
-        | MI ACADÉMICO — inscripciones y materias del año en curso
-        |----------------------------------------------------------------------
-        */
-        Route::controller(MiAcademicoController::class)
-            ->prefix('academico')
-            ->name('academico.')
-            ->group(function () {
-
-                Route::get('/inscripciones', 'inscripciones')->name('inscripciones');
-                Route::get('/materias', 'materias')->name('materias');
-            });
 
         /*
         |----------------------------------------------------------------------

@@ -82,24 +82,6 @@
                                 <i class="fas fa-chart-line icono"></i> Mis Notas
                             </a>
                         </li>
-                        <li>
-                            <a href="{{ route('estudiante.boletin.index') }}">
-                                <i class="fas fa-file-alt icono"></i> Mis Boletines
-                            </a>
-                        </li>
-
-                        {{-- ┄ Inscripciones ┄ --}}
-                        <li class="submenu-titulo">Inscripciones</li>
-                        <li>
-                            <a href="{{ route('estudiante.academico.inscripciones') }}">
-                                <i class="fas fa-book-open icono"></i> Mis Inscripciones
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{ route('estudiante.academico.materias') }}">
-                                <i class="fas fa-layer-group icono"></i> Mis Materias
-                            </a>
-                        </li>
 
                         {{-- ┄ Asistencia ┄ --}}
                         <li class="submenu-titulo">Asistencia</li>
@@ -111,7 +93,11 @@
 
                     </ul>
                 </li>
-
+                 <li>
+                    <a href="{{ route('estudiante.boletin.index') }}">
+                        <i class="fas fa-file-alt icono"></i> Mis Boletines
+                    </a>
+                </li>
                 {{-- ── Mi Horario ── --}}
                 <li>
                     <a href="{{ route('estudiante.horario.index') }}">

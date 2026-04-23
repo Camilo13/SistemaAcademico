@@ -121,7 +121,7 @@
                                 <strong>{{ optional($im->asignacion->materia)->nombre ?? '—' }}</strong>
                             </td>
                             <td data-label="Docente">
-                                {{ optional($im->asignacion->docente)->name ?? '—' }}
+                                {{ optional($im->asignacion->docente)->nombre_completo ?? '—' }}
                             </td>
                             <td data-label="Nota">
                                 @if($nota)
