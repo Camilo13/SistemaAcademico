@@ -1,0 +1,123 @@
+/* ============================================================
+   modulos/docente/grupos/index.css
+
+   Globales disponibles (menudocente):
+     academico-index.css → .cabecera, .cabecera-subtitulo
+                           (+ responsive de .cabecera)
+     botones.css         → .btn, .btn-primario, .btn-secundario,
+                           .btn-neutro, .btn-sm
+     tablas.css          → .alerta-advertencia
+     tipografia.css      → .sin-registros, .texto-tenue
+     docente-comun.css   → .input-buscar
+
+   Este archivo aporta: contenedor, grid y tarjetas de grupo.
+   ============================================================ */
+
+.contenedor-grupos {
+    padding       : 1.8rem;
+    display       : flex;
+    flex-direction: column;
+    gap           : 1.5rem;
+}
+
+/* ── Grid de tarjetas ── */
+.grupos-grid {
+    display              : grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap                  : 1rem;
+}
+
+/* ── Tarjeta de grupo ── */
+.grupo-card {
+    background    : var(--fondo-tarjeta);
+    border        : 1px solid var(--borde-color);
+    border-radius : var(--radio-lg);
+    padding       : 1.2rem;
+    box-shadow    : var(--sombra-sm);
+    display       : flex;
+    flex-direction: column;
+    gap           : 0.9rem;
+    transition    : box-shadow 0.15s, transform 0.1s;
+}
+.grupo-card:hover {
+    box-shadow: 0 4px 14px rgba(34,197,94,.1);
+    transform : translateY(-2px);
+}
+
+.grupo-card-header {
+    display    : flex;
+    align-items: center;
+    gap        : 0.85rem;
+}
+
+.grupo-card-icono {
+    width          : 42px;
+    height         : 42px;
+    border-radius  : 50%;
+    background     : #f0fdf4;
+    border         : 1.5px solid #86efac;
+    display        : flex;
+    align-items    : center;
+    justify-content: center;
+    font-size      : 1.05rem;
+    color          : #16a34a;
+    flex-shrink    : 0;
+}
+
+.grupo-card-titulo {
+    font-size  : var(--texto-base);
+    font-weight: var(--peso-semibold);
+    color      : var(--color-texto-subtitulo);
+    line-height: 1.3;
+}
+
+.grupo-card-subtitulo {
+    font-size : var(--texto-sm);
+    color     : var(--color-texto-tenue);
+    margin-top: 0.1rem;
+}
+
+.grupo-card-datos {
+    display      : flex;
+    flex-wrap    : wrap;
+    gap          : 0.5rem 1.25rem;
+    padding      : 0.6rem 0;
+    border-top   : 1px solid var(--borde-color);
+    border-bottom: 1px solid var(--borde-color);
+}
+
+.grupo-dato {
+    display    : flex;
+    align-items: center;
+    gap        : 0.35rem;
+    font-size  : var(--texto-sm);
+    color      : var(--color-texto-secundario);
+}
+.grupo-dato i { color: #10b981; font-size: var(--texto-xs); }
+
+.grupo-card-acciones {
+    display  : flex;
+    gap      : 0.5rem;
+    flex-wrap: wrap;
+}
+
+/* ── Sin grupos ── */
+.sin-grupos {
+    display        : flex;
+    align-items    : center;
+    justify-content: center;
+    gap            : 0.5rem;
+    padding        : 3rem 1rem;
+    color          : var(--color-texto-tenue);
+    font-size      : var(--texto-sm);
+    text-align     : center;
+}
+
+@media (max-width: 768px) {
+    .contenedor-grupos           { padding: 1.2rem; }
+    .grupos-grid                 { grid-template-columns: 1fr; }
+    .grupo-card-acciones .btn    { flex: 1; justify-content: center; }
+}
+@media (max-width: 480px) {
+    .contenedor-grupos { padding: 0.9rem; }
+}

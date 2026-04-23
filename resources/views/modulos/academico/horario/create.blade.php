@@ -1,43 +1,49 @@
 @extends('layouts.menuadmin')
+
 @section('title', 'Agregar franja horaria')
 
 @push('styles')
-    <link rel="stylesheet" href="{{ asset('css/componentes/academico-form.css') }}">
     <link rel="stylesheet" href="{{ asset('css/modulos/academico/horario/create.css') }}">
 @endpush
 
 @section('content')
-<div class="contenedor-horario-form">
 
+<div class="contenedor-modulo">
+
+    {{-- ── Cabecera — sin botón Volver ── --}}
     <div class="cabecera">
         <div class="cabecera-info">
-            <h2><i class="fa-solid fa-calendar-plus"></i> Agregar franja horaria</h2>
+            <h2>
+                <i class="fa-solid fa-calendar-plus"></i>
+                Agregar franja horaria
+            </h2>
             <p class="cabecera-subtitulo">
                 {{ optional($grupo->grado)->nombre }} — Grupo {{ $grupo->nombre }}
-                &nbsp;·&nbsp; {{ optional($grupo->anioLectivo)->nombre }}
+                &nbsp;·&nbsp;
+                {{ optional($grupo->anioLectivo)->nombre }}
             </p>
         </div>
-        <a href="{{ route('admin.horarios.grupo', $grupo->id) }}" class="btn btn-neutro">
-            <i class="fa-solid fa-arrow-left"></i> Volver
-        </a>
     </div>
 
-    @if($errors->has('choque'))
+    {{-- ── Error de choque ── --}}
+    @error('choque')
         <div class="alerta-error">
             <i class="fa-solid fa-triangle-exclamation"></i>
-            {{ $errors->first('choque') }}
+            {{ $message }}
         </div>
-    @endif
+    @enderror
 
     <div class="tarjeta-form">
-        <form method="POST" action="{{ route('admin.horarios.store') }}"
+
+        <form method="POST"
+              action="{{ route('admin.academico.horarios.store') }}"
               data-form="horario">
             @csrf
             <input type="hidden" name="grupo_id" value="{{ $grupo->id }}">
 
             <div class="grid-campos">
 
-                {{-- Asignación (materia + docente) --}}
+                {{-- Asignación ── --}}
                 <div class="campo campo-ancho">
                     <label for="asignacion_id">
                         <i class="fa-solid fa-chalkboard-user"></i>
@@ -54,11 +60,13 @@
                         @endforeach
                     </select>
                     @error('asignacion_id')
-                        <span class="error-campo">{{ $message }}</span>
+                        <span class="error-campo">
+                            <i class="fa-solid fa-circle-exclamation"></i> {{ $message }}
+                        </span>
                     @enderror
                 </div>
 
-                {{-- Día de la semana --}}
+                {{-- Día ── --}}
                 <div class="campo">
                     <label for="dia_semana">
                         <i class="fa-solid fa-calendar-days"></i>
@@ -74,11 +82,13 @@
                         @endforeach
                     </select>
                     @error('dia_semana')
-                        <span class="error-campo">{{ $message }}</span>
+                        <span class="error-campo">
+                            <i class="fa-solid fa-circle-exclamation"></i> {{ $message }}
+                        </span>
                     @enderror
                 </div>
 
-                {{-- Bloque horario --}}
+                {{-- Bloque ── --}}
                 <div class="campo">
                     <label for="bloque">
                         <i class="fa-solid fa-clock"></i>
@@ -87,10 +97,6 @@
                     <select id="bloque" name="bloque" required>
                         <option value="">Seleccione un bloque</option>
                         @foreach(\App\Models\Horario::BLOQUES as $num => $info)
-                            @php
-                                $key = old('dia_semana', '') . '_' . $num;
-                                $ocupado = in_array(old('dia_semana','') . '_' . $num, $ocupadas);
-                            @endphp
                             <option value="{{ $num }}"
                                 {{ old('bloque') == $num ? 'selected' : '' }}>
                                 Bloque {{ $num }} · {{ $info['inicio'] }} – {{ $info['fin'] }}
@@ -99,7 +105,9 @@
                         @endforeach
                     </select>
                     @error('bloque')
-                        <span class="error-campo">{{ $message }}</span>
+                        <span class="error-campo">
+                            <i class="fa-solid fa-circle-exclamation"></i> {{ $message }}
+                        </span>
                     @enderror
                     <span class="nota-campo">
                         <i class="fa-solid fa-circle-info"></i>
@@ -109,6 +117,7 @@
 
             </div>
 
+            {{-- Referencia de bloques ── --}}
             <div class="info-bloques">
                 <table class="tabla-bloques">
                     <thead>
@@ -146,7 +155,8 @@
             </div>
 
             <div class="acciones-form">
-                <a href="{{ route('admin.horarios.grupo', $grupo->id) }}" class="btn btn-neutro">
+                <a href="{{ route('admin.academico.horarios.grupo', $grupo->id) }}"
+                   class="btn btn-neutro">
                     <i class="fa-solid fa-xmark"></i> Cancelar
                 </a>
                 <button type="submit" class="btn btn-primario">
@@ -155,9 +165,11 @@
             </div>
 
         </form>
+
     </div>
 
 </div>
+
 @endsection
 
 @push('scripts')

@@ -1,0 +1,188 @@
+/* ============================================================
+   modulos/solicitudes/solicitud.css
+   Formulario multipaso de registro de solicitud.
+
+   tipografia.css + tarjetas.css + formularios.css + botones.css
+   + resumen.css se cargan antes en el blade y proveen las bases.
+
+   Este archivo aporta solo lo específico del multipaso:
+     .registro, .registro-contenedor
+     .registro-encabezado, .registro-titulo, .registro-mensaje
+     .progreso, .progreso-barra, .progreso-relleno, .progreso-texto
+     .registro-paso, .paso-activo, .paso-oculto
+     .registro-submensaje
+     .campo-password, .btn-ver
+     .registro-acciones
+     .oculto
+   ============================================================ */
+
+/* ── Reset base ── */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin    : 0;
+    padding   : 0;
+}
+
+body {
+    font-family: var(--fuente-base);
+    background : var(--fondo-pagina);
+    min-height : 100vh;
+}
+
+/* ── Sección contenedor ── */
+.registro {
+    display        : flex;
+    justify-content: center;
+    align-items    : flex-start;
+    min-height     : 100vh;
+    padding        : 2.5rem 1rem;
+    background     : var(--fondo-pagina);
+}
+
+/* ── Tarjeta principal ── */
+.registro-contenedor {
+    width    : 100%;
+    max-width: 560px;
+    animation: registroAparecer 0.4s ease-out both;
+}
+
+@keyframes registroAparecer {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0);    }
+}
+
+/* ── Encabezado ── */
+.registro-encabezado {
+    margin-bottom: 1.5rem;
+}
+
+.registro-titulo {
+    font-size  : var(--texto-xl);
+    font-weight: var(--peso-bold);
+    color      : var(--color-texto-titulo);
+    margin     : 0 0 0.35rem;
+}
+
+.registro-mensaje {
+    font-size  : var(--texto-sm);
+    color      : var(--color-texto-secundario);
+    margin     : 0;
+    line-height: var(--leading-relaxed);
+}
+
+/* ── Barra de progreso ── */
+.progreso {
+    margin-bottom: 1.75rem;
+    display      : flex;
+    flex-direction: column;
+    gap          : 0.4rem;
+}
+
+.progreso-barra {
+    height       : 6px;
+    background   : #e5e7eb;
+    border-radius: var(--radio-pill);
+    overflow     : hidden;
+}
+
+.progreso-relleno {
+    height          : 100%;
+    background      : linear-gradient(90deg, #22c55e, #16a34a);
+    border-radius   : var(--radio-pill);
+    width           : 16.66%;      /* paso 1 de 6 */
+    transition      : width 0.4s ease;
+}
+
+.progreso-texto {
+    font-size  : var(--texto-xs);
+    color      : var(--color-texto-tenue);
+    font-weight: var(--peso-medio);
+    text-align : right;
+}
+
+/* ── Pasos del formulario ── */
+.registro-paso { display: none; }
+.paso-activo   { display: block; }
+.paso-oculto   { display: none; }
+
+/* ── Submensaje informativo ── */
+.registro-submensaje {
+    display    : flex;
+    align-items: flex-start;
+    gap        : 0.45rem;
+    font-size  : var(--texto-sm);
+    color      : var(--color-texto-secundario);
+    background : #f0fdf4;
+    border     : 1px solid #bbf7d0;
+    border-radius: var(--radio-md);
+    padding    : 0.65rem 0.9rem;
+    margin-bottom: 0.5rem;
+    line-height: 1.4;
+}
+
+.registro-submensaje i {
+    color      : #16a34a;
+    flex-shrink: 0;
+    margin-top : 0.1rem;
+}
+
+/* ── Campo de contraseña con botón ver ── */
+.campo-password {
+    display : flex;
+    position: relative;
+}
+
+.campo-password input {
+    flex        : 1;
+    padding-right: 3.2rem;
+}
+
+.btn-ver {
+    position     : absolute;
+    right        : 0.6rem;
+    top          : 50%;
+    transform    : translateY(-50%);
+    background   : none;
+    border       : none;
+    cursor       : pointer;
+    color        : var(--color-texto-tenue);
+    font-size    : 0.95rem;
+    padding      : 0.25rem;
+    line-height  : 1;
+    transition   : color var(--transicion-rapida);
+}
+
+.btn-ver:hover { color: #16a34a; }
+
+/* ── Acciones del formulario ── */
+.registro-acciones {
+    display        : flex;
+    align-items    : center;
+    gap            : 0.75rem;
+    margin-top     : 1.75rem;
+    padding-top    : 1.25rem;
+    border-top     : 1px solid var(--borde-color);
+    flex-wrap      : wrap;
+}
+
+.registro-acciones .btn {
+    min-width: 110px;
+    justify-content: center;
+}
+
+/* Cancelar a la izquierda, resto a la derecha */
+#btnCancelar { margin-right: auto; }
+
+/* ── Utilidad oculto ── */
+.oculto { display: none !important; }
+
+/* ── Responsive ── */
+@media (max-width: 600px) {
+    .registro              { padding: 1.25rem 0.75rem; }
+    .registro-contenedor   { max-width: 100%; }
+    .registro-acciones     { flex-direction: column; align-items: stretch; }
+    .registro-acciones .btn{ width: 100%; min-width: unset; }
+    #btnCancelar           { margin-right: 0; order: 99; }
+}

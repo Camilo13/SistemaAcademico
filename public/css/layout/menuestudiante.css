@@ -2,9 +2,9 @@
    layout/menuestudiante.css
    Barra lateral + área de contenido — Panel Estudiante.
 
-   ✅ SCROLL FIX: .barra-lateral usa height:100vh + overflow-y:auto
-      para que el menú sea desplazable cuando hay muchas opciones.
-      Sin esto las opciones inferiores quedaban ocultas en móvil.
+   ✅ SCROLL FIX: solo .barra-nav tiene overflow-y:auto.
+      Logo y "Cerrar sesión" siempre visibles sin importar cuántos ítems haya.
+      El botón ya no se solapa cuando el submenú se expande.
    ============================================================ */
 
 /* ── Variables del layout ── */
@@ -31,10 +31,9 @@
     flex-direction : column;
     padding        : 1.5rem 1rem 1.5rem;
 
-    /* ✅ Scroll: altura fija = ventana + overflow activado */
+    /* ✅ Overflow oculto: solo .barra-nav hace scroll internamente */
     height         : 100vh;
-    overflow-y     : auto;
-    overflow-x     : hidden;
+    overflow       : hidden;
 
     position       : fixed;
     left           : 0;
@@ -47,9 +46,7 @@
     scrollbar-width : thin;
     scrollbar-color : #a7f3d0 transparent;
 }
-.barra-lateral::-webkit-scrollbar       { width: 4px; }
-.barra-lateral::-webkit-scrollbar-track { background: transparent; }
-.barra-lateral::-webkit-scrollbar-thumb { background: #a7f3d0; border-radius: 4px; }
+
 
 /* ── Logo ── */
 .barra-logo {
@@ -63,7 +60,17 @@
 }
 
 /* ── Navegación ── */
-.barra-nav { flex: 1; min-height: 0; }
+.barra-nav {
+    flex           : 1;
+    min-height     : 0;
+    overflow-y     : auto;
+    overflow-x     : hidden;
+    scrollbar-width : thin;
+    scrollbar-color : #a7f3d0 transparent;
+}
+.barra-nav::-webkit-scrollbar       { width: 4px; }
+.barra-nav::-webkit-scrollbar-track { background: transparent; }
+.barra-nav::-webkit-scrollbar-thumb { background: #a7f3d0; border-radius: 4px; }
 
 .barra-nav .lista-menu {
     list-style : none;

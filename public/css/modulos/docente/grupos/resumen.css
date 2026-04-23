@@ -1,0 +1,104 @@
+/* ============================================================
+   css/modulos/docente/grupos/resumen.css
+   Vista: resumen del grupo (docente)
+
+   Globales disponibles (menudocente):
+     academico-index.css → .cabecera, .cabecera-info,
+                           .cabecera-subtitulo, .estado y variantes
+     tablas.css          → .tabla, .tabla-contenedor, .col-centrado
+     tipografia.css      → .sin-registros
+     docente-comun.css   → (no aplica en esta vista)
+     notas.css           → .nombre-estudiante, .id-estudiante,
+                           .promedio-chip y variantes
+
+   Este archivo aporta:
+     — contenedor raíz
+     — panel de estadísticas (.stats-panel, .stat-card)
+     — chips de conteo (.conteo-chip y variantes)
+     — fila de riesgo (.fila-riesgo)
+   ============================================================ */
+
+.contenedor-resumen-grupo {
+    padding       : 1.8rem;
+    display       : flex;
+    flex-direction: column;
+    gap           : 1.5rem;
+}
+
+/* ── Panel de estadísticas ── */
+.stats-panel {
+    display              : grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap                  : 1rem;
+}
+
+.stat-card {
+    background   : var(--fondo-tarjeta);
+    border       : 1px solid var(--borde-color);
+    border-radius: var(--radio-lg);
+    padding      : 1.1rem 1.2rem;
+    box-shadow   : var(--sombra-sm);
+    display      : flex;
+    flex-direction: column;
+    gap          : 0.35rem;
+}
+
+.stat-numero {
+    font-size  : var(--texto-2xl);
+    font-weight: var(--peso-bold);
+    color      : var(--color-texto-subtitulo);
+    line-height: 1;
+}
+
+.stat-label {
+    font-size: var(--texto-xs);
+    color    : var(--color-texto-secundario);
+    display  : flex;
+    align-items: center;
+    gap      : 0.3rem;
+}
+
+/* Variantes de color para cada stat */
+.stat-aprobado  .stat-numero { color: var(--color-verde-700); }
+.stat-aprobado               { border-left: 3px solid var(--color-verde-700); }
+
+.stat-reprobado .stat-numero { color: #991b1b; }
+.stat-reprobado              { border-left: 3px solid #fca5a5; }
+
+.stat-pendiente .stat-numero { color: #92400e; }
+.stat-pendiente              { border-left: 3px solid #fcd34d; }
+
+/* ── Chips de conteo ── */
+.conteo-chip {
+    display        : inline-flex;
+    align-items    : center;
+    justify-content: center;
+    min-width      : 32px;
+    padding        : 0.18rem 0.55rem;
+    border-radius  : 999px;
+    font-size      : var(--texto-sm);
+    font-weight    : var(--peso-bold);
+}
+
+.conteo-aprobadas  { background: #d1fae5; color: #065f46; }
+.conteo-reprobadas { background: #fee2e2; color: #991b1b; }
+.conteo-pendiente  { background: #fef9c3; color: #854d0e; }
+.conteo-ok         { background: #f3f4f6; color: #9ca3af; }
+
+/* ── Fila de riesgo ── */
+.fila-riesgo {
+    background: #fff9f9;
+}
+.fila-riesgo td:first-child {
+    border-left: 3px solid #fca5a5;
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+    .contenedor-resumen-grupo { padding: 1.2rem; }
+    .stats-panel              { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 480px) {
+    .contenedor-resumen-grupo { padding: 0.9rem; }
+    .stats-panel              { grid-template-columns: 1fr 1fr; }
+}

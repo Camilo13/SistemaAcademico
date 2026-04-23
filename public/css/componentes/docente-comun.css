@@ -1,0 +1,201 @@
+/* ============================================================
+   componentes/docente-comun.css
+   Estilos compartidos entre todas las vistas del módulo docente.
+
+   Cargado en layouts/menudocente.blade.php.
+
+   Aporta:
+     — .input-buscar           (index de notas, asistencia y grupos)
+     — .asignaciones-lista     (index de notas y asistencia)
+     — .asignacion-item        (ídem)
+     — .asignacion-icono       (ídem)
+     — .asignacion-datos       (ídem)
+     — .asignacion-materia     (ídem)
+     — .asignacion-grupo       (ídem)
+     — .asignacion-flecha      (ídem)
+     — .ficha-asignacion       (estudiantes de notas y asistencia)
+     — .ficha-contexto         (create y edit de notas y asistencia)
+     — .ficha-dato             (ídem)
+     — .formulario-asistencia  (create y edit de asistencia)
+     — .campos-faltas          (ídem)
+     — .resumen-faltas         (ídem)
+   ============================================================ */
+
+/* ══════════════════════════════════════════════════════════
+   BUSCADOR — usado en index de notas, asistencia y grupos
+   ══════════════════════════════════════════════════════════ */
+.input-buscar {
+    padding      : 0.5rem 0.85rem;
+    border       : 1px solid var(--borde-color);
+    border-radius: var(--radio-md);
+    font-size    : var(--texto-sm);
+    color        : var(--color-texto-cuerpo);
+    background   : var(--fondo-tarjeta);
+    width        : 240px;
+    transition   : border-color var(--transicion-normal);
+}
+.input-buscar:focus {
+    outline     : none;
+    border-color: #22c55e;
+}
+
+/* ══════════════════════════════════════════════════════════
+   CARDS DE ASIGNACIONES — index de notas y de asistencia
+   ══════════════════════════════════════════════════════════ */
+.asignaciones-lista {
+    display       : flex;
+    flex-direction: column;
+    gap           : 0.5rem;
+}
+
+.asignacion-item {
+    display        : flex;
+    align-items    : center;
+    gap            : 1rem;
+    padding        : 1rem 1.2rem;
+    background     : var(--fondo-tarjeta);
+    border         : 1px solid var(--borde-color);
+    border-radius  : var(--radio-md);
+    text-decoration: none;
+    color          : var(--color-texto-cuerpo);
+    transition     : border-color 0.15s, box-shadow 0.15s, transform 0.1s;
+    box-shadow     : var(--sombra-sm);
+}
+.asignacion-item:hover {
+    border-color: #22c55e;
+    box-shadow  : 0 2px 10px rgba(34,197,94,.12);
+    transform   : translateY(-1px);
+}
+
+.asignacion-icono {
+    width          : 44px;
+    height         : 44px;
+    border-radius  : 50%;
+    background     : #f0fdf4;
+    border         : 1.5px solid #a7f3d0;
+    display        : flex;
+    align-items    : center;
+    justify-content: center;
+    font-size      : 1.1rem;
+    color          : #10b981;
+    flex-shrink    : 0;
+}
+
+.asignacion-datos  { flex: 1; min-width: 0; }
+
+.asignacion-materia {
+    font-weight  : var(--peso-semibold);
+    font-size    : var(--texto-base);
+    color        : var(--color-texto-subtitulo);
+    white-space  : nowrap;
+    overflow     : hidden;
+    text-overflow: ellipsis;
+}
+
+.asignacion-grupo {
+    font-size : var(--texto-sm);
+    color     : var(--color-texto-tenue);
+    margin-top: 0.15rem;
+}
+
+.asignacion-flecha {
+    color      : var(--color-texto-tenue);
+    font-size  : var(--texto-sm);
+    flex-shrink: 0;
+    transition : color 0.15s;
+}
+.asignacion-item:hover .asignacion-flecha { color: #10b981; }
+
+/* ══════════════════════════════════════════════════════════
+   FICHA DE CONTEXTO — create, edit y estudiantes de
+   notas y asistencia
+   ══════════════════════════════════════════════════════════ */
+.ficha-asignacion,
+.ficha-contexto {
+    display      : flex;
+    flex-wrap    : wrap;
+    gap          : 0.5rem;
+    padding      : 0.85rem 1.1rem;
+    background   : var(--fondo-tarjeta);
+    border       : 1px solid var(--borde-color);
+    border-radius: var(--radio-md);
+    box-shadow   : var(--sombra-sm);
+}
+
+.ficha-dato {
+    display       : flex;
+    flex-direction: column;
+    gap           : 0.1rem;
+    padding-right : 1.5rem;
+}
+.ficha-dato span {
+    font-size  : var(--texto-xs);
+    color      : var(--color-texto-tenue);
+    line-height: 1.2;
+    display    : flex;
+    align-items: center;
+    gap        : 0.3rem;
+}
+.ficha-dato strong {
+    font-size  : var(--texto-sm);
+    font-weight: var(--peso-semibold);
+    color      : var(--color-texto-subtitulo);
+}
+
+/* ══════════════════════════════════════════════════════════
+   FORMULARIO DE ASISTENCIA — create y edit de asistencia
+   ══════════════════════════════════════════════════════════ */
+.formulario-asistencia {
+    background    : var(--fondo-tarjeta);
+    border        : 1px solid var(--borde-color);
+    border-radius : var(--radio-lg);
+    padding       : 1.8rem;
+    box-shadow    : var(--sombra-md);
+    display       : flex;
+    flex-direction: column;
+    gap           : 1.25rem;
+}
+
+/* Grid 2 columnas: justificadas / injustificadas */
+.campos-faltas {
+    display              : grid;
+    grid-template-columns: 1fr 1fr;
+    gap                  : 1rem;
+}
+
+/* Resumen total en tiempo real */
+.resumen-faltas {
+    display      : flex;
+    align-items  : center;
+    gap          : 0.5rem;
+    padding      : 0.65rem 1rem;
+    background   : #f0fdf4;
+    border       : 1px solid #a7f3d0;
+    border-radius: var(--radio-md);
+    font-size    : var(--texto-sm);
+    font-weight  : var(--peso-semi);
+    color        : #065f46;
+}
+.resumen-faltas i { color: #10b981; }
+.resumen-faltas #total-faltas-preview {
+    font-size  : var(--texto-lg);
+    font-weight: var(--peso-bold);
+    margin-left: 0.25rem;
+}
+
+/* ══════════════════════════════════════════════════════════
+   RESPONSIVE
+   Nota: .cabecera y .cabecera .btn responsive ya están
+   en academico-index.css — no se duplican aquí.
+   ══════════════════════════════════════════════════════════ */
+@media (max-width: 768px) {
+    .input-buscar        { width: 100%; }
+    .ficha-asignacion,
+    .ficha-contexto      { flex-direction: column; }
+    .ficha-dato          { padding-right: 0; padding-bottom: 0.5rem;
+                           border-bottom: 1px solid var(--borde-color); }
+    .ficha-dato:last-child { border-bottom: none; }
+    .campos-faltas       { grid-template-columns: 1fr; }
+    .formulario-asistencia { padding: 1.2rem; }
+    .asignacion-materia  { white-space: normal; }
+}

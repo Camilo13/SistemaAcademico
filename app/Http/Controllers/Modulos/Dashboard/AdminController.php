@@ -3,22 +3,14 @@
 namespace App\Http\Controllers\Modulos\Dashboard;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-
-/*
-|--------------------------------------------------------------------------
-| Controlador del Administrador
-|--------------------------------------------------------------------------
-| Gestiona las vistas y acciones exclusivas del rol administrador
-*/
+use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
 {
-    /**
-     * Muestra el panel principal del administrador
-     */
     public function index()
     {
-        return view('dashboard.admin');
+        return view('dashboard.admin', [
+            'usuario' => Auth::user(),
+        ]);
     }
 }

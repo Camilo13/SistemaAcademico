@@ -64,7 +64,7 @@ use App\Http\Controllers\Modulos\Estudiante\HorarioEstudianteController;
 // ── Docente ───────────────────────────────────────────────────────────────
 use App\Http\Controllers\Modulos\Docente\MisGruposController;
 use App\Http\Controllers\Modulos\Docente\NotaDocenteController;
-use App\Http\Controllers\Modulos\Docente\BoletinDocenteController;
+use App\Http\Controllers\Modulos\Docente\ResumenGrupoController;
 
 // ── Estudiante ────────────────────────────────────────────────────────────
 use App\Http\Controllers\Modulos\Estudiante\MiAcademicoController;
@@ -252,8 +252,10 @@ Route::middleware(['auth', 'rol:administrador'])
         Route::get('materias/{materia}/recursos/create',                  [AdminRecursoController::class, 'create'])  ->name('materias.recursos.create');
         Route::post('materias/{materia}/recursos',                        [AdminRecursoController::class, 'store'])   ->name('materias.recursos.store');
         Route::get('materias/{materia}/recursos/{recurso}/edit',          [AdminRecursoController::class, 'edit'])    ->name('materias.recursos.edit');
-        Route::put('materias/{materia}/recursos/{recurso}',               [AdminRecursoController::class, 'update'])  ->name('materias.recursos.update');
-        Route::delete('materias/{materia}/recursos/{recurso}',            [AdminRecursoController::class, 'destroy']) ->name('materias.recursos.destroy');
+        Route::put('materias/{materia}/recursos/{recurso}',               [AdminRecursoController::class, 'update'])     ->name('materias.recursos.update');
+        Route::patch('materias/{materia}/recursos/{recurso}/activar',    [AdminRecursoController::class, 'activar'])    ->name('materias.recursos.activar');
+        Route::patch('materias/{materia}/recursos/{recurso}/desactivar', [AdminRecursoController::class, 'desactivar']) ->name('materias.recursos.desactivar');
+        Route::delete('materias/{materia}/recursos/{recurso}',            [AdminRecursoController::class, 'destroy'])   ->name('materias.recursos.destroy');
     });
 
 
@@ -555,16 +557,11 @@ Route::middleware(['auth', 'rol:docente'])
 
         /*
         |----------------------------------------------------------------------
-        | BOLETÍN — DOCENTE (solo lectura, solo sus grupos)
+        | RESUMEN DE GRUPO — DOCENTE (todos los estudiantes del grupo)
         |----------------------------------------------------------------------
         */
-        Route::controller(BoletinDocenteController::class)
-            ->prefix('boletin')
-            ->name('boletin.')
-            ->group(function () {
-
-                Route::get('/{inscripcion}', 'show')->name('show');
-            });
+        Route::get('grupos/{grupo}/resumen', [ResumenGrupoController::class, 'show'])
+            ->name('grupos.resumen');
 
         /*
         |----------------------------------------------------------------------

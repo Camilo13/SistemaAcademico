@@ -100,12 +100,13 @@ class NotaDocenteController extends Controller
 
         $validated = $request->validate([
             'periodo_id'  => ['required', 'exists:periodos,id'],
-            'nota'        => ['required', 'numeric', 'min:0', 'max:5'],
+            'nota'        => ['required', 'numeric', 'decimal:0,2', 'min:0', 'max:5'],
             'observacion' => ['nullable', 'string', 'max:1000'],
         ], [
             'periodo_id.required' => 'Debe seleccionar un periodo.',
             'nota.required'       => 'La nota es obligatoria.',
             'nota.numeric'        => 'La nota debe ser un número.',
+            'nota.decimal'        => 'La nota acepta máximo 2 decimales (ej: 3.75).',
             'nota.min'            => 'La nota mínima es 0.00.',
             'nota.max'            => 'La nota máxima es 5.00.',
         ]);
@@ -170,11 +171,12 @@ class NotaDocenteController extends Controller
         );
 
         $validated = $request->validate([
-            'nota'        => ['required', 'numeric', 'min:0', 'max:5'],
+            'nota'        => ['required', 'numeric', 'decimal:0,2', 'min:0', 'max:5'],
             'observacion' => ['nullable', 'string', 'max:1000'],
         ], [
             'nota.required' => 'La nota es obligatoria.',
             'nota.numeric'  => 'La nota debe ser un número.',
+            'nota.decimal'  => 'La nota acepta máximo 2 decimales (ej: 3.75).',
             'nota.min'      => 'La nota mínima es 0.00.',
             'nota.max'      => 'La nota máxima es 5.00.',
         ]);

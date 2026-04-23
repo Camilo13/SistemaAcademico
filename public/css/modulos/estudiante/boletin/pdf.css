@@ -1,0 +1,309 @@
+/* ============================================================
+   css/modulos/estudiante/boletin/pdf.css
+   Vista: pdf_preview.blade.php (admin) · pdf.blade.php (estudiante)
+
+   El blade carga explícitamente:
+     tipografia.css  → variables + fuente
+     botones.css     → .btn, .btn-primario, .btn-neutro, .btn-sm
+
+   Este archivo SOLO define lo específico de la hoja imprimible:
+     — layout del contenedor y barra de acciones
+     — hoja del boletín (.hoja-boletin)
+     — encabezado institucional
+     — datos del estudiante
+     — tabla del boletín
+     — chips de nota y badges de desempeño
+     — resultado final
+     — firmas
+     — @media print
+   ============================================================ */
+
+/* ── Reset mínimo (el layout no lo aporta aquí) ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    font-family: var(--fuente-base);
+    font-size  : var(--texto-base);
+    color      : var(--color-texto-cuerpo);
+    background : var(--fondo-pagina);
+    line-height: var(--leading-normal);
+}
+
+/* ══════════════════════════════════════════════════════════
+   CONTENEDOR PRINCIPAL
+   ══════════════════════════════════════════════════════════ */
+.contenedor-pdf {
+    max-width: 860px;
+    margin   : 0 auto;
+    padding  : 1.5rem 1rem 3rem;
+}
+
+/* ══════════════════════════════════════════════════════════
+   BARRA DE ACCIONES
+   ══════════════════════════════════════════════════════════ */
+.barra-pdf {
+    display      : flex;
+    align-items  : center;
+    gap          : 0.75rem;
+    padding      : 0.75rem 1rem;
+    margin-bottom: 1.25rem;
+    background   : var(--fondo-tarjeta);
+    border       : 1px solid var(--borde-color);
+    border-radius: var(--radio-md);
+    box-shadow   : var(--sombra-sm);
+}
+
+/* ══════════════════════════════════════════════════════════
+   HOJA DEL BOLETÍN
+   ══════════════════════════════════════════════════════════ */
+.hoja-boletin {
+    background   : var(--fondo-tarjeta);
+    border       : 1px solid var(--borde-color);
+    border-radius: var(--radio-lg);
+    box-shadow   : 0 2px 12px rgba(0,0,0,.08);
+    padding      : 2rem 2.5rem;
+}
+
+/* ── Encabezado institucional ── */
+.encabezado-inst {
+    display        : flex;
+    justify-content: space-between;
+    align-items    : flex-start;
+    padding-bottom : 1rem;
+    margin-bottom  : 1rem;
+    border-bottom  : 2px solid var(--color-verde-800);
+}
+
+.encabezado-inst-texto h1 {
+    font-size  : var(--texto-xl);
+    font-weight: var(--peso-bold);
+    color      : var(--color-texto-titulo);
+    line-height: var(--leading-tight);
+}
+
+.encabezado-inst-texto p {
+    font-size: var(--texto-sm);
+    color    : var(--color-texto-secundario);
+}
+
+.encabezado-titulo {
+    font-size     : var(--texto-sm);
+    font-weight   : var(--peso-bold);
+    color         : var(--color-texto-titulo);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-wider);
+}
+
+/* ── Datos del estudiante ── */
+.datos-estudiante {
+    display              : grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap                  : 0.5rem 2rem;
+    padding              : 0.9rem 1rem;
+    background           : var(--color-verde-50);
+    border               : 1px solid var(--color-verde-100);
+    border-radius        : var(--radio-md);
+    margin-bottom        : 1.5rem;
+}
+
+.dato-fila {
+    display       : flex;
+    flex-direction: column;
+    gap           : 0.1rem;
+}
+
+.dato-fila > span {
+    font-size     : var(--texto-xs);
+    color         : var(--color-texto-secundario);
+    font-weight   : var(--peso-medio);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-wide);
+}
+
+.dato-fila > strong {
+    font-size  : var(--texto-base);
+    color      : var(--color-texto-subtitulo);
+    font-weight: var(--peso-semi);
+}
+
+/* ── Tabla del boletín ── */
+.tabla-boletin {
+    width          : 100%;
+    border-collapse: collapse;
+    font-size      : var(--texto-sm);
+    margin-bottom  : 1.25rem;
+}
+
+.tabla-boletin thead tr {
+    background: var(--color-verde-800);
+    color     : #ffffff;
+}
+
+.tabla-boletin thead th {
+    padding       : 0.6rem 0.75rem;
+    text-align    : left;
+    font-weight   : var(--peso-semi);
+    font-size     : var(--texto-xs);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-wide);
+}
+
+.tabla-boletin tbody tr {
+    border-bottom: 1px solid var(--borde-color);
+}
+
+.tabla-boletin tbody tr:last-child {
+    border-bottom: none;
+}
+
+.tabla-boletin tbody tr.fila-reprobada {
+    background: #fff5f5;
+}
+
+.tabla-boletin tbody td {
+    padding       : 0.6rem 0.75rem;
+    color         : var(--color-texto-cuerpo);
+    vertical-align: middle;
+}
+
+/* tabla de escala — más compacta */
+.tabla-escala {
+    width    : auto;
+    font-size: var(--texto-xs);
+    margin-top: 0.5rem;
+}
+
+/* ── Chips de nota ── */
+.nota-chip {
+    display      : inline-block;
+    padding      : 0.2rem 0.55rem;
+    border-radius: 999px;
+    font-size    : var(--texto-xs);
+    font-weight  : var(--peso-bold);
+}
+
+.nota-chip.aprobada  { background: #dcfce7; color: #166534; }
+.nota-chip.reprobada { background: #fee2e2; color: #991b1b; }
+
+/* ── Badges de desempeño ── */
+.badge-desempeno {
+    display      : inline-block;
+    padding      : 0.18rem 0.5rem;
+    border-radius: var(--radio-md);
+    font-size    : var(--texto-xs);
+    font-weight  : var(--peso-medio);
+}
+
+.des-superior { background: #dcfce7; color: #14532d; }
+.des-alto     { background: #d1fae5; color: #065f46; }
+.des-basico   { background: #fef9c3; color: #854d0e; }
+.des-bajo     { background: #fee2e2; color: #991b1b; }
+
+/* ── Resultado final ── */
+.resultado-final {
+    display        : flex;
+    justify-content: space-between;
+    align-items    : center;
+    padding        : 0.85rem 1rem;
+    background     : var(--color-verde-50);
+    border         : 1px solid var(--color-verde-100);
+    border-radius  : var(--radio-md);
+    margin-bottom  : 1.25rem;
+}
+
+.resultado-texto {
+    font-size: var(--texto-base);
+    color    : var(--color-texto-cuerpo);
+}
+
+.resultado-texto strong {
+    font-size  : var(--texto-lg);
+    font-weight: var(--peso-bold);
+    color      : var(--color-texto-titulo);
+    margin-left: 0.4rem;
+}
+
+.resultado-estado {
+    font-size     : var(--texto-base);
+    font-weight   : var(--peso-bold);
+    padding       : 0.3rem 0.9rem;
+    border-radius : var(--radio-md);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-wider);
+}
+
+.estado-aprobado  { background: #dcfce7; color: #14532d; }
+.estado-reprobado { background: #fee2e2; color: #991b1b; }
+
+/* ── Firmas ── */
+.firma-seccion {
+    display              : grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap                  : 1rem 2rem;
+    margin-top           : 2.5rem;
+    padding-top          : 1rem;
+    border-top           : 1px dashed var(--borde-color);
+}
+
+.firma-item {
+    display       : flex;
+    flex-direction: column;
+    align-items   : center;
+    gap           : 0.4rem;
+}
+
+.firma-linea {
+    width        : 100%;
+    height       : 1px;
+    background   : var(--color-texto-cuerpo);
+    margin-bottom: 0.3rem;
+}
+
+.firma-nombre {
+    font-size : var(--texto-xs);
+    color     : var(--color-texto-secundario);
+    text-align: center;
+}
+
+/* ══════════════════════════════════════════════════════════
+   @media print — oculta menú y barra, ajusta márgenes
+   ══════════════════════════════════════════════════════════ */
+@media print {
+
+    .barra-lateral,
+    .barra-nav,
+    .barra-pdf,
+    header, nav, footer {
+        display: none !important;
+    }
+
+    body {
+        background: #ffffff;
+    }
+
+    .contenedor-pdf {
+        max-width: 100%;
+        padding  : 0;
+        margin   : 0;
+    }
+
+    .hoja-boletin {
+        border       : none;
+        box-shadow   : none;
+        border-radius: 0;
+        padding      : 1cm 1.5cm;
+    }
+
+    .tabla-boletin tr { page-break-inside: avoid; }
+
+    /* forzar fondos de color al imprimir */
+    .tabla-boletin thead tr,
+    .datos-estudiante,
+    .resultado-final,
+    .nota-chip,
+    .badge-desempeno,
+    .resultado-estado {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust         : exact;
+    }
+}

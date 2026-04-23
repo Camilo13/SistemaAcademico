@@ -185,51 +185,6 @@
     </div>
     @endif
 
-    {{-- ══════════════════════════════════════════
-         TARJETA PELIGRO — Eliminar
-    ══════════════════════════════════════════ --}}
-    <div class="tarjeta-form tarjeta-peligro">
-
-        <h3 class="seccion-titulo-form peligro">
-            <i class="fa-solid fa-triangle-exclamation"></i> Zona de peligro
-        </h3>
-
-        @php
-            $tieneMaterias = $inscripcion->inscripcionMaterias()->exists();
-            $tieneNotas    = $inscripcion->notas()->exists();
-            $puedeEliminar = !$tieneMaterias && !$tieneNotas;
-        @endphp
-
-        <p class="seccion-desc">
-            Eliminar esta inscripción es una acción <strong>permanente</strong>.
-            Solo es posible si no tiene materias ni notas registradas.
-            @if(!$puedeEliminar)
-                <br>
-                <span style="color:#991b1b;">
-                    <i class="fa-solid fa-circle-xmark"></i>
-                    Tiene información académica asociada y no puede eliminarse.
-                </span>
-            @endif
-        </p>
-
-        <div class="acciones-secundarias">
-            <form method="POST"
-                  action="{{ route('admin.academico.inscripciones.destroy', $inscripcion->id) }}"
-                  class="form-eliminar"
-                  data-nombre="{{ optional($inscripcion->estudiante)->nombre }} {{ optional($inscripcion->estudiante)->apellidos }}">
-                @csrf @method('DELETE')
-                <button type="submit"
-                        class="btn btn-peligro"
-                        {{ !$puedeEliminar ? 'disabled' : '' }}>
-                    <i class="fa-solid fa-trash"></i> Eliminar inscripción
-                </button>
-            </form>
-        </div>
-
-    </div>
-
-</div>
-
 @endsection
 
 @push('scripts')

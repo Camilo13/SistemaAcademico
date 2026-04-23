@@ -1,0 +1,30 @@
+/* ============================================================
+   modulos/docente/asistencia/create.css
+   Vista: create — formulario para registrar faltas
+
+   Globales disponibles (menudocente):
+     academico-form.css  → .campo, label, inputs, .error-campo,
+                           .acciones-form
+     academico-index.css → .cabecera, .cabecera-subtitulo
+                           (+ responsive de .cabecera)
+     botones.css         → .btn, .btn-primario, .btn-neutro, .btn-sm
+     docente-comun.css   → .ficha-contexto, .ficha-dato,
+                           .formulario-asistencia, .campos-faltas,
+                           .resumen-faltas
+
+   Este archivo aporta solo el contenedor raíz.
+   ============================================================ */
+
+.contenedor-crear-asistencia {
+    padding       : 1.8rem;
+    display       : flex;
+    flex-direction: column;
+    gap           : 1.5rem;
+}
+
+@media (max-width: 768px) {
+    .contenedor-crear-asistencia { padding: 1.2rem; }
+}
+@media (max-width: 480px) {
+    .contenedor-crear-asistencia { padding: 0.9rem; }
+}

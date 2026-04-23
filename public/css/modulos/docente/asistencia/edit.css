@@ -1,0 +1,83 @@
+/* ============================================================
+   modulos/docente/asistencia/edit.css
+   Vista: edit — formulario para editar faltas existentes
+
+   Globales disponibles (menudocente):
+     academico-form.css  → .campo, label, inputs, .error-campo
+     academico-index.css → .cabecera, .cabecera-subtitulo
+                           (+ responsive de .cabecera)
+     botones.css         → .btn, .btn-primario, .btn-neutro, .btn-sm
+     docente-comun.css   → .ficha-contexto, .ficha-dato,
+                           .formulario-asistencia, .campos-faltas,
+                           .resumen-faltas
+
+   Este archivo aporta: contenedor, aviso periodo cerrado,
+   registro actual con badges de faltas previas.
+   ============================================================ */
+
+.contenedor-editar-asistencia {
+    padding       : 1.8rem;
+    display       : flex;
+    flex-direction: column;
+    gap           : 1.5rem;
+}
+
+/* ── Aviso periodo cerrado ── */
+.aviso-cerrado {
+    display      : flex;
+    align-items  : center;
+    gap          : 0.5rem;
+    background   : #fffbeb;
+    border       : 1px solid #fcd34d;
+    border-left  : 4px solid #f59e0b;
+    border-radius: var(--radio-md);
+    padding      : 0.75rem 1rem;
+    font-size    : var(--texto-sm);
+    color        : #92400e;
+}
+.aviso-cerrado i { color: #f59e0b; flex-shrink: 0; }
+
+/* ── Registro actual (badges con valores previos) ── */
+.info-registro {
+    background   : #f8fafc;
+    border       : 1px solid var(--borde-color);
+    border-radius: var(--radio-md);
+    padding      : 0.85rem 1.1rem;
+}
+.info-registro-label {
+    display       : block;
+    font-size     : var(--texto-xs);
+    font-weight   : var(--peso-semi);
+    color         : var(--color-texto-tenue);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-bottom : 0.6rem;
+}
+.faltas-actuales {
+    display  : flex;
+    gap      : 0.75rem;
+    flex-wrap: wrap;
+}
+.falta-badge {
+    display       : flex;
+    flex-direction: column;
+    align-items   : center;
+    gap           : 0.15rem;
+    padding       : 0.5rem 1rem;
+    background    : var(--fondo-tarjeta);
+    border        : 1px solid var(--borde-color);
+    border-radius : var(--radio-md);
+    min-width     : 80px;
+    text-align    : center;
+}
+.falta-badge small  { font-size: var(--texto-xs); color: var(--color-texto-tenue); }
+.falta-badge strong { font-size: var(--texto-xl); font-weight: var(--peso-bold); color: var(--color-texto-subtitulo); }
+
+@media (max-width: 768px) {
+    .contenedor-editar-asistencia { padding: 1.2rem; }
+    .faltas-actuales              { gap: 0.5rem; }
+    .falta-badge                  { min-width: 70px; }
+}
+@media (max-width: 480px) {
+    .contenedor-editar-asistencia { padding: 0.9rem; }
+}

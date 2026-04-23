@@ -1,0 +1,267 @@
+/* ============================================================
+   modulos/academico/boletin/boletin.css
+   Vista: show.blade.php
+
+   El layout ya carga globalmente:
+     tipografia.css · botones.css · tablas.css
+     academico-form.css · academico-index.css
+
+   Este archivo aporta solo:
+     — .cabecera-acciones
+     — .boletin-ficha + .boletin-ficha-item
+     — .boletin-resumen + .boletin-res-card + variantes
+     — .nota-chip (aprobada/reprobada)
+     — .badge-desempeno + variantes
+     — .badge-sin-calificar
+     — .fila-reprobada
+     — .col-centrado
+   ============================================================ */
+
+/* ── Acciones en cabecera ── */
+.cabecera-acciones {
+    display  : flex;
+    gap      : 0.6rem;
+    flex-wrap: wrap;
+}
+
+/* ── Ficha del estudiante ── */
+.boletin-ficha {
+    display      : flex;
+    flex-wrap    : wrap;
+    gap          : 0.4rem 2rem;
+    padding      : 0.8rem 1.1rem;
+    background   : var(--fondo-tarjeta);
+    border       : 1px solid var(--borde-color);
+    border-radius: var(--radio-md);
+    box-shadow   : var(--sombra-sm);
+}
+
+.boletin-ficha-item {
+    display       : flex;
+    flex-direction: column;
+    gap           : 0.1rem;
+}
+
+.boletin-ficha-item > span {
+    font-size  : var(--texto-xs);
+    color      : var(--color-texto-tenue);
+    line-height: 1.2;
+}
+
+.boletin-ficha-item strong {
+    font-size  : var(--texto-sm);
+    font-weight: var(--peso-semibold);
+    color      : var(--color-texto-subtitulo);
+}
+
+/* ── Tarjetas de resumen ── */
+.boletin-resumen {
+    display              : grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap                  : 0.75rem;
+}
+
+.boletin-res-card {
+    display      : flex;
+    align-items  : center;
+    gap          : 0.75rem;
+    padding      : 0.9rem 1rem;
+    background   : var(--fondo-tarjeta);
+    border       : 1px solid var(--borde-color);
+    border-radius: var(--radio-md);
+    box-shadow   : var(--sombra-sm);
+}
+
+.boletin-res-card > i {
+    font-size  : 1.4rem;
+    color      : var(--color-texto-tenue);
+    flex-shrink: 0;
+}
+
+.boletin-res-card div {
+    display       : flex;
+    flex-direction: column;
+    gap           : 0.1rem;
+}
+
+.boletin-res-card span {
+    font-size  : var(--texto-xs);
+    color      : var(--color-texto-tenue);
+    line-height: 1.2;
+}
+
+.boletin-res-card strong {
+    font-size  : var(--texto-base);
+    font-weight: var(--peso-bold);
+    color      : var(--color-texto-subtitulo);
+}
+
+/* Variante aprobado */
+.boletin-res-card.aprobado {
+    background  : #d1fae5;
+    border-color: #6ee7b7;
+}
+.boletin-res-card.aprobado > i,
+.boletin-res-card.aprobado strong { color: #065f46; }
+
+/* Variante reprobado */
+.boletin-res-card.reprobado {
+    background  : #fee2e2;
+    border-color: #fca5a5;
+}
+.boletin-res-card.reprobado > i,
+.boletin-res-card.reprobado strong { color: #991b1b; }
+
+/* Variante aprobadas (resumen) */
+.boletin-res-card.aprobadas > i { color: #10b981; }
+
+/* Variante reprobadas (resumen) */
+.boletin-res-card.reprobadas > i { color: #ef4444; }
+
+/* ── Chip de nota ── */
+.nota-chip {
+    display        : inline-flex;
+    align-items    : center;
+    justify-content: center;
+    min-width      : 50px;
+    padding        : 0.2rem 0.65rem;
+    border-radius  : 999px;
+    font-size      : var(--texto-sm);
+    font-weight    : var(--peso-bold);
+}
+
+.nota-chip.aprobada { background: #d1fae5; color: #065f46; }
+.nota-chip.reprobada{ background: #fee2e2; color: #991b1b; }
+
+/* ── Badge de desempeño ── */
+.badge-desempeno {
+    display      : inline-block;
+    padding      : 0.15rem 0.65rem;
+    border-radius: 999px;
+    font-size    : var(--texto-xs);
+    font-weight  : var(--peso-semibold);
+    white-space  : nowrap;
+}
+
+.des-superior { background: #d1fae5; color: #065f46; }
+.des-alto     { background: #dcfce7; color: #166534; }
+.des-basico   { background: #fef9c3; color: #854d0e; }
+.des-bajo     { background: #fee2e2; color: #991b1b; }
+.des-sin      { background: #f3f4f6; color: #6b7280; }
+
+/* ── Sin calificar ── */
+.badge-sin-calificar {
+    display      : inline-block;
+    padding      : 0.15rem 0.65rem;
+    border-radius: 999px;
+    background   : #f3f4f6;
+    color        : #9ca3af;
+    font-size    : var(--texto-xs);
+    font-style   : italic;
+}
+
+/* ── Fila reprobada (suave) ── */
+.fila-reprobada td,
+.fila-alerta td {
+    background: #fff7f7;
+}
+
+/* ── Celda centrada ── */
+.col-centrado { text-align: center !important; }
+
+/* ══════════════════════════════════════════════════════════
+   ALIASES — clases usadas en docente/boletin/show.blade.php
+   Apuntan al mismo estilo que los originales del admin.
+   ══════════════════════════════════════════════════════════ */
+
+/* .ficha-estudiante = alias de .boletin-ficha */
+.ficha-estudiante {
+    display      : flex;
+    flex-wrap    : wrap;
+    gap          : 0.4rem 2rem;
+    padding      : 0.8rem 1.1rem;
+    background   : var(--fondo-tarjeta);
+    border       : 1px solid var(--borde-color);
+    border-radius: var(--radio-md);
+    box-shadow   : var(--sombra-sm);
+}
+
+/* .ficha-dato = alias de .boletin-ficha-item */
+.ficha-dato {
+    display       : flex;
+    flex-direction: column;
+    gap           : 0.1rem;
+}
+.ficha-dato > span {
+    font-size  : var(--texto-xs);
+    color      : var(--color-texto-tenue);
+    line-height: 1.2;
+    display    : flex;
+    align-items: center;
+    gap        : 0.3rem;
+}
+.ficha-dato strong {
+    font-size  : var(--texto-sm);
+    font-weight: var(--peso-semibold);
+    color      : var(--color-texto-subtitulo);
+}
+
+/* .resumen-boletin = alias de .boletin-resumen */
+.resumen-boletin {
+    display              : grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap                  : 0.75rem;
+}
+
+/* .resumen-card = alias de .boletin-res-card */
+.resumen-card {
+    display      : flex;
+    align-items  : center;
+    gap          : 0.75rem;
+    padding      : 0.9rem 1rem;
+    background   : var(--fondo-tarjeta);
+    border       : 1px solid var(--borde-color);
+    border-radius: var(--radio-md);
+    box-shadow   : var(--sombra-sm);
+}
+.resumen-card > i {
+    font-size  : 1.4rem;
+    color      : var(--color-texto-tenue);
+    flex-shrink: 0;
+}
+.resumen-card > div {
+    display       : flex;
+    flex-direction: column;
+    gap           : 0.1rem;
+}
+.resumen-card span   { font-size: var(--texto-xs); color: var(--color-texto-tenue); }
+.resumen-card strong { font-size: var(--texto-base); font-weight: var(--peso-bold); color: var(--color-texto-subtitulo); }
+
+.resumen-card.aprobado  { background: #d1fae5; border-color: #6ee7b7; }
+.resumen-card.aprobado  > i,
+.resumen-card.aprobado  strong { color: #065f46; }
+.resumen-card.reprobado { background: #fee2e2; border-color: #fca5a5; }
+.resumen-card.reprobado > i,
+.resumen-card.reprobado strong { color: #991b1b; }
+.resumen-card.aprobadas > i    { color: #10b981; }
+.resumen-card.reprobadas > i   { color: #ef4444; }
+
+/* .tabla-boletin — cabecera verde institucional */
+.tabla-boletin thead tr  { background: #065f46; }
+.tabla-boletin thead th  { color: #ffffff; }
+
+/* badges resultado */
+.badge-aprobada  { background: #d1fae5; color: #065f46; }
+.badge-reprobada { background: #fee2e2; color: #991b1b; }
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+    .boletin-resumen { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 480px) {
+    .cabecera-acciones   { flex-wrap: wrap; }
+    .boletin-ficha       { flex-direction: column; gap: 0.5rem; }
+    .boletin-resumen     { grid-template-columns: 1fr; }
+    .boletin-res-card    { padding: 0.75rem; }
+}

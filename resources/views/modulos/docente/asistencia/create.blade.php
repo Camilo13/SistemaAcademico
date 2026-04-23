@@ -17,10 +17,6 @@
                 Ingresa las faltas del periodo seleccionado para este estudiante
             </p>
         </div>
-        <a href="{{ route('docente.asistencia.estudiantes', $asignacion->id) }}"
-           class="btn btn-neutro btn-sm">
-            <i class="fa-solid fa-arrow-left"></i> Volver
-        </a>
     </div>
 
     {{-- Error académico --}}
@@ -54,7 +50,8 @@
 
     {{-- Formulario --}}
     <form method="POST"
-          action="{{ route('docente.asistencia.store', [$asignacion->id, $inscripcionMateria->id]) }}">
+          action="{{ route('docente.asistencia.store', [$asignacion->id, $inscripcionMateria->id]) }}"
+          data-form="asistencia-docente">
         @csrf
 
         <div class="formulario-asistencia">
@@ -143,7 +140,7 @@
             </div>
 
             {{-- Acciones --}}
-            <div style="display:flex; gap:0.75rem; flex-wrap:wrap;">
+            <div class="acciones-form">
                 <button type="submit" class="btn btn-primario">
                     <i class="fa-solid fa-floppy-disk"></i> Guardar
                 </button>

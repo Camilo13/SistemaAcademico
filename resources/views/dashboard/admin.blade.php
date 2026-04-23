@@ -1,6 +1,6 @@
 @extends('layouts.menuadmin')
 
-@section('title', 'Inicio — Panel Administrador')
+@section('title', 'Panel Administrador')
 
 @push('styles')
     <link rel="stylesheet" href="{{ asset('css/modulos/dashboard/admin.css') }}">
@@ -13,7 +13,7 @@
     {{-- ── Banner de bienvenida ── --}}
     <div class="bienvenida">
         <h1 class="bienvenida-titulo">
-            Bienvenido, <span class="rol">Administrador</span>
+            Bienvenido, <span class="rol">{{ $usuario->nombre ?? 'Administrador' }}</span>
         </h1>
         <p class="bienvenida-texto">
             Desde este panel puedes gestionar toda la estructura académica,

@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title', 'Panel Docente') — I.E.A.</title>
 
     {{-- ── CSS globales ── --}}
@@ -14,6 +15,9 @@
     <link rel="stylesheet" href="{{ asset('css/componentes/tarjetas.css') }}">
     <link rel="stylesheet" href="{{ asset('css/global/tipografia.css') }}">
     <link rel="stylesheet" href="{{ asset('css/componentes/tablas.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/componentes/academico-form.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/componentes/academico-index.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/componentes/docente-comun.css') }}">
 
     {{-- ── FontAwesome 6 ── --}}
     <link rel="stylesheet"
@@ -35,7 +39,7 @@
     ════════════════════════════════════════════════ --}}
     <aside class="barra-lateral" data-menu>
 
-        {{-- Logo / Nombre institución --}}
+        {{-- Logo --}}
         <div class="barra-logo">
             I.E.A. Akwe Uus Yat
         </div>
@@ -44,15 +48,23 @@
         <nav class="barra-nav">
             <ul class="lista-menu">
 
-                {{-- ── 1. Perfil ── --}}
+                {{-- ── Inicio ── --}}
                 <li>
-                    <a href="{{ route('perfil') }}">
-                        <i class="fas fa-user-circle icono"></i>
-                        Perfil
+                    <a href="{{ route('docente.dashboard') }}">
+                        <i class="fas fa-home icono"></i>
+                        Inicio
                     </a>
                 </li>
 
-                {{-- ── 2. Mis Grupos (desplegable) ── --}}
+                {{-- ── Perfil ── --}}
+                <li>
+                    <a href="{{ route('perfil') }}">
+                        <i class="fas fa-user-circle icono"></i>
+                        Mi Perfil
+                    </a>
+                </li>
+
+                {{-- ── Mis Grupos (desplegable) ── --}}
                 <li class="menu-padre">
                     <button type="button" class="menu-toggle">
                         <span>
@@ -66,16 +78,9 @@
 
                         {{-- ┄ Notas ┄ --}}
                         <li class="submenu-titulo">Notas</li>
-
                         <li>
                             <a href="{{ route('docente.notas.index') }}">
                                 <i class="fas fa-clipboard-list icono"></i> Registrar Notas
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="{{ route('docente.notas.index') }}">
-                                <i class="fas fa-eye icono"></i> Consultar Notas
                             </a>
                         </li>
 
@@ -89,25 +94,16 @@
 
                         {{-- ┄ Grupos ┄ --}}
                         <li class="submenu-titulo">Grupos</li>
-
                         <li>
                             <a href="{{ route('docente.grupos.index') }}">
                                 <i class="fas fa-users icono"></i> Ver Mis Grupos
                             </a>
                         </li>
 
-                        {{-- Mis Asignaciones — PENDIENTE DE IMPLEMENTAR
-                        <li>
-                            <a href="#">
-                                <i class="fas fa-list-alt icono"></i> Mis Asignaciones
-                            </a>
-                        </li>
-                        --}}
-
                     </ul>
                 </li>
 
-                {{-- ── 3. Mi Horario ── --}}
+                {{-- ── Mi Horario ── --}}
                 <li>
                     <a href="{{ route('docente.horario.index') }}">
                         <i class="fas fa-calendar-week icono"></i>
@@ -115,7 +111,7 @@
                     </a>
                 </li>
 
-                {{-- ── 4. Biblioteca Digital ── --}}
+                {{-- ── Biblioteca Digital ── --}}
                 <li>
                     <a href="{{ route('biblioteca.materias.index') }}">
                         <i class="fas fa-book icono"></i>
@@ -131,7 +127,7 @@
             <form method="POST" action="{{ route('logout') }}">
                 @csrf
                 <button type="submit" class="boton-salir">
-                    <i class="fas fa-sign-out-alt"></i> Salir
+                    <i class="fas fa-sign-out-alt"></i> Cerrar sesión
                 </button>
             </form>
         </div>
@@ -149,6 +145,7 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="{{ asset('js/global/notificaciones.js') }}"></script>
     <script src="{{ asset('js/layout/menu.js') }}"></script>
+    <script src="{{ asset('js/componentes/academico.js') }}"></script>
 
     <script>
         window.APP_ALERTS = {

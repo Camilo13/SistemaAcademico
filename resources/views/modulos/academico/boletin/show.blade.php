@@ -22,7 +22,7 @@
                 {{ \Carbon\Carbon::parse($boletin['fecha_generacion'])->format('d/m/Y H:i') }}
             </p>
         </div>
-        <div style="display:flex;gap:.6rem;flex-wrap:wrap;">
+        <div class="cabecera-acciones">
             <a href="{{ route('admin.academico.inscripciones.edit', $inscripcion->id) }}"
                class="btn btn-neutro btn-sm">
                 <i class="fa-solid fa-arrow-left"></i> Inscripción
@@ -107,7 +107,7 @@
                 <tr>
                     <th>Materia</th>
                     <th>Docente</th>
-                    <th>Notas</th>
+                    <th class="col-centrado">Notas</th>
                     <th>Promedio</th>
                     <th>Desempeño</th>
                     <th>Resultado</th>
@@ -126,7 +126,7 @@
                             {{ $materia['docente_nombre'] }}
                         </td>
 
-                        <td data-label="Notas" class="text-center">
+                        <td data-label="Notas" class="col-centrado">
                             {{ $materia['total_notas'] }}
                         </td>
 
@@ -199,5 +199,6 @@
 @endsection
 
 @push('scripts')
+    <script src="{{ asset('js/componentes/academico.js') }}"></script>
     <script src="{{ asset('js/modulos/academico/boletin.js') }}"></script>
 @endpush

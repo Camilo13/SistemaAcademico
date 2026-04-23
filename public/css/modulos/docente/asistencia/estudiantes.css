@@ -1,0 +1,93 @@
+/* ============================================================
+   modulos/docente/asistencia/estudiantes.css
+   Vista: estudiantes — tabla de faltas por periodo
+
+   Globales disponibles (menudocente):
+     academico-index.css → .cabecera, .cabecera-subtitulo
+                           (+ responsive de .cabecera y .cabecera .btn)
+     tablas.css          → .tabla, .tabla-contenedor, .col-acciones,
+                           .btn-icono, .alerta-error
+     botones.css         → .btn, .btn-neutro, .btn-sm
+     tipografia.css      → .sin-registros
+     docente-comun.css   → .ficha-asignacion, .ficha-dato
+
+   Este archivo aporta: contenedor, columna estudiante,
+   chips de faltas por periodo y total anual, badge cerrado.
+   ============================================================ */
+
+.contenedor-asistencia-est {
+    padding       : 1.8rem;
+    display       : flex;
+    flex-direction: column;
+    gap           : 1.5rem;
+}
+
+/* ── Columna estudiante ── */
+.col-estudiante { min-width: 180px; }
+
+.nombre-estudiante {
+    font-weight: var(--peso-semibold);
+    font-size  : var(--texto-sm);
+    color      : var(--color-texto-subtitulo);
+}
+.id-estudiante {
+    font-size : var(--texto-xs);
+    color     : var(--color-texto-tenue);
+    margin-top: 0.1rem;
+}
+
+.text-center { text-align: center; }
+
+/* ── Badge periodo cerrado ── */
+.badge-cerrado {
+    display       : inline-flex;
+    align-items   : center;
+    padding       : 0.1rem 0.45rem;
+    border-radius : var(--radio-pill);
+    font-size     : 0.65rem;
+    font-weight   : var(--peso-semi);
+    background    : #fee2e2;
+    color         : #991b1b;
+    margin-left   : 0.3rem;
+    vertical-align: middle;
+}
+
+/* ── Chips de faltas por periodo ── */
+.faltas-chip {
+    display        : inline-flex;
+    align-items    : center;
+    justify-content: center;
+    min-width      : 36px;
+    padding        : 0.2rem 0.55rem;
+    border-radius  : 999px;
+    font-size      : var(--texto-sm);
+    font-weight    : var(--peso-bold);
+    cursor         : default;
+}
+.faltas-sin  { background: #f3f4f6; color: #9ca3af; }
+.faltas-ok   { background: #d1fae5; color: #065f46; }
+.faltas-bajo { background: #fef9c3; color: #854d0e; }
+.faltas-alto { background: #fee2e2; color: #991b1b; }
+
+/* ── Chip de total anual ── */
+.total-chip {
+    display        : inline-flex;
+    align-items    : center;
+    justify-content: center;
+    min-width      : 40px;
+    padding        : 0.22rem 0.65rem;
+    border-radius  : 999px;
+    font-size      : var(--texto-sm);
+    font-weight    : var(--peso-bold);
+}
+.total-sin   { background: #f3f4f6; color: #9ca3af; }
+.total-ok    { background: #d1fae5; color: #065f46; }
+.total-medio { background: #fef9c3; color: #854d0e; }
+.total-alto  { background: #fee2e2; color: #991b1b; }
+
+@media (max-width: 768px) {
+    .contenedor-asistencia-est { padding: 1.2rem; }
+}
+@media (max-width: 480px) {
+    .contenedor-asistencia-est { padding: 0.9rem; }
+}

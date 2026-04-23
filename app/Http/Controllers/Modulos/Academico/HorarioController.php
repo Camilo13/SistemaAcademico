@@ -40,16 +40,22 @@ class HorarioController extends Controller
     */
     public function index(Request $request)
     {
-        $anios  = AnioLectivo::orderByDesc('nombre')->get();
-        $grupos = collect();
+        $anios = AnioLectivo::orderByDesc('nombre')->get();
 
-        $anioSeleccionado = null;
-
+        // Sin filtro → todos los grupos activos de todos los años
+        // Con filtro → solo los grupos del año seleccionado
         if ($request->filled('anio')) {
             $anioSeleccionado = AnioLectivo::find($request->anio);
             $grupos = Grupo::with(['grado'])
                 ->where('anio_lectivo_id', $request->anio)
                 ->where('activo', true)
+                ->orderBy('nombre')
+                ->get();
+        } else {
+            $anioSeleccionado = null;
+            $grupos = Grupo::with(['grado', 'anioLectivo'])
+                ->where('activo', true)
+                ->orderByDesc('anio_lectivo_id')
                 ->orderBy('nombre')
                 ->get();
         }
@@ -177,7 +183,7 @@ class HorarioController extends Controller
         ]);
 
         return redirect()
-            ->route('admin.horarios.grupo', $validated['grupo_id'])
+            ->route('admin.academico.horarios.grupo', $validated['grupo_id'])
             ->with('exito', 'Franja horaria agregada correctamente.');
     }
 
@@ -192,7 +198,7 @@ class HorarioController extends Controller
         $horario->delete();
 
         return redirect()
-            ->route('admin.horarios.grupo', $grupoId)
+            ->route('admin.academico.horarios.grupo', $grupoId)
             ->with('exito', 'Franja eliminada correctamente.');
     }
 }

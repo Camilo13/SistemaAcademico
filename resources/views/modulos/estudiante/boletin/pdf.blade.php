@@ -1,20 +1,29 @@
-@extends('layouts.menuestudiante')
-@section('title', 'PDF — Boletín ' . ($boletin['estudiante']['nombre'] ?? ''))
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boletín — {{ $boletin['estudiante']['nombre'] ?? '' }}</title>
 
-@push('styles')
+    {{-- CSS base (variables + tipografía + botones) --}}
+    <link rel="stylesheet" href="{{ asset('css/global/tipografia.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/componentes/botones.css') }}">
+
+    {{-- Font Awesome --}}
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+          crossorigin="anonymous" referrerpolicy="no-referrer">
+
+    {{-- CSS específico del boletín --}}
     <link rel="stylesheet" href="{{ asset('css/modulos/estudiante/boletin/pdf.css') }}">
-@endpush
+</head>
+<body>
 
-@section('content')
 <div class="contenedor-pdf">
 
-    {{-- Barra de acción (se oculta al imprimir) --}}
+    {{-- Barra de acciones — solo imprimir (se oculta al imprimir) --}}
     <div class="barra-pdf">
-        <a href="{{ route('estudiante.boletin.show', $inscripcion->id) }}"
-           class="btn btn-neutro btn-sm">
-            <i class="fa-solid fa-arrow-left"></i> Volver
-        </a>
-        <button id="btn-imprimir" class="btn btn-primario btn-sm">
+        <button class="btn btn-primario" onclick="window.print()">
             <i class="fa-solid fa-print"></i> Imprimir / Guardar PDF
         </button>
     </div>
@@ -127,7 +136,7 @@
         </div>
 
         {{-- Escala de desempeño --}}
-        <table class="tabla-boletin" style="width:auto;font-size:var(--texto-xs);margin-top:1rem;">
+        <table class="tabla-boletin tabla-escala">
             <thead>
                 <tr><th colspan="2">Escala de Desempeño</th></tr>
             </thead>
@@ -139,7 +148,7 @@
             </tbody>
         </table>
 
-        {{-- Firma --}}
+        {{-- Firmas --}}
         <div class="firma-seccion">
             <div class="firma-item">
                 <div class="firma-linea"></div>
@@ -158,8 +167,6 @@
     </div>{{-- fin .hoja-boletin --}}
 
 </div>
-@endsection
 
-@push('scripts')
-    <script src="{{ asset('js/modulos/estudiante/boletin.js') }}"></script>
-@endpush
+</body>
+</html>

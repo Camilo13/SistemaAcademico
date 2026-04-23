@@ -81,21 +81,11 @@
                             <i class="fa-solid fa-user-check"></i> Asistencia
                         </a>
 
-                        {{-- El boletín se consulta por inscripción, no por asignación.
-                             Mostramos el botón para la primera inscripción activa del grupo. --}}
-                        @php
-                            $primeraInscripcion = $asignacion->grupo
-                                ->inscripciones()
-                                ->where('estado', 'activa')
-                                ->first();
-                        @endphp
-                        @if($primeraInscripcion)
-                            <a href="{{ route('docente.boletin.show', $primeraInscripcion->id) }}"
-                               class="btn btn-neutro btn-sm"
-                               title="Ver boletín del grupo">
-                                <i class="fa-solid fa-file-lines"></i> Boletín
-                            </a>
-                        @endif
+                        <a href="{{ route('docente.grupos.resumen', $asignacion->grupo_id) }}"
+                           class="btn btn-neutro btn-sm"
+                           title="Ver resumen académico del grupo">
+                            <i class="fa-solid fa-chart-bar"></i> Resumen
+                        </a>
                     </div>
 
                 </div>

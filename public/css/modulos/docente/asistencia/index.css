@@ -1,0 +1,27 @@
+/* ============================================================
+   modulos/docente/asistencia/index.css
+   Vista: index — selección de materia para registrar faltas
+
+   Globales disponibles (menudocente):
+     academico-index.css → .contenedor-modulo, .cabecera,
+                           .cabecera-subtitulo
+     docente-comun.css   → .input-buscar, .asignaciones-lista,
+                           .asignacion-item y familia
+     tipografia.css      → .sin-registros
+
+   Este archivo aporta solo el contenedor raíz.
+   ============================================================ */
+
+.contenedor-asistencia-doc {
+    padding       : 1.8rem;
+    display       : flex;
+    flex-direction: column;
+    gap           : 1.5rem;
+}
+
+@media (max-width: 768px) {
+    .contenedor-asistencia-doc { padding: 1.2rem; }
+}
+@media (max-width: 480px) {
+    .contenedor-asistencia-doc { padding: 0.9rem; }
+}

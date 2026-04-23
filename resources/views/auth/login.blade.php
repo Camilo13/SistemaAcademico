@@ -2,90 +2,73 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Iniciar sesión - Akwe Uus Yat</title>
-
-    {{-- Estilos propios del login --}}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar sesión — Akwe Uus Yat</title>
     <link rel="stylesheet" href="{{ asset('css/auth/login.css') }}">
 </head>
 <body>
 
-<div class="contenedor-login">
-    <div class="caja-login">
+<div class="login-contenedor">
+    <div class="login-caja">
 
-        <div class="encabezado-login">
-            <h2>Portal Académico</h2>
-            <p>Inicia sesión para ingresar a la plataforma</p>
-            <img src="{{ asset('img/logo.png') }}" alt="Logo institucional" class="logo">
+        <div class="login-cabecera">
+            <h2 class="login-titulo">Portal Académico</h2>
+            <p class="login-subtitulo">Inicia sesión para ingresar a la plataforma</p>
+            <img src="{{ asset('img/logo.png') }}" alt="Logo institucional" class="login-logo">
         </div>
 
-        {{-- Formulario de login --}}
         <form method="POST" action="{{ route('login') }}">
             @csrf
 
-            <div class="grupo-campo">
+            <div class="login-campo">
                 <label for="identificacion">Usuario</label>
-                <input
-                    type="text"
-                    id="identificacion"
-                    name="identificacion"
-                    value="{{ old('identificacion') }}"
-                    placeholder="Ingrese su número de identificación"
-                    required
-                    autofocus>
+                <input type="text"
+                       id="identificacion"
+                       name="identificacion"
+                       value="{{ old('identificacion') }}"
+                       placeholder="Ingrese su número de identificación"
+                       required
+                       autofocus>
             </div>
 
-            <div class="grupo-campo">
+            <div class="login-campo">
                 <label for="password">Contraseña</label>
-                <input
-                    type="password"
-                    id="password"
-                    name="password"
-                    placeholder="Ingrese su contraseña"
-                    required>
+                <input type="password"
+                       id="password"
+                       name="password"
+                       placeholder="Ingrese su contraseña"
+                       required>
             </div>
 
-            <div class="botones-accion">
-                <a href="{{ route('inicio') }}" class="boton-login">
+            <div class="login-botones">
+                <a href="{{ route('inicio') }}" class="login-btn login-btn--neutro">
                     Atrás
                 </a>
-
-                <button type="submit" class="boton-login">
+                <button type="submit" class="login-btn login-btn--primario">
                     Ingresar
                 </button>
             </div>
+
         </form>
 
-        <div class="pie-login">
-            <a href="{{ route('solicitud.create') }}">
-                Regístrate ahora
-            </a>
+        <div class="login-pie">
+            <a href="{{ route('solicitud.create') }}">Regístrate ahora</a>
         </div>
 
     </div>
 </div>
 
-{{-- =====================
-| Scripts
-|===================== --}}
-
-{{-- SweetAlert2 --}}
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-{{-- Contrato ÚNICO de mensajes para toda la aplicación --}}
 <script>
     window.APP_ALERTS = {
-        exito: @json(session('exito')),
-        error: @json(session('error')),
-        info: @json(session('info')),
-        advertencia: @json(session('advertencia')),
-        errores: @json($errors->all()),
+        exito       : @json(session('exito')),
+        error       : @json(session('error')),
+        info        : @json(session('info')),
+        advertencia : @json(session('advertencia')),
+        errores     : @json($errors->all()),
     };
 </script>
-
-{{-- Notificaciones globales --}}
 <script src="{{ asset('js/global/notificaciones.js') }}"></script>
-
-{{-- JS específico del login (ligero, sin lógica de mensajes) --}}
 <script src="{{ asset('js/auth/login.js') }}"></script>
 
 </body>

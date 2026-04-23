@@ -65,7 +65,7 @@
                             </th>
                         @endforeach
                         <th>Total</th>
-                        <th class="col-acciones">Acciones</th>
+                        <th class="col-acciones">Registrar falta</th>
                     </tr>
                 </thead>
                 <tbody>

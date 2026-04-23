@@ -24,10 +24,6 @@
                 {{ $asignacion->materia->nombre ?? '—' }}
             </p>
         </div>
-        <a href="{{ route('docente.asistencia.estudiantes', $asignacion->id) }}"
-           class="btn btn-neutro btn-sm">
-            <i class="fa-solid fa-arrow-left"></i> Volver
-        </a>
     </div>
 
     {{-- Error académico --}}
@@ -86,7 +82,8 @@
     </div>
 
     {{-- Formulario --}}
-    <form method="POST" action="{{ route('docente.asistencia.update', $asistencia->id) }}">
+    <form method="POST" action="{{ route('docente.asistencia.update', $asistencia->id) }}"
+          data-form="asistencia-docente">
         @csrf
         @method('PUT')
 
@@ -155,7 +152,7 @@
 
             {{-- Acciones --}}
             @if($periodoAbierto)
-                <div style="display:flex; gap:0.75rem; flex-wrap:wrap;">
+                <div class="acciones-form">
                     <button type="submit" class="btn btn-primario">
                         <i class="fa-solid fa-floppy-disk"></i> Actualizar
                     </button>

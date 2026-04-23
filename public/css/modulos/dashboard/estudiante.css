@@ -1,0 +1,122 @@
+/* ============================================================
+   dashboard/admin.css
+   Vista: Inicio del Panel Administrador — contenido estático.
+   Cargado en: dashboard/admin.blade.php — @push('styles')
+
+   las tarjetas son visibles por defecto (sin opacity:0).
+       La animación de entrada es CSS pura, no depende de JS.
+   ============================================================ */
+
+/* ── Contenedor principal ── */
+.inicio-estudiante {
+    padding       : 1.8rem;
+    display       : flex;
+    flex-direction: column;
+    gap           : 2rem;
+    animation     : aparecer 0.4s ease-out;
+}
+
+@keyframes aparecer {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0);    }
+}
+
+/* ── Banner de bienvenida ── */
+.bienvenida {
+    background   : linear-gradient(135deg, #d1fae5 0%, #ecfdf5 100%);
+    border       : 1px solid #a7f3d0;
+    border-radius: var(--radio-xl);
+    padding      : 2rem 2.2rem;
+}
+
+.bienvenida-titulo {
+    font-size    : var(--texto-2xl);
+    font-weight  : var(--peso-bold);
+    color        : #065f46;
+    margin       : 0 0 0.5rem;
+    line-height  : var(--leading-tight);
+}
+
+.bienvenida-titulo .rol { color: #10b981; }
+
+.bienvenida-texto {
+    font-size  : var(--texto-base);
+    color      : var(--color-texto-secundario);
+    max-width  : 660px;
+    line-height: var(--leading-relaxed);
+    margin     : 0;
+}
+
+/* ── Grid de tarjetas ── */
+.tarjetas-resumen {
+    display               : grid;
+    grid-template-columns : repeat(auto-fill, minmax(220px, 1fr));
+    gap                   : 1.3rem;
+}
+
+/* ── Tarjeta de módulo ──
+    Visible por defecto — sin opacity:0 ni transform inicial.
+   La animación escalonada es un plus vía JS, pero si no carga
+   las tarjetas siguen mostrándose normalmente.               */
+.tarjeta {
+    background    : var(--fondo-tarjeta);
+    padding       : 1.3rem 1.4rem;
+    border-radius : var(--radio-lg);
+    box-shadow    : var(--sombra-sm);
+    border-left   : 3px solid #22c55e;
+    display       : flex;
+    flex-direction: column;
+    gap           : 0.5rem;
+    transition    : transform  var(--transicion-normal),
+                    box-shadow var(--transicion-normal);
+}
+
+.tarjeta:hover {
+    transform : translateY(-4px);
+    box-shadow: var(--sombra-lg);
+}
+
+/* Ícono */
+.tarjeta-icono {
+    width           : 40px;
+    height          : 40px;
+    border-radius   : var(--radio-md);
+    background      : #f0fdf4;
+    display         : flex;
+    align-items     : center;
+    justify-content : center;
+    color           : #16a34a;
+    font-size       : 1.05rem;
+    margin-bottom   : 0.2rem;
+}
+
+.tarjeta h3 {
+    font-size  : var(--texto-base);
+    font-weight: var(--peso-semi);
+    color      : #065f46;
+    margin     : 0;
+}
+
+.tarjeta p {
+    font-size  : var(--texto-sm);
+    color      : var(--color-texto-secundario);
+    margin     : 0;
+    line-height: var(--leading-relaxed);
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+    .inicio-estudiante      { padding: 1.2rem; gap: 1.5rem; }
+    .bienvenida        { padding: 1.3rem 1.4rem; }
+    .bienvenida-titulo { font-size: var(--texto-xl); }
+}
+
+@media (max-width: 480px) {
+    .inicio-estudiante     { padding: 0.9rem; }
+    .tarjetas-resumen { grid-template-columns: 1fr 1fr; gap: 0.85rem; }
+    .tarjeta          { padding: 1rem; }
+}
+
+@media (max-width: 360px) {
+    .tarjetas-resumen { grid-template-columns: 1fr; }
+}

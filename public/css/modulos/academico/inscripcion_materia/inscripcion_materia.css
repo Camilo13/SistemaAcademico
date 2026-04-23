@@ -1,0 +1,91 @@
+/* ============================================================
+   modulos/academico/inscripcion_materia/inscripcion_materia.css
+   Vistas: index, create
+
+   El layout menuadmin.blade.php ya carga globalmente:
+     tipografia.css · notificaciones.css · botones.css
+     formularios.css · resumen.css · tarjetas.css
+     tablas.css · academico-form.css · academico-index.css
+
+   Este archivo solo aporta:
+     — .im-cabecera-acciones
+     — .im-ficha y .im-ficha-item
+     — .celda-notas + .im-notas-chip
+     — .estado-finalizado (no en tablas.css base)
+   ============================================================ */
+
+/* ── Acciones en cabecera ── */
+.im-cabecera-acciones {
+    display  : flex;
+    gap      : 0.6rem;
+    flex-wrap: wrap;
+}
+
+/* ── Ficha resumen ── */
+.im-ficha {
+    display      : flex;
+    flex-wrap    : wrap;
+    gap          : 0.4rem 1.75rem;
+    padding      : 0.75rem 1.1rem;
+    background   : var(--fondo-tarjeta);
+    border       : 1px solid var(--borde-color);
+    border-radius: var(--radio-md);
+    box-shadow   : var(--sombra-sm);
+}
+
+.im-ficha-item {
+    display    : flex;
+    align-items: center;
+    gap        : 0.45rem;
+    font-size  : var(--texto-sm);
+}
+
+.im-ficha-item > span:first-child {
+    color      : var(--color-texto-tenue);
+    font-size  : var(--texto-xs);
+    white-space: nowrap;
+}
+
+.im-ficha-item strong {
+    font-weight: var(--peso-semibold);
+    color      : var(--color-texto-subtitulo);
+}
+
+/* ── Columna notas como chip-enlace ── */
+.celda-notas {
+    text-align: center;
+}
+
+.im-notas-chip {
+    display        : inline-flex;
+    align-items    : center;
+    gap            : 0.35rem;
+    padding        : 0.22rem 0.65rem;
+    background     : #f0fdf4;
+    border         : 1px solid #a7f3d0;
+    border-radius  : var(--radio-md);
+    color          : #065f46;
+    font-size      : var(--texto-sm);
+    font-weight    : var(--peso-semibold);
+    text-decoration: none;
+    transition     : background .15s, border-color .15s;
+    white-space    : nowrap;
+}
+
+.im-notas-chip:hover {
+    background  : #d1fae5;
+    border-color: #10b981;
+}
+
+/* ── Estado finalizado ── */
+.estado-finalizado {
+    background: #f0fdf4;
+    color     : #047857;
+}
+
+/* ── Responsive ── */
+@media (max-width: 640px) {
+    .im-cabecera-acciones { flex-wrap: wrap; }
+    .im-ficha             { flex-direction: column; gap: 0.5rem; }
+    .im-ficha-item        { justify-content: space-between; }
+}

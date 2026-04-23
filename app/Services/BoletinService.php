@@ -52,7 +52,7 @@ class BoletinService
             */
             'estudiante' => [
                 'id'     => $inscripcion->estudiante->id,
-                'nombre' => $inscripcion->estudiante->name ?? 'N/A',
+                'nombre' => $inscripcion->estudiante->nombre_completo ?? 'N/A',
             ],
 
             'grupo' => $inscripcion->grupo->nombre ?? null,
@@ -118,7 +118,7 @@ class BoletinService
                     $materia->asignacion->materia->nombre ?? 'N/A',
 
                 'docente_nombre' =>
-                    $materia->asignacion->docente->name ?? 'N/A',
+                    $materia->asignacion->docente->nombre_completo ?? 'N/A',
 
                 'total_notas' =>
                     $materia->notas->count(),

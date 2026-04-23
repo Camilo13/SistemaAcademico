@@ -1,264 +1,170 @@
-/* ------------------------------
-    VARIABLES DE COLOR 🌿
---------------------------------*/
-:root {
-    --color-primario-oscuro: #166534; /* Verde Bosque (Títulos) */
-    --color-primario: #16a34a; /* Verde medio (Botón principal) */
-    --color-secundario: #4b5563; /* Gris para textos secundarios */
-    --color-fondo-claro: #fcfcf7; /* Blanco roto/Crema */
-    --color-fondo-input: #f9fafb; /* Gris muy claro para inputs */
-    --color-borde-input: #d1d5db;
-    --color-texto-principal: #333333; 
-    --color-texto-secundario: #555555; 
-}
+/* ============================================================
+   auth/login.css  —  Formulario de inicio de sesión.
+   Página standalone: NO extiende layout, NO carga tipografia.
+   Todos los valores son directos para garantizar funcionamiento.
+   ============================================================ */
 
-
-/* ------------------------------
-    CONTENEDOR PRINCIPAL
---------------------------------*/
-.contenedor-login {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: calc(100vh - 80px); /* Ajusta si tienes un header fijo */
-    padding: 40px 20px;
-    /* ✅ CAMBIO: Fondo con tono tierra/verde muy claro */
-    background: var(--color-fondo-claro);
-}
-
-/* ------------------------------
-    CAJA DEL FORMULARIO
---------------------------------*/
-.caja-login {
-    background: white;
-    padding: 40px;
-    border-radius: 12px; /* Ligeramente más redondeado */
-    width: 100%;
-    max-width: 400px;
-    /* Sombra suave */
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1); 
-    animation: aparecer 0.6s ease-in-out;
-    text-align: center;
-}
-
-/* ------------------------------
-    ENCABEZADO
---------------------------------*/
-.encabezado-login {
-    margin-bottom: 25px;
-}
-
-.encabezado-login h2 {
-    font-size: 1.8rem; /* Título más prominente */
-    /* ✅ CAMBIO: Color Verde Bosque */
-    color: var(--color-primario-oscuro);
-    margin-bottom: 5px;
-}
-
-.encabezado-login p {
-    font-size: 1rem;
-    color: var(--color-texto-secundario);
-}
-
-.encabezado-login .logo {
-    width: 80px; /* Logo un poco más grande */
-    margin-top: 20px;
-}
-
-/* ------------------------------
-    PIE DE FORMULARIO
---------------------------------*/
-.pie-login {
-    text-align: center;
-    margin-top: 25px;
-    font-size: 15px;
-}
-
-.pie-login a {
-    /* ✅ CAMBIO: Enlace de registro en Verde Primario */
-    color: var(--color-primario);
-    text-decoration: none;
-    font-weight: 600;
-    display: block;
-    margin-bottom: 10px;
-}
-
-.pie-login a:hover {
-    text-decoration: underline;
-    color: var(--color-primario-oscuro);
-}
-
-/* ------------------------------
-    ANIMACIÓN DE ENTRADA
---------------------------------*/
-@keyframes aparecer {
-    from {
-        opacity: 0;
-        transform: translateY(15px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* ------------------------------
-    CAMPOS DEL FORMULARIO
---------------------------------*/
-.grupo-campo {
-    text-align: left;
-    margin-bottom: 20px;
-}
-
-.grupo-campo label {
-    display: block;
-    font-weight: 500;
-    margin-bottom: 6px;
-    color: var(--color-texto-principal);
-}
-
-input[type="text"],
-input[type="password"] {
-    width: 100%;
-    padding: 14px;
-    /* ✅ CAMBIO: Borde más suave */
-    border: 1px solid var(--color-borde-input);
-    /* ✅ CAMBIO: Fondo ligeramente gris */
-    background: var(--color-fondo-input);
-    border-radius: 8px;
-    font-size: 1rem;
+/* ── Reset ── */
+*, *::before, *::after {
     box-sizing: border-box;
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    margin    : 0;
+    padding   : 0;
 }
 
-input[type="text"]:focus,
-input[type="password"]:focus {
-    /* ✅ CAMBIO: Borde verde al enfocar */
-    border-color: var(--color-primario);
-    outline: none;
-    box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.2); /* Sombra suave verde */
+/* ── Body ── */
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background : #ecfdf5;
+    min-height : 100vh;
 }
 
-/* ------------------------------
-    CONTENEDOR DE CLAVE
---------------------------------*/
-.contenedor-clave {
-    position: relative;
-}
-
-/* ------------------------------
-    BOTONES
---------------------------------*/
-.botones-accion {
-    display: flex;
-    justify-content: space-between;
-    gap: 15px;
-    margin-top: 30px;
-}
-
-.botones-accion .boton-login {
-    flex: 1;
-    text-decoration: none; /* Necesario para el botón "Atrás" que es un <a> */
-    display: inline-block;
-    text-align: center;
-    padding: 12px;
-    font-weight: bold;
-    border: none;
-    border-radius: 8px;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    margin-top: 0; /* Anulamos el margin-top de la definición genérica */
-}
-
-/* Estilos específicos para los botones */
-.botones-accion .boton-login:nth-child(2) { /* Botón Ingresar */
-    /* ✅ CAMBIO: Botón principal en Verde Primario */
-    background-color: var(--color-primario);
-    color: white;
-}
-
-.botones-accion .boton-login:nth-child(2):hover {
-    /* ✅ CAMBIO: Hover en Verde Bosque */
-    background-color: var(--color-primario-oscuro);
-}
-
-.botones-accion .boton-login:nth-child(1) { /* Botón Atrás */
-    /* ✅ CAMBIO: Botón secundario con estilo claro */
-    background-color: #e5e7eb;
-    color: var(--color-texto-principal);
-    border: 1px solid var(--color-borde-input);
-}
-
-.botones-accion .boton-login:nth-child(1):hover {
-    background-color: #d1d5db;
-}
-
-
-/* ------------------------------
-    MENSAJES DE NOTIFICACIÓN (Se mantienen)
---------------------------------*/
-.mensaje-exito {
-    background: #d4edda;
-    color: #155724;
-    padding: 10px;
-    border-radius: 6px;
-    margin-bottom: 15px;
-    border: 1px solid #c3e6cb;
-}
-
-.mensaje-error {
-    background: #f8d7da;
-    color: #721c24;
-    padding: 10px;
-    border-radius: 6px;
-    margin-bottom: 15px;
-    border: 1px solid #f5c6cb;
-}
-
-.mensaje-informacion {
-    background: #d1ecf1;
-    color: #0c5460;
-    padding: 10px;
-    border-radius: 6px;
-    margin-bottom: 15px;
-    border: 1px solid #bee5eb;
-}
-
-.mensaje-advertencia {
-    background: #fff3cd;
-    color: #856404;
-    padding: 10px;
-    border-radius: 6px;
-    margin-bottom: 15px;
-    border: 1px solid #ffeeba;
-}
-/* Mensaje de error */
-.mensaje-error,
-.mensaje-exito,
-.mensaje-informacion,
-.mensaje-advertencia {
-    animation: desaparecer 4s ease forwards;
-}
-
-/* Keyframes para desaparecer */
-@keyframes desaparecer {
-    0% { opacity: 1; }
-    80% { opacity: 1; }
-    100% { opacity: 0; display: none; }
-}
-/* ------------------------------
-    ALERTA FLOTANTE (overlay opcional)
---------------------------------*/
-.capa-mensaje {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.4); /* Fondo semitransparente */
-    display: flex;
+/* ── Contenedor centrado ── */
+.login-contenedor {
+    display        : flex;
     justify-content: center;
-    align-items: center;
-    z-index: 2000;
+    align-items    : center;
+    min-height     : 100vh;
+    padding        : 2rem 1rem;
+    background     : #ecfdf5;
+}
+
+/* ── Caja del formulario ── */
+.login-caja {
+    background   : #ffffff;
+    width        : 100%;
+    max-width    : 420px;
+    padding      : 2.5rem 2rem;
+    border-radius: 12px;
+    box-shadow   : 0 8px 28px rgba(0, 0, 0, 0.10);
+    animation    : loginAparecer 0.45s ease-out both;
+}
+
+@keyframes loginAparecer {
+    from { opacity: 0; transform: translateY(14px); }
+    to   { opacity: 1; transform: translateY(0);    }
+}
+
+/* ── Cabecera ── */
+.login-cabecera {
+    text-align   : center;
+    margin-bottom: 2rem;
+}
+
+.login-titulo {
+    font-size  : 1.65rem;
+    font-weight: 700;
+    color      : #065f46;
+    margin     : 0 0 0.3rem;
+    line-height: 1.2;
+}
+
+.login-subtitulo {
+    font-size: 0.9rem;
+    color    : #6b7280;
+}
+
+.login-logo {
+    width      : 80px;
+    margin-top : 1.1rem;
+    display    : block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* ── Campos ── */
+.login-campo {
+    margin-bottom: 1.2rem;
+}
+
+.login-campo label {
+    display      : block;
+    font-size    : 0.9rem;
+    font-weight  : 500;
+    color        : #374151;
+    margin-bottom: 0.4rem;
+}
+
+.login-campo input {
+    display      : block;
+    width        : 100%;
+    padding      : 0.75rem 1rem;
+    font-size    : 0.9rem;
+    font-family  : inherit;
+    color        : #374151;
+    background   : #f9fafb;
+    border       : 1px solid #d1d5db;
+    border-radius: 8px;
+    outline      : none;
+    transition   : border-color 0.2s, box-shadow 0.2s;
+}
+
+.login-campo input:focus {
+    border-color: #22c55e;
+    background  : #ffffff;
+    box-shadow  : 0 0 0 3px rgba(34, 197, 94, 0.15);
+}
+
+/* ── Botones ── */
+.login-botones {
+    display   : flex;
+    gap       : 0.75rem;
+    margin-top: 1.75rem;
+}
+
+.login-btn {
+    flex           : 1;
+    display        : inline-flex;
+    align-items    : center;
+    justify-content: center;
+    padding        : 0.72rem 1rem;
+    font-family    : inherit;
+    font-size      : 0.9rem;
+    font-weight    : 600;
+    border-radius  : 8px;
+    border         : none;
+    cursor         : pointer;
+    text-decoration: none;
+    transition     : background-color 0.2s, transform 0.1s;
+    line-height    : 1;
+}
+
+.login-btn--neutro {
+    background: #e5e7eb;
+    color     : #374151;
+    border    : 1px solid #d1d5db;
+}
+.login-btn--neutro:hover { background: #d1d5db; }
+
+.login-btn--primario {
+    background: #16a34a;
+    color     : #ffffff;
+}
+.login-btn--primario:hover {
+    background: #065f46;
+    transform : translateY(-1px);
+}
+.login-btn--primario:active { transform: translateY(0); }
+
+/* ── Pie ── */
+.login-pie {
+    text-align: center;
+    margin-top: 1.5rem;
+}
+
+.login-pie a {
+    color          : #16a34a;
+    font-size      : 0.875rem;
+    font-weight    : 600;
+    text-decoration: none;
+}
+.login-pie a:hover {
+    color          : #065f46;
+    text-decoration: underline;
+}
+
+/* ── Responsive ── */
+@media (max-width: 480px) {
+    .login-caja    { padding: 1.75rem 1.25rem; }
+    .login-botones { flex-direction: column; }
+    .login-btn     { width: 100%; }
 }

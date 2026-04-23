@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
+use App\Models\Horario;
 use RuntimeException;
 
 class Asignacion extends Model
@@ -92,6 +93,11 @@ class Asignacion extends Model
     public function inscripcionMaterias(): HasMany
     {
         return $this->hasMany(InscripcionMateria::class);
+    }
+
+    public function horarios(): HasMany
+    {
+        return $this->hasMany(Horario::class);
     }
 
     /**

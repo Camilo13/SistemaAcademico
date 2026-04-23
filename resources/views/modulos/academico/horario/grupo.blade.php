@@ -1,4 +1,5 @@
 @extends('layouts.menuadmin')
+
 @section('title', 'Horario — ' . optional($grupo->grado)->nombre . ' ' . $grupo->nombre)
 
 @push('styles')
@@ -7,12 +8,14 @@
 @endpush
 
 @section('content')
-<div class="contenedor-horario-grupo">
 
-    {{-- Cabecera --}}
+<div class="contenedor-modulo">
+
+    {{-- ── Cabecera ── --}}
     <div class="cabecera">
         <div class="cabecera-info">
-            <h2><i class="fa-solid fa-table-cells"></i>
+            <h2>
+                <i class="fa-solid fa-table-cells"></i>
                 Horario — {{ optional($grupo->grado)->nombre }} Grupo {{ $grupo->nombre }}
             </h2>
             <p class="cabecera-subtitulo">
@@ -20,30 +23,33 @@
                 {{ optional($grupo->anioLectivo)->nombre }}
             </p>
         </div>
-        <div style="display:flex;gap:.6rem;flex-wrap:wrap;">
-            <a href="{{ route('admin.horarios.create', $grupo->id) }}" class="btn btn-primario">
+        <div class="cabecera-acciones">
+            <a href="{{ route('admin.academico.horarios.create', $grupo->id) }}"
+               class="btn btn-primario">
                 <i class="fa-solid fa-plus"></i> Agregar franja
             </a>
-            <a href="{{ route('admin.horarios.index') }}" class="btn btn-neutro">
-                <i class="fa-solid fa-arrow-left"></i> Volver
+            <a href="{{ route('admin.academico.horarios.index') }}"
+               class="btn btn-neutro btn-sm">
+                <i class="fa-solid fa-arrow-left"></i> Horarios
             </a>
         </div>
     </div>
 
-    @if($errors->has('choque'))
+    {{-- ── Error de choque ── --}}
+    @error('choque')
         <div class="alerta-error">
             <i class="fa-solid fa-triangle-exclamation"></i>
-            {{ $errors->first('choque') }}
+            {{ $message }}
         </div>
-    @endif
+    @enderror
 
-    {{-- Leyenda de pausas --}}
+    {{-- ── Leyenda de pausas ── --}}
     <div class="leyenda-pausas">
         <span><i class="fa-solid fa-mug-hot"></i> Refrigerio: 9:00 – 9:30</span>
         <span><i class="fa-solid fa-utensils"></i> Almuerzo: 11:30 – 13:00</span>
     </div>
 
-    {{-- Cuadrícula semanal --}}
+    {{-- ── Cuadrícula semanal ── --}}
     <div class="cuadricula-contenedor">
         <table class="cuadricula">
             <thead>
@@ -57,7 +63,7 @@
             </thead>
             <tbody>
                 @foreach(\App\Models\Horario::BLOQUES as $num => $info)
-                    {{-- Separador de pausa antes del bloque 3 y 5 --}}
+
                     @if($num === 3)
                         <tr class="fila-pausa">
                             <td colspan="7">
@@ -95,11 +101,13 @@
                                             {{ optional($celda['asignacion']->docente)->nombre_completo ?? '—' }}
                                         </span>
                                         <form method="POST"
-                                              action="{{ route('admin.horarios.destroy', $celda['horario']->id) }}"
+                                              action="{{ route('admin.academico.horarios.destroy', $celda['horario']->id) }}"
                                               class="form-eliminar-franja"
                                               data-nombre="{{ optional($celda['asignacion']->materia)->nombre }}">
                                             @csrf @method('DELETE')
-                                            <button type="submit" class="btn-eliminar-franja" title="Quitar franja">
+                                            <button type="submit"
+                                                    class="btn-eliminar-franja"
+                                                    title="Quitar franja">
                                                 <i class="fa-solid fa-xmark"></i>
                                             </button>
                                         </form>
@@ -110,12 +118,13 @@
                             </td>
                         @endforeach
                     </tr>
+
                 @endforeach
             </tbody>
         </table>
     </div>
 
-    {{-- Resumen de asignaciones sin horario completo --}}
+    {{-- ── Resumen de asignaciones ── --}}
     @if($asignaciones->isNotEmpty())
         <div class="resumen-asignaciones">
             <h3 class="seccion-titulo">
@@ -151,6 +160,7 @@
     @endif
 
 </div>
+
 @endsection
 
 @push('scripts')
