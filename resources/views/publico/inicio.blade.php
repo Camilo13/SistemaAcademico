@@ -20,7 +20,6 @@
                      style="background-image: url('{{ Storage::url($imagen->imagen) }}')">
                 </div>
             @empty
-                {{-- Imagen de respaldo si no hay registros en el carrusel --}}
                 <div class="slide-hero activo"
                      style="background-image: url('{{ asset('img/inicio/hero.webp') }}')">
                 </div>
@@ -32,8 +31,9 @@
 
         {{-- Texto sobre la imagen --}}
         <div class="contenedor-hero">
-            <h1>Bienvenidos a la I.E. Agroambiental Akwe Uus Yat La Gaitana</h1>
-            <p>Educamos con raíces culturales, saberes ancestrales y compromiso ambiental.</p>
+            <h1>Bienvenidos a la I.E. Agroambiental<br>Akwe Uus Yat La Gaitana</h1>
+            <p>Formamos líderes comunitarios en defensa del territorio,<br>
+               la identidad cultural y los derechos de nuestro pueblo.</p>
         </div>
 
     </section>
@@ -48,20 +48,25 @@
                 <div class="mision-card">
                     <h2>Nuestra Misión</h2>
                     <p>
-                        Somos una institución educativa de carácter étnico agroambiental que
-                        <strong>desarrolla procesos pedagógicos propios</strong>, fortaleciendo la identidad cultural,
-                        la lengua, la autonomía y la participación comunitaria. Formamos
-                        <strong>seres humanos integrales</strong> con pensamiento crítico, capaces de contribuir a la
-                        construcción de un proyecto de vida digno en armonía con la Madre Tierra.
+                        La Institución Educativa Agroambiental A´Kwe Úus Yat del Resguardo
+                        Indígena La Gaitana <strong>orienta y forma estudiantes con espíritu de
+                        liderazgo comunitario</strong>, en defensa del territorio y de la identidad
+                        cultural, fundamentada en el marco de la reivindicación del derecho mayor
+                        y de los derechos fundamentales que <strong>guíen el camino de nuestras
+                        futuras generaciones</strong>.
                     </p>
                 </div>
 
                 <div class="vision-card">
                     <h2>Nuestra Visión</h2>
                     <p>
-                        Para el año 2028, seremos reconocida como una institución educativa étnica
-                        agroambiental <strong>líder en la formación integral</strong>, basada en el rescate de los
-                        saberes ancestrales, el cuidado del territorio y la excelencia académica.
+                        En nuestro proceso de formación pretendemos la
+                        <strong>consolidación de una educación propia de calidad</strong>, en el
+                        marco del desarrollo del SEIP, acorde a las necesidades del contexto
+                        basado en el querer de la Nasa Wala <em>"asamblea"</em>, formando
+                        personas competentes e íntegras que fortalezcan la defensa de
+                        <em>uma kiwe</em> <strong>"territorio"</strong> y la pervivencia de
+                        nuestro pueblo.
                     </p>
                 </div>
 
@@ -75,7 +80,7 @@
     <section class="seccion-nuestra-esencia">
         <div class="contenedor-inicio">
 
-            <h2 class="titulo-seccion-central">Nuestra Esencia: Corazón y Legado</h2>
+            <h2 class="titulo-seccion-central">Raíces Vivas, Futuro Propio</h2>
 
             <div class="contenido-esencia">
 
@@ -87,10 +92,19 @@
 
                 <div class="texto-esencia">
                     <p>
-                        Nuestra esencia radica en el tejido profundo de la cultura ancestral con
-                        el saber agroambiental. Promovemos un vínculo respetuoso con la tierra y
-                        las <strong>tradiciones que nos definen</strong>, formando ciudadanos conscientes,
-                        responsables y comprometidos con su territorio.
+                        Nacida de la decisión soberana del Resguardo Indígena La Gaitana,
+                        nuestra institución lleva el nombre <strong>Akwe Uus Yat</strong>,
+                        dado por mayores y hablantes de Nasayuwe tras un proceso de
+                        consulta comunitaria. Somos el resultado de años de resistencia,
+                        organización y lucha por el <strong>derecho a una educación propia</strong>
+                        que respete la lengua, el territorio y la cultura Nasa.
+                    </p>
+                    <p>
+                        Desde la vereda El Lago del Resguardo La Gaitana, en el municipio
+                        de Inzá, Cauca, formamos estudiantes de básica primaria, secundaria
+                        y media técnica con un currículo que integra el
+                        <strong>conocimiento ancestral y científico</strong>, el cuidado
+                        de la Madre Tierra y el desarrollo de la capacidad crítica e investigativa.
                     </p>
                 </div>
 

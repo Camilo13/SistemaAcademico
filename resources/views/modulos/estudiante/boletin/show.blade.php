@@ -72,14 +72,14 @@
                 <strong>{{ $boletin['total_materias'] }}</strong>
             </div>
         </div>
-        <div class="resumen-card aprobado">
+        <div class="resumen-card aprobadas">
             <i class="fa-solid fa-circle-check"></i>
             <div>
                 <span>Aprobadas</span>
                 <strong>{{ $boletin['materias_aprobadas'] }}</strong>
             </div>
         </div>
-        <div class="resumen-card reprobado">
+        <div class="resumen-card reprobadas">
             <i class="fa-solid fa-circle-xmark"></i>
             <div>
                 <span>Reprobadas</span>
@@ -90,7 +90,7 @@
 
     {{-- Tabla de materias --}}
     <div class="tabla-contenedor">
-        <table class="tabla tabla-boletin">
+        <table class="tabla">
             <thead>
                 <tr>
                     <th>Materia</th>
