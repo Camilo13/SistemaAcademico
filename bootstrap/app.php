@@ -11,12 +11,15 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
+        // Trust Railway proxy
+        $middleware->trustProxies(at: '*');
+
         // Aquí defines alias de middleware personalizados
         $middleware->alias([
-            'rol' => \App\Http\Middleware\VerificarRol::class, // 👈 tu middleware de roles
+            'rol' => \App\Http\Middleware\VerificarRol::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
-        // Aquí puedes manejar errores globales si lo deseas
+        //
     })
-    ->create(); // 👈 El create SIEMPRE va al final
+    ->create();
