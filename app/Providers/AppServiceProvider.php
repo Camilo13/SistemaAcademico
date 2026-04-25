@@ -2,24 +2,17 @@
 
 namespace App\Providers;
 
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Route;
-use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
+use Illuminate\Support\ServiceProvider;
 
-/*
-|--------------------------------------------------------------------------
-| Proveedor de servicios de rutas
-|--------------------------------------------------------------------------
-| Define la lógica de redirección después del login
-*/
-
-class RouteServiceProvider extends ServiceProvider
+class AppServiceProvider extends ServiceProvider
 {
-    /**
-     * Redirección después de la autenticación
-     */
-    public static function home(): string
+    public function register(): void
     {
-        // Verifica que el usuario esté autenticado
+        //
+    }
+
+    public function boot(): void
+    {
+        //
     }
 }
