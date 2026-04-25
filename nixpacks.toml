@@ -1,9 +1,6 @@
 [phases.build]
 cmds = [
     "composer install --no-dev --optimize-autoloader",
-    "php artisan storage:link",
-    "php artisan migrate:fresh --force",
-    "php artisan db:seed --class=UserSeeder --force",
     "php artisan config:cache",
     "php artisan route:cache",
     "php artisan view:cache"
