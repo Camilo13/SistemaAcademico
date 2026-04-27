@@ -161,98 +161,12 @@
 }
 
 /* ── Fila reprobada (suave) ── */
-.fila-reprobada td,
-.fila-alerta td {
+.fila-reprobada td {
     background: #fff7f7;
 }
 
 /* ── Celda centrada ── */
 .col-centrado { text-align: center !important; }
-
-/* ══════════════════════════════════════════════════════════
-   ALIASES — clases usadas en docente/boletin/show.blade.php
-   Apuntan al mismo estilo que los originales del admin.
-   ══════════════════════════════════════════════════════════ */
-
-/* .ficha-estudiante = alias de .boletin-ficha */
-.ficha-estudiante {
-    display      : flex;
-    flex-wrap    : wrap;
-    gap          : 0.4rem 2rem;
-    padding      : 0.8rem 1.1rem;
-    background   : var(--fondo-tarjeta);
-    border       : 1px solid var(--borde-color);
-    border-radius: var(--radio-md);
-    box-shadow   : var(--sombra-sm);
-}
-
-/* .ficha-dato = alias de .boletin-ficha-item */
-.ficha-dato {
-    display       : flex;
-    flex-direction: column;
-    gap           : 0.1rem;
-}
-.ficha-dato > span {
-    font-size  : var(--texto-xs);
-    color      : var(--color-texto-tenue);
-    line-height: 1.2;
-    display    : flex;
-    align-items: center;
-    gap        : 0.3rem;
-}
-.ficha-dato strong {
-    font-size  : var(--texto-sm);
-    font-weight: var(--peso-semibold);
-    color      : var(--color-texto-subtitulo);
-}
-
-/* .resumen-boletin = alias de .boletin-resumen */
-.resumen-boletin {
-    display              : grid;
-    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-    gap                  : 0.75rem;
-}
-
-/* .resumen-card = alias de .boletin-res-card */
-.resumen-card {
-    display      : flex;
-    align-items  : center;
-    gap          : 0.75rem;
-    padding      : 0.9rem 1rem;
-    background   : var(--fondo-tarjeta);
-    border       : 1px solid var(--borde-color);
-    border-radius: var(--radio-md);
-    box-shadow   : var(--sombra-sm);
-}
-.resumen-card > i {
-    font-size  : 1.4rem;
-    color      : var(--color-texto-tenue);
-    flex-shrink: 0;
-}
-.resumen-card > div {
-    display       : flex;
-    flex-direction: column;
-    gap           : 0.1rem;
-}
-.resumen-card span   { font-size: var(--texto-xs); color: var(--color-texto-tenue); }
-.resumen-card strong { font-size: var(--texto-base); font-weight: var(--peso-bold); color: var(--color-texto-subtitulo); }
-
-.resumen-card.aprobado  { background: #d1fae5; border-color: #6ee7b7; }
-.resumen-card.aprobado  > i,
-.resumen-card.aprobado  strong { color: #065f46; }
-.resumen-card.reprobado { background: #fee2e2; border-color: #fca5a5; }
-.resumen-card.reprobado > i,
-.resumen-card.reprobado strong { color: #991b1b; }
-.resumen-card.aprobadas > i    { color: #10b981; }
-.resumen-card.reprobadas > i   { color: #ef4444; }
-
-/* .tabla-boletin — cabecera verde institucional */
-.tabla-boletin thead tr  { background: #065f46; }
-.tabla-boletin thead th  { color: #ffffff; }
-
-/* badges resultado */
-.badge-aprobada  { background: #d1fae5; color: #065f46; }
-.badge-reprobada { background: #fee2e2; color: #991b1b; }
 
 /* ── Responsive ── */
 @media (max-width: 768px) {

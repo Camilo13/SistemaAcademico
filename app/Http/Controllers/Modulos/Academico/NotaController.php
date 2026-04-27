@@ -115,7 +115,7 @@ class NotaController extends Controller
     | edit
     |----------------------------------------------------------------------
     */
-    public function edit(Nota $nota)
+    public function edit(InscripcionMateria $inscripcionMateria, Nota $nota)
     {
         return view(
             'modulos.academico.nota.edit',
@@ -128,7 +128,7 @@ class NotaController extends Controller
     | update
     |----------------------------------------------------------------------
     */
-    public function update(Request $request, Nota $nota)
+    public function update(Request $request, InscripcionMateria $inscripcionMateria, Nota $nota)
     {
         $validated = $request->validate([
             'nota'        => ['required', 'numeric', 'decimal:0,2', 'min:0', 'max:5'],
@@ -170,7 +170,7 @@ class NotaController extends Controller
     | destroy
     |----------------------------------------------------------------------
     */
-    public function destroy(Nota $nota)
+    public function destroy(InscripcionMateria $inscripcionMateria, Nota $nota)
     {
         // Pre-check: no eliminar si el periodo está cerrado
         if ($nota->periodo && $nota->periodo->estaCerrado()) {

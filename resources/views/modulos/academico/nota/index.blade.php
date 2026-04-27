@@ -126,7 +126,7 @@
 
                         <td class="col-acciones">
                             <div class="acciones">
-                                <a href="{{ route('admin.academico.notas.edit', $nota->id) }}"
+                                <a href="{{ route('admin.academico.notas.edit', [$nota->inscripcion_materia_id, $nota->id]) }}"
                                    class="btn-icono editar"
                                    title="Editar nota">
                                     <i class="fa-solid fa-pen"></i>

@@ -64,7 +64,7 @@
         @endif
 
         <form method="POST"
-              action="{{ route('admin.academico.notas.update', $nota->id) }}"
+              action="{{ route('admin.academico.notas.update', [$nota->inscripcion_materia_id, $nota->id]) }}"
               data-form="nota">
             @csrf @method('PUT')
 
@@ -168,7 +168,7 @@
 
         <div class="acciones-secundarias">
             <form method="POST"
-                  action="{{ route('admin.academico.notas.destroy', $nota->id) }}"
+                  action="{{ route('admin.academico.notas.destroy', [$nota->inscripcion_materia_id, $nota->id]) }}"
                   class="form-eliminar"
                   data-nombre="Nota {{ optional($nota->periodo)->nombre }} — {{ number_format($valActual, 1) }}">
                 @csrf @method('DELETE')
