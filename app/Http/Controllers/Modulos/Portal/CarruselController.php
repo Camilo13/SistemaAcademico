@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
+use Intervention\Image\Laravel\Facades\Image;
 use Throwable;
 
 /*
@@ -74,11 +75,17 @@ class CarruselController extends Controller
 
             DB::transaction(function () use ($request, $validated) {
 
-                $ruta = $request->file('imagen')
-                    ->store('carrusel/inicio', 'public');
+                $filename = 'carrusel/inicio/' . uniqid() . '.jpg';
+
+                Storage::disk('public')->put(
+                    $filename,
+                    Image::read($request->file('imagen'))
+                        ->cover(1200, 400)
+                        ->toJpeg(80)
+                );
 
                 CarruselInicio::create([
-                    'imagen' => $ruta,
+                    'imagen' => $filename,
                     'orden'  => $validated['orden'] ?? 0,
                     'activo' => $request->boolean('activo', true),
                 ]);
@@ -147,8 +154,16 @@ class CarruselController extends Controller
                         Storage::disk('public')->delete($carrusel->imagen);
                     }
 
-                    $data['imagen'] = $request->file('imagen')
-                        ->store('carrusel/inicio', 'public');
+                    $filename = 'carrusel/inicio/' . uniqid() . '.jpg';
+
+                    Storage::disk('public')->put(
+                        $filename,
+                        Image::read($request->file('imagen'))
+                            ->cover(1200, 400)
+                            ->toJpeg(80)
+                    );
+
+                    $data['imagen'] = $filename;
                 }
 
                 $carrusel->update($data);

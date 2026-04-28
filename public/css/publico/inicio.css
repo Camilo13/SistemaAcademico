@@ -267,8 +267,18 @@
     .seccion-mision-vision,
     .seccion-nuestra-esencia { padding: 56px 1rem; }
 
+    .mision-vision-grid {
+        grid-template-columns: 1fr;
+        text-align: center;
+        margin: 0 auto;
+    }
+
     .mision-card,
-    .vision-card { padding: 1.8rem 1.4rem; }
+    .vision-card {
+        padding: 1.8rem 1.4rem;
+        margin: 0 auto;
+        width: 100%;
+    }
 
     /* En móvil el carrusel usa contain para no recortar fotos verticales */
     .slide-hero {

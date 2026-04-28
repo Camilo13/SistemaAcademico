@@ -41,12 +41,12 @@
             </div>
 
             <div class="login-botones">
-                <a href="{{ route('inicio') }}" class="login-btn login-btn--neutro">
-                    Atrás
-                </a>
                 <button type="submit" class="login-btn login-btn--primario">
                     Ingresar
                 </button>
+                <a href="{{ route('inicio') }}" class="login-btn login-btn--neutro">
+                    Atrás
+                </a>
             </div>
 
         </form>
