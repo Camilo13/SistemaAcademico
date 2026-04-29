@@ -8,8 +8,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
-use Intervention\Image\Drivers\Imagick\Driver as ImagickDriver;
-use Intervention\Image\ImageManager;
 use Throwable;
 
 /*
@@ -78,12 +76,7 @@ class CarruselController extends Controller
 
                 $filename = 'carrusel/inicio/' . uniqid() . '.jpg';
 
-                $encoded = (new ImageManager(new ImagickDriver()))
-                    ->read($request->file('imagen')->getRealPath())
-                    ->cover(1200, 600)
-                    ->toJpeg(80);
-
-                Storage::disk('public')->put($filename, (string) $encoded);
+                $request->file('imagen')->storeAs('carrusel/inicio', basename($filename), 'public');
 
                 CarruselInicio::create([
                     'imagen' => $filename,
@@ -159,12 +152,7 @@ class CarruselController extends Controller
 
                     $filename = 'carrusel/inicio/' . uniqid() . '.jpg';
 
-                    $encoded = (new ImageManager(new ImagickDriver()))
-                        ->read($request->file('imagen')->getRealPath())
-                        ->cover(1200, 600)
-                        ->toJpeg(80);
-
-                    Storage::disk('public')->put($filename, (string) $encoded);
+                    $request->file('imagen')->storeAs('carrusel/inicio', basename($filename), 'public');
 
                     $data['imagen'] = $filename;
                 }
