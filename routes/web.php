@@ -64,7 +64,6 @@ use App\Http\Controllers\Modulos\Estudiante\HorarioEstudianteController;
 // ── Docente ───────────────────────────────────────────────────────────────
 use App\Http\Controllers\Modulos\Docente\MisGruposController;
 use App\Http\Controllers\Modulos\Docente\NotaDocenteController;
-use App\Http\Controllers\Modulos\Docente\BoletinDocenteController;
 use App\Http\Controllers\Modulos\Docente\ResumenGrupoController;
 
 // ── Estudiante ────────────────────────────────────────────────────────────
@@ -220,8 +219,6 @@ Route::middleware(['auth', 'rol:docente,estudiante'])
         Route::get('materias/{materia}/recursos', [LecturaRecursoController::class, 'index'])
             ->name('materias.recursos.index');
 
-        Route::view('buscar', 'biblioteca.busqueda.index')
-            ->name('busqueda');
     });
 
 /*
@@ -374,8 +371,8 @@ Route::middleware(['auth', 'rol:administrador'])
             ->group(function () {
 
                 Route::resource('materias', MateriaController::class);
-                Route::post('materias/{materia}/activar', [MateriaController::class, 'activar'])->name('materias.activar');
-                Route::post('materias/{materia}/desactivar', [MateriaController::class, 'desactivar'])->name('materias.desactivar');
+                Route::patch('materias/{materia}/activar', [MateriaController::class, 'activar'])->name('materias.activar');
+                Route::patch('materias/{materia}/desactivar', [MateriaController::class, 'desactivar'])->name('materias.desactivar');
             });
 
         /*
@@ -560,14 +557,6 @@ Route::middleware(['auth', 'rol:docente'])
         | BOLETÍN — DOCENTE (solo lectura, solo sus grupos)
         |----------------------------------------------------------------------
         */
-        Route::controller(BoletinDocenteController::class)
-            ->prefix('boletin')
-            ->name('boletin.')
-            ->group(function () {
-
-                Route::get('/{inscripcion}', 'show')->name('show');
-            });
-
         /*
         |----------------------------------------------------------------------
         | RESUMEN DE GRUPO — DOCENTE (todos los estudiantes del grupo)
