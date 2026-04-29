@@ -1,4 +1,9 @@
 # Configuracion de build para Railway - Laravel 12
+
+# Extensiones PHP adicionales (GD requerida por intervention/image)
+[phases.setup]
+nixPkgs = ["php82Extensions.gd"]
+
 [phases.build]
 cmds = [
     "composer install --no-dev --optimize-autoloader",
