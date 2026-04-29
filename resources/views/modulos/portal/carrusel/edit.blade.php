@@ -76,6 +76,12 @@
                             <i class="fa-solid fa-circle-exclamation"></i> {{ $message }}
                         </span>
                     @enderror
+                    <div class="nota-ayuda">
+                        <i class="fa-solid fa-circle-info"></i>
+                        Para que la imagen se vea bien en el carrusel, sube una foto tomada en modo horizontal.
+                        Las fotos tomadas en modo vertical desde el celular pueden aparecer cortadas.
+                        El tamaño ideal es de <strong>1200 × 600 píxeles</strong>.
+                    </div>
                 </div>
 
                 {{-- Orden ── --}}

@@ -32,16 +32,23 @@
    ============================================================ */
 .hero {
     position        : relative;
-    min-height      : 560px;
+    height          : calc(100vh - 72px);
+    min-height      : calc(100vh - 72px);
     display         : flex;
     justify-content : center;
     align-items     : center;
     text-align      : center;
     overflow        : hidden;
+    background-color: #f8f9fa;
+
+    /* Escapa el padding: 2rem 1.5rem del <main> de menupublico.css */
+    margin  : -2rem -1.5rem 0;
+    padding : 0;
+    width   : calc(100% + 3rem);
 }
 
-/* Overlay oscuro sobre las imágenes */
-.hero::before {
+/* Overlay oscuro — solo cuando hay un slide activo */
+.hero:has(.slide-hero.activo)::before {
     content   : '';
     position  : absolute;
     inset     : 0;
@@ -64,6 +71,7 @@
 .slide-hero {
     position           : absolute;
     inset              : 0;
+    background-color   : #f8f9fa;
     background-size    : cover;
     background-position: center;
     background-repeat  : no-repeat;
@@ -100,6 +108,56 @@
     margin     : 0 auto;
 }
 
+/* ── Flecha de scroll ── */
+.scroll-indicador {
+    position  : absolute;
+    bottom    : 3.6rem;
+    left      : 50%;
+    transform : translateX(-50%);
+    z-index   : 3;
+    color     : rgba(255, 255, 255, 0.8);
+    font-size : 1.5rem;
+    cursor    : pointer;
+    animation : scroll-bounce 2.4s ease-in-out infinite;
+    transition: color 0.2s ease;
+}
+.scroll-indicador:hover { color: #ffffff; }
+
+@keyframes scroll-bounce {
+    0%, 100% { transform: translateX(-50%) translateY(0);   opacity: 1;   }
+    55%       { transform: translateX(-50%) translateY(9px); opacity: 0.6; }
+}
+
+/* ── Animaciones hero (fade-in + slide-up al cargar) ── */
+@keyframes fade-slide-up {
+    from { opacity: 0; transform: translateY(28px); }
+    to   { opacity: 1; transform: translateY(0);    }
+}
+
+.hero-titulo {
+    animation: fade-slide-up 0.75s ease-out 0.2s both;
+}
+
+.hero-subtitulo {
+    animation: fade-slide-up 0.75s ease-out 0.48s both;
+}
+
+/* ── Tarjetas Misión/Visión — estado inicial para IntersectionObserver ── */
+.mv-animado {
+    opacity   : 0;
+    transform : translateY(36px);
+    transition: opacity 0.65s ease, transform 0.65s ease;
+}
+
+.mv-animado.visible {
+    opacity  : 1;
+    transform: translateY(0);
+}
+
+.mv-animado:nth-child(2) {
+    transition-delay: 0.16s;
+}
+
 /* ── Indicadores del carrusel ── */
 .carrusel-indicadores {
     position       : absolute;
@@ -118,7 +176,7 @@
     background   : rgba(255, 255, 255, 0.45);
     border       : none;
     cursor       : pointer;
-    transition   : background 0.3s ease, transform 0.3s ease;
+    transition   : background 0.5s ease, transform 0.4s ease;
     padding      : 0;
 }
 
@@ -256,7 +314,10 @@
 }
 
 @media (max-width: 768px) {
-    .hero { min-height: 440px; }
+    .hero {
+        height    : calc(100vh - 64px);
+        min-height: calc(100vh - 64px);
+    }
 
     .contenedor-hero h1 {
         font-size: 1.9rem;
@@ -282,16 +343,19 @@
 
     /* En móvil el carrusel usa contain para no recortar fotos verticales */
     .slide-hero {
-        background-size    : contain;
+        background-size    : cover;
         background-position: center top;
-        background-color   : #000;
+        background-color   : #ffffff;
     }
 }
 
 @media (max-width: 480px) {
     .contenedor-hero h1  { font-size: 1.55rem; }
     .contenedor-hero p   { font-size: 0.95rem; }
-    .hero                { min-height: 360px; }
+    .hero {
+        height    : calc(100vh - 56px);
+        min-height: calc(100vh - 56px);
+    }
     .mision-card h2,
     .vision-card h2      { font-size: 1.35rem; }
 }

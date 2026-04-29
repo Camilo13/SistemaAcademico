@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     /* ── Avanzar automáticamente ── */
     function iniciarIntervalo() {
-        intervalo = setInterval(() => irA(indice + 1), 3000);
+        intervalo = setInterval(() => irA(indice + 1), 2000);
     }
 
     function detenerIntervalo() {
@@ -60,10 +60,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
     iniciarIntervalo();
 
-    /* ── Pausa al pasar el cursor ── */
-    const hero = document.querySelector('.hero');
-    if (hero) {
-        hero.addEventListener('mouseenter', detenerIntervalo);
-        hero.addEventListener('mouseleave', iniciarIntervalo);
+    /* ── IntersectionObserver: tarjetas Misión y Visión ── */
+    const mvCards = document.querySelectorAll('.mv-animado');
+    if (mvCards.length > 0) {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.15 });
+
+        mvCards.forEach(card => observer.observe(card));
     }
 });

@@ -179,6 +179,22 @@
 /* Texto de ayuda */
 .nota-campo { font-size: var(--texto-xs); color: var(--color-texto-secundario); }
 
+/* Nota de ayuda informativa con ícono */
+.nota-ayuda {
+    display        : flex;
+    align-items    : flex-start;
+    gap            : 0.5rem;
+    margin-top     : 0.6rem;
+    padding        : 0.65rem 0.9rem;
+    background     : #f0fdf4;
+    border         : 1px solid #a7f3d0;
+    border-radius  : var(--radio-md);
+    font-size      : var(--texto-xs);
+    color          : #065f46;
+    line-height    : 1.5;
+}
+.nota-ayuda i { margin-top: 0.1rem; flex-shrink: 0; }
+
 /* Nota de unicidad */
 .nota-unicidad {
     font-size   : var(--texto-xs);

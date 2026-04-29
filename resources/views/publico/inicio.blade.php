@@ -26,13 +26,18 @@
             @endforelse
         </div>
 
+        {{-- Flecha de scroll ── --}}
+        <div class="scroll-indicador" aria-hidden="true">
+            <i class="fas fa-chevron-down"></i>
+        </div>
+
         {{-- Indicadores del carrusel (se generan por JS) --}}
         <div class="carrusel-indicadores" id="carrusel-indicadores"></div>
 
         {{-- Texto sobre la imagen --}}
         <div class="contenedor-hero">
-            <h1>Bienvenidos a la I.E. Agroambiental<br>Akwe Uus Yat La Gaitana</h1>
-            <p>Formamos líderes comunitarios en defensa del territorio,<br>
+            <h1 class="hero-titulo">Bienvenidos a la I.E. Agroambiental<br>Akwe Uus Yat La Gaitana</h1>
+            <p class="hero-subtitulo">Formamos líderes comunitarios en defensa del territorio,<br>
                la identidad cultural y los derechos de nuestro pueblo.</p>
         </div>
 
@@ -45,7 +50,7 @@
         <div class="contenedor-inicio">
             <div class="mision-vision-grid">
 
-                <div class="mision-card">
+                <div class="mision-card mv-animado">
                     <h2>Nuestra Misión</h2>
                     <p>
                         La Institución Educativa Agroambiental A´Kwe Úus Yat del Resguardo
@@ -57,7 +62,7 @@
                     </p>
                 </div>
 
-                <div class="vision-card">
+                <div class="vision-card mv-animado">
                     <h2>Nuestra Visión</h2>
                     <p>
                         En nuestro proceso de formación pretendemos la

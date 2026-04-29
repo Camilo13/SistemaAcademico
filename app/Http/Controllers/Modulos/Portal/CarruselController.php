@@ -80,7 +80,7 @@ class CarruselController extends Controller
 
                 $encoded = (new ImageManager(new GdDriver()))
                     ->read($request->file('imagen')->getRealPath())
-                    ->cover(1200, 400)
+                    ->cover(1200, 600)
                     ->toJpeg(80);
 
                 Storage::disk('public')->put($filename, (string) $encoded);
@@ -159,7 +159,7 @@ class CarruselController extends Controller
 
                     $encoded = (new ImageManager(new GdDriver()))
                         ->read($request->file('imagen')->getRealPath())
-                        ->cover(1200, 400)
+                        ->cover(1200, 600)
                         ->toJpeg(80);
 
                     Storage::disk('public')->put($filename, (string) $encoded);
