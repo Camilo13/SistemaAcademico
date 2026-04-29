@@ -8,7 +8,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
-use Intervention\Image\Laravel\Facades\Image;
+use Intervention\Image\Drivers\Gd\Driver as GdDriver;
+use Intervention\Image\ImageManager;
 use Throwable;
 
 /*
@@ -77,12 +78,12 @@ class CarruselController extends Controller
 
                 $filename = 'carrusel/inicio/' . uniqid() . '.jpg';
 
-                Storage::disk('public')->put(
-                    $filename,
-                    Image::read($request->file('imagen'))
-                        ->cover(1200, 400)
-                        ->toJpeg(80)
-                );
+                $encoded = (new ImageManager(new GdDriver()))
+                    ->read($request->file('imagen')->getRealPath())
+                    ->cover(1200, 400)
+                    ->toJpeg(80);
+
+                Storage::disk('public')->put($filename, (string) $encoded);
 
                 CarruselInicio::create([
                     'imagen' => $filename,
@@ -156,12 +157,12 @@ class CarruselController extends Controller
 
                     $filename = 'carrusel/inicio/' . uniqid() . '.jpg';
 
-                    Storage::disk('public')->put(
-                        $filename,
-                        Image::read($request->file('imagen'))
-                            ->cover(1200, 400)
-                            ->toJpeg(80)
-                    );
+                    $encoded = (new ImageManager(new GdDriver()))
+                        ->read($request->file('imagen')->getRealPath())
+                        ->cover(1200, 400)
+                        ->toJpeg(80);
+
+                    Storage::disk('public')->put($filename, (string) $encoded);
 
                     $data['imagen'] = $filename;
                 }
@@ -226,18 +227,17 @@ class CarruselController extends Controller
     */
     public function destroy(CarruselInicio $carrusel)
     {
+        $rutaImagen = $carrusel->imagen;
+
         try {
 
-            DB::transaction(function () use ($carrusel) {
+            // Primero confirmar el delete en BD; si falla, el archivo no se toca
+            DB::transaction(fn () => $carrusel->delete());
 
-                // Eliminar archivo físico dentro de la transacción
-                if ($carrusel->imagen &&
-                    Storage::disk('public')->exists($carrusel->imagen)) {
-                    Storage::disk('public')->delete($carrusel->imagen);
-                }
-
-                $carrusel->delete();
-            });
+            // Solo borrar el archivo físico tras confirmar la transacción
+            if ($rutaImagen && Storage::disk('public')->exists($rutaImagen)) {
+                Storage::disk('public')->delete($rutaImagen);
+            }
 
             return redirect()
                 ->route('admin.carrusel.index')
