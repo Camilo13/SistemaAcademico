@@ -98,6 +98,8 @@ class CarruselController extends Controller
 
         } catch (Throwable $e) {
 
+            \Log::error('CarruselController@store error: ' . $e->getMessage() . ' | ' . $e->getFile() . ':' . $e->getLine());
+
             return back()
                 ->withErrors(['error_carrusel' => 'Ocurrió un error al guardar la imagen.'])
                 ->withInput();
