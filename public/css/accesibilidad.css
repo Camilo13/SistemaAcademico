@@ -513,3 +513,13 @@ html.modo-oscuro .nav-links li a:hover {
     background : #2a4a3e;
     color      : #e0e0e0;
 }
+
+/* ── Chips de resumen: superficie, borde e hijos tipográficos ── */
+html.modo-oscuro .resumen-chip {
+    background-color : #1a2c26;
+    border-color     : #2a4a3e;
+}
+
+html.modo-oscuro .resumen-chip span  { color: #e0e0e0; }  /* número principal */
+html.modo-oscuro .resumen-chip label { color: #94a3b8; }  /* etiqueta secundaria */
+html.modo-oscuro .resumen-chip i     { color: #81c784; }  /* icono decorativo */
