@@ -1,0 +1,342 @@
+/* ═══════════════════════════════════════════════════════════
+   accesibilidad.css
+   Widget flotante: modo oscuro + tamaño de fuente.
+   Las variables de tema se definen aquí y son el único
+   mecanismo de color — nunca estilos inline.
+═══════════════════════════════════════════════════════════ */
+
+/* ── Variables de paleta (invariables entre temas) ────── */
+:root {
+    --acc-verde-principal : #065f46;
+    --acc-verde-medio     : #166534;
+    --acc-verde-claro     : #22c55e;
+    --acc-verde-boton     : #16a34a;
+
+    /* Superficies — modo claro */
+    --acc-bg-page         : #f3f4f6;
+    --acc-bg-content      : #ffffff;
+    --acc-bg-card         : #ffffff;
+    --acc-bg-aside        : #065f46;
+    --acc-bg-navbar       : #065f46;
+    --acc-bg-footer       : #065f46;
+    --acc-bg-table-th     : #f3f4f6;
+    --acc-bg-input        : #ffffff;
+
+    /* Texto — modo claro */
+    --acc-text            : #374151;
+    --acc-text-sec        : #6b7280;
+    --acc-text-inv        : #ffffff;
+
+    /* Bordes — modo claro */
+    --acc-border          : #e5e7eb;
+    --acc-border-med      : #d1d5db;
+}
+
+/* ── Override de variables en modo oscuro ────────────── */
+html.modo-oscuro {
+    --acc-bg-page         : #0a1a15;
+    --acc-bg-content      : #0e2219;
+    --acc-bg-card         : #15302a;
+    --acc-bg-aside        : #042f22;
+    --acc-bg-navbar       : #031a12;
+    --acc-bg-footer       : #031a12;
+    --acc-bg-table-th     : #0f2a20;
+    --acc-bg-input        : #15302a;
+    --acc-text            : #e2e8f0;
+    --acc-text-sec        : #94a3b8;
+    --acc-border          : #1f4535;
+    --acc-border-med      : #235c44;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   MODO OSCURO — elementos estructurales
+═══════════════════════════════════════════════════════════ */
+
+html.modo-oscuro body {
+    background-color : var(--acc-bg-page);
+    color            : var(--acc-text);
+}
+
+/* Contenido principal */
+html.modo-oscuro main,
+html.modo-oscuro .contenido {
+    background-color : var(--acc-bg-content);
+    color            : var(--acc-text);
+}
+
+/* Barra lateral (roles admin / docente / estudiante) */
+html.modo-oscuro .barra-lateral {
+    background-color : var(--acc-bg-aside);
+    border-right     : 1px solid var(--acc-border);
+}
+
+/* Navbar pública */
+html.modo-oscuro header nav,
+html.modo-oscuro nav.navbar {
+    background-color : var(--acc-bg-navbar);
+}
+
+html.modo-oscuro footer {
+    background-color : var(--acc-bg-footer);
+}
+
+/* ── Tarjetas y paneles ─────────────────────────────── */
+html.modo-oscuro .tarjeta-form,
+html.modo-oscuro .tarjeta-accion,
+html.modo-oscuro .tarjeta-peligro,
+html.modo-oscuro .panel-filtros,
+html.modo-oscuro .resumen-card {
+    background-color : var(--acc-bg-card);
+    color            : var(--acc-text);
+    border-color     : var(--acc-border);
+}
+
+/* ── Tablas ─────────────────────────────────────────── */
+html.modo-oscuro table {
+    background-color : var(--acc-bg-card);
+    color            : var(--acc-text);
+}
+
+html.modo-oscuro th {
+    background-color : var(--acc-bg-table-th);
+    color            : var(--acc-text);
+    border-color     : var(--acc-border);
+}
+
+html.modo-oscuro td {
+    color            : var(--acc-text);
+    border-color     : var(--acc-border);
+}
+
+html.modo-oscuro tr:hover td {
+    background-color : var(--acc-bg-table-th);
+}
+
+/* ── Formularios ────────────────────────────────────── */
+html.modo-oscuro input,
+html.modo-oscuro select,
+html.modo-oscuro textarea {
+    background-color : var(--acc-bg-input);
+    color            : var(--acc-text);
+    border-color     : var(--acc-border-med);
+}
+
+html.modo-oscuro input::placeholder,
+html.modo-oscuro textarea::placeholder {
+    color : var(--acc-text-sec);
+}
+
+/* ── Tipografía general ─────────────────────────────── */
+html.modo-oscuro h1,
+html.modo-oscuro h2,
+html.modo-oscuro h3,
+html.modo-oscuro h4,
+html.modo-oscuro h5,
+html.modo-oscuro p,
+html.modo-oscuro label,
+html.modo-oscuro span,
+html.modo-oscuro li {
+    color : var(--acc-text);
+}
+
+html.modo-oscuro small {
+    color : var(--acc-text-sec);
+}
+
+/* Links fuera de la barra lateral escalan a texto oscuro */
+html.modo-oscuro a:not(.boton-salir) {
+    color : var(--acc-text);
+}
+
+/* La barra lateral conserva texto blanco */
+html.modo-oscuro .barra-lateral a,
+html.modo-oscuro .barra-lateral button,
+html.modo-oscuro .barra-lateral .barra-logo {
+    color : var(--acc-text-inv);
+}
+
+/* ── Separadores ────────────────────────────────────── */
+html.modo-oscuro hr {
+    border-color : var(--acc-border);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   TAMAÑO DE FUENTE — tres niveles (pequeño / normal / grande)
+   Elementos con font-size en px heredarán si usan `em`;
+   los declarados en rem escalan automáticamente con html.
+═══════════════════════════════════════════════════════════ */
+html                 { font-size: 16px; }
+html.fuente-pequena  { font-size: 14px; }
+html.fuente-grande   { font-size: 19px; }
+
+/* Elementos de texto clave con override explícito en em */
+html.fuente-pequena p,
+html.fuente-pequena a,
+html.fuente-pequena td,
+html.fuente-pequena th,
+html.fuente-pequena label,
+html.fuente-pequena li,
+html.fuente-pequena span { font-size: 0.875em; }
+
+html.fuente-grande p,
+html.fuente-grande a,
+html.fuente-grande td,
+html.fuente-grande th,
+html.fuente-grande label,
+html.fuente-grande li,
+html.fuente-grande span  { font-size: 1.1875em; }
+
+/* ═══════════════════════════════════════════════════════════
+   WIDGET FLOTANTE — posicionamiento y estructura
+═══════════════════════════════════════════════════════════ */
+.acc-widget {
+    position        : fixed;
+    bottom          : 24px;
+    right           : 24px;
+    z-index         : 9999;
+    display         : flex;
+    flex-direction  : column;
+    align-items     : flex-end;
+    gap             : 10px;
+}
+
+/* ── Botón circular disparador ─────────────────────── */
+.acc-btn {
+    width            : 52px;
+    height           : 52px;
+    border-radius    : 50%;
+    border           : none;
+    background-color : var(--acc-verde-boton);
+    color            : #ffffff;
+    font-size        : 1.3rem;
+    cursor           : pointer;
+    display          : flex;
+    align-items      : center;
+    justify-content  : center;
+    box-shadow       : 0 4px 14px rgba(0, 0, 0, 0.25);
+    transition       : background-color 0.2s, transform 0.15s;
+    flex-shrink      : 0;
+}
+
+.acc-btn:hover            { background-color: var(--acc-verde-principal); transform: scale(1.08); }
+.acc-btn:focus-visible    { outline: 3px solid var(--acc-verde-claro); outline-offset: 3px; }
+
+/* ── Panel de opciones ─────────────────────────────── */
+.acc-panel {
+    background-color : #ffffff;
+    border           : 1px solid #e5e7eb;
+    border-radius    : 12px;
+    padding          : 16px;
+    box-shadow       : 0 8px 24px rgba(0, 0, 0, 0.15);
+    min-width        : 230px;
+    display          : flex;
+    flex-direction   : column;
+    gap              : 14px;
+    animation        : acc-aparecer 0.18s ease-out;
+}
+
+/* Panel en modo oscuro */
+html.modo-oscuro .acc-panel {
+    background-color : #15302a;
+    border-color     : #1f4535;
+}
+
+/* Animación de apertura ascendente */
+@keyframes acc-aparecer {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0);   }
+}
+
+/* Sin animación si el usuario prefiere movimiento reducido */
+@media (prefers-reduced-motion: reduce) {
+    .acc-panel { animation: none; }
+}
+
+/* ── Separador interno del panel ───────────────────── */
+.acc-separador {
+    border          : none;
+    border-top      : 1px solid #e5e7eb;
+    margin          : 0;
+}
+
+html.modo-oscuro .acc-separador { border-color: #1f4535; }
+
+/* ── Fila de opción ────────────────────────────────── */
+.acc-opcion {
+    display         : flex;
+    align-items     : center;
+    justify-content : space-between;
+    gap             : 12px;
+}
+
+/* ── Etiqueta de la opción ─────────────────────────── */
+.acc-etiqueta {
+    font-size   : 0.82rem;
+    font-weight : 600;
+    color       : #374151;
+    white-space : nowrap;
+}
+
+html.modo-oscuro .acc-etiqueta { color: #e2e8f0; }
+
+/* ── Botón toggle luna / sol ───────────────────────── */
+.acc-toggle {
+    width            : 36px;
+    height           : 36px;
+    border-radius    : 50%;
+    border           : 2px solid var(--acc-verde-boton);
+    background-color : transparent;
+    color            : var(--acc-verde-boton);
+    font-size        : 1rem;
+    cursor           : pointer;
+    display          : flex;
+    align-items      : center;
+    justify-content  : center;
+    transition       : background-color 0.2s, color 0.2s;
+    flex-shrink      : 0;
+}
+
+.acc-toggle:hover              { background-color: var(--acc-verde-boton); color: #ffffff; }
+html.modo-oscuro .acc-toggle   { background-color: var(--acc-verde-boton); color: #ffffff; }
+.acc-toggle:focus-visible      { outline: 3px solid var(--acc-verde-claro); outline-offset: 2px; }
+
+/* ── Grupo de botones A- A A+ ──────────────────────── */
+.acc-fuente-btns {
+    display : flex;
+    gap     : 4px;
+}
+
+.acc-fuente-btn {
+    padding          : 5px 9px;
+    border-radius    : 6px;
+    border           : 1.5px solid var(--acc-verde-boton);
+    background-color : transparent;
+    color            : var(--acc-verde-boton);
+    font-weight      : 700;
+    cursor           : pointer;
+    line-height      : 1;
+    transition       : background-color 0.15s, color 0.15s;
+}
+
+/* Tamaño visual diferenciado para cada botón */
+.acc-fuente-btn:nth-child(1) { font-size: 0.72rem; }
+.acc-fuente-btn:nth-child(2) { font-size: 0.88rem; }
+.acc-fuente-btn:nth-child(3) { font-size: 1.05rem; }
+
+.acc-fuente-btn:hover,
+.acc-fuente-btn.acc-fuente-activo { background-color: var(--acc-verde-boton); color: #ffffff; }
+.acc-fuente-btn:focus-visible      { outline: 3px solid var(--acc-verde-claro); outline-offset: 2px; }
+
+/* ═══════════════════════════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════════════════════════ */
+@media (max-width: 768px) {
+    .acc-widget       { bottom: 16px; right: 16px; }
+    .acc-btn          { width: 46px; height: 46px; font-size: 1.15rem; }
+    .acc-panel        { min-width: 200px; padding: 13px; }
+}
+
+@media (max-width: 480px) {
+    .acc-panel        { min-width: 176px; gap: 10px; }
+    .acc-etiqueta     { font-size: 0.78rem; }
+}

@@ -24,6 +24,8 @@
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
           crossorigin="anonymous" referrerpolicy="no-referrer">
 
+    <link rel="stylesheet" href="{{ asset('css/accesibilidad.css') }}">
+
     {{-- ── CSS específico de la vista activa ── --}}
     @stack('styles')
 </head>
@@ -160,5 +162,6 @@
     {{-- ── JS específico de la vista activa ── --}}
     @stack('scripts')
 
+    @include('components.accesibilidad')
 </body>
 </html>

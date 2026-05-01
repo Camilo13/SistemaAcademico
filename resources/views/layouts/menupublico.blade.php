@@ -13,6 +13,8 @@
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
           crossorigin="anonymous" referrerpolicy="no-referrer">
 
+    <link rel="stylesheet" href="{{ asset('css/accesibilidad.css') }}">
+
     {{-- ── CSS específico de cada página ── --}}
     @yield('styles')
 </head>
@@ -102,5 +104,6 @@
     {{-- ── JS específico de cada página ── --}}
     @yield('scripts')
 
+    @include('components.accesibilidad')
 </body>
 </html>
