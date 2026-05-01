@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+<script>!function(){var t=localStorage.getItem('acc_tema'),f=localStorage.getItem('acc_fuente');if(t==='oscuro')document.documentElement.classList.add('modo-oscuro');if(f&&f!=='normal')document.documentElement.classList.add('fuente-'+f);}();</script>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">

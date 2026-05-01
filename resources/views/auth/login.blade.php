@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="es">
+<script>!function(){var t=localStorage.getItem('acc_tema'),f=localStorage.getItem('acc_fuente');if(t==='oscuro')document.documentElement.classList.add('modo-oscuro');if(f&&f!=='normal')document.documentElement.classList.add('fuente-'+f);}();</script>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Iniciar sesión — Akwe Uus Yat</title>
     <link rel="stylesheet" href="{{ asset('css/auth/login.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/accesibilidad.css') }}">
 </head>
 <body>
 
@@ -71,5 +73,6 @@
 <script src="{{ asset('js/global/notificaciones.js') }}"></script>
 <script src="{{ asset('js/auth/login.js') }}"></script>
 
+    @include('components.accesibilidad')
 </body>
 </html>

@@ -11,8 +11,7 @@
     <div class="acc-panel"
          id="accPanel"
          role="region"
-         aria-label="Opciones de accesibilidad"
-         hidden>
+         aria-label="Opciones de accesibilidad">
 
         {{-- Control 1: alternar modo oscuro / claro --}}
         <div class="acc-opcion">
@@ -113,23 +112,23 @@
         /* Abrir / cerrar panel */
         btn.addEventListener('click', function (e) {
             e.stopPropagation();
-            var abrir   = panel.hidden;
-            panel.hidden = !abrir;
+            var abrir = !panel.classList.contains('acc-abierto');
+            panel.classList.toggle('acc-abierto', abrir);
             btn.setAttribute('aria-expanded', String(abrir));
         });
 
         /* Cerrar al hacer clic fuera del widget */
         document.addEventListener('click', function (e) {
             if (!widget.contains(e.target)) {
-                panel.hidden = true;
+                panel.classList.remove('acc-abierto');
                 btn.setAttribute('aria-expanded', 'false');
             }
         });
 
         /* Cerrar con tecla Escape */
         document.addEventListener('keydown', function (e) {
-            if (e.key === 'Escape' && !panel.hidden) {
-                panel.hidden = true;
+            if (e.key === 'Escape' && panel.classList.contains('acc-abierto')) {
+                panel.classList.remove('acc-abierto');
                 btn.setAttribute('aria-expanded', 'false');
                 btn.focus();
             }

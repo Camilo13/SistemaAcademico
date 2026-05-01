@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+<script>!function(){var t=localStorage.getItem('acc_tema'),f=localStorage.getItem('acc_fuente');if(t==='oscuro')document.documentElement.classList.add('modo-oscuro');if(f&&f!=='normal')document.documentElement.classList.add('fuente-'+f);}();</script>
 <head>
     <meta charset="UTF-8">
     <title>Solicitud de Registro — Akwe Uus Yat</title>
@@ -18,6 +19,7 @@
 
     {{-- ── Estilos del módulo ── --}}
     <link rel="stylesheet" href="{{ asset('css/modulos/solicitudes/solicitud.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/accesibilidad.css') }}">
 </head>
 <body>
 
@@ -207,5 +209,6 @@
 <script src="{{ asset('js/global/notificaciones.js') }}"></script>
 <script src="{{ asset('js/modulos/solicitudes/solicitud.js') }}"></script>
 
+    @include('components.accesibilidad')
 </body>
 </html>

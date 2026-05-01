@@ -34,18 +34,18 @@
 
 /* ── Override de variables en modo oscuro ────────────── */
 html.modo-oscuro {
-    --acc-bg-page         : #0a1a15;
-    --acc-bg-content      : #0e2219;
-    --acc-bg-card         : #15302a;
-    --acc-bg-aside        : #042f22;
-    --acc-bg-navbar       : #031a12;
-    --acc-bg-footer       : #031a12;
-    --acc-bg-table-th     : #0f2a20;
-    --acc-bg-input        : #15302a;
-    --acc-text            : #e2e8f0;
+    --acc-bg-page         : #0d1714;
+    --acc-bg-content      : #0d1714;
+    --acc-bg-card         : #1a2c26;
+    --acc-bg-aside        : #142320;
+    --acc-bg-navbar       : #0d1714;
+    --acc-bg-footer       : #0d1714;
+    --acc-bg-table-th     : #1a2c26;
+    --acc-bg-input        : #1a2c26;
+    --acc-text            : #e0e0e0;
     --acc-text-sec        : #94a3b8;
-    --acc-border          : #1f4535;
-    --acc-border-med      : #235c44;
+    --acc-border          : #2a4a3e;
+    --acc-border-med      : #2a4a3e;
 }
 
 /* ═══════════════════════════════════════════════════════════
@@ -59,6 +59,7 @@ html.modo-oscuro body {
 
 /* Contenido principal */
 html.modo-oscuro main,
+html.modo-oscuro section,
 html.modo-oscuro .contenido {
     background-color : var(--acc-bg-content);
     color            : var(--acc-text);
@@ -81,14 +82,22 @@ html.modo-oscuro footer {
 }
 
 /* ── Tarjetas y paneles ─────────────────────────────── */
+html.modo-oscuro .tarjeta,
+html.modo-oscuro .card,
+html.modo-oscuro .resumen-card,
 html.modo-oscuro .tarjeta-form,
 html.modo-oscuro .tarjeta-accion,
 html.modo-oscuro .tarjeta-peligro,
 html.modo-oscuro .panel-filtros,
-html.modo-oscuro .resumen-card {
+html.modo-oscuro .dashboard-bienvenida {
     background-color : var(--acc-bg-card);
     color            : var(--acc-text);
     border-color     : var(--acc-border);
+}
+
+/* ── Iconos verdes en modo oscuro ───────────────────── */
+html.modo-oscuro .icono {
+    color : #81c784;
 }
 
 /* ── Tablas ─────────────────────────────────────────── */
@@ -229,16 +238,20 @@ html.fuente-grande span  { font-size: 1.1875em; }
     padding          : 16px;
     box-shadow       : 0 8px 24px rgba(0, 0, 0, 0.15);
     min-width        : 230px;
-    display          : flex;
+    display          : none;
     flex-direction   : column;
     gap              : 14px;
+}
+
+.acc-panel.acc-abierto {
+    display          : flex;
     animation        : acc-aparecer 0.18s ease-out;
 }
 
 /* Panel en modo oscuro */
 html.modo-oscuro .acc-panel {
-    background-color : #15302a;
-    border-color     : #1f4535;
+    background-color : #1a2c26;
+    border-color     : #2a4a3e;
 }
 
 /* Animación de apertura ascendente */
@@ -259,7 +272,7 @@ html.modo-oscuro .acc-panel {
     margin          : 0;
 }
 
-html.modo-oscuro .acc-separador { border-color: #1f4535; }
+html.modo-oscuro .acc-separador { border-color: #2a4a3e; }
 
 /* ── Fila de opción ────────────────────────────────── */
 .acc-opcion {
@@ -277,7 +290,7 @@ html.modo-oscuro .acc-separador { border-color: #1f4535; }
     white-space : nowrap;
 }
 
-html.modo-oscuro .acc-etiqueta { color: #e2e8f0; }
+html.modo-oscuro .acc-etiqueta { color: #e0e0e0; }
 
 /* ── Botón toggle luna / sol ───────────────────────── */
 .acc-toggle {
