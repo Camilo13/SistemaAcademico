@@ -7,6 +7,7 @@
     <title>Iniciar sesión — Akwe Uus Yat</title>
     <link rel="stylesheet" href="{{ asset('css/auth/login.css') }}">
     <link rel="stylesheet" href="{{ asset('css/accesibilidad.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
 </head>
 <body>
 

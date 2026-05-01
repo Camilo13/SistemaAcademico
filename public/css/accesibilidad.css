@@ -353,3 +353,112 @@ html.modo-oscuro .acc-toggle   { background-color: var(--acc-verde-boton); color
     .acc-panel        { min-width: 176px; gap: 10px; }
     .acc-etiqueta     { font-size: 0.78rem; }
 }
+
+/* ═══════════════════════════════════════════════════════════
+   Overrides extendidos — backgrounds sin cobertura previa
+═══════════════════════════════════════════════════════════ */
+
+/* ── Contenedores, tarjetas y wrappers ─────────────────── */
+html.modo-oscuro .bienvenida,
+html.modo-oscuro .tarjeta-icono,
+html.modo-oscuro .mision-card,
+html.modo-oscuro .vision-card,
+html.modo-oscuro .seccion-nuestra-esencia,
+html.modo-oscuro .tarjeta-contacto,
+html.modo-oscuro .evento-card,
+html.modo-oscuro .login-contenedor,
+html.modo-oscuro .login-caja,
+html.modo-oscuro .login-campo input:focus,
+html.modo-oscuro .tabla thead,
+html.modo-oscuro .barra-bulk,
+html.modo-oscuro .info-registro,
+html.modo-oscuro .nota-ayuda,
+html.modo-oscuro .cuadricula-contenedor,
+html.modo-oscuro .cuadricula thead tr,
+html.modo-oscuro .num-bloque,
+html.modo-oscuro .celda-clase.ocupada,
+html.modo-oscuro .clase-card,
+html.modo-oscuro .alerta-info,
+html.modo-oscuro .resumen-bloque,
+html.modo-oscuro .asignacion-icono,
+html.modo-oscuro .resumen-faltas,
+html.modo-oscuro .nota-agregar,
+html.modo-oscuro .preview-nota,
+html.modo-oscuro .boletin-res-card,
+html.modo-oscuro .perfil-avatar {
+    background-color : #1a2c26;
+    color            : #e0e0e0;
+}
+
+/* Fila seleccionada — selector completo con !important para superar la fuente */
+html.modo-oscuro .tabla tbody tr.fila-seleccionada td {
+    background-color : #1a2c26 !important;
+}
+
+/* ── Badges y chips: estado activo / aprobado ──────────── */
+html.modo-oscuro .estado-activo,
+html.modo-oscuro .estado-activa,
+html.modo-oscuro .estado-abierto,
+html.modo-oscuro .estado-finalizado,
+html.modo-oscuro .estado-finalizada,
+html.modo-oscuro .estado-en-curso,
+html.modo-oscuro .badge-admin,
+html.modo-oscuro .badge-estudiante,
+html.modo-oscuro .badge-activo,
+html.modo-oscuro .badge-activa,
+html.modo-oscuro .badge-abierto,
+html.modo-oscuro .badge-finalizado,
+html.modo-oscuro .badge-en-curso,
+html.modo-oscuro .badge-visible,
+html.modo-oscuro .nota-aprobada,
+html.modo-oscuro .promedio-aprobado,
+html.modo-oscuro .des-superior,
+html.modo-oscuro .des-alto,
+html.modo-oscuro .nota-chip,
+html.modo-oscuro .badge-aprobada,
+html.modo-oscuro .conteo-aprobadas,
+html.modo-oscuro .faltas-ok,
+html.modo-oscuro .total-ok,
+html.modo-oscuro .btn-bulk-editar,
+html.modo-oscuro .badge-rol.rol-administrador,
+html.modo-oscuro .badge-rol.rol-estudiante {
+    background-color : #2a3d35;
+    color            : #e0e0e0;
+}
+
+/* ── Badges y chips: estado neutro / pendiente / sin calificar ── */
+html.modo-oscuro .estado-pendiente,
+html.modo-oscuro .badge-docente,
+html.modo-oscuro .badge-pendiente,
+html.modo-oscuro .badge-oculta,
+html.modo-oscuro .badge-rol,
+html.modo-oscuro .badge-rol.rol-docente,
+html.modo-oscuro .nota-sin,
+html.modo-oscuro .promedio-sin,
+html.modo-oscuro .des-sin,
+html.modo-oscuro .badge-sin-calificar,
+html.modo-oscuro .conteo-ok,
+html.modo-oscuro .faltas-sin,
+html.modo-oscuro .total-sin {
+    background-color : #1e2e28;
+    color            : #e0e0e0;
+}
+
+/* ── Alerta de éxito ───────────────────────────────────── */
+html.modo-oscuro .alerta-exito {
+    background-color : #2a3520;
+    color            : #e0e0e0;
+}
+
+/* ── Alerta de advertencia (amarilla) ──────────────────── */
+html.modo-oscuro .alerta-advertencia {
+    background-color : #2a2a1e;
+    color            : #e0e0e0;
+}
+
+/* ── Filas de alerta (rojo tenue) ──────────────────────── */
+html.modo-oscuro .fila-alerta td,
+html.modo-oscuro .fila-reprobada td {
+    background-color : #2a1e1e;
+    color            : #e0e0e0;
+}
