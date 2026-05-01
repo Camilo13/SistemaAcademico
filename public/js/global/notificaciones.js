@@ -75,6 +75,7 @@ function _temaOscuro() {
  * @param {string} mensaje - HTML del mensaje.
  */
 function mostrarExito(mensaje) {
+    const esModoOscuro = document.documentElement.classList.contains('modo-oscuro');
     return Swal.fire({
         icon             : 'success',
         title            : 'Listo',
@@ -82,7 +83,8 @@ function mostrarExito(mensaje) {
         confirmButtonText: 'Aceptar',
         timer            : 3500,
         timerProgressBar : true,
-        ..._temaOscuro(), // aplica fondo/color oscuro si el modo oscuro está activo
+        ..._temaOscuro(),                                          // aplica fondo/color oscuro si el modo oscuro está activo
+        ...(esModoOscuro ? { titleColor: '#81c784' } : {}),        // título en verde claro para contraste en modo oscuro
     });
 }
 

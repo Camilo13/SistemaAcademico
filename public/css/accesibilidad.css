@@ -574,3 +574,67 @@ html.modo-oscuro .btn-bulk-eliminar {
     background : #2a1e1e;
     color      : #e0e0e0;
 }
+
+/* ── Tarjetas de valores del portal público ── */
+html.modo-oscuro .valor-card {
+    background-color : #1a2c26;
+    color            : #e0e0e0;
+}
+
+/* ── Subtítulos grises — quedan invisibles sobre fondo oscuro ── */
+html.modo-oscuro .cabecera-subtitulo,
+html.modo-oscuro .texto-subtitulo,
+html.modo-oscuro .descripcion-seccion {
+    color : #94a3b8;
+}
+
+/* ── Nombres en negrita dentro de celdas — strong no hereda el override de td ── */
+html.modo-oscuro td strong {
+    color : #e0e0e0;
+}
+
+/* ── Iconos de calendario y inputs de fecha ── */
+html.modo-oscuro .fa-calendar,
+html.modo-oscuro .fa-calendar-days {
+    color : #81c784;
+}
+
+html.modo-oscuro input[type="date"] {
+    background-color : #1a2c26;
+    color            : #e0e0e0;
+}
+
+/* ── Texto de checkboxes (label-check) — invisible sin override ── */
+html.modo-oscuro .label-check {
+    color : #e0e0e0;
+}
+
+/* ── Dropdown de opciones de selects — hereda fondo del sistema sin override ── */
+html.modo-oscuro select option {
+    background-color : #1a2c26;
+    color            : #e0e0e0;
+}
+
+/* ── Franjas especiales del horario — refrigerio (ámbar oscuro) y almuerzo (verde azulado oscuro) ── */
+html.modo-oscuro .franja-refrigerio,
+html.modo-oscuro .fila-refrigerio {
+    background-color : #2a2a1e;
+    color            : #e0e0e0;
+}
+
+html.modo-oscuro .franja-almuerzo,
+html.modo-oscuro .fila-almuerzo {
+    background-color : #1e2a2a;
+    color            : #e0e0e0;
+}
+
+/* ── Info-registro: refuerzo explícito de color de texto ── */
+html.modo-oscuro .info-registro {
+    color : #e0e0e0;
+}
+
+/* ── Número y referencia de año académico ── */
+html.modo-oscuro .anio-numero,
+html.modo-oscuro .año-referencia {
+    color : #e0e0e0;
+}
