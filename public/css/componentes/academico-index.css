@@ -242,6 +242,9 @@
     .resumen-usuarios  { grid-template-columns: repeat(2, 1fr); }
     /* Correo más comprimido en móvil — ellipsis evita desbordamiento horizontal */
     .celda-correo      { max-width: 120px; text-overflow: ellipsis; }
+    /* Barra bulk apilada — botones a ancho completo para mayor área táctil */
+    .barra-bulk        { flex-direction: column; align-items: stretch; }
+    .btn-bulk          { width: 100%; }
 }
 
 /* ── Móvil muy pequeño: colapso completo a 1 columna ── */

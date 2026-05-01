@@ -202,7 +202,8 @@
     display       : flex;
     flex-direction: column;
     gap           : 0.3rem;
-    min-width     : 150px;
+    min-width     : 0;          /* evita desborde en flex-wrap en móvil */
+    flex          : 1 1 140px; /* crece y encoge, base cómoda de 140px */
 }
 
 .filtro label {

@@ -352,6 +352,8 @@
 }
 
 @media (max-width: 480px) {
+    /* Padding lateral explícito — evita que el texto toque los bordes */
+    .contenedor-hero     { padding: 1.5rem 1rem; }
     .contenedor-hero h1  { font-size: 1.55rem; }
     .contenedor-hero p   { font-size: 0.95rem; }
     .hero {

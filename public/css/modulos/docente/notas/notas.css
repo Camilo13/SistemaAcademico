@@ -104,6 +104,7 @@
     font-size    : var(--texto-sm);
     font-weight  : var(--peso-semibold);
     min-height   : 36px;
+    max-width    : 100%; /* impide desborde horizontal en contenedores estrechos */
     transition   : background 0.2s, color 0.2s;
 }
 .preview-nota:empty    { display: none; }

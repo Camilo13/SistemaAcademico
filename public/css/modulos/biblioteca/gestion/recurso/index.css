@@ -131,6 +131,10 @@
 }
 
 @media (max-width: 480px) {
+    /* Grid explícito a 1 columna por debajo de 640px — cobertura redundante intencional */
+    .recursos-grid            { grid-template-columns: 1fr; }
+    /* Descripción a 2 líneas — tarjetas menos altas en pantalla pequeña */
+    .recurso-descripcion      { -webkit-line-clamp: 2; line-clamp: 2; }
     .recurso-acciones         { flex-direction: column; }
     .recurso-acciones .btn    { width: 100%; justify-content: center; }
 }

@@ -128,6 +128,7 @@
 .campo input,
 .campo select,
 .campo textarea {
+    box-sizing    : border-box; /* padding incluido en el ancho — evita desborde */
     padding       : 0.6rem 0.8rem;
     border        : 1px solid #d1d5db;
     border-radius : var(--radio-md);

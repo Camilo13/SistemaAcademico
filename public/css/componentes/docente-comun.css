@@ -31,7 +31,8 @@
     font-size    : var(--texto-sm);
     color        : var(--color-texto-cuerpo);
     background   : var(--fondo-tarjeta);
-    width        : 240px;
+    max-width    : 240px; /* límite en desktop */
+    width        : 100%; /* fluido en pantallas pequeñas */
     transition   : border-color var(--transicion-normal);
 }
 .input-buscar:focus {
@@ -198,4 +199,10 @@
     .campos-faltas       { grid-template-columns: 1fr; }
     .formulario-asistencia { padding: 1.2rem; }
     .asignacion-materia  { white-space: normal; }
+}
+
+/* Campos de faltas: columna única explícita e hijos a ancho completo en móvil pequeño */
+@media (max-width: 480px) {
+    .campos-faltas      { grid-template-columns: 1fr; }
+    .campos-faltas > *  { width: 100%; }
 }
