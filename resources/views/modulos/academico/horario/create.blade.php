@@ -64,6 +64,11 @@
                             <i class="fa-solid fa-circle-exclamation"></i> {{ $message }}
                         </span>
                     @enderror
+                    <span class="nota-ayuda">
+                        <i class="fa-solid fa-circle-info"></i>
+                        Si no ves opciones disponibles, primero debes crear una asignación en
+                        Gestión Académica → Asignaciones Docentes.
+                    </span>
                 </div>
 
                 {{-- Día ── --}}
