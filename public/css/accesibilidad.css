@@ -47,6 +47,14 @@ html.modo-oscuro {
     --acc-border          : #2a4a3e;
     --acc-border-med      : #2a4a3e;
     --fondo-tarjeta       : #1a2c26;   /* superficie de tarjeta oscura — heredada por componentes */
+
+    /* Menú y navegación */
+    --menu-fondo-top      : #142320;   /* franja superior del menú lateral */
+    --menu-fondo-bot      : #0d1714;   /* franja inferior / fondo de página */
+    --menu-texto          : #e0e0e0;   /* texto de ítems de menú */
+    --menu-icono          : #81c784;   /* iconos del menú */
+    --menu-hover-fondo    : #2a4a3e;   /* fondo al hacer hover sobre un ítem */
+    --fondo-pagina        : #0d1714;   /* fondo general de página en oscuro */
 }
 
 /* ═══════════════════════════════════════════════════════════
@@ -483,4 +491,25 @@ html.modo-oscuro .btn-neutro {
 
 html.modo-oscuro .btn-neutro:hover {
     background : #1a2c26;
+}
+
+/* ── Bienvenida: fuerza override del gradiente hardcodeado ─── */
+html.modo-oscuro .bienvenida {
+    background : #1a2c26 !important;
+}
+
+/* ── Botón neutro del login (Cancelar / Volver) ─────────────── */
+html.modo-oscuro .login-btn--neutro {
+    background : #2a4a3e;
+    color      : #e0e0e0;
+}
+
+html.modo-oscuro .login-btn--neutro:hover {
+    background : #1a2c26;
+}
+
+/* ── Hover de ítems del menú público — legible en oscuro ───── */
+html.modo-oscuro .nav-links li a:hover {
+    background : #2a4a3e;
+    color      : #e0e0e0;
 }
