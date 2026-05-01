@@ -283,6 +283,8 @@
 }
 
 .imagen-esencia img {
+    /* display:block elimina el espacio extra que genera el baseline de inline */
+    display      : block;
     width        : 100%;
     border-radius: var(--pub-radio-xl, 1.2rem);
     box-shadow   : 0 10px 28px var(--inicio-sombra-media);
@@ -358,4 +360,22 @@
     }
     .mision-card h2,
     .vision-card h2      { font-size: 1.35rem; }
+
+    /* Padding interno de tarjetas Misión/Visión más compacto en móvil pequeño */
+    .mision-card,
+    .vision-card { padding: 1.4rem 1rem; }
+}
+
+@media (max-width: 360px) {
+    /* Padding reducido en pantallas muy estrechas */
+    .contenedor-hero { padding: 1.2rem 0.8rem; }
+
+    /* Padding mínimo para tarjetas Misión/Visión en pantallas muy pequeñas */
+    .mision-card,
+    .vision-card { padding: 1rem 0.75rem; }
+}
+
+/* Hero: altura mínima reducida en pantallas bajas (landscape móvil) */
+@media (max-height: 600px) {
+    .hero { min-height: 60vh; }
 }

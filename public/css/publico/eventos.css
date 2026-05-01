@@ -210,3 +210,8 @@
     /* Día numérico reducido para no dominar la tarjeta apilada */
     .evento-fecha .dia { font-size: 1.6rem; }
 }
+
+/* Día numérico más compacto en móvil muy pequeño */
+@media (max-width: 360px) {
+    .evento-fecha .dia { font-size: 1.4rem; }
+}

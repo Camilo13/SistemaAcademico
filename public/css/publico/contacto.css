@@ -187,4 +187,6 @@
     .columna { min-width: 100%; }
     /* Botones sociales a ancho completo — evita desborde horizontal en fila */
     .btn-social { width: 100%; justify-content: center; }
+    /* Iframe de mapa menos alto en móvil — evita que domine el scroll */
+    .mapa-iframe { height: 200px; }
 }

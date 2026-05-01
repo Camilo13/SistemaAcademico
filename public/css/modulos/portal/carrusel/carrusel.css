@@ -53,6 +53,8 @@
 }
 
 .carrusel-imagen img {
+    /* display:block elimina el espacio extra que genera el baseline de inline */
+    display   : block;
     width     : 100%;
     height    : 100%;
     object-fit: cover;
@@ -148,6 +150,8 @@
     .carrusel-imagen { height: 130px; }
 }
 
+/* Móvil muy pequeño: grid de 1 columna y altura de imagen reducida */
 @media (max-width: 360px) {
-    .carrusel-grid { grid-template-columns: 1fr; }
+    .carrusel-grid   { grid-template-columns: 1fr; }
+    .carrusel-imagen { height: 110px; }
 }
