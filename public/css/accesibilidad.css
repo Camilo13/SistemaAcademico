@@ -46,6 +46,7 @@ html.modo-oscuro {
     --acc-text-sec        : #94a3b8;
     --acc-border          : #2a4a3e;
     --acc-border-med      : #2a4a3e;
+    --fondo-tarjeta       : #1a2c26;   /* superficie de tarjeta oscura — heredada por componentes */
 }
 
 /* ═══════════════════════════════════════════════════════════
@@ -461,4 +462,25 @@ html.modo-oscuro .fila-alerta td,
 html.modo-oscuro .fila-reprobada td {
     background-color : #2a1e1e;
     color            : #e0e0e0;
+}
+
+/* ── Perfil: elimina el gradiente blanco del bloque de info ── */
+html.modo-oscuro .perfil-info {
+    background : #1a2c26;
+}
+
+/* ── Título de card: fondo transparente, texto verde suave ─── */
+html.modo-oscuro .card-titulo {
+    background : transparent;
+    color      : #81c784;
+}
+
+/* ── Botón neutro (Anterior / Cancelar) — visible en oscuro ── */
+html.modo-oscuro .btn-neutro {
+    background : #2a4a3e;
+    color      : #e0e0e0;
+}
+
+html.modo-oscuro .btn-neutro:hover {
+    background : #1a2c26;
 }

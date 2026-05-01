@@ -59,7 +59,7 @@ class CarruselController extends Controller
                 'imagen' => [
                     'required', 'image',
                     'mimes:jpg,jpeg,png,webp',
-                    'max:2048',
+                    'max:8192',
                 ],
                 'orden' => [
                     'nullable', 'integer', 'min:0',
@@ -122,7 +122,7 @@ class CarruselController extends Controller
                 'imagen' => [
                     'nullable', 'image',
                     'mimes:jpg,jpeg,png,webp',
-                    'max:2048',
+                    'max:8192',
                 ],
                 'orden' => [
                     'nullable', 'integer', 'min:0',
@@ -252,7 +252,7 @@ class CarruselController extends Controller
             'imagen.required' => 'Debes seleccionar una imagen.',
             'imagen.image'    => 'El archivo no es una imagen válida.',
             'imagen.mimes'    => 'Formatos permitidos: JPG, JPEG, PNG, WEBP.',
-            'imagen.max'      => 'La imagen no puede superar los 2 MB.',
+            'imagen.max'      => 'La imagen no puede superar los 8 MB.',
             'orden.integer'   => 'El orden debe ser un número entero.',
             'orden.min'       => 'El orden no puede ser negativo.',
             'orden.unique'    => 'Ya existe una imagen con ese número de orden.',
