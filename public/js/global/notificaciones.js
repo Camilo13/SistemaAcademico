@@ -61,6 +61,16 @@ document.addEventListener('DOMContentLoaded', () => {
    ═══════════════════════════════════════════════════════════ */
 
 /**
+ * Devuelve los overrides de tema para SweetAlert2 cuando el modo oscuro está activo.
+ * Se evalúa en cada llamada para reflejar cambios de tema en caliente.
+ */
+function _temaOscuro() {
+    return document.documentElement.classList.contains('modo-oscuro')
+        ? { background: '#1a2c26', color: '#e0e0e0' }
+        : {};
+}
+
+/**
  * Alerta de éxito (verde).
  * @param {string} mensaje - HTML del mensaje.
  */
@@ -72,6 +82,7 @@ function mostrarExito(mensaje) {
         confirmButtonText: 'Aceptar',
         timer            : 3500,
         timerProgressBar : true,
+        ..._temaOscuro(), // aplica fondo/color oscuro si el modo oscuro está activo
     });
 }
 
@@ -85,6 +96,7 @@ function mostrarError(mensaje) {
         title            : 'Error',
         html             : mensaje,
         confirmButtonText: 'Aceptar',
+        ..._temaOscuro(), // aplica fondo/color oscuro si el modo oscuro está activo
     });
 }
 
@@ -98,6 +110,7 @@ function mostrarInfo(mensaje) {
         title            : 'Información',
         html             : mensaje,
         confirmButtonText: 'Aceptar',
+        ..._temaOscuro(), // aplica fondo/color oscuro si el modo oscuro está activo
     });
 }
 
@@ -119,5 +132,6 @@ function mostrarAdvertencia(mensaje, opciones = {}) {
         cancelButtonText : opciones.cancelButtonText  ?? 'Cancelar',
         timer            : opciones.timer             ?? undefined,
         timerProgressBar : !!opciones.timer,
+        ..._temaOscuro(), // aplica fondo/color oscuro si el modo oscuro está activo
     });
 }

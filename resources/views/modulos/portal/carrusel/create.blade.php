@@ -92,7 +92,6 @@
                                id="activo" name="activo" value="1"
                                {{ old('activo', '1') === '1' ? 'checked' : '' }}>
                         <label for="activo" class="label-check">
-                            <i class="fa-solid fa-circle-check"></i>
                             Imagen activa al crear
                         </label>
                     </div>

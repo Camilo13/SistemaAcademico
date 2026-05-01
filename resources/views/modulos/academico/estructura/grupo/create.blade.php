@@ -118,7 +118,6 @@
                            id="activo" name="activo" value="1"
                            {{ old('activo', '1') !== '0' ? 'checked' : '' }}>
                     <label for="activo" class="label-check">
-                        <i class="fa-solid fa-circle-check"></i>
                         Grupo activo
                     </label>
                 </div>

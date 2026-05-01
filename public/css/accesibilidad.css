@@ -47,6 +47,8 @@ html.modo-oscuro {
     --acc-border          : #2a4a3e;
     --acc-border-med      : #2a4a3e;
     --fondo-tarjeta       : #1a2c26;   /* superficie de tarjeta oscura — heredada por componentes */
+    --fondo-input         : #1a2c26;   /* fondo de inputs en modo oscuro — evita el blanco al escribir */
+    --fondo-input-focus   : #1a2c26;   /* fondo al enfocar inputs — mantiene el tono oscuro */
 
     /* Menú y navegación */
     --menu-fondo-top      : #142320;   /* franja superior del menú lateral */

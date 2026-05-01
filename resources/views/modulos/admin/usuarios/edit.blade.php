@@ -116,7 +116,7 @@
                     <input type="checkbox" id="activo" name="activo" value="1"
                            {{ old('activo', $usuario->activo) ? 'checked' : '' }}>
                     <label for="activo" class="label-check">
-                        <i class="fa-solid fa-circle-check"></i> Usuario activo
+                        Usuario activo
                     </label>
                 </div>
 

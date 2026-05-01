@@ -111,7 +111,6 @@
                            id="activa" name="activa" value="1"
                            {{ old('activa', '1') !== '0' ? 'checked' : '' }}>
                     <label for="activa" class="label-check">
-                        <i class="fa-solid fa-circle-check"></i>
                         Materia activa
                     </label>
                 </div>

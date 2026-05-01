@@ -120,7 +120,7 @@
                 {{-- Contacto --}}
                 <div class="grupo-formulario">
                     <label for="contacto">
-                        <i class="fa-solid fa-phone"></i> Número de contacto
+                        <i class="fa-solid fa-phone"></i> NÚMERO DE CONTACTO
                     </label>
                     <input type="tel"
                            id="contacto"
@@ -140,7 +140,7 @@
                 {{-- Ubicación --}}
                 <div class="grupo-formulario">
                     <label for="ubicacion">
-                        <i class="fa-solid fa-location-dot"></i> Ubicación
+                        <i class="fa-solid fa-location-dot"></i> UBICACIÓN
                     </label>
                     <input type="text"
                            id="ubicacion"

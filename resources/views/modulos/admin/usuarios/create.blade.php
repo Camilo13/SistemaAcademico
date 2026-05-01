@@ -100,7 +100,7 @@
                     <input type="checkbox" id="activo" name="activo" value="1"
                            {{ old('activo', '1') === '1' ? 'checked' : '' }}>
                     <label for="activo" class="label-check">
-                        <i class="fa-solid fa-circle-check"></i> Crear como usuario activo
+                        Crear como usuario activo
                     </label>
                 </div>
 

@@ -29,8 +29,9 @@
          JS (acciones-tabla.js) controla .visible.
     ══════════════════════════════════════════ --}}
     <div class="barra-bulk"
-         data-bulk-modo="academico"
+         data-bulk-modo="usuarios"
          data-entidad="sede(s)"
+         data-url-editar="{{ route('admin.academico.sedes.edit', ':id') }}"
          data-url-destroy="{{ route('admin.academico.sedes.destroy', ':id') }}">
 
         <div class="bulk-info">
@@ -40,6 +41,9 @@
         </div>
 
         <div class="bulk-acciones">
+            <a href="#" class="btn-bulk btn-bulk-editar">
+                <i class="fa-solid fa-pen"></i> Editar
+            </a>
             <button type="button" class="btn-bulk btn-bulk-eliminar">
                 <i class="fa-solid fa-trash"></i> Eliminar seleccionadas
             </button>
@@ -70,13 +74,12 @@
                     <th>Dirección</th>
                     <th>Teléfono</th>
                     <th>Estado</th>
-                    <th class="col-acciones">Acciones</th>
                 </tr>
             </thead>
 
             <tbody>
                 @forelse($sedes as $sede)
-                    <tr>
+                    <tr data-id="{{ $sede->id }}" class="fila-seleccionable">
                         {{-- Checkbox individual --}}
                         <td class="col-check">
                             <input type="checkbox"
@@ -113,20 +116,10 @@
                             @endif
                         </td>
 
-                        <td class="col-acciones">
-                            <div class="acciones">
-                                <a href="{{ route('admin.academico.sedes.edit', $sede->id) }}"
-                                   class="btn-icono editar"
-                                   title="Editar sede">
-                                    <i class="fa-solid fa-pen"></i>
-                                </a>
-                            </div>
-                        </td>
-
                     </tr>
                 @empty
                     <tr class="fila-vacia">
-                        <td colspan="7">
+                        <td colspan="6">
                             <i class="fa-solid fa-circle-info"></i>
                             No hay sedes registradas aún.
                         </td>

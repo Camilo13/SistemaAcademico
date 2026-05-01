@@ -32,6 +32,7 @@
 .grupo-formulario input[type="email"],
 .grupo-formulario input[type="password"],
 .grupo-formulario input[type="number"],
+.grupo-formulario input[type="tel"],
 .grupo-formulario select,
 .grupo-formulario textarea {
     padding      : 0.7rem 0.9rem;
