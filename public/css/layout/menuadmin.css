@@ -232,10 +232,16 @@
    Responsive
    ============================================================ */
 
-/* Tablet */
+/* Tablet: menú colapsado por defecto, se abre con .activa igual que en móvil */
 @media (max-width: 1024px) {
-    .barra-lateral { width: var(--menu-ancho-tablet); }
-    .contenido     { margin-left: var(--menu-ancho-tablet); }
+    .barra-lateral {
+        width     : var(--menu-ancho-movil);
+        max-width : 85vw;
+        transform : translateX(-100%);
+    }
+    .barra-lateral.activa { transform: translateX(0); }
+    .contenido  { margin-left: 0; padding-top: 4rem; }
+    .boton-menu { display: flex; align-items: center; }
 }
 
 /* Móvil — menú superpuesto sobre el contenido */

@@ -179,3 +179,8 @@ footer {
         display: block;
     }
 }
+
+/* Móvil muy pequeño: drawer más ancho para no comprimir el texto de los enlaces */
+@media (max-width: 360px) {
+    .nav-links { width: 90%; }
+}

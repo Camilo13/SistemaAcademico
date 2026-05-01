@@ -185,4 +185,6 @@
     .contenido-principal { padding: 2rem 1rem 3rem; }
     .titulo-centrado .titulo { font-size: 1.6rem; }
     .columna { min-width: 100%; }
+    /* Botones sociales a ancho completo — evita desborde horizontal en fila */
+    .btn-social { width: 100%; justify-content: center; }
 }

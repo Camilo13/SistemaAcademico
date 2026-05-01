@@ -278,8 +278,8 @@
 /* ============================================================
    Responsive
    ============================================================ */
-@media (max-width: 992px) {
-    /* Grids de 3+ columnas pasan a 2 */
+/* Tablet horizontal: grids de 3+ columnas colapsan a 2 */
+@media (max-width: 1024px) {
     .grid-campos { grid-template-columns: repeat(2, 1fr); }
 }
 
