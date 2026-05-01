@@ -204,5 +204,9 @@
 }
 
 @media (max-width: 480px) {
-    .titulo-seccion { font-size: 1.7rem; }
+    .titulo-seccion    { font-size: 1.7rem; }
+    /* Grid fuerza 1 columna — 2 columnas es estrecho en < 480px */
+    .eventos-grid      { grid-template-columns: 1fr; }
+    /* Día numérico reducido para no dominar la tarjeta apilada */
+    .evento-fecha .dia { font-size: 1.6rem; }
 }

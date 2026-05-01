@@ -325,6 +325,7 @@
         text-align     : right;
         gap            : 1rem;
         font-size      : var(--texto-sm);
+        word-break     : break-word; /* evita desbordamiento de texto largo en modo tarjeta */
     }
 
     .tabla td:last-child { border-bottom: none; }

@@ -241,3 +241,8 @@
     .contenedor-modulo { padding: 0.9rem; }
     .resumen-usuarios  { grid-template-columns: repeat(2, 1fr); }
 }
+
+/* ── Móvil muy pequeño: colapso completo a 1 columna ── */
+@media (max-width: 360px) {
+    .resumen-usuarios { grid-template-columns: 1fr; }
+}

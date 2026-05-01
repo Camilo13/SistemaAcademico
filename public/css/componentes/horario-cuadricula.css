@@ -210,3 +210,11 @@
 }
 
 .alerta-error i { color: #dc2626; flex-shrink: 0; }
+
+/* ── Móvil pequeño: reduce min-width y anchos de columna fijos ── */
+@media (max-width: 480px) {
+    .cuadricula             { min-width: 480px; }
+    .cuadricula th.col-bloque { width: 40px; }
+    .cuadricula th.col-hora   { width: 80px; }
+    .cuadricula th.col-dia    { min-width: 90px; }
+}
