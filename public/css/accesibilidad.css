@@ -525,3 +525,52 @@ html.modo-oscuro .resumen-chip {
 html.modo-oscuro .resumen-chip span  { color: #e0e0e0; }  /* número principal */
 html.modo-oscuro .resumen-chip label { color: #94a3b8; }  /* etiqueta secundaria */
 html.modo-oscuro .resumen-chip i     { color: #81c784; }  /* icono decorativo */
+
+/* ── Badges de estado inactivo / cerrado — fondo rojo oscuro para evitar claro sobre claro ── */
+html.modo-oscuro .estado-inactivo,
+html.modo-oscuro .estado-inactiva,
+html.modo-oscuro .estado-cerrado {
+    background-color : #2a1e1e;
+    color            : #e0e0e0;
+}
+
+/* ── Badges de estado retirado — fondo ámbar oscuro ── */
+html.modo-oscuro .estado-retirado,
+html.modo-oscuro .estado-retirada {
+    background-color : #2a2a1e;
+    color            : #e0e0e0;
+}
+
+/* ── Badges genéricos inactivo — fondo rojo oscuro ── */
+html.modo-oscuro .badge-inactivo,
+html.modo-oscuro .badge-inactiva {
+    background-color : #2a1e1e;
+    color            : #e0e0e0;
+}
+
+/* ── Chip de nota reprobada — fondo rojo oscuro ── */
+html.modo-oscuro .nota-reprobada {
+    background-color : #2a1e1e;
+    color            : #e0e0e0;
+}
+
+/* ── Etiquetas data-label en modo tarjeta móvil — el ::before no hereda color de td ── */
+html.modo-oscuro .tabla td[data-label]::before {
+    color : #81c784;
+}
+
+/* ── Barra bulk: texto, icono, separador y botones sin override previo ── */
+html.modo-oscuro .bulk-info   { color: #e0e0e0; }
+html.modo-oscuro .bulk-info i { color: #81c784; }
+
+html.modo-oscuro .bulk-separador { background: #2a4a3e; }
+
+html.modo-oscuro .btn-bulk-limpiar {
+    background : #2a4a3e;
+    color      : #e0e0e0;
+}
+
+html.modo-oscuro .btn-bulk-eliminar {
+    background : #2a1e1e;
+    color      : #e0e0e0;
+}
