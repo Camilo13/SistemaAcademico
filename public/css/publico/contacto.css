@@ -39,6 +39,7 @@
     border-radius: 1.2rem;
     padding      : 2.5rem;
     box-shadow   : 0 6px 24px rgba(0, 0, 0, 0.07);
+    overflow     : hidden; /* recorta hijos que desborden la tarjeta */
 }
 
 /* ── Columnas ── */
@@ -179,6 +180,10 @@
     .tarjeta-contacto { padding: 1.5rem 1.2rem; }
     .titulo-centrado .titulo { font-size: 1.9rem; }
     .mapa-iframe { height: 260px; }
+    /* apila botones en columna desde 768px — cubre el hueco que el override de 480px no alcanzaba */
+    .espacio-arriba { display: flex; flex-direction: column; width: 100%; }
+    .grupo-botones  { display: flex; flex-direction: column; width: 100%; }
+    .btn-social     { display: flex; width: 100%; justify-content: center; }
 }
 
 @media (max-width: 480px) {

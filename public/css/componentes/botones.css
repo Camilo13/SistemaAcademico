@@ -97,6 +97,14 @@ button.btn { -webkit-appearance: none; appearance: none; }
 }
 
 /* ============================================================
+   Responsive
+   ============================================================ */
+/* permite wrap de texto en botones en móvil */
+@media (max-width: 768px) {
+    .btn { white-space: normal; }
+}
+
+/* ============================================================
    Contenedor de acciones en formulario / tabla
    ============================================================ */
 .acciones {

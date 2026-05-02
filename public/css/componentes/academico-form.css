@@ -306,6 +306,10 @@
         align-items    : stretch;
     }
     .acciones-form .btn { width: 100%; justify-content: center; }
+
+    /* botones tarjeta-accion y tarjeta-peligro en columna en móvil */
+    .acciones-secundarias            { flex-direction: column; align-items: stretch; }
+    .acciones-secundarias .btn       { width: 100%; justify-content: center; }
 }
 
 @media (max-width: 480px) {
