@@ -62,7 +62,7 @@
             <strong>{{ optional($inscripcionMateria->inscripcion->grupo)->nombre ?? '—' }}</strong>
         </div>
         <div class="nota-ficha-item">
-            <span><i class="fa-solid fa-circle-check"></i> Estado materia</span>
+            <span> Estado materia</span>
             @if($inscripcionMateria->estaActiva())
                 <span class="estado estado-activo">
                     <i class="fa-solid fa-circle-check"></i> Activa

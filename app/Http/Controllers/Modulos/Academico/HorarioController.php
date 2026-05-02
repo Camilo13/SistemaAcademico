@@ -176,6 +176,15 @@ class HorarioController extends Controller
                 ->withErrors(['choque' => 'El docente ya tiene clase en ese bloque y día (otro grupo).']);
         }
 
+        // ── Validar: límite semanal de franjas por asignación (máximo 5) ──
+        $franjasSemana = Horario::where('asignacion_id', $validated['asignacion_id'])->count();
+
+        if ($franjasSemana >= 5) {
+            return back()
+                ->withInput()
+                ->withErrors(['choque' => 'Esta asignación ya tiene 5 franjas semanales registradas. No se puede asignar el mismo docente y materia más de 5 veces por semana.']);
+        }
+
         Horario::create([
             'asignacion_id' => $validated['asignacion_id'],
             'dia_semana'    => $validated['dia_semana'],
