@@ -186,8 +186,9 @@
     .titulo-centrado .titulo { font-size: 1.6rem; }
     /* cancela el min-width: 280px base — cada columna ocupa el ancho completo en móvil */
     .columna { min-width: 100%; }
-    /* Botones sociales a ancho completo — evita desborde horizontal en fila */
-    .btn-social { width: 100%; justify-content: center; }
+    /* contenedor y botones en columna — evita desborde horizontal */
+    .espacio-arriba { display: flex; flex-direction: column; width: 100%; }
+    .btn-social     { display: flex; width: 100%; justify-content: center; }
     /* Iframe de mapa menos alto en móvil — evita que domine el scroll */
     .mapa-iframe { height: 200px; }
 }

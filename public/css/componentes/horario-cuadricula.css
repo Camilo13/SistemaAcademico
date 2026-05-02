@@ -236,3 +236,8 @@ html.modo-oscuro .cuadricula tbody .celda-vacia,
 html.modo-oscuro .cuadricula td.celda-vacia {
     background-color : #1a2c26 !important;
 }
+
+/* anula fondo #fafafa del td padre — el fix anterior solo cubría el hijo .celda-vacia */
+html.modo-oscuro .cuadricula td.celda-clase.libre {
+    background-color : #1a2c26 !important;
+}
