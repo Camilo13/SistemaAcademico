@@ -247,7 +247,8 @@
     .btn-bulk          { width: 100%; }
 }
 
-/* ── Móvil muy pequeño: colapso completo a 1 columna ── */
-@media (max-width: 360px) {
+/* Colapsa a 1 columna desde 430px — el breakpoint de 480px deja 2 columnas apretadas
+   en iPhones comunes (390-430px); este rule lo anula con mayor especificidad de cascade */
+@media (max-width: 430px) {
     .resumen-usuarios { grid-template-columns: 1fr; }
 }

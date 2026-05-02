@@ -90,4 +90,8 @@
 }
 @media (max-width: 480px) {
     .contenedor-asistencia-est { padding: 0.9rem; }
+
+    /* Reemplaza min-width fijo por ancho acotado — en modo tarjeta móvil no aplica,
+       pero previene desbordamiento si la tabla se renderiza en modo columna estrecha */
+    .col-estudiante { min-width: 0; width: 140px; }
 }

@@ -365,7 +365,9 @@ html.modo-oscuro .acc-toggle   { background-color: var(--acc-verde-boton); color
 }
 
 @media (max-width: 480px) {
-    .acc-panel        { min-width: 176px; gap: 10px; }
+    /* max-width: calc(100vw - 32px) garantiza que el panel nunca supere el viewport
+       independientemente de su posición fixed; min-width: 0 elimina el fijo anterior */
+    .acc-panel        { max-width: calc(100vw - 32px); min-width: 0; gap: 10px; }
     .acc-etiqueta     { font-size: 0.78rem; }
 }
 

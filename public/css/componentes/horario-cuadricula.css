@@ -213,10 +213,14 @@
 
 /* ── Móvil pequeño: reduce min-width y anchos de columna fijos ── */
 @media (max-width: 480px) {
-    .cuadricula             { min-width: 480px; }
-    .cuadricula th.col-bloque { width: 40px; }
-    .cuadricula th.col-hora   { width: 80px; }
-    .cuadricula th.col-dia    { min-width: 90px; }
+    /* min-width: 0 + width: max-content permiten scroll interno en .cuadricula-contenedor
+       sin forzar un ancho mínimo que desborde el viewport */
+    .cuadricula             { min-width: 0; width: max-content; }
+
+    /* 48px bloque + 90px hora + 72px × 5 días ≈ 498px — legible con scroll interno */
+    .cuadricula th.col-bloque { width: 48px; }      /* número de bloque — compacto */
+    .cuadricula th.col-hora   { width: 90px; }      /* rango horario — legible sin truncar */
+    .cuadricula th.col-dia    { min-width: 72px; }  /* cinco días × 72px = 360px de días */
 
     /* Numeración de bloque más compacta en móvil pequeño */
     .num-bloque { width: 22px; height: 22px; font-size: 0.65rem; }

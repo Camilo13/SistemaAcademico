@@ -199,4 +199,6 @@
     .contenedor-notas-est { padding: 0.9rem; }
     .tabs-periodos        { gap: 0.3rem; }
     .ficha-academica      { flex-direction: column; gap: 0.6rem; }
+    /* refuerza el min-width: 0 del breakpoint 768px — evita que el flex item desborde el card en pantallas muy estrechas */
+    .materia-nota-nombre  { min-width: 0; }
 }

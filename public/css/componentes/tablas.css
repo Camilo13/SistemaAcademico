@@ -349,4 +349,7 @@
         border-left  : none;
         border-right : none;
     }
+
+    /* Elimina min-width fijo para que el input de búsqueda ocupe todo el ancho disponible en móvil */
+    .filtro-buscar { min-width: 0; width: 100%; }
 }
