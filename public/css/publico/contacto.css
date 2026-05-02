@@ -188,6 +188,8 @@
     .columna { min-width: 100%; }
     /* contenedor y botones en columna — evita desborde horizontal */
     .espacio-arriba { display: flex; flex-direction: column; width: 100%; }
+    /* contenedor de redes sociales en columna en móvil */
+    .grupo-botones  { display: flex; flex-direction: column; width: 100%; }
     .btn-social     { display: flex; width: 100%; justify-content: center; }
     /* Iframe de mapa menos alto en móvil — evita que domine el scroll */
     .mapa-iframe { height: 200px; }

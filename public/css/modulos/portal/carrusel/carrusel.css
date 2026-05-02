@@ -148,6 +148,8 @@
 @media (max-width: 480px) {
     .carrusel-grid   { grid-template-columns: 1fr 1fr; }
     .carrusel-imagen { height: 130px; }
+    /* reduce altura fija en móvil — evita que el preview domine el form */
+    .carrusel-preview { height: 160px; }
 }
 
 /* Móvil muy pequeño: grid de 1 columna y altura de imagen reducida */
