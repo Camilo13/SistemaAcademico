@@ -125,6 +125,7 @@ function mostrarInfo(mensaje) {
  * @returns {Promise<SweetAlertResult>}
  */
 function mostrarAdvertencia(mensaje, opciones = {}) {
+    const esModoOscuro = document.documentElement.classList.contains('modo-oscuro');
     return Swal.fire({
         icon             : 'warning',
         title            : opciones.title            ?? 'Advertencia',
@@ -134,6 +135,7 @@ function mostrarAdvertencia(mensaje, opciones = {}) {
         cancelButtonText : opciones.cancelButtonText  ?? 'Cancelar',
         timer            : opciones.timer             ?? undefined,
         timerProgressBar : !!opciones.timer,
-        ..._temaOscuro(), // aplica fondo/color oscuro si el modo oscuro está activo
+        ..._temaOscuro(),                                          // aplica fondo/color oscuro si el modo oscuro está activo
+        ...(esModoOscuro ? { titleColor: '#81c784' } : {}),        // título en verde claro para contraste en modo oscuro
     });
 }

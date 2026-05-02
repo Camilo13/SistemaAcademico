@@ -34,6 +34,10 @@
 
 /* ── Override de variables en modo oscuro ────────────── */
 html.modo-oscuro {
+    /* Tokens semánticos de tipografía — consumidos por componentes que usan estas variables */
+    --color-texto-titulo    : #81c784;   /* títulos en verde suave para contraste sobre fondos oscuros */
+    --color-texto-subtitulo : #94a3b8;   /* subtítulos en gris azulado — idéntico a --acc-text-sec */
+
     --acc-bg-page         : #0d1714;
     --acc-bg-content      : #0d1714;
     --acc-bg-card         : #1a2c26;
@@ -637,4 +641,15 @@ html.modo-oscuro .info-registro {
 html.modo-oscuro .anio-numero,
 html.modo-oscuro .año-referencia {
     color : #e0e0e0;
+}
+
+/* ── strong dentro de avisos info-registro — no hereda el color del contenedor ── */
+html.modo-oscuro .info-registro strong {
+    color : #e0e0e0;
+}
+
+/* ── Badge NOTAS en Materias Inscritas — necesita superficie oscura propia ── */
+html.modo-oscuro .btn-ver-notas {
+    background-color : #1a2c26;
+    color            : #e0e0e0;
 }
