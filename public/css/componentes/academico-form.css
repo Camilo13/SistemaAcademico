@@ -310,6 +310,14 @@
     /* botones tarjeta-accion y tarjeta-peligro en columna en móvil */
     .acciones-secundarias            { flex-direction: column; align-items: stretch; }
     .acciones-secundarias .btn       { width: 100%; justify-content: center; }
+
+    /* input de archivo no desborda el contenedor en móvil */
+    input[type="file"]  { max-width: 100%; box-sizing: border-box; }
+    /* nota de ayuda no desborda ni rompe el layout en móvil */
+    .nota-ayuda         { max-width: 100%; box-sizing: border-box; word-break: break-word; }
+    /* campos de texto y select respetan el ancho del contenedor en móvil */
+    .campo input,
+    .campo select       { max-width: 100%; box-sizing: border-box; }
 }
 
 @media (max-width: 480px) {

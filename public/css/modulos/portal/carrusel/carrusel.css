@@ -143,6 +143,10 @@
 /* ── Responsive ── */
 @media (max-width: 768px) {
     .carrusel-grid { grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); }
+    /* preview más compacto en tablet/móvil — evita que domine el formulario y no desborda */
+    .carrusel-preview     { height: 160px; max-width: 100%; box-sizing: border-box; }
+    /* imagen del preview ocupa todo el espacio sin desborde horizontal */
+    .carrusel-preview img { width: 100%; height: 100%; object-fit: cover; }
 }
 
 @media (max-width: 480px) {
