@@ -225,3 +225,12 @@
     /* Numeración de bloque más compacta en móvil pequeño */
     .num-bloque { width: 22px; height: 22px; font-size: 0.65rem; }
 }
+
+/* ── Modo oscuro ── */
+html.modo-oscuro .fila-pausa td {
+    color : #1a1a1a; /* contraste texto refrigerio en modo oscuro */
+}
+
+html.modo-oscuro .celda-vacia {
+    background-color : #1a2c26; /* celda vacía hereda fondo oscuro — evita parche blanco */
+}
