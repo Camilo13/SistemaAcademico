@@ -231,6 +231,8 @@ html.modo-oscuro .fila-pausa td {
     color : #1a1a1a; /* contraste texto refrigerio en modo oscuro */
 }
 
-html.modo-oscuro .celda-vacia {
-    background-color : #1a2c26; /* celda vacía hereda fondo oscuro — evita parche blanco */
+/* especificidad reforzada — anula fondo blanco heredado de .celda-clase.libre */
+html.modo-oscuro .cuadricula tbody .celda-vacia,
+html.modo-oscuro .cuadricula td.celda-vacia {
+    background-color : #1a2c26 !important;
 }

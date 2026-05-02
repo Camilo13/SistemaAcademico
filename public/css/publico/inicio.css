@@ -359,7 +359,6 @@
     .hero {
         height    : calc(100vh - 56px);
         min-height: calc(100vh - 56px);
-        width     : 100%; /* anula el calc(100% + 3rem) base — evita scroll horizontal en móvil */
     }
     .mision-card h2,
     .vision-card h2      { font-size: 1.35rem; }
