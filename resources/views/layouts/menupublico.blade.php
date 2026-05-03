@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'I.E. Agroambiental Akwe Uus Yat')</title>
 
+    <link rel="stylesheet" href="{{ asset('css/global/tipografia.css') }}">
+
     {{-- ── CSS base del portal público ── --}}
     <link rel="stylesheet" href="{{ asset('css/layout/menupublico.css') }}">
 
