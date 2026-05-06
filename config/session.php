@@ -34,7 +34,8 @@ return [
 
     'lifetime' => (int) env('SESSION_LIFETIME', 20), /* 20 minutos — coincide con el timeout JS */
 
-    'expire_on_close' => env('SESSION_EXPIRE_ON_CLOSE', false),
+    /* la sesión expira al cerrar el navegador — el usuario debe identificarse nuevamente al volver */
+    'expire_on_close' => env('SESSION_EXPIRE_ON_CLOSE', true),
 
     /*
     |--------------------------------------------------------------------------
