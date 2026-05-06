@@ -160,6 +160,9 @@
         };
     </script>
 
+    {{-- timeout de sesión por inactividad --}}
+    <script src="{{ asset('js/global/session-timeout.js') }}"></script>
+
     {{-- ── JS específico de la vista activa ── --}}
     @stack('scripts')
 
