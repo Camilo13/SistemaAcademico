@@ -11,6 +11,11 @@ class LoginController extends Controller
 {
     public function showLoginForm()
     {
+        /* informa al usuario cuando fue redirigido por timeout de inactividad */
+        if (request()->query('sesion') === 'expirada') {
+            session()->flash('info', 'Tu sesión expiró por inactividad. Por favor inicia sesión nuevamente.');
+        }
+
         return view('auth.login');
     }
 
@@ -30,6 +35,9 @@ class LoginController extends Controller
         ])) {
 
             $request->session()->regenerate();
+
+            /* invalida todas las sesiones anteriores del usuario en otros dispositivos */
+            Auth::logoutOtherDevices($request->password);
 
             return match (Auth::user()->rol) {
                 'administrador' => redirect()->route('admin.dashboard'),

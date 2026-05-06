@@ -655,3 +655,9 @@ html.modo-oscuro .btn-ver-notas {
     background-color : #1a2c26;
     color            : #e0e0e0;
 }
+
+/* estilo del modal de sesión en modo oscuro */
+.swal-oscuro {
+    border     : 1px solid #2d4a3e !important;
+    box-shadow : 0 8px 32px rgba(0, 0, 0, 0.5) !important;
+}
