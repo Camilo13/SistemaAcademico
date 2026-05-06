@@ -185,6 +185,7 @@
     display        : flex;
     align-items    : flex-start;
     gap            : 0.5rem;
+    flex-wrap      : wrap;
     margin-top     : 0.6rem;
     padding        : 0.65rem 0.9rem;
     background     : #f0fdf4;
@@ -313,8 +314,12 @@
 
     /* width: 100% explícito — evita que min-content del botón nativo de iOS Safari o Chrome supere el contenedor */
     input[type="file"]  { width: 100%; max-width: 100%; box-sizing: border-box; }
+    /* recorta el texto nativo del input file que desborda en Chrome Android */
+    input[type="file"]  { overflow: hidden; }
     /* nota de ayuda no desborda ni rompe el layout en móvil */
     .nota-ayuda         { max-width: 100%; box-sizing: border-box; word-break: break-word; }
+    /* evita que strong sea tratado como flex item separado en móvil */
+    .nota-ayuda strong  { display: inline; word-break: break-word; white-space: normal; }
     /* campos de texto y select respetan el ancho del contenedor en móvil */
     .campo input,
     .campo select       { max-width: 100%; box-sizing: border-box; }
