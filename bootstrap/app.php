@@ -14,6 +14,11 @@ return Application::configure(basePath: dirname(__DIR__))
         // Trust Railway proxy
         $middleware->trustProxies(at: '*');
 
+        // Requerido para que Auth::logoutOtherDevices() invalide sesiones en otros dispositivos
+        $middleware->web(append: [
+            \Illuminate\Session\Middleware\AuthenticateSession::class,
+        ]);
+
         // Aquí defines alias de middleware personalizados
         $middleware->alias([
             'rol' => \App\Http\Middleware\VerificarRol::class,
