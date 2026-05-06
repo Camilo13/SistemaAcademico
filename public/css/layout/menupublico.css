@@ -98,11 +98,9 @@ footer {
     margin-top: auto;
 }
 
-/* tipografia.css define p { color: #374151 } como regla directa que gana sobre
-   la herencia de color: #fff del footer — este selector la sobreescribe */
-footer p {
-    color: #fff;
-}
+/* especificidad reforzada — gana sobre p { color } de tipografia.css cargado globalmente */
+footer p,
+footer p a { color: #ffffff !important; }
 
 /* ===================================================== */
 /* ================== BOTÓN HAMBURGUESA ================ */
