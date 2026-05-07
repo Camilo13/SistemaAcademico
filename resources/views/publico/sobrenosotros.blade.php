@@ -245,7 +245,7 @@
         <div class="modal-content">
             <span id="cerrarManual" class="cerrar">&times;</span>
             <h2 class="titulo">Manual de Convivencia</h2>
-            <iframe src="{{ asset('manuales/111.pdf') }}"></iframe>
+            <iframe src="{{ asset('manuales/Manual de Buen Vivir - IE A´kwe Üus Yat.pdf') }}"></iframe>
         </div>
     </div>
 

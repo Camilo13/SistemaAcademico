@@ -1,6 +1,6 @@
 @extends('layouts.menupublico')
 
-@section('title', 'Inicio — I.E. Agroambiental Akwe Uus Yat')
+@section('title', 'Inicio — IE Agroambiental A´kwe Üus Yat')
 
 @section('styles')
     <link rel="stylesheet" href="{{ asset('css/publico/inicio.css') }}">
@@ -36,7 +36,7 @@
 
         {{-- Texto sobre la imagen --}}
         <div class="contenedor-hero">
-            <h1 class="hero-titulo">Bienvenidos a la I.E. Agroambiental<br>Akwe Uus Yat La Gaitana</h1>
+            <h1 class="hero-titulo">Bienvenidos a la I.E. Agroambiental<br>A´kwe Üus Yat la Gaitana</h1>
             <p class="hero-subtitulo">Formamos líderes comunitarios en defensa del territorio,<br>
                la identidad cultural y los derechos de nuestro pueblo.</p>
         </div>
@@ -53,7 +53,7 @@
                 <div class="mision-card mv-animado">
                     <h2>Nuestra Misión</h2>
                     <p>
-                        La Institución Educativa Agroambiental A´Kwe Úus Yat del Resguardo
+                        La Institución Educativa Agroambiental A´kwe Üus Yat,Resguardo
                         Indígena La Gaitana <strong>orienta y forma estudiantes con espíritu de
                         liderazgo comunitario</strong>, en defensa del territorio y de la identidad
                         cultural, fundamentada en el marco de la reivindicación del derecho mayor

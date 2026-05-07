@@ -2,16 +2,16 @@
 
 @section('title', 'Contáctanos')
 
-{{-- 🔹 Estilos propios para esta página --}}
+{{--  Estilos propios para esta página --}}
 @section('styles')
     <link rel="stylesheet" href="{{ asset('css/publico/contacto.css') }}">
 @endsection
 
-{{-- 🔹 Contenido principal --}}
+{{--  Contenido principal --}}
 @section('content')
 <main class="contenido-principal">
     
-    {{-- 🟢 Título e introducción --}}
+    {{--  Título e introducción --}}
     <div class="titulo-centrado">
         <h1 class="titulo">Contáctanos</h1>
         <p class="intro">
@@ -20,14 +20,14 @@
         </p>
     </div>
 
-    {{-- 🟢 Sección principal de contacto con 2 columnas --}}
+    {{--  Sección principal de contacto con 2 columnas --}}
     <div class="tarjeta-contacto">
         <div class="columnas">
 
             {{-- 🔹 Columna izquierda: información y redes --}}
             <div class="columna izquierda">
 
-                {{-- 📍 Información de contacto --}}
+                {{--  Información de contacto --}}
                 <div>
                     <h2 class="subtitulo">Información de Contacto</h2>
                     <div class="info-contacto">
@@ -44,7 +44,7 @@
                     </div>
                 </div>
 
-                {{-- 📱 Botón de WhatsApp (solo dentro de la sección) --}}
+                {{--  Botón de WhatsApp (solo dentro de la sección) --}}
                 <div class="espacio-arriba">
                     <h2 class="subtitulo">Comunícate Directamente</h2>
                     <p class="texto">¿Necesitas una respuesta rápida? Envíanos un mensaje por WhatsApp.</p>
@@ -55,7 +55,7 @@
                     </a>
                 </div>
 
-                {{-- 🌐 Redes Sociales --}}
+                {{--  Redes Sociales --}}
                 <div class="espacio-arriba">
                     <h2 class="subtitulo">Síguenos en Redes Sociales</h2>
                     <p class="texto">Mantente al tanto de nuestras noticias y actividades.</p>
@@ -69,7 +69,7 @@
                 </div>
             </div>
 
-            {{-- 🔹 Columna derecha: mapa --}}
+            {{--  Columna derecha: mapa --}}
             <div class="columna derecha">
                 <h2 class="subtitulo">Nuestra Ubicación</h2>
                 <img src="{{ asset('img/contacto/2.jpg') }}" alt="Mapa de Ubicación" class="mapa">
