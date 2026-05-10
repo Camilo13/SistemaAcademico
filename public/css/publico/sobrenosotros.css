@@ -497,3 +497,7 @@ h2 {
     
     .cerrar { font-size: 28px; top: 10px; right: 15px; }
 }
+
+html.modo-oscuro .valor-item p {
+    color: var(--acc-text);
+}

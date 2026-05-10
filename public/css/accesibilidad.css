@@ -37,6 +37,8 @@ html.modo-oscuro {
     /* Tokens semánticos de tipografía — consumidos por componentes que usan estas variables */
     --color-texto-titulo    : #81c784;   /* títulos en verde suave para contraste sobre fondos oscuros */
     --color-texto-subtitulo : #94a3b8;   /* subtítulos en gris azulado — idéntico a --acc-text-sec */
+    --color-texto-cuerpo     : #e2e8f0;
+    --color-texto-secundario : #94a3b8;
 
     --acc-bg-page         : #0d1714;
     --acc-bg-content      : #0d1714;
