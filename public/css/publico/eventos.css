@@ -32,7 +32,7 @@ html.modo-oscuro {
 
 .eventos-hero {
     background : linear-gradient(135deg, var(--ev-verde-prof) 0%, var(--ev-verde-med) 60%, #14532d 100%);
-    padding    : 80px 2rem 100px;
+    padding    : 40px 2rem 70px;
     text-align : center;
     position   : relative;
     overflow   : hidden;
@@ -162,7 +162,7 @@ html.modo-oscuro {
 
 .evento-cabecera {
     background: linear-gradient(135deg, var(--ev-verde-prof), var(--ev-verde-med));
-    padding   : 1.5rem 1.5rem 1rem;
+    padding   : 1rem 1.5rem 0.75rem;
     position  : relative;
     overflow  : hidden;
 }
@@ -209,6 +209,7 @@ html.modo-oscuro {
     font-size  : 0.8rem;
     color      : rgba(255,255,255,.55);
     font-weight: 500;
+    display    : none;
 }
 
 .evento-contenido {
