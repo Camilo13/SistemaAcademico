@@ -178,33 +178,6 @@
 
     </div>
 
-    {{-- ══════════════════════════════════════════
-         TARJETA PELIGRO — Eliminar
-    ══════════════════════════════════════════ --}}
-    <div class="tarjeta-form tarjeta-peligro">
-
-        <h3 class="seccion-titulo-form peligro">
-            <i class="fa-solid fa-triangle-exclamation"></i> Zona de peligro
-        </h3>
-
-        <p class="seccion-desc">
-            Eliminar este evento es una acción <strong>permanente</strong> e irreversible.
-        </p>
-
-        <div class="acciones-secundarias">
-            <form method="POST"
-                  action="{{ route('admin.eventos.destroy', $evento->id) }}"
-                  class="form-eliminar"
-                  data-nombre="{{ $evento->titulo }}">
-                @csrf @method('DELETE')
-                <button type="submit" class="btn btn-peligro">
-                    <i class="fa-solid fa-trash"></i> Eliminar evento
-                </button>
-            </form>
-        </div>
-
-    </div>
-
 </div>
 
 @endsection
