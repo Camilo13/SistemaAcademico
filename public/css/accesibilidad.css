@@ -663,3 +663,22 @@ html.modo-oscuro .btn-ver-notas {
     border     : 1px solid #2d4a3e !important;
     box-shadow : 0 8px 32px rgba(0, 0, 0, 0.5) !important;
 }
+
+/* ── SweetAlert2 — overrides modo oscuro ── */
+html.modo-oscuro .swal2-popup {
+    background : #1a2c26;
+    color      : #e2e8f0;
+}
+
+html.modo-oscuro .swal2-html-container,
+html.modo-oscuro .swal2-content {
+    color: #e2e8f0 !important;
+}
+
+html.modo-oscuro .swal2-title {
+    color: #81c784;
+}
+
+html.modo-oscuro .swal2-timer-progress-bar {
+    background: #22c55e;
+}
