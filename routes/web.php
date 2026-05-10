@@ -302,6 +302,8 @@ Route::middleware(['auth', 'rol:administrador'])
         Route::patch('/{evento}/activar',      [EventosController::class, 'activar'])   ->name('activar');
         Route::patch('/{evento}/desactivar',   [EventosController::class, 'desactivar'])->name('desactivar');
 
+        Route::delete('/bulk', [EventosController::class, 'destroyBulk'])->name('destroyBulk');
+
         Route::get('/{evento}/edit',           [EventosController::class, 'edit'])      ->name('edit');
         Route::put('/{evento}',                [EventosController::class, 'update'])    ->name('update');
         Route::delete('/{evento}',             [EventosController::class, 'destroy'])   ->name('destroy');

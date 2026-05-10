@@ -10,7 +10,6 @@
 
 <div class="contenedor-modulo">
 
-    {{-- ── Cabecera ── --}}
     <div class="cabecera">
         <div class="cabecera-info">
             <h2>
@@ -26,7 +25,6 @@
         </a>
     </div>
 
-    {{-- ── Error general ── --}}
     @error('error_evento')
         <div class="alerta-error">
             <i class="fa-solid fa-triangle-exclamation"></i>
@@ -34,39 +32,69 @@
         </div>
     @enderror
 
-    {{-- ── Tabla ── --}}
+    <div class="barra-bulk"
+         data-bulk-modo="usuarios"
+         data-entidad="evento(s)"
+         data-url-editar="{{ route('admin.eventos.edit', ':id') }}"
+         data-url-destroy="{{ route('admin.eventos.destroy', ':id') }}"
+         data-url-bulk-destroy="{{ route('admin.eventos.destroyBulk') }}">
+
+        <div class="bulk-info">
+            <i class="fa-solid fa-check-square"></i>
+            <span class="bulk-contador">0</span>
+            seleccionado(s)
+        </div>
+
+        <div class="bulk-acciones">
+            <a href="#" class="btn-bulk btn-bulk-editar">
+                <i class="fa-solid fa-pen"></i> Editar
+            </a>
+            <button type="button" class="btn-bulk btn-bulk-eliminar">
+                <i class="fa-solid fa-trash"></i> Eliminar
+            </button>
+            <div class="bulk-separador"></div>
+            <button type="button" class="btn-bulk btn-bulk-limpiar">
+                <i class="fa-solid fa-xmark"></i> Limpiar
+            </button>
+        </div>
+
+    </div>
+
     <div class="tabla-contenedor">
         <table class="tabla">
             <thead>
                 <tr>
+                    <th class="col-check">
+                        <input type="checkbox" class="checkbox-todos" title="Seleccionar todos">
+                    </th>
                     <th>Título</th>
                     <th>Fecha</th>
                     <th>Hora</th>
                     <th>Lugar</th>
                     <th>Estado</th>
-                    <th class="col-acciones">Acciones</th>
                 </tr>
             </thead>
             <tbody>
-
                 @forelse($eventos as $evento)
-                    <tr>
+                    <tr data-id="{{ $evento->id }}" class="fila-seleccionable">
+                        <td class="col-check">
+                            <input type="checkbox"
+                                   class="checkbox-tabla"
+                                   data-id="{{ $evento->id }}"
+                                   title="Seleccionar evento">
+                        </td>
                         <td data-label="Título">
                             <strong>{{ $evento->titulo }}</strong>
                         </td>
-
                         <td data-label="Fecha">
                             {{ $evento->fecha_evento->format('d/m/Y') }}
                         </td>
-
                         <td data-label="Hora">
                             {{ $evento->fecha_evento->format('H:i') }}
                         </td>
-
                         <td data-label="Lugar">
                             {{ $evento->lugar ?? '—' }}
                         </td>
-
                         <td data-label="Estado">
                             @if($evento->activo)
                                 <span class="estado estado-activo">
@@ -78,17 +106,6 @@
                                 </span>
                             @endif
                         </td>
-
-                        <td class="col-acciones">
-                            <div class="acciones">
-                                {{-- Solo editar — eliminar desde el edit ── --}}
-                                <a href="{{ route('admin.eventos.edit', $evento->id) }}"
-                                   class="btn-icono editar"
-                                   title="Editar evento">
-                                    <i class="fa-solid fa-pen"></i>
-                                </a>
-                            </div>
-                        </td>
                     </tr>
                 @empty
                     <tr class="fila-vacia">
@@ -98,12 +115,10 @@
                         </td>
                     </tr>
                 @endforelse
-
             </tbody>
         </table>
     </div>
 
-    {{-- ── Paginación ── --}}
     @if($eventos->hasPages())
         <div class="paginacion">{{ $eventos->links() }}</div>
     @endif
@@ -114,5 +129,6 @@
 
 @push('scripts')
     <script src="{{ asset('js/componentes/academico.js') }}"></script>
+    <script src="{{ asset('js/componentes/acciones-tabla.js') }}"></script>
     <script src="{{ asset('js/modulos/portal/eventos/eventos.js') }}"></script>
 @endpush

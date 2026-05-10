@@ -198,6 +198,28 @@ class EventosController extends Controller
         }
     }
 
+    public function destroyBulk(Request $request)
+    {
+        $request->validate([
+            'ids'   => ['required', 'array', 'min:1'],
+            'ids.*' => ['integer', 'exists:eventos,id'],
+        ]);
+
+        try {
+            $cantidad = count($request->ids);
+            DB::transaction(fn () => Evento::whereIn('id', $request->ids)->delete());
+
+            return redirect()
+                ->route('admin.eventos.index')
+                ->with('exito', "{$cantidad} evento(s) eliminado(s) correctamente.");
+
+        } catch (Throwable $e) {
+            return back()->withErrors([
+                'error_evento' => 'Ocurrió un error al eliminar los eventos.',
+            ]);
+        }
+    }
+
     /*
     |----------------------------------------------------------------------
     | destroy
