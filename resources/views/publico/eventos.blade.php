@@ -30,7 +30,7 @@
                         <div class="evento-fecha-bloque">
                             <span class="dia">{{ $evento->fecha_evento->format('d') }}</span>
                             <div class="mes-anio">
-                                <span class="mes">{{ $evento->fecha_evento->translatedFormat('M') }}</span>
+                                <span class="mes">{{ $evento->fecha_evento->translatedFormat('F') }}</span>
                                 <span class="anio">{{ $evento->fecha_evento->format('Y') }}</span>
                             </div>
                         </div>
