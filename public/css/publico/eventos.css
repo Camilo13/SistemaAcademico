@@ -1,50 +1,121 @@
-/* ============================================================
-   publico/eventos.css
-   Página de eventos institucionales — portal público.
-   Cargado en: publico/eventos.blade.php
-   Dependencias: layout/menupublico.css
-   ============================================================ */
+
 
 :root {
-    --ev-titulo   : #004d2a;
-    --ev-acento   : #388e3c;
-    --ev-texto    : #555555;
-    --ev-fondo    : #fcfcf7;
-    --ev-sombra   : rgba(0, 0, 0, 0.08);
-    --ev-sombra-md: rgba(0, 0, 0, 0.15);
+    --ev-verde-prof  : #065f46;
+    --ev-verde-med   : #166534;
+    --ev-verde-vivo  : #22c55e;
+    --ev-verde-boton : #16a34a;
+    --ev-gris-texto  : #374151;
+    --ev-gris-sec    : #6b7280;
+    --ev-fondo       : #f0fdf4;
+    --ev-blanco      : #ffffff;
+    --ev-sombra-s    : 0 2px 12px rgba(6,95,70,.08);
+    --ev-sombra-m    : 0 8px 32px rgba(6,95,70,.14);
+    --ev-sombra-l    : 0 20px 60px rgba(6,95,70,.18);
 }
 
-/* ── Sección principal ── */
+html.modo-oscuro {
+    --ev-fondo      : #0d1714;
+    --ev-blanco     : #1a2c26;
+    --ev-gris-texto : #e2e8f0;
+    --ev-gris-sec   : #94a3b8;
+    --ev-sombra-s   : 0 2px 12px rgba(0,0,0,.3);
+    --ev-sombra-m   : 0 8px 32px rgba(0,0,0,.4);
+    --ev-sombra-l   : 0 20px 60px rgba(0,0,0,.5);
+}
+
 .seccion-eventos {
-    padding         : 64px 1.5rem 72px;
+    min-height      : 100vh;
     background-color: var(--ev-fondo);
-    text-align      : center;
+    padding-bottom  : 80px;
 }
 
-.contenedor { max-width: 1200px; margin: 0 auto; }
+.eventos-hero {
+    background : linear-gradient(135deg, var(--ev-verde-prof) 0%, var(--ev-verde-med) 60%, #14532d 100%);
+    padding    : 80px 2rem 100px;
+    text-align : center;
+    position   : relative;
+    overflow   : hidden;
+}
 
-/* ── Encabezado ── */
+.eventos-hero::before {
+    content   : '';
+    position  : absolute;
+    inset     : 0;
+    background: radial-gradient(ellipse 80% 60% at 50% 120%, rgba(34,197,94,.18) 0%, transparent 70%);
+}
+
+.eventos-hero::after {
+    content   : '';
+    position  : absolute;
+    bottom    : -2px;
+    left      : 0;
+    right     : 0;
+    height    : 60px;
+    background: var(--ev-fondo);
+    clip-path : ellipse(55% 100% at 50% 100%);
+}
+
+.hero-badge {
+    display       : inline-flex;
+    align-items   : center;
+    gap           : 0.5rem;
+    background    : rgba(255,255,255,.12);
+    border        : 1px solid rgba(255,255,255,.2);
+    color         : #86efac;
+    font-size     : 0.78rem;
+    font-weight   : 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding       : 0.4rem 1rem;
+    border-radius : 50px;
+    margin-bottom : 1.5rem;
+    position      : relative;
+}
+
+.hero-badge::before {
+    content      : '';
+    width        : 6px;
+    height       : 6px;
+    background   : #22c55e;
+    border-radius: 50%;
+    animation    : pulso 2s infinite;
+}
+
+@keyframes pulso {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50%       { opacity: .5; transform: scale(1.4); }
+}
+
 .titulo-seccion {
-    font-size    : 2.4rem;
+    font-size    : clamp(2rem, 5vw, 3.2rem);
     font-weight  : 800;
-    color        : var(--ev-titulo);
-    margin-bottom: 0.75rem;
+    color        : #ffffff;
+    margin-bottom: 1rem;
+    line-height  : 1.1;
+    position     : relative;
 }
 
 .descripcion-seccion {
-    max-width  : 660px;
-    margin     : 0 auto 3rem;
-    font-size  : 1.05rem;
-    color      : var(--ev-texto);
+    max-width : 600px;
+    margin    : 0 auto;
+    font-size : 1.05rem;
+    color     : rgba(255,255,255,.75);
     line-height: 1.7;
+    position  : relative;
 }
 
-/* ── Grid de eventos ── */
+.contenedor {
+    max-width: 1180px;
+    margin   : 0 auto;
+    padding  : 0 1.5rem;
+}
+
 .eventos-grid {
     display              : grid;
     grid-template-columns: 1fr;
-    gap                  : 1.6rem;
-    text-align           : left;
+    gap                  : 1.5rem;
+    margin-top           : 3rem;
 }
 
 @media (min-width: 640px) {
@@ -55,163 +126,214 @@
     .eventos-grid { grid-template-columns: repeat(3, 1fr); }
 }
 
-/* ── Tarjeta de evento ── */
 .evento-card {
-    display      : flex;
-    align-items  : stretch;
-    background   : #ffffff;
-    border-radius: 1.1rem;
-    overflow     : hidden;
-    box-shadow   : 0 6px 20px var(--ev-sombra);
-    border-left  : 5px solid var(--ev-acento);
-    transition   : transform 0.28s ease, box-shadow 0.28s ease;
-    height       : 100%;
+    background    : var(--ev-blanco);
+    border-radius : 1.25rem;
+    overflow      : hidden;
+    box-shadow    : var(--ev-sombra-s);
+    transition    : transform 0.3s cubic-bezier(.34,1.56,.64,1),
+                    box-shadow 0.3s ease;
+    display       : flex;
+    flex-direction: column;
+    position      : relative;
+}
+
+.evento-card::before {
+    content         : '';
+    position        : absolute;
+    top             : 0;
+    left            : 0;
+    right           : 0;
+    height          : 4px;
+    background      : linear-gradient(90deg, var(--ev-verde-prof), var(--ev-verde-vivo));
+    transform       : scaleX(0);
+    transform-origin: left;
+    transition      : transform 0.35s ease;
 }
 
 .evento-card:hover {
-    transform : translateY(-5px);
-    box-shadow: 0 12px 30px var(--ev-sombra-md);
+    transform : translateY(-6px);
+    box-shadow: var(--ev-sombra-l);
 }
 
-/* ── Bloque de fecha ── */
-.evento-fecha {
-    background     : var(--ev-titulo);
-    color          : #ffffff;
-    min-width      : 90px;
-    padding        : 1.2rem 0.8rem;
-    display        : flex;
-    flex-direction : column;
-    align-items    : center;
-    justify-content: center;
-    flex-shrink    : 0;
+.evento-card:hover::before {
+    transform: scaleX(1);
 }
 
-.evento-fecha .dia {
-    font-size  : 2.2rem;
-    font-weight: 800;
-    line-height: 1;
-}
-
-.evento-fecha .mes {
-    font-size     : 0.85rem;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    margin-top    : 0.25rem;
-    opacity       : 0.88;
-}
-
-/* ── Contenido del evento ── */
-.evento-contenido {
-    padding        : 1.2rem 1.3rem;
-    display        : flex;
-    flex-direction : column;
-    gap            : 0.4rem;
-    flex           : 1;
-}
-
-.evento-contenido h3 {
-    font-size    : 1.05rem;
-    font-weight  : 700;
-    color        : var(--ev-titulo);
-    margin       : 0;
-    line-height  : 1.35;
-}
-
-/* ── Meta (hora y lugar) ── */
-.evento-meta {
-    display  : flex;
-    flex-wrap: wrap;
-    gap      : 0.6rem 1rem;
-    font-size: 0.85rem;
-}
-
-.evento-hora  { color: var(--ev-titulo); font-weight: 600; }
-.evento-lugar { color: var(--ev-acento); font-weight: 600; }
-
-/* ── Descripción colapsable ── */
-.evento-descripcion {
-    font-size  : 0.95rem;
-    color      : var(--ev-texto);
-    line-height: 1.65;
-    margin     : 0;
-    position   : relative;
-}
-
-.colapsado {
-    max-height: 72px;
+.evento-cabecera {
+    background: linear-gradient(135deg, var(--ev-verde-prof), var(--ev-verde-med));
+    padding   : 1.5rem 1.5rem 1rem;
+    position  : relative;
     overflow  : hidden;
 }
 
-/* Degradado al pie cuando está colapsado */
-.colapsado::after {
+.evento-cabecera::after {
     content   : '';
     position  : absolute;
-    bottom    : 0;
+    bottom    : -1px;
     left      : 0;
-    width     : 100%;
-    height    : 36px;
-    background: linear-gradient(to bottom, transparent, #ffffff);
+    right     : 0;
+    height    : 24px;
+    background: var(--ev-blanco);
+    clip-path : ellipse(55% 100% at 50% 100%);
 }
 
-/* ── Botón "Ver más / Ver menos" ── */
-.btn-ver-mas {
-    background : none;
-    border     : none;
-    color      : var(--ev-acento);
+.evento-fecha-bloque {
+    display    : flex;
+    align-items: baseline;
+    gap        : 0.5rem;
+}
+
+.dia {
+    font-size  : 3.5rem;
+    font-weight: 900;
+    color      : #ffffff;
+    line-height: 1;
+}
+
+.mes-anio {
+    display       : flex;
+    flex-direction: column;
+    gap           : 0.1rem;
+}
+
+.mes {
+    font-size     : 0.95rem;
+    font-weight   : 700;
+    color         : #86efac;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+.anio {
+    font-size  : 0.8rem;
+    color      : rgba(255,255,255,.55);
+    font-weight: 500;
+}
+
+.evento-contenido {
+    padding       : 1.4rem 1.5rem 1.5rem;
+    display       : flex;
+    flex-direction: column;
+    gap           : 0.75rem;
+    flex          : 1;
+}
+
+.evento-contenido h3 {
+    font-size  : 1.1rem;
     font-weight: 700;
-    font-size  : 0.88rem;
-    cursor     : pointer;
-    padding    : 0.2rem 0;
-    align-self : flex-start;
-    transition : color 0.2s;
-}
-.btn-ver-mas:hover {
-    color          : var(--ev-titulo);
-    text-decoration: underline;
+    color      : var(--ev-verde-prof);
+    line-height: 1.35;
+    margin     : 0;
 }
 
-/* ── Sin eventos ── */
+html.modo-oscuro .evento-contenido h3 {
+    color: #86efac;
+}
+
+.evento-meta {
+    display  : flex;
+    flex-wrap: wrap;
+    gap      : 0.4rem 0.6rem;
+}
+
+.evento-meta span {
+    display      : inline-flex;
+    align-items  : center;
+    gap          : 0.35rem;
+    font-size    : 0.82rem;
+    font-weight  : 600;
+    padding      : 0.25rem 0.7rem;
+    border-radius: 50px;
+}
+
+.evento-hora {
+    background: rgba(6,95,70,.08);
+    color     : var(--ev-verde-med);
+}
+
+html.modo-oscuro .evento-hora {
+    background: rgba(134,239,172,.1);
+    color     : #86efac;
+}
+
+.evento-lugar {
+    background: rgba(22,163,74,.08);
+    color     : var(--ev-verde-boton);
+}
+
+html.modo-oscuro .evento-lugar {
+    background: rgba(34,197,94,.1);
+    color     : #4ade80;
+}
+
+.evento-descripcion {
+    font-size  : 0.92rem;
+    color      : var(--ev-gris-texto);
+    line-height: 1.7;
+    margin     : 0;
+    flex       : 1;
+}
+
+.colapsado {
+    display           : -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow          : hidden;
+}
+
+.btn-ver-mas {
+    background   : none;
+    border       : 1.5px solid var(--ev-verde-boton);
+    color        : var(--ev-verde-boton);
+    font-weight  : 700;
+    font-size    : 0.82rem;
+    cursor       : pointer;
+    padding      : 0.4rem 1rem;
+    border-radius: 50px;
+    align-self   : flex-start;
+    transition   : all 0.2s ease;
+    margin-top   : auto;
+}
+
+.btn-ver-mas:hover {
+    background: var(--ev-verde-boton);
+    color     : #ffffff;
+    transform : translateY(-1px);
+}
+
+html.modo-oscuro .btn-ver-mas {
+    border-color: #4ade80;
+    color       : #4ade80;
+}
+
+html.modo-oscuro .btn-ver-mas:hover {
+    background: #4ade80;
+    color     : #0d1714;
+}
+
 .sin-eventos {
     grid-column: 1 / -1;
     text-align : center;
-    padding    : 3rem 1rem;
-    color      : #9ca3af;
-    font-style : italic;
-    font-size  : 1rem;
+    padding    : 5rem 2rem;
 }
 
-/* ── Responsive ── */
-@media (max-width: 768px) {
-    .seccion-eventos   { padding: 48px 1rem 56px; }
-    .titulo-seccion    { font-size: 2rem; }
+.sin-eventos-icono {
+    font-size    : 3.5rem;
+    color        : var(--ev-gris-sec);
+    margin-bottom: 1rem;
+    display      : block;
+    opacity      : 0.4;
+}
 
-    /* En móvil la tarjeta se apila verticalmente */
-    .evento-card {
-        flex-direction: column;
-        border-left   : none;
-        border-top    : 5px solid var(--ev-acento);
-    }
-
-    .evento-fecha {
-        flex-direction: row;
-        justify-content: center;
-        gap            : 0.5rem;
-        padding        : 1rem;
-        min-width      : unset;
-    }
-
-    .evento-fecha .dia { font-size: 1.8rem; }
+.sin-eventos p {
+    color    : var(--ev-gris-sec);
+    font-size: 1.05rem;
 }
 
 @media (max-width: 480px) {
-    .titulo-seccion    { font-size: 1.7rem; }
-    /* Grid fuerza 1 columna — 2 columnas es estrecho en < 480px */
-    .eventos-grid      { grid-template-columns: 1fr; }
-    /* Día numérico reducido para no dominar la tarjeta apilada */
-    .evento-fecha .dia { font-size: 1.6rem; }
+    .eventos-grid { grid-template-columns: 1fr; }
+    .dia          { font-size: 2.8rem; }
 }
 
-/* Día numérico más compacto en móvil muy pequeño */
-@media (max-width: 360px) {
-    .evento-fecha .dia { font-size: 1.4rem; }
-}
+No tocar ningún otro archivo.

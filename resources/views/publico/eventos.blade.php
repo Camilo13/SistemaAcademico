@@ -9,54 +9,51 @@
 @section('content')
 
 <section class="seccion-eventos">
-    <div class="contenedor">
 
+    <div class="eventos-hero">
+        <span class="hero-badge">Calendario institucional</span>
         <h2 class="titulo-seccion">Eventos Institucionales</h2>
-
         <p class="descripcion-seccion">
-            Conoce las actividades académicas, culturales y comunitarias que fortalecen
-            nuestra identidad y compromiso con el territorio.
+            Conoce las actividades académicas, culturales y comunitarias
+            que fortalecen nuestra identidad y compromiso con el territorio.
         </p>
+    </div>
 
+    <div class="contenedor">
         <div class="eventos-grid">
 
             @forelse ($eventos as $evento)
 
                 <article class="evento-card">
 
-                    {{-- FECHA (DÍA + MES) --}}
-                    <div class="evento-fecha">
-                        <span class="dia">
-                            {{ $evento->fecha_evento->format('d') }}
-                        </span>
-                        <span class="mes">
-                            {{ $evento->fecha_evento->translatedFormat('M') }}
-                        </span>
+                    <div class="evento-cabecera">
+                        <div class="evento-fecha-bloque">
+                            <span class="dia">{{ $evento->fecha_evento->format('d') }}</span>
+                            <div class="mes-anio">
+                                <span class="mes">{{ $evento->fecha_evento->translatedFormat('M') }}</span>
+                                <span class="anio">{{ $evento->fecha_evento->format('Y') }}</span>
+                            </div>
+                        </div>
                     </div>
 
-                    {{-- CONTENIDO --}}
                     <div class="evento-contenido">
 
                         <h3>{{ $evento->titulo }}</h3>
 
-                        {{-- META (HORA Y LUGAR) --}}
                         <div class="evento-meta">
-
                             <span class="evento-hora">
-                                🕒 {{ $evento->fecha_evento->format('H:i') }}
+                                <i class="fa-solid fa-clock"></i>
+                                {{ $evento->fecha_evento->format('H:i') }}
                             </span>
-
                             @if ($evento->lugar)
                                 <span class="evento-lugar">
-                                    📍 {{ $evento->lugar }}
+                                    <i class="fa-solid fa-location-dot"></i>
+                                    {{ $evento->lugar }}
                                 </span>
                             @endif
-
                         </div>
 
-                        <p class="evento-descripcion colapsado">
-                            {{ $evento->descripcion }}
-                        </p>
+                        <p class="evento-descripcion colapsado">{{ $evento->descripcion }}</p>
 
                         <button class="btn-ver-mas">Ver más</button>
 
@@ -67,18 +64,18 @@
             @empty
 
                 <div class="sin-eventos">
-                    No hay eventos próximos en este momento.
+                    <i class="fa-solid fa-calendar-xmark sin-eventos-icono"></i>
+                    <p>No hay eventos próximos en este momento.</p>
                 </div>
 
             @endforelse
 
         </div>
-
     </div>
+
 </section>
 
 @endsection
-
 
 @section('scripts')
 <script src="{{ asset('js/publico/eventos.js') }}"></script>
