@@ -153,13 +153,15 @@ h2 {
 }
 
 .valor-item {
-    background: #ffffff;
+    background: var(--acc-bg-card);
     padding: 30px;
     border-radius: 15px;
     box-shadow: 0 8px 20px var(--color-sombra-suave);
     text-align: center;
     transition: all 0.3s ease;
-    border-bottom: 4px solid transparent; 
+    border-bottom: 4px solid transparent;
+    color: var(--acc-text);
+    border-color: var(--acc-border);
 }
 
 .valor-item:hover {
@@ -178,13 +180,13 @@ h2 {
 .valor-item h3 {
     font-size: 1.5rem;
     /* ⚠️ CAMBIO: Títulos de valores en Verde Primario */
-    color: var(--color-primario); 
+    color: var(--acc-verde-boton);
     margin-bottom: 10px;
 }
 
 .valor-item p {
     font-size: 1rem;
-    color: var(--color-texto-secundario);
+    color: var(--acc-text-sec);
     line-height: 1.5;
 }
 
@@ -248,6 +250,7 @@ h2 {
 .overlay-proyecto h3 {
     font-size: 1.3rem;
     margin-bottom: 5px;
+    color: #fff;
 }
 
 .overlay-proyecto p {
@@ -308,6 +311,7 @@ h2 {
 .overlay-instalacion h3 {
     font-size: 1.3rem;
     margin-bottom: 5px;
+    color: #fff;
 }
 
 .overlay-instalacion p {
