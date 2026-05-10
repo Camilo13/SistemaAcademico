@@ -65,7 +65,7 @@
 
                     {{-- Acción ── --}}
                     <div class="lectura-card-acciones">
-                        <a href="{{ route('biblioteca.materias.recursos.index', $materia->id_materia) }}"
+                        <a href="{{ route('biblioteca.materias.recursos.index', $materia->id) }}"
                            class="btn btn-primario">
                             <i class="fa-solid fa-folder-open"></i>
                             Ver recursos

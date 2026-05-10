@@ -113,7 +113,7 @@ class MateriaController extends Controller
                 'nombre' => [
                     'required', 'string', 'max:150',
                     \Illuminate\Validation\Rule::unique('bibliotecamateria', 'nombre')
-                        ->ignore($materia->id_materia, 'id_materia'),
+                        ->ignore($materia->id),
                 ],
                 'descripcion' => ['nullable', 'string', 'max:500'],
             ],

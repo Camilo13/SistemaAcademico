@@ -29,7 +29,7 @@
                 Materia: <strong>{{ $materia->nombre }}</strong>
             </p>
         </div>
-        <a href="{{ route('admin.biblioteca.materias.recursos.create', $materia->id_materia) }}"
+        <a href="{{ route('admin.biblioteca.materias.recursos.create', $materia->id) }}"
            class="btn btn-primario">
             <i class="fa-solid fa-plus"></i> Nuevo Recurso
         </a>
@@ -51,7 +51,7 @@
         <div class="tarjeta-form recurso-vacio">
             <i class="fa-solid fa-file-circle-plus fa-2x"></i>
             <p>No hay recursos registrados para esta materia.</p>
-            <a href="{{ route('admin.biblioteca.materias.recursos.create', $materia->id_materia) }}"
+            <a href="{{ route('admin.biblioteca.materias.recursos.create', $materia->id) }}"
                class="btn btn-primario btn-sm">
                 <i class="fa-solid fa-plus"></i> Agregar primer recurso
             </a>
@@ -107,7 +107,7 @@
                         </a>
 
                         {{-- Editar: .btn-neutro (gris) ── --}}
-                        <a href="{{ route('admin.biblioteca.materias.recursos.edit', [$materia->id_materia, $recurso->id_recurso]) }}"
+                        <a href="{{ route('admin.biblioteca.materias.recursos.edit', [$materia->id, $recurso->id]) }}"
                            class="btn btn-neutro btn-sm">
                             <i class="fa-solid fa-pen"></i> Editar
                         </a>

@@ -27,7 +27,7 @@
 
         <form id="form-recurso"
               method="POST"
-              action="{{ route('admin.biblioteca.materias.recursos.store', $materia->id_materia) }}"
+              action="{{ route('admin.biblioteca.materias.recursos.store', $materia->id) }}"
               enctype="multipart/form-data"
               data-form="recurso">
             @csrf
@@ -167,7 +167,7 @@
 
             {{-- Cancelar → .btn-neutro · Guardar → .btn-primario ── --}}
             <div class="acciones-form">
-                <a href="{{ route('admin.biblioteca.materias.recursos.index', $materia->id_materia) }}"
+                <a href="{{ route('admin.biblioteca.materias.recursos.index', $materia->id) }}"
                    class="btn btn-neutro">
                     <i class="fa-solid fa-xmark"></i> Cancelar
                 </a>

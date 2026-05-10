@@ -47,11 +47,11 @@
                         </div>
                         <div>
                             <div class="grupo-card-titulo">
-                                {{ optional($asignacion->materia)->nombre ?? '—' }}
+                                {{ $asignacion->materia->nombre }}
                             </div>
                             <div class="grupo-card-subtitulo">
-                                {{ optional($asignacion->grupo->grado)->nombre ?? '—' }}
-                                — Grupo {{ optional($asignacion->grupo)->nombre ?? '—' }}
+                                {{ $asignacion->grupo->grado->nombre }}
+                                — Grupo {{ $asignacion->grupo->nombre }}
                             </div>
                         </div>
                     </div>
@@ -59,7 +59,7 @@
                     <div class="grupo-card-datos">
                         <div class="grupo-dato">
                             <i class="fa-solid fa-calendar-days"></i>
-                            {{ optional($asignacion->grupo->anioLectivo)->nombre ?? '—' }}
+                            {{ $asignacion->grupo->anioLectivo->nombre }}
                         </div>
                         <div class="grupo-dato">
                             <i class="fa-solid fa-users"></i>

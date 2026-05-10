@@ -122,7 +122,7 @@ class RecursoController extends Controller
             });
 
             return redirect()
-                ->route('admin.biblioteca.materias.recursos.index', $materia->id_materia)
+                ->route('admin.biblioteca.materias.recursos.index', $materia->id)
                 ->with('exito', 'Recurso creado correctamente.');
 
         } catch (Throwable $e) {
@@ -219,7 +219,7 @@ class RecursoController extends Controller
             });
 
             return redirect()
-                ->route('admin.biblioteca.materias.recursos.index', $recurso->id_materia)
+                ->route('admin.biblioteca.materias.recursos.index', $recurso->biblioteca_materia_id)
                 ->with('exito', 'Recurso actualizado correctamente.');
 
         } catch (Throwable $e) {
@@ -278,7 +278,7 @@ class RecursoController extends Controller
         try {
 
             $titulo    = $recurso->titulo;
-            $idMateria = $recurso->id_materia;
+            $idMateria = $recurso->biblioteca_materia_id;
 
             DB::transaction(function () use ($recurso) {
 

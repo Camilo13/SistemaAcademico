@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Builder;
 class BibliotecaMateria extends Model
 {
     protected $table = 'bibliotecamateria';
-    protected $primaryKey = 'id_materia';
     public $timestamps = true;
 
     protected $fillable = [
@@ -31,8 +30,7 @@ class BibliotecaMateria extends Model
     {
         return $this->hasMany(
             Recurso::class,
-            'id_materia',
-            'id_materia'
+            'biblioteca_materia_id'
         );
     }
 

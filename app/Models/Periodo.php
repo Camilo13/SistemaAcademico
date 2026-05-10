@@ -37,7 +37,7 @@ class Periodo extends Model
         static::saving(function (Periodo $periodo) {
 
             // 1️ Validación básica de fechas
-            if ($periodo->fecha_inicio > $periodo->fecha_fin) {
+            if ($periodo->fecha_inicio->greaterThan($periodo->fecha_fin)) {
                 throw new \RuntimeException(
                     'La fecha de inicio no puede ser mayor que la fecha de fin.'
                 );
@@ -54,8 +54,8 @@ class Periodo extends Model
 
             // 3️ Validar que esté dentro del rango del año
             if (
-                $periodo->fecha_inicio < $anio->fecha_inicio ||
-                $periodo->fecha_fin > $anio->fecha_fin
+                $periodo->fecha_inicio->lessThan($anio->fecha_inicio) ||
+                $periodo->fecha_fin->greaterThan($anio->fecha_fin)
             ) {
                 throw new \RuntimeException(
                     'Las fechas del periodo deben estar dentro del rango del año lectivo.'

@@ -8,11 +8,10 @@ use Illuminate\Support\Facades\Storage;
 class Recurso extends Model
 {
     protected $table = 'recurso';
-    protected $primaryKey = 'id_recurso';
     public $timestamps = true;
 
     protected $fillable = [
-        'id_materia',
+        'biblioteca_materia_id',
         'titulo',
         'descripcion',
         'tipo',
@@ -62,8 +61,7 @@ class Recurso extends Model
     {
         return $this->belongsTo(
             BibliotecaMateria::class,
-            'id_materia',
-            'id_materia'
+            'biblioteca_materia_id'
         );
     }
 

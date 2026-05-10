@@ -78,12 +78,12 @@
                     {{-- Acciones ── solo Recursos y Editar, sin Eliminar inline ── --}}
                     <div class="materia-acciones">
 
-                        <a href="{{ route('admin.biblioteca.materias.recursos.index', $materia->id_materia) }}"
+                        <a href="{{ route('admin.biblioteca.materias.recursos.index', $materia->id) }}"
                            class="btn btn-secundario btn-sm">
                             <i class="fa-solid fa-folder-open"></i> Recursos
                         </a>
 
-                        <a href="{{ route('admin.biblioteca.materias.edit', $materia->id_materia) }}"
+                        <a href="{{ route('admin.biblioteca.materias.edit', $materia->id) }}"
                            class="btn btn-neutro btn-sm">
                             <i class="fa-solid fa-pen"></i> Editar
                         </a>

@@ -39,7 +39,7 @@
         </div>
 
         <form method="POST"
-              action="{{ route('admin.biblioteca.materias.update', $materia->id_materia) }}"
+              action="{{ route('admin.biblioteca.materias.update', $materia->id) }}"
               data-form="materia">
             @csrf
             @method('PUT')
@@ -126,7 +126,7 @@
         <div class="acciones-secundarias">
             @if($materia->visible)
                 <form method="POST"
-                      action="{{ route('admin.biblioteca.materias.desactivar', $materia->id_materia) }}"
+                      action="{{ route('admin.biblioteca.materias.desactivar', $materia->id) }}"
                       class="form-desactivar"
                       data-nombre="{{ $materia->nombre }}">
                     @csrf @method('PATCH')
@@ -136,7 +136,7 @@
                 </form>
             @else
                 <form method="POST"
-                      action="{{ route('admin.biblioteca.materias.activar', $materia->id_materia) }}"
+                      action="{{ route('admin.biblioteca.materias.activar', $materia->id) }}"
                       class="form-activar"
                       data-nombre="{{ $materia->nombre }}">
                     @csrf @method('PATCH')
@@ -173,7 +173,7 @@
 
         <div class="acciones-secundarias">
             <form method="POST"
-                  action="{{ route('admin.biblioteca.materias.destroy', $materia->id_materia) }}"
+                  action="{{ route('admin.biblioteca.materias.destroy', $materia->id) }}"
                   class="form-eliminar"
                   data-nombre="{{ $materia->nombre }}">
                 @csrf @method('DELETE')

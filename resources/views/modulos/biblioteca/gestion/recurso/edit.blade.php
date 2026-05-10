@@ -44,7 +44,7 @@
         </div>
 
         <form method="POST"
-              action="{{ route('admin.biblioteca.materias.recursos.update', [$materia->id_materia, $recurso->id_recurso]) }}"
+              action="{{ route('admin.biblioteca.materias.recursos.update', [$materia->id, $recurso->id]) }}"
               enctype="multipart/form-data"
               data-form="recurso">
             @csrf @method('PUT')
@@ -177,7 +177,7 @@
 
             {{-- Cancelar → .btn-neutro · Actualizar → .btn-primario ── --}}
             <div class="acciones-form">
-                <a href="{{ route('admin.biblioteca.materias.recursos.index', $materia->id_materia) }}"
+                <a href="{{ route('admin.biblioteca.materias.recursos.index', $materia->id) }}"
                    class="btn btn-neutro">
                     <i class="fa-solid fa-xmark"></i> Cancelar
                 </a>
@@ -212,7 +212,7 @@
         <div class="acciones-secundarias">
             @if($recurso->visible)
                 <form method="POST"
-                      action="{{ route('admin.biblioteca.materias.recursos.desactivar', [$materia->id_materia, $recurso->id_recurso]) }}"
+                      action="{{ route('admin.biblioteca.materias.recursos.desactivar', [$materia->id, $recurso->id]) }}"
                       class="form-desactivar"
                       data-nombre="{{ $recurso->titulo }}">
                     @csrf @method('PATCH')
@@ -223,7 +223,7 @@
                 </form>
             @else
                 <form method="POST"
-                      action="{{ route('admin.biblioteca.materias.recursos.activar', [$materia->id_materia, $recurso->id_recurso]) }}"
+                      action="{{ route('admin.biblioteca.materias.recursos.activar', [$materia->id, $recurso->id]) }}"
                       class="form-activar"
                       data-nombre="{{ $recurso->titulo }}">
                     @csrf @method('PATCH')
@@ -256,7 +256,7 @@
 
         <div class="acciones-secundarias">
             <form method="POST"
-                  action="{{ route('admin.biblioteca.materias.recursos.destroy', [$materia->id_materia, $recurso->id_recurso]) }}"
+                  action="{{ route('admin.biblioteca.materias.recursos.destroy', [$materia->id, $recurso->id]) }}"
                   class="form-eliminar"
                   data-nombre="{{ $recurso->titulo }}">
                 @csrf @method('DELETE')
