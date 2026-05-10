@@ -162,7 +162,7 @@ html.modo-oscuro {
 
 .evento-cabecera {
     background: linear-gradient(135deg, var(--ev-verde-prof), var(--ev-verde-med));
-    padding   : 1rem 1.5rem 0.75rem;
+    padding   : 1rem 1.5rem 2rem;
     position  : relative;
     overflow  : hidden;
 }
