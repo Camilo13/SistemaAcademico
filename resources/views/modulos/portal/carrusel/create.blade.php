@@ -50,7 +50,7 @@
                         <i class="fa-solid fa-circle-info"></i>
                         Para que la imagen se vea bien en el carrusel, sube una foto tomada en modo horizontal.
                         Las fotos tomadas en modo vertical desde el celular pueden aparecer cortadas.
-                        El tamaño ideal es de <strong>1000 × 720 píxeles</strong>.
+                        El tamaño ideal es de <strong>1105 × 623 píxeles</strong>.
                     </div>
                 </div>
 
