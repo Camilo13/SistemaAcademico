@@ -108,6 +108,11 @@ class BoletinService
 
             // Meta
             'fecha_generacion' => now()->format('d/m/Y'),
+
+            // Compatibilidad con vistas anteriores
+            'grupo'              => $inscripcion->grupo->grado->nombre ?? '—',
+            'materias'           => $materiasNormales,
+            'materias_reprobadas'=> $materiasNormales->where('aprobada', false)->count(),
         ];
     }
 
@@ -145,6 +150,7 @@ class BoletinService
                 'aprobada'               => !is_null($promedio) && $promedio >= 3.0,
                 'desempeno'              => $this->resolverDesempeno($promedio),
                 'desempeno_corto'        => $this->resolverDesempenoCorto($promedio),
+                'estado_academico'       => $this->resolverDesempeno($promedio),
             ];
         })->values();
     }
