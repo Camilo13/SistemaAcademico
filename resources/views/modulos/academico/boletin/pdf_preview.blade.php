@@ -18,10 +18,6 @@
     <button id="btn-imprimir" class="btn btn-primario">
         <i class="fa-solid fa-print"></i> Imprimir / Guardar PDF
     </button>
-    <a href="{{ route('admin.academico.boletin.show', $inscripcion->id) }}"
-       class="btn btn-neutro">
-        <i class="fa-solid fa-arrow-left"></i> Volver
-    </a>
 </div>
 
 {{-- ── Hoja del boletín ── --}}
