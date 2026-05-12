@@ -17,6 +17,7 @@ class RiesgoController extends Controller
 
     public function analizar(Request $request)
     {
+        // ── 1. Validar inputs ────────────────────────────────────────
         $request->validate([
             'excel'   => ['required', 'file', 'mimes:xlsx,xls', 'max:5120'],
             'periodo' => ['required', 'integer', 'in:1,2,3'],
@@ -34,6 +35,7 @@ class RiesgoController extends Controller
             'p3.required'      => 'Ingresa el porcentaje de la Actividad 3.',
         ]);
 
+        // ── 2. Validar porcentajes ───────────────────────────────────
         $suma = (float)$request->p1 + (float)$request->p2 + (float)$request->p3;
         if (round($suma, 2) !== 100.00) {
             return back()->withErrors([
@@ -41,64 +43,94 @@ class RiesgoController extends Controller
             ])->withInput();
         }
 
-        $excelPath = $request->file('excel')->store('ia_temp', 'local');
-        $excelAbs  = storage_path("app/{$excelPath}");
+        try {
+            // ── 3. Guardar Excel temporal ────────────────────────────
+            $excelPath = $request->file('excel')->store('ia_temp', 'local');
+            $excelAbs  = storage_path('app/' . $excelPath);
 
-        $outputDir = storage_path('app/ia_resultados');
-        if (!file_exists($outputDir)) {
-            mkdir($outputDir, 0755, true);
-        }
+            // ── 4. Directorio de salida ──────────────────────────────
+            $outputDir = storage_path('app/ia_resultados');
+            if (!is_dir($outputDir)) {
+                mkdir($outputDir, 0755, true);
+            }
 
-        // En Railway (Nix), PHP no hereda el PATH del sistema.
-        // Forzamos las rutas donde Nix instala Python.
-        $nixPath = '/nix/var/nix/profiles/default/bin:'
-                 . '/root/.nix-profile/bin:'
-                 . '/usr/local/bin:/usr/bin:/bin';
+            // ── 5. Buscar python3 en rutas conocidas de Nix ──────────
+            $pythonBin  = '';
+            $candidates = [
+                '/nix/var/nix/profiles/default/bin/python3',
+                '/root/.nix-profile/bin/python3',
+                '/usr/bin/python3',
+                '/usr/local/bin/python3',
+                'python3',
+            ];
+            foreach ($candidates as $candidate) {
+                if ($candidate === 'python3' || is_executable($candidate)) {
+                    $pythonBin = $candidate;
+                    break;
+                }
+            }
 
-        $pythonScript = base_path('python/modelo_riesgo.py');
-        $p1 = (float)$request->p1 / 100;
-        $p2 = (float)$request->p2 / 100;
-        $p3 = (float)$request->p3 / 100;
+            $pythonScript = base_path('python/modelo_riesgo.py');
+            $p1 = round((float)$request->p1 / 100, 4);
+            $p2 = round((float)$request->p2 / 100, 4);
+            $p3 = round((float)$request->p3 / 100, 4);
 
-        $cmd = sprintf(
-            'export PATH="%s:$PATH" && python3 %s %s %d %.4f %.4f %.4f %s 2>&1',
-            $nixPath,
-            escapeshellarg($pythonScript),
-            escapeshellarg($excelAbs),
-            (int)$request->periodo,
-            $p1, $p2, $p3,
-            escapeshellarg($outputDir)
-        );
+            // ── 6. Construir y ejecutar comando ──────────────────────
+            $cmd = 'export PATH="/nix/var/nix/profiles/default/bin:/root/.nix-profile/bin:/usr/local/bin:/usr/bin:/bin:$PATH"'
+                 . ' && python3'
+                 . ' ' . escapeshellarg($pythonScript)
+                 . ' ' . escapeshellarg($excelAbs)
+                 . ' ' . (int)$request->periodo
+                 . ' ' . $p1
+                 . ' ' . $p2
+                 . ' ' . $p3
+                 . ' ' . escapeshellarg($outputDir)
+                 . ' 2>&1';
 
-        $jsonOutput = shell_exec($cmd);
+            $jsonOutput = shell_exec($cmd);
 
-        Storage::disk('local')->delete($excelPath);
+            // ── 7. Limpiar Excel temporal ────────────────────────────
+            Storage::disk('local')->delete($excelPath);
 
-        $resultado = json_decode($jsonOutput, true);
+            // ── 8. Parsear respuesta ─────────────────────────────────
+            $resultado = json_decode($jsonOutput, true);
 
-        if (!$resultado || $resultado['status'] !== 'ok') {
-            Log::error('IA Pipeline - Error Python', [
-                'python_bin'  => $pythonBin,
-                'script'      => $pythonScript,
-                'script_existe' => file_exists($pythonScript) ? 'SI' : 'NO',
-                'cmd'         => $cmd,
-                'output_raw'  => $jsonOutput,
+            if (!$resultado || ($resultado['status'] ?? '') !== 'ok') {
+                Log::error('IA Pipeline error', [
+                    'script_existe' => file_exists($pythonScript) ? 'SI' : 'NO',
+                    'python_bin'    => $pythonBin,
+                    'output'        => substr($jsonOutput ?? 'null', 0, 600),
+                ]);
+
+                $detalle = $resultado['mensaje']
+                    ?? substr($jsonOutput ?? 'Sin respuesta del script Python.', 0, 400);
+
+                return back()
+                    ->withErrors(['python' => 'Error en el modelo. Detalle: ' . $detalle])
+                    ->withInput();
+            }
+
+            // ── 9. Retornar vista con resultados ─────────────────────
+            return view('modulos.ia.riesgo.index', [
+                'metricas'    => $resultado['metricas'],
+                'estudiantes' => $resultado['estudiantes'],
+                'periodo'     => $request->periodo,
+                'p1'          => $request->p1,
+                'p2'          => $request->p2,
+                'p3'          => $request->p3,
             ]);
 
-            $msg = $resultado['mensaje']
-                ?? ('Error en el modelo. Detalle: ' . substr($jsonOutput ?? 'Sin salida del script', 0, 500));
+        } catch (\Throwable $e) {
+            Log::error('IA Pipeline excepción PHP', [
+                'mensaje' => $e->getMessage(),
+                'linea'   => $e->getLine(),
+                'archivo' => $e->getFile(),
+            ]);
 
-            return back()->withErrors(['python' => $msg])->withInput();
+            return back()
+                ->withErrors(['python' => 'Error interno: ' . $e->getMessage()])
+                ->withInput();
         }
-
-        return view('modulos.ia.riesgo.index', [
-            'metricas'    => $resultado['metricas'],
-            'estudiantes' => $resultado['estudiantes'],
-            'periodo'     => $request->periodo,
-            'p1'          => $request->p1,
-            'p2'          => $request->p2,
-            'p3'          => $request->p3,
-        ]);
     }
 
     public function descargarPdf(): BinaryFileResponse
