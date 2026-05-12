@@ -1,7 +1,7 @@
 {{-- resources/views/modulos/ia/riesgo/index.blade.php --}}
-@extends('layouts.app')
+@extends('layouts.menuadmin')
 
-@section('titulo', 'Análisis Predictivo de Riesgo Académico')
+@section('title', 'Análisis Predictivo de Riesgo Académico')
 
 @push('styles')
 <style>
@@ -170,7 +170,7 @@
 </style>
 @endpush
 
-@section('contenido')
+@section('content')
 <div class="contenedor-ia">
 
     {{-- ── Cabecera ──────────────────────────────────────────────── --}}
