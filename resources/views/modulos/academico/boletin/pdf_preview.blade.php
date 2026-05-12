@@ -3,169 +3,210 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PDF — Boletín {{ $boletin['estudiante']['nombre'] ?? '' }}</title>
-
-    {{-- ── CSS global del sistema (variables + tipografía + botones) ── --}}
+    <title>Boletín — {{ $boletin['estudiante']['nombre'] ?? '' }}</title>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+          crossorigin="anonymous" referrerpolicy="no-referrer">
     <link rel="stylesheet" href="{{ asset('css/global/tipografia.css') }}">
     <link rel="stylesheet" href="{{ asset('css/componentes/botones.css') }}">
-
-    {{-- Font Awesome --}}
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
-    {{-- CSS específico de esta vista --}}
-    <link rel="stylesheet" href="{{ asset('css/modulos/estudiante/boletin/pdf.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/modulos/academico/boletin/pdf.css') }}">
 </head>
 <body>
 
-<div class="contenedor-pdf">
+{{-- ── Barra de acciones (se oculta al imprimir) ── --}}
+<div class="barra-pdf">
+    <button id="btn-imprimir" class="btn btn-primario">
+        <i class="fa-solid fa-print"></i> Imprimir / Guardar PDF
+    </button>
+    <a href="{{ route('admin.academico.boletin.show', $inscripcion->id) }}"
+       class="btn btn-neutro">
+        <i class="fa-solid fa-arrow-left"></i> Volver
+    </a>
+</div>
 
-    {{-- ── Barra de acciones (se oculta al imprimir) ── --}}
-    <div class="barra-pdf">
-        <button class="btn btn-primario" onclick="window.print()">
-            <i class="fa-solid fa-print"></i> Imprimir / Guardar PDF
-        </button>
+{{-- ── Hoja del boletín ── --}}
+<div class="hoja-boletin">
+
+    {{-- ENCABEZADO INSTITUCIONAL --}}
+    <div class="enc-institucional">
+        <div class="enc-logo">
+            <div class="enc-escudo">
+                <i class="fa-solid fa-school"></i>
+            </div>
+        </div>
+        <div class="enc-texto">
+            <h1>{{ $boletin['institucion']['nombre'] }}</h1>
+            <p>{{ $boletin['institucion']['resolucion'] }}</p>
+            <p>{{ $boletin['sede'] }} — {{ $boletin['institucion']['municipio'] }}, {{ $boletin['institucion']['departamento'] }}</p>
+        </div>
+        <div class="enc-meta">
+            <table class="tabla-meta">
+                <tr>
+                    <td>FECHA</td>
+                    <td><strong>{{ $boletin['fecha_generacion'] }}</strong></td>
+                </tr>
+                <tr>
+                    <td>AÑO</td>
+                    <td><strong>{{ $boletin['anio_lectivo'] }}</strong></td>
+                </tr>
+                <tr>
+                    <td>GRADO</td>
+                    <td><strong>{{ $boletin['grado'] }}</strong></td>
+                </tr>
+            </table>
+        </div>
     </div>
 
-    {{-- ── Hoja del boletín ── --}}
-    <div class="hoja-boletin">
+    {{-- TÍTULO DEL INFORME --}}
+    <div class="inf-titulo">
+        INFORME ACADÉMICO — AÑO LECTIVO {{ $boletin['anio_lectivo'] }}
+    </div>
 
-        {{-- Encabezado institucional --}}
-        <div class="encabezado-inst">
-            <div class="encabezado-inst-texto">
-                <h1>I.E. Akwe Uus Yat</h1>
-                <p>Sistema de Gestión Académica</p>
-            </div>
-            <div style="text-align:right;">
-                <div class="encabezado-titulo">Boletín de Calificaciones</div>
-                <p style="font-size:var(--texto-xs);color:var(--color-texto-secundario);margin-top:0.2rem;">
-                    Año Lectivo: {{ $boletin['anio_lectivo'] ?? '—' }}
-                </p>
-            </div>
+    {{-- DATOS DEL ESTUDIANTE --}}
+    <div class="datos-estudiante">
+        <div class="dato-item">
+            <span>ESTUDIANTE</span>
+            <strong>{{ $boletin['estudiante']['nombre'] }}</strong>
         </div>
-
-        {{-- Datos del estudiante --}}
-        <div class="datos-estudiante">
-            <div class="dato-fila">
-                <span>Estudiante</span>
-                <strong>{{ $boletin['estudiante']['nombre'] ?? '—' }}</strong>
-            </div>
-            <div class="dato-fila">
-                <span>Grupo</span>
-                <strong>{{ $boletin['grupo'] ?? '—' }}</strong>
-            </div>
-            <div class="dato-fila">
-                <span>Fecha generación</span>
-                <strong>{{ \Carbon\Carbon::parse($boletin['fecha_generacion'])->format('d/m/Y') }}</strong>
-            </div>
+        <div class="dato-item">
+            <span>GRADO</span>
+            <strong>{{ $boletin['grado'] }}</strong>
         </div>
+        <div class="dato-item">
+            <span>PUESTO</span>
+            <strong>{{ $boletin['puesto'] ?? '—' }}</strong>
+        </div>
+        <div class="dato-item">
+            <span>PROMEDIO GENERAL</span>
+            <strong>
+                {{ !is_null($boletin['promedio_general'])
+                    ? number_format($boletin['promedio_general'], 2)
+                    : '—' }}
+            </strong>
+        </div>
+    </div>
 
-        {{-- Tabla de materias --}}
-        <table class="tabla-boletin">
-            <thead>
-                <tr>
-                    <th>Materia</th>
-                    <th>Docente</th>
-                    <th>Promedio</th>
-                    <th>Desempeño</th>
-                    <th>Resultado</th>
+    {{-- TABLA DE MATERIAS --}}
+    <table class="tabla-boletin">
+        <thead>
+            <tr>
+                <th class="col-materia">ÁREA / MATERIA</th>
+                <th class="col-hi">H.I</th>
+                <th class="col-desc">MADURACIÓN DEL FRUTO</th>
+                @foreach($boletin['periodos'] as $periodo)
+                    <th class="col-periodo">P{{ $periodo->numero }}</th>
+                @endforeach
+                @for($i = $boletin['periodos']->count() + 1; $i <= 3; $i++)
+                    <th class="col-periodo">P{{ $i }}</th>
+                @endfor
+                <th class="col-definitiva">DEF.</th>
+                <th class="col-desempeno">DESEMPEÑO</th>
+            </tr>
+        </thead>
+        <tbody>
+            @forelse($boletin['materias_normales'] as $materia)
+                <tr class="{{ !$materia['aprobada'] && !is_null($materia['promedio']) ? 'fila-baja' : '' }}">
+                    <td class="col-materia">
+                        <strong>{{ $materia['materia_nombre'] }}</strong>
+                    </td>
+                    <td class="col-hi col-centrado">
+                        {{ $materia['intensidad_horaria'] ?? '—' }}
+                    </td>
+                    <td class="col-desc">
+                        {{ $materia['descripcion'] ?? '' }}
+                    </td>
+                    @foreach($boletin['periodos'] as $periodo)
+                        <td class="col-periodo col-centrado">
+                            @php $n = $materia['notas_por_periodo'][$periodo->numero] ?? null; @endphp
+                            {{ !is_null($n) ? number_format($n, 1) : '—' }}
+                        </td>
+                    @endforeach
+                    @for($i = $boletin['periodos']->count() + 1; $i <= 3; $i++)
+                        <td class="col-periodo col-centrado">—</td>
+                    @endfor
+                    <td class="col-definitiva col-centrado">
+                        {{ !is_null($materia['promedio']) ? number_format($materia['promedio'], 2) : '—' }}
+                    </td>
+                    <td class="col-desempeno col-centrado des-{{ strtolower($materia['desempeno']) }}">
+                        {{ $materia['desempeno'] }}
+                    </td>
                 </tr>
-            </thead>
-            <tbody>
-                @forelse($boletin['materias'] as $materia)
-                    @php
-                        $cls = match($materia['estado_academico']) {
-                            'Desempeño Superior' => 'des-superior',
-                            'Desempeño Alto'     => 'des-alto',
-                            'Desempeño Básico'   => 'des-basico',
-                            'Desempeño Bajo'     => 'des-bajo',
-                            default              => '',
-                        };
-                    @endphp
-                    <tr class="{{ $materia['aprobada'] ? '' : 'fila-reprobada' }}">
-                        <td><strong>{{ $materia['materia_nombre'] }}</strong></td>
-                        <td>{{ $materia['docente_nombre'] }}</td>
-                        <td>
-                            @if(!is_null($materia['promedio']))
-                                <span class="nota-chip {{ $materia['aprobada'] ? 'aprobada' : 'reprobada' }}">
-                                    {{ number_format($materia['promedio'], 2) }}
-                                </span>
-                            @else
-                                <span class="texto-tenue" style="font-style:italic;">Sin notas</span>
-                            @endif
-                        </td>
-                        <td>
-                            <span class="badge-desempeno {{ $cls }}">
-                                {{ $materia['estado_academico'] }}
-                            </span>
-                        </td>
-                        <td>
-                            @if(!is_null($materia['promedio']))
-                                <span class="nota-chip {{ $materia['aprobada'] ? 'aprobada' : 'reprobada' }}">
-                                    {{ $materia['aprobada'] ? 'Aprobada' : 'Reprobada' }}
-                                </span>
-                            @else
-                                <span class="texto-tenue" style="font-style:italic;">Sin calificar</span>
-                            @endif
-                        </td>
-                    </tr>
-                @empty
-                    <tr>
-                        <td colspan="5" class="sin-registros">
-                            No hay materias activas registradas.
-                        </td>
-                    </tr>
-                @endforelse
-            </tbody>
-        </table>
+            @empty
+                <tr>
+                    <td colspan="7" class="sin-registros">Sin materias registradas.</td>
+                </tr>
+            @endforelse
+        </tbody>
+    </table>
 
-        {{-- Resultado final --}}
-        <div class="resultado-final">
-            <span class="resultado-texto">
-                Promedio general:
-                <strong>
-                    {{ !is_null($boletin['promedio_general'])
-                        ? number_format($boletin['promedio_general'], 2)
-                        : '—' }}
-                </strong>
-            </span>
-            <span class="resultado-estado {{ $boletin['aprobado_anio'] ? 'estado-aprobado' : 'estado-reprobado' }}">
-                {{ $boletin['aprobado_anio'] ? 'APROBADO' : 'REPROBADO' }}
-            </span>
+    {{-- PROMEDIOS Y RESULTADO --}}
+    <div class="resultado-fila">
+        <div class="resultado-item">
+            <span>PROMEDIO GENERAL:</span>
+            <strong>
+                {{ !is_null($boletin['promedio_general'])
+                    ? number_format($boletin['promedio_general'], 2)
+                    : '—' }}
+            </strong>
         </div>
-
-        {{-- Escala de desempeño --}}
-        <table class="tabla-boletin tabla-escala">
-            <thead>
-                <tr><th colspan="2">Escala de Desempeño</th></tr>
-            </thead>
-            <tbody>
-                <tr><td>4.5 – 5.0</td><td>Desempeño Superior</td></tr>
-                <tr><td>4.0 – 4.4</td><td>Desempeño Alto</td></tr>
-                <tr><td>3.0 – 3.9</td><td>Desempeño Básico</td></tr>
-                <tr><td>0.0 – 2.9</td><td>Desempeño Bajo</td></tr>
-            </tbody>
-        </table>
-
-        {{-- Firmas --}}
-        <div class="firma-seccion">
-            <div class="firma-item">
-                <div class="firma-linea"></div>
-                <div class="firma-nombre">Rector(a)</div>
-            </div>
-            <div class="firma-item">
-                <div class="firma-linea"></div>
-                <div class="firma-nombre">Director(a) de Grupo</div>
-            </div>
-            <div class="firma-item">
-                <div class="firma-linea"></div>
-                <div class="firma-nombre">Padre / Acudiente</div>
-            </div>
+        <div class="resultado-item">
+            <span>PUESTO:</span>
+            <strong>{{ $boletin['puesto'] ?? '—' }}</strong>
         </div>
+        <div class="resultado-estado {{ $boletin['aprobado_anio'] ? 'aprobado' : 'reprobado' }}">
+            {{ $boletin['aprobado_anio'] ? 'PROMOVIDO' : 'NO PROMOVIDO' }}
+        </div>
+    </div>
 
-    </div>{{-- fin .hoja-boletin --}}
+    {{-- ESCALA DE DESEMPEÑO --}}
+    <div class="escala-fila">
+        <span><strong>Escala:</strong></span>
+        <span>4.5–5.0 → <strong>Superior</strong></span>
+        <span>4.0–4.4 → <strong>Alto</strong></span>
+        <span>3.0–3.9 → <strong>Básico</strong></span>
+        <span>0.0–2.9 → <strong>Bajo</strong></span>
+    </div>
+
+    {{-- OBSERVACIONES --}}
+    @if($boletin['materias_observacion']->isNotEmpty())
+        <div class="observaciones-seccion">
+            <div class="observaciones-titulo">OBSERVACIONES</div>
+            @foreach($boletin['materias_observacion'] as $obs)
+                <div class="observacion-item">
+                    <span class="obs-label">{{ $obs['materia_nombre'] }}:</span>
+                    <span class="obs-texto">{{ $obs['descripcion'] ?? '—' }}</span>
+                </div>
+            @endforeach
+        </div>
+    @endif
+
+    {{-- FIRMAS --}}
+    <div class="firmas-seccion">
+        <div class="firma-item">
+            @if($boletin['firma_rector'])
+                <img src="{{ $boletin['firma_rector'] }}" alt="Firma rector">
+            @else
+                <div class="firma-linea"></div>
+            @endif
+            <div class="firma-cargo">Rector(a)</div>
+        </div>
+        <div class="firma-item">
+            @if($boletin['firma_director'])
+                <img src="{{ $boletin['firma_director'] }}" alt="Firma director">
+            @else
+                <div class="firma-linea"></div>
+            @endif
+            <div class="firma-cargo">{{ $boletin['director_nombre'] }}</div>
+            <div class="firma-subcargo">Director(a) de Grado</div>
+        </div>
+        <div class="firma-item">
+            <div class="firma-linea"></div>
+            <div class="firma-cargo">Padre / Acudiente</div>
+        </div>
+    </div>
 
 </div>
 
+<script src="{{ asset('js/modulos/academico/boletin/pdf.js') }}"></script>
 </body>
 </html>

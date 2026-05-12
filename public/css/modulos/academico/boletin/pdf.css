@@ -1,0 +1,352 @@
+/* ============================================================
+   modulos/academico/boletin/pdf.css
+   Vista: Previsualización e impresión del boletín académico.
+   Orientación: Landscape (horizontal).
+   ============================================================ */
+
+/* ── Configuración de página para impresión ── */
+@page {
+    size        : A4 landscape;
+    margin      : 1cm;
+}
+
+/* ── Cuerpo ── */
+body {
+    font-family : var(--fuente-base);
+    font-size   : 9pt;
+    color       : #1a1a1a;
+    background  : #f3f4f6;
+    margin      : 0;
+    padding     : 1rem;
+}
+
+/* ── Barra de acciones (se oculta al imprimir) ── */
+.barra-pdf {
+    display        : flex;
+    gap            : 0.75rem;
+    justify-content: flex-end;
+    margin-bottom  : 1rem;
+    padding        : 0.75rem 1rem;
+    background     : #fff;
+    border-radius  : 8px;
+    box-shadow     : 0 1px 3px rgba(0,0,0,0.1);
+}
+
+@media print {
+    .barra-pdf { display: none; }
+    body       { background: #fff; padding: 0; }
+}
+
+/* ── Hoja del boletín ── */
+.hoja-boletin {
+    background    : #fff;
+    padding       : 1cm;
+    max-width     : 27cm;
+    margin        : 0 auto;
+    box-shadow    : 0 2px 8px rgba(0,0,0,0.12);
+}
+
+@media print {
+    .hoja-boletin { box-shadow: none; padding: 0; max-width: 100%; }
+}
+
+/* ── Encabezado institucional ── */
+.enc-institucional {
+    display        : flex;
+    align-items    : center;
+    gap            : 1rem;
+    border-bottom  : 2px solid #065f46;
+    padding-bottom : 0.5rem;
+    margin-bottom  : 0.5rem;
+}
+
+.enc-escudo {
+    width           : 48px;
+    height          : 48px;
+    background      : #065f46;
+    border-radius   : 50%;
+    display         : flex;
+    align-items     : center;
+    justify-content : center;
+    color           : #fff;
+    font-size       : 1.4rem;
+    flex-shrink     : 0;
+}
+
+.enc-texto {
+    flex : 1;
+}
+
+.enc-texto h1 {
+    font-size   : 11pt;
+    font-weight : 700;
+    color       : #065f46;
+    margin      : 0 0 0.15rem 0;
+    text-transform: uppercase;
+}
+
+.enc-texto p {
+    font-size : 7.5pt;
+    color     : #4b5563;
+    margin    : 0;
+}
+
+.enc-meta {
+    flex-shrink : 0;
+}
+
+.tabla-meta {
+    font-size      : 7.5pt;
+    border-collapse: collapse;
+}
+
+.tabla-meta td {
+    padding : 0.1rem 0.4rem;
+    border  : 1px solid #d1d5db;
+}
+
+.tabla-meta td:first-child {
+    font-weight  : 600;
+    color        : #374151;
+    background   : #f9fafb;
+    text-transform: uppercase;
+}
+
+/* ── Título del informe ── */
+.inf-titulo {
+    text-align  : center;
+    font-size   : 9.5pt;
+    font-weight : 700;
+    color       : #065f46;
+    background  : #f0fdf4;
+    border      : 1px solid #a7f3d0;
+    border-radius: 4px;
+    padding     : 0.3rem;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* ── Datos del estudiante ── */
+.datos-estudiante {
+    display        : flex;
+    gap            : 0.5rem;
+    margin-bottom  : 0.5rem;
+    flex-wrap      : wrap;
+}
+
+.dato-item {
+    display        : flex;
+    flex-direction : column;
+    border         : 1px solid #d1d5db;
+    border-radius  : 4px;
+    padding        : 0.25rem 0.6rem;
+    flex           : 1;
+    min-width      : 120px;
+}
+
+.dato-item span {
+    font-size      : 6.5pt;
+    color          : #6b7280;
+    text-transform : uppercase;
+    font-weight    : 600;
+    letter-spacing : 0.04em;
+}
+
+.dato-item strong {
+    font-size  : 9pt;
+    color      : #111827;
+}
+
+/* ── Tabla principal de materias ── */
+.tabla-boletin {
+    width           : 100%;
+    border-collapse : collapse;
+    font-size       : 8pt;
+    margin-bottom   : 0.5rem;
+}
+
+.tabla-boletin th {
+    background     : #065f46;
+    color          : #fff;
+    padding        : 0.3rem 0.4rem;
+    text-align     : center;
+    font-size      : 7.5pt;
+    font-weight    : 600;
+    border         : 1px solid #047857;
+    text-transform : uppercase;
+}
+
+.tabla-boletin td {
+    padding       : 0.25rem 0.4rem;
+    border        : 1px solid #d1d5db;
+    vertical-align: middle;
+}
+
+.tabla-boletin tbody tr:nth-child(even) {
+    background : #f9fafb;
+}
+
+.tabla-boletin tbody tr:hover {
+    background : #f0fdf4;
+}
+
+/* Columnas */
+.col-materia   { width: 14%; text-align: left; }
+.col-hi        { width: 3%;  }
+.col-desc      { width: 32%; font-size: 7.5pt; text-align: left; line-height: 1.3; }
+.col-periodo   { width: 5%;  }
+.col-definitiva{ width: 5%;  font-weight: 600; }
+.col-desempeno { width: 8%;  }
+.col-centrado  { text-align: center; }
+
+/* Fila con desempeño bajo */
+.fila-baja {
+    background : #fff7ed !important;
+}
+
+/* Desempeño colores */
+.des-superior { color: #065f46; font-weight: 700; }
+.des-alto     { color: #1d4ed8; font-weight: 700; }
+.des-básico   { color: #92400e; font-weight: 700; }
+.des-bajo     { color: #991b1b; font-weight: 700; }
+
+/* ── Fila de resultado ── */
+.resultado-fila {
+    display     : flex;
+    align-items : center;
+    gap         : 1rem;
+    margin-bottom: 0.4rem;
+    font-size   : 8.5pt;
+}
+
+.resultado-item {
+    display : flex;
+    gap     : 0.4rem;
+    align-items: center;
+}
+
+.resultado-item span {
+    color       : #4b5563;
+    font-weight : 600;
+    text-transform: uppercase;
+    font-size   : 7.5pt;
+}
+
+.resultado-item strong {
+    font-size : 10pt;
+    color     : #111827;
+}
+
+.resultado-estado {
+    padding      : 0.2rem 0.8rem;
+    border-radius: 4px;
+    font-weight  : 700;
+    font-size    : 9pt;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.resultado-estado.aprobado  { background: #d1fae5; color: #065f46; }
+.resultado-estado.reprobado { background: #fee2e2; color: #991b1b; }
+
+/* ── Escala de desempeño ── */
+.escala-fila {
+    display     : flex;
+    gap         : 1rem;
+    font-size   : 7pt;
+    color       : #6b7280;
+    border-top  : 1px solid #e5e7eb;
+    padding-top : 0.3rem;
+    margin-bottom: 0.4rem;
+    flex-wrap   : wrap;
+}
+
+.escala-fila strong { color: #374151; }
+
+/* ── Observaciones ── */
+.observaciones-seccion {
+    border        : 1px solid #d1d5db;
+    border-radius : 4px;
+    padding       : 0.4rem 0.6rem;
+    margin-bottom : 0.5rem;
+    font-size     : 8pt;
+}
+
+.observaciones-titulo {
+    font-weight    : 700;
+    font-size      : 8pt;
+    color          : #065f46;
+    text-transform : uppercase;
+    margin-bottom  : 0.3rem;
+    border-bottom  : 1px solid #a7f3d0;
+    padding-bottom : 0.2rem;
+}
+
+.observacion-item {
+    margin-bottom : 0.2rem;
+    line-height   : 1.4;
+}
+
+.obs-label {
+    font-weight : 600;
+    color       : #374151;
+    margin-right: 0.3rem;
+}
+
+.obs-texto {
+    color : #4b5563;
+}
+
+/* ── Sección de firmas ── */
+.firmas-seccion {
+    display         : flex;
+    justify-content : space-around;
+    margin-top      : 1rem;
+    padding-top     : 0.5rem;
+    border-top      : 1px solid #e5e7eb;
+    gap             : 1rem;
+}
+
+.firma-item {
+    display        : flex;
+    flex-direction : column;
+    align-items    : center;
+    gap            : 0.3rem;
+    flex           : 1;
+    max-width      : 160px;
+}
+
+.firma-item img {
+    max-width  : 120px;
+    max-height : 50px;
+    object-fit : contain;
+}
+
+.firma-linea {
+    width         : 100%;
+    border-bottom : 1px solid #374151;
+    height        : 40px;
+}
+
+.firma-cargo {
+    font-size   : 7.5pt;
+    font-weight : 600;
+    color       : #374151;
+    text-align  : center;
+    text-transform: uppercase;
+}
+
+.firma-subcargo {
+    font-size : 7pt;
+    color     : #6b7280;
+    text-align: center;
+}
+
+/* ── Celda sin registros ── */
+.sin-registros {
+    text-align  : center;
+    color       : #9ca3af;
+    font-style  : italic;
+    padding     : 1rem;
+}

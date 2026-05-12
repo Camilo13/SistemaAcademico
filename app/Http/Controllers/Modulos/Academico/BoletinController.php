@@ -22,7 +22,7 @@ class BoletinController extends Controller
     */
     public function show(Inscripcion $inscripcion)
     {
-        $boletin = $this->boletinService->generarBoletinAnual($inscripcion);
+        $boletin = $this->boletinService->generarBoletin($inscripcion);
 
         return view('modulos.academico.boletin.show', [
             'inscripcion' => $inscripcion,
@@ -30,27 +30,9 @@ class BoletinController extends Controller
         ]);
     }
 
-    /*
-    |----------------------------------------------------------------------
-    | exportarPdf — Previsualización / descarga PDF
-    |----------------------------------------------------------------------
-    | Para descarga real: composer require barryvdh/laravel-dompdf
-    | y descomentar el bloque PDF::loadView() de abajo.
-    |----------------------------------------------------------------------
-    */
     public function exportarPdf(Inscripcion $inscripcion)
     {
-        $boletin = $this->boletinService->generarBoletinAnual($inscripcion);
-
-        /*
-        |------------------------------------------------------------------
-        | $pdf = \Barryvdh\DomPDF\Facade\Pdf::loadView(
-        |     'modulos.academico.boletin.pdf',
-        |     compact('boletin', 'inscripcion')
-        | );
-        | return $pdf->download('boletin_' . $inscripcion->id . '.pdf');
-        |------------------------------------------------------------------
-        */
+        $boletin = $this->boletinService->generarBoletin($inscripcion);
 
         return view('modulos.academico.boletin.pdf_preview', [
             'boletin'     => $boletin,

@@ -2,9 +2,12 @@
 
 namespace App\Services;
 
+use App\Models\Configuracion;
 use App\Models\Inscripcion;
 use App\Models\InscripcionMateria;
+use App\Models\Materia;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Storage;
 
 class BoletinService
 {
@@ -17,149 +20,202 @@ class BoletinService
 
     /*
     |--------------------------------------------------------------------------
-    | GENERAR BOLETÍN ANUAL COMPLETO
+    | GENERAR BOLETÍN
     |--------------------------------------------------------------------------
     */
 
-    public function generarBoletinAnual(
-        Inscripcion $inscripcion
-    ): array {
-
-        /*
-        |--------------------------------------------------------------------------
-        | Carga estructural completa (optimizada)
-        |--------------------------------------------------------------------------
-        */
+    public function generarBoletin(Inscripcion $inscripcion): array
+    {
         $inscripcion->load([
             'estudiante',
-            'grupo.anioLectivo',
+            'grupo.anioLectivo.periodos',
+            'grupo.grado.director',
+            'grupo.grado.sede',
             'inscripcionMaterias.asignacion.materia',
             'inscripcionMaterias.asignacion.docente',
             'inscripcionMaterias.notas',
         ]);
 
-        $materiasActivas = $inscripcion->inscripcionMaterias
-            ->where('estado', 'activa');
+        $periodos        = $inscripcion->grupo->anioLectivo->periodos->sortBy('numero')->values();
+        $materiasActivas = $inscripcion->inscripcionMaterias->where('estado', 'activa');
 
-        $detalleMaterias = $this->construirDetalleMaterias($materiasActivas);
+        // Separar normales y observación
+        $materiasNormales    = $this->construirMaterias($materiasActivas->filter(
+            fn ($m) => ($m->asignacion->materia->tipo ?? 'normal') === 'normal'
+        ), $periodos);
+
+        $materiasObservacion = $this->construirMaterias($materiasActivas->filter(
+            fn ($m) => ($m->asignacion->materia->tipo ?? 'normal') === 'observacion'
+        ), $periodos);
+
+        // Promedio y puesto
+        $promedioGeneral = $this->calculo->calcularPromedioAnual($inscripcion);
+        $puesto          = $this->calcularPuesto($inscripcion, $promedioGeneral);
+
+        // Configuración institucional
+        $config = Configuracion::pluck('valor', 'clave');
+
+        // Firma rector
+        $firmaRector = $config['firma_rector'] ?? null;
+
+        // Firma director de grado
+        $director    = $inscripcion->grupo->grado->director ?? null;
+        $firmaDirector = $director?->firma ?? null;
 
         return [
+            // Datos institucionales
+            'institucion' => [
+                'nombre'      => $config['nombre_institucion'] ?? 'I.E.A. Akwe Uus Yat',
+                'nit'         => $config['nit_institucion']    ?? '',
+                'municipio'   => $config['municipio']          ?? '',
+                'departamento'=> $config['departamento']       ?? '',
+                'resolucion'  => $config['resolucion']         ?? '',
+            ],
 
-            /*
-            |--------------------------------------------------------------------------
-            | DATOS GENERALES
-            |--------------------------------------------------------------------------
-            */
+            // Datos del estudiante
             'estudiante' => [
                 'id'     => $inscripcion->estudiante->id,
                 'nombre' => $inscripcion->estudiante->nombre_completo ?? 'N/A',
             ],
 
-            'grupo' => $inscripcion->grupo->nombre ?? null,
+            // Datos académicos
+            'grado'       => $inscripcion->grupo->grado->nombre     ?? '—',
+            'anio_lectivo'=> $inscripcion->grupo->anioLectivo->nombre ?? '—',
+            'sede'        => $inscripcion->grupo->grado->sede->nombre ?? '—',
 
-            'anio_lectivo' =>
-                $inscripcion->grupo->anioLectivo->nombre ?? null,
+            // Periodos disponibles
+            'periodos' => $periodos,
 
-            'fecha_generacion' => now()->format('Y-m-d H:i:s'),
+            // Materias
+            'materias_normales'    => $materiasNormales,
+            'materias_observacion' => $materiasObservacion,
 
-            /*
-            |--------------------------------------------------------------------------
-            | DETALLE ACADÉMICO
-            |--------------------------------------------------------------------------
-            */
-            'materias' => $detalleMaterias,
+            // Resumen
+            'promedio_general'  => $promedioGeneral,
+            'puesto'            => $puesto,
+            'aprobado_anio'     => $this->calculo->estaAprobadoAnio($inscripcion),
+            'total_materias'    => $materiasNormales->count(),
+            'materias_aprobadas'=> $materiasNormales->where('aprobada', true)->count(),
 
-            /*
-            |--------------------------------------------------------------------------
-            | RESUMEN GENERAL
-            |--------------------------------------------------------------------------
-            */
-            'promedio_general' =>
-                $this->calculo->calcularPromedioAnual($inscripcion),
+            // Firmas
+            'firma_rector'   => $firmaRector
+                ? Storage::disk('public')->url($firmaRector)
+                : null,
+            'firma_director' => $firmaDirector
+                ? Storage::disk('public')->url($firmaDirector)
+                : null,
+            'director_nombre'=> $director?->nombre_completo ?? '—',
 
-            'aprobado_anio' =>
-                $this->calculo->estaAprobadoAnio($inscripcion),
-
-            'total_materias' =>
-                $materiasActivas->count(),
-
-            'materias_aprobadas' =>
-                $detalleMaterias->where('aprobada', true)->count(),
-
-            'materias_reprobadas' =>
-                $detalleMaterias->where('aprobada', false)->count(),
+            // Meta
+            'fecha_generacion' => now()->format('d/m/Y'),
         ];
     }
 
     /*
     |--------------------------------------------------------------------------
-    | CONSTRUIR DETALLE DE MATERIAS
+    | CONSTRUIR DETALLE DE MATERIAS CON NOTAS POR PERIODO
     |--------------------------------------------------------------------------
     */
 
-    protected function construirDetalleMaterias(
-        Collection $materias
+    protected function construirMaterias(
+        Collection $materias,
+        Collection $periodos
     ): Collection {
 
-        return $materias->map(function (
-            InscripcionMateria $materia
-        ) {
+        return $materias->map(function (InscripcionMateria $im) use ($periodos) {
 
-            $promedio =
-                $this->calculo->calcularPromedioMateria($materia);
+            $materia  = $im->asignacion->materia;
+            $promedio = $this->calculo->calcularPromedioMateria($im);
+
+            // Nota por periodo
+            $notasPorPeriodo = [];
+            foreach ($periodos as $periodo) {
+                $nota = $im->notas->firstWhere('periodo_id', $periodo->id);
+                $notasPorPeriodo[$periodo->numero] = $nota ? (float) $nota->nota : null;
+            }
 
             return [
-                'inscripcion_materia_id' => $materia->id,
-
-                'materia_id' =>
-                    $materia->asignacion->materia->id ?? null,
-
-                'materia_nombre' =>
-                    $materia->asignacion->materia->nombre ?? 'N/A',
-
-                'docente_nombre' =>
-                    $materia->asignacion->docente->nombre_completo ?? 'N/A',
-
-                'total_notas' =>
-                    $materia->notas->count(),
-
-                'promedio' => $promedio,
-
-                'aprobada' =>
-                    !is_null($promedio) && $promedio >= 3.0,
-
-                'estado_academico' =>
-                    $this->resolverEstadoAcademico($promedio),
+                'inscripcion_materia_id' => $im->id,
+                'materia_id'             => $materia->id   ?? null,
+                'materia_nombre'         => $materia->nombre ?? 'N/A',
+                'descripcion'            => $materia->descripcion ?? null,
+                'intensidad_horaria'     => $materia->intensidad_horaria ?? null,
+                'notas_por_periodo'      => $notasPorPeriodo,
+                'promedio'               => $promedio,
+                'aprobada'               => !is_null($promedio) && $promedio >= 3.0,
+                'desempeno'              => $this->resolverDesempeno($promedio),
+                'desempeno_corto'        => $this->resolverDesempenoCorto($promedio),
             ];
-        });
+        })->values();
     }
 
     /*
     |--------------------------------------------------------------------------
-    | ESTADO ACADÉMICO DESCRIPTIVO
+    | CALCULAR PUESTO DENTRO DEL GRUPO
     |--------------------------------------------------------------------------
     */
 
-    protected function resolverEstadoAcademico(
-        ?float $promedio
-    ): string {
+    protected function calcularPuesto(
+        Inscripcion $inscripcion,
+        ?float $promedioEstudiante
+    ): ?int {
 
-        if (is_null($promedio)) {
-            return 'Sin calificar';
+        if (is_null($promedioEstudiante)) {
+            return null;
         }
 
-        if ($promedio >= 4.5) {
-            return 'Desempeño Superior';
-        }
+        // Obtener todas las inscripciones activas del mismo grupo
+        $inscripciones = Inscripcion::where('grupo_id', $inscripcion->grupo_id)
+            ->where('estado', 'activa')
+            ->with('inscripcionMaterias.notas')
+            ->get();
 
-        if ($promedio >= 4.0) {
-            return 'Desempeño Alto';
-        }
+        // Calcular promedio de cada estudiante
+        $promedios = $inscripciones->map(function ($ins) {
+            return [
+                'id'       => $ins->id,
+                'promedio' => $this->calculo->calcularPromedioAnual($ins) ?? 0,
+            ];
+        })->sortByDesc('promedio')->values();
 
-        if ($promedio >= 3.0) {
-            return 'Desempeño Básico';
-        }
+        // Encontrar la posición del estudiante actual
+        $posicion = $promedios->search(fn ($item) => $item['id'] === $inscripcion->id);
 
-        return 'Desempeño Bajo';
+        return $posicion !== false ? $posicion + 1 : null;
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | ESTADO DE DESEMPEÑO
+    |--------------------------------------------------------------------------
+    */
+
+    protected function resolverDesempeno(?float $promedio): string
+    {
+        if (is_null($promedio)) return 'Sin calificar';
+        if ($promedio >= 4.5)   return 'Superior';
+        if ($promedio >= 4.0)   return 'Alto';
+        if ($promedio >= 3.0)   return 'Básico';
+        return 'Bajo';
+    }
+
+    protected function resolverDesempenoCorto(?float $promedio): string
+    {
+        if (is_null($promedio)) return '—';
+        if ($promedio >= 4.5)   return 'S';
+        if ($promedio >= 4.0)   return 'A';
+        if ($promedio >= 3.0)   return 'B';
+        return 'J';
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | COMPATIBILIDAD — mantiene el método anterior por si algo lo usa
+    |--------------------------------------------------------------------------
+    */
+
+    public function generarBoletinAnual(Inscripcion $inscripcion): array
+    {
+        return $this->generarBoletin($inscripcion);
     }
 }
