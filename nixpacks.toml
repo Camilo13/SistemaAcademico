@@ -1,11 +1,11 @@
 # Configuracion de build para Railway - Laravel 12
 
-# Extensiones PHP adicionales (GD requerida por intervention/image)
 [phases.setup]
-nixPkgs = ["php82Extensions.gd"]
+nixPkgs = ["php82Extensions.gd", "python311", "python311Packages.pip"]
 
 [phases.build]
 cmds = [
+    "pip install pandas scikit-learn scipy reportlab openpyxl",
     "composer install --no-dev --optimize-autoloader",
     "php artisan config:cache",
     "php artisan route:cache",
