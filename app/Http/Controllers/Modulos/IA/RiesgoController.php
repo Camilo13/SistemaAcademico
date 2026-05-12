@@ -54,30 +54,15 @@ class RiesgoController extends Controller
                 mkdir($outputDir, 0755, true);
             }
 
-            // ── 5. Buscar python3 en rutas conocidas de Nix ──────────
-            $pythonBin  = '';
-            $candidates = [
-                '/nix/var/nix/profiles/default/bin/python3',
-                '/root/.nix-profile/bin/python3',
-                '/usr/bin/python3',
-                '/usr/local/bin/python3',
-                'python3',
-            ];
-            foreach ($candidates as $candidate) {
-                if ($candidate === 'python3' || is_executable($candidate)) {
-                    $pythonBin = $candidate;
-                    break;
-                }
-            }
-
+            // ── 5. Python bin desde variable de entorno ──────────────
+            $python       = env('PYTHON_BIN', '/root/.nix-profile/bin/python3');
             $pythonScript = base_path('python/modelo_riesgo.py');
-            $p1 = round((float)$request->p1 / 100, 4);
-            $p2 = round((float)$request->p2 / 100, 4);
-            $p3 = round((float)$request->p3 / 100, 4);
+            $p1           = round((float)$request->p1 / 100, 4);
+            $p2           = round((float)$request->p2 / 100, 4);
+            $p3           = round((float)$request->p3 / 100, 4);
 
-            // ── 6. Construir y ejecutar comando ──────────────────────
-            $cmd = 'export PATH="/nix/var/nix/profiles/default/bin:/root/.nix-profile/bin:/usr/local/bin:/usr/bin:/bin:$PATH"'
-                 . ' && python3'
+            // ── 6. Construir comando ─────────────────────────────────
+            $cmd = escapeshellcmd($python)
                  . ' ' . escapeshellarg($pythonScript)
                  . ' ' . escapeshellarg($excelAbs)
                  . ' ' . (int)$request->periodo
@@ -87,18 +72,19 @@ class RiesgoController extends Controller
                  . ' ' . escapeshellarg($outputDir)
                  . ' 2>&1';
 
+            // ── 7. Ejecutar Python ───────────────────────────────────
             $jsonOutput = shell_exec($cmd);
 
-            // ── 7. Limpiar Excel temporal ────────────────────────────
+            // ── 8. Limpiar Excel temporal ────────────────────────────
             Storage::disk('local')->delete($excelPath);
 
-            // ── 8. Parsear respuesta ─────────────────────────────────
+            // ── 9. Parsear respuesta ─────────────────────────────────
             $resultado = json_decode($jsonOutput, true);
 
             if (!$resultado || ($resultado['status'] ?? '') !== 'ok') {
                 Log::error('IA Pipeline error', [
                     'script_existe' => file_exists($pythonScript) ? 'SI' : 'NO',
-                    'python_bin'    => $pythonBin,
+                    'python'        => $python,
                     'output'        => substr($jsonOutput ?? 'null', 0, 600),
                 ]);
 
@@ -110,7 +96,7 @@ class RiesgoController extends Controller
                     ->withInput();
             }
 
-            // ── 9. Retornar vista con resultados ─────────────────────
+            // ── 10. Retornar vista con resultados ────────────────────
             return view('modulos.ia.riesgo.index', [
                 'metricas'    => $resultado['metricas'],
                 'estudiantes' => $resultado['estudiantes'],
