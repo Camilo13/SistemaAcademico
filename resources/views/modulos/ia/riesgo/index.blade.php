@@ -214,12 +214,12 @@
             <div class="grid-campos" style="margin-top:1.5rem">
 
                 <div>
-                    <label class="form-label">Corte a analizar</label>
-                    <select name="corte" class="form-control" required>
+                    <label class="form-label">Periodo a analizar</label>
+                    <select name="periodo" class="form-control" required>
                         <option value="">Seleccionar...</option>
-                        <option value="1" {{ old('corte') == 1 ? 'selected' : '' }}>Corte 1</option>
-                        <option value="2" {{ old('corte') == 2 ? 'selected' : '' }}>Corte 2</option>
-                        <option value="3" {{ old('corte') == 3 ? 'selected' : '' }}>Corte 3</option>
+                        <option value="1" {{ old('periodo') == 1 ? 'selected' : '' }}>Corte 1</option>
+                        <option value="2" {{ old('periodo') == 2 ? 'selected' : '' }}>Corte 2</option>
+                        <option value="3" {{ old('periodo') == 3 ? 'selected' : '' }}>Corte 3</option>
                     </select>
                 </div>
 
@@ -294,7 +294,7 @@
         <div class="ia-card">
             <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;margin-bottom:1rem">
                 <p class="ia-card-titulo" style="margin:0">
-                    <i class="fas fa-table"></i> Resultados por estudiante — Corte {{ $corte }}
+                    <i class="fas fa-table"></i> Resultados por estudiante — Periodo {{ $periodo }}
                 </p>
                 <a href="{{ route('ia.riesgo.pdf') }}" class="btn-pdf">
                     <i class="fas fa-file-pdf"></i> Descargar PDF
