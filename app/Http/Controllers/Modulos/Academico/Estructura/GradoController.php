@@ -49,11 +49,12 @@ class GradoController extends Controller
     */
     public function create()
     {
-        $sedes = Sede::orderBy('nombre')->get();
+        $sedes    = Sede::orderBy('nombre')->get();
+        $docentes = \App\Models\User::docentes()->activos()->orderBy('apellidos')->get();
 
         return view(
             'modulos.academico.estructura.grado.create',
-            compact('sedes')
+            compact('sedes', 'docentes')
         );
     }
 
@@ -78,11 +79,12 @@ class GradoController extends Controller
 
             DB::transaction(function () use ($request, $validated) {
                 Grado::create([
-                    'sede_id' => $validated['sede_id'],
-                    'nombre'  => $validated['nombre'],
-                    'nivel'   => $validated['nivel'],
-                    'tipo'    => $validated['tipo'],
-                    'activo'  => $request->boolean('activo', true),
+                    'sede_id'     => $validated['sede_id'],
+                    'nombre'      => $validated['nombre'],
+                    'nivel'       => $validated['nivel'],
+                    'tipo'        => $validated['tipo'],
+                    'director_id' => $validated['director_id'] ?? null,
+                    'activo'      => $request->boolean('activo', true),
                 ]);
             });
 
@@ -105,11 +107,12 @@ class GradoController extends Controller
     */
     public function edit(Grado $grado)
     {
-        $sedes = Sede::orderBy('nombre')->get();
+        $sedes    = Sede::orderBy('nombre')->get();
+        $docentes = \App\Models\User::docentes()->activos()->orderBy('apellidos')->get();
 
         return view(
             'modulos.academico.estructura.grado.edit',
-            compact('grado', 'sedes')
+            compact('grado', 'sedes', 'docentes')
         );
     }
 
@@ -135,10 +138,11 @@ class GradoController extends Controller
 
             DB::transaction(function () use ($grado, $validated) {
                 $grado->update([
-                    'sede_id' => $validated['sede_id'],
-                    'nombre'  => $validated['nombre'],
-                    'nivel'   => $validated['nivel'],
-                    'tipo'    => $validated['tipo'],
+                    'sede_id'     => $validated['sede_id'],
+                    'nombre'      => $validated['nombre'],
+                    'nivel'       => $validated['nivel'],
+                    'tipo'        => $validated['tipo'],
+                    'director_id' => $validated['director_id'] ?? null,
                 ]);
             });
 
@@ -249,8 +253,9 @@ class GradoController extends Controller
                     fn ($q) => $q->where('sede_id', request('sede_id'))
                 ),
             ],
-            'tipo'   => ['required', 'string', 'max:50'],
-            'activo' => ['nullable', 'boolean'],
+            'tipo'        => ['required', 'string', 'max:50'],
+            'director_id' => ['nullable', 'exists:users,id'],
+            'activo'      => ['nullable', 'boolean'],
         ];
     }
 
@@ -270,7 +275,8 @@ class GradoController extends Controller
                     ->where(fn ($q) => $q->where('sede_id', request('sede_id')))
                     ->ignore($grado->id),
             ],
-            'tipo' => ['required', 'string', 'max:50'],
+            'tipo'        => ['required', 'string', 'max:50'],
+            'director_id' => ['nullable', 'exists:users,id'],
         ];
     }
 
@@ -292,6 +298,7 @@ class GradoController extends Controller
             'nivel.max'        => 'El nivel máximo es 11.',
             'nivel.unique'     => 'Ese nivel ya existe en la sede seleccionada.',
             'tipo.required'    => 'Debe indicar el tipo de grado.',
+            'director_id.exists' => 'El docente seleccionado no es válido.',
         ];
     }
 }

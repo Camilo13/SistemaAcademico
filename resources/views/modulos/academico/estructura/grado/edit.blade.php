@@ -123,6 +123,27 @@
                     @enderror
                 </div>
 
+                {{-- Director de grado ── --}}
+                <div class="campo campo-ancho">
+                    <label for="director_id">
+                        <i class="fa-solid fa-chalkboard-user"></i>
+                        Director de grado
+                    </label>
+                    <select id="director_id" name="director_id">
+                        <option value="">Sin director asignado</option>
+                        @foreach($docentes as $docente)
+                            <option value="{{ $docente->id }}"
+                                {{ old('director_id', $grado->director_id) == $docente->id ? 'selected' : '' }}>
+                                {{ $docente->nombre_completo }}
+                            </option>
+                        @endforeach
+                    </select>
+                    <span class="nota-campo">Opcional. El director gestiona el boletín y las materias especiales del grado.</span>
+                    @error('director_id')
+                        <span class="error-campo"><i class="fa-solid fa-circle-exclamation"></i> {{ $message }}</span>
+                    @enderror
+                </div>
+
             </div>
 
             @error('error_grado')
