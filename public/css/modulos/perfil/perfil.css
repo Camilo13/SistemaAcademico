@@ -167,3 +167,32 @@
     }
     .perfil-acciones .btn { width: 100%; justify-content: center; }
 }
+
+/* ── Tarjeta de firma ── */
+.perfil-firma-preview {
+    display        : flex;
+    align-items    : center;
+    gap            : 1rem;
+    flex-wrap      : wrap;
+    margin-bottom  : 0.75rem;
+}
+
+.perfil-firma-img {
+    max-width     : 200px;
+    max-height    : 80px;
+    border        : 1px solid var(--borde-color);
+    border-radius : var(--radio-md);
+    background    : #f9fafb;
+    padding       : 0.4rem;
+    object-fit    : contain;
+}
+
+.perfil-firma-vacia {
+    font-size  : var(--texto-sm);
+    color      : var(--color-texto-secundario);
+    font-style : italic;
+}
+
+.perfil-grid-full {
+    grid-template-columns: 1fr;
+}

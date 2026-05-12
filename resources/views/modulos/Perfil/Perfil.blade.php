@@ -1,4 +1,5 @@
 @extends($layout)
+@use('Illuminate\Support\Facades\Storage')
 
 @section('title', 'Mi Perfil')
 
@@ -196,6 +197,70 @@
         </article>
 
     </div>
+
+    {{-- ── Tarjeta 3: Firma digital (solo docentes y administrador) ── --}}
+    @if(!$user->esEstudiante())
+    <div class="perfil-grid perfil-grid-full">
+
+        <article class="card">
+
+            <h3 class="card-titulo">
+                <i class="fa-solid fa-signature"></i> Firma Digital
+            </h3>
+
+            <p class="perfil-nota-readonly">
+                <i class="fa-solid fa-circle-info"></i>
+                La firma aparecerá en los boletines académicos. Se recomienda imagen PNG con fondo transparente o blanco.
+            </p>
+
+            {{-- Vista previa de firma actual --}}
+            <div class="perfil-firma-preview">
+                @if($user->firma)
+                    <img src="{{ Storage::url($user->firma) }}"
+                         alt="Firma de {{ $user->nombre_completo }}"
+                         class="perfil-firma-img">
+                @else
+                    <span class="perfil-firma-vacia">
+                        <i class="fa-solid fa-image-slash"></i>
+                        Sin firma registrada.
+                    </span>
+                @endif
+            </div>
+
+            {{-- Formulario subida de firma --}}
+            <form method="POST"
+                  action="{{ route('perfil.firma') }}"
+                  enctype="multipart/form-data">
+                @csrf
+
+                <div class="grupo-formulario">
+                    <label for="firma">
+                        <i class="fa-solid fa-upload"></i> SUBIR NUEVA FIRMA
+                    </label>
+                    <input type="file"
+                           id="firma"
+                           name="firma"
+                           accept=".png,.jpg,.jpeg">
+                    <span class="nota-campo">PNG o JPG — máximo 2 MB.</span>
+                    @error('firma')
+                        <span class="error-campo">
+                            <i class="fa-solid fa-circle-exclamation"></i> {{ $message }}
+                        </span>
+                    @enderror
+                </div>
+
+                <div class="perfil-acciones">
+                    <button type="submit" class="btn btn-primario">
+                        <i class="fa-solid fa-floppy-disk"></i> Guardar firma
+                    </button>
+                </div>
+
+            </form>
+
+        </article>
+
+    </div>
+    @endif
 
 </section>
 

@@ -124,6 +124,9 @@ Route::middleware('auth')->group(function () {
     Route::put('/perfil', [PerfilController::class, 'update'])
         ->name('perfil.update');
 
+    Route::post('/perfil/firma', [PerfilController::class, 'firmaUpdate'])
+        ->name('perfil.firma');
+
     /* mantiene viva la sesión cuando el usuario confirma el modal de inactividad */
     Route::get('/ping-sesion', function () {
         return response()->json(['ok' => true]);

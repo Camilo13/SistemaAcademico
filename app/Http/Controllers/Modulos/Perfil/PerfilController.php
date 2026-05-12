@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Modulos\Perfil;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class PerfilController extends Controller
 {
@@ -60,5 +61,42 @@ class PerfilController extends Controller
         return redirect()
             ->route('perfil')
             ->with('exito', 'Información del perfil actualizada correctamente.');
+    }
+
+    /**
+     * Actualiza la firma del usuario autenticado.
+     * Solo disponible para docentes y administrador.
+     */
+    public function firmaUpdate(Request $request)
+    {
+        $user = auth()->user();
+
+        if ($user->esEstudiante()) {
+            abort(403);
+        }
+
+        $request->validate([
+            'firma' => ['required', 'image', 'mimes:png,jpg,jpeg', 'max:2048'],
+        ], [
+            'firma.required' => 'Debe seleccionar una imagen de firma.',
+            'firma.image'    => 'El archivo debe ser una imagen.',
+            'firma.mimes'    => 'Solo se permiten imágenes PNG o JPG.',
+            'firma.max'      => 'La imagen no puede superar 2 MB.',
+        ]);
+
+        // Eliminar firma anterior si existe
+        if ($user->firma && Storage::disk('public')->exists($user->firma)) {
+            Storage::disk('public')->delete($user->firma);
+        }
+
+        // Guardar nueva firma
+        $ruta = $request->file('firma')->store('firmas', 'public');
+
+        $user->firma = $ruta;
+        $user->save();
+
+        return redirect()
+            ->route('perfil')
+            ->with('exito', 'Firma actualizada correctamente.');
     }
 }
