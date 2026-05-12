@@ -19,7 +19,7 @@
             </h2>
             <p class="cabecera-subtitulo">
                 Generado el
-                {{ \Carbon\Carbon::parse($boletin['fecha_generacion'])->format('d/m/Y H:i') }}
+                {{ \Carbon\Carbon::parse($boletin['fecha_generacion_iso'])->format('d/m/Y H:i') }}
             </p>
         </div>
         <div class="cabecera-acciones">
@@ -127,7 +127,7 @@
                         </td>
 
                         <td data-label="Notas" class="col-centrado">
-                            {{ $materia['total_notas'] }}
+                            {{ count(array_filter($materia['notas_por_periodo'], fn($n) => !is_null($n))) }}
                         </td>
 
                         <td data-label="Promedio">
@@ -143,11 +143,11 @@
                         <td data-label="Desempeño">
                             @php
                                 $cls = match($materia['estado_academico']) {
-                                    'Desempeño Superior' => 'des-superior',
-                                    'Desempeño Alto'     => 'des-alto',
-                                    'Desempeño Básico'   => 'des-basico',
-                                    'Desempeño Bajo'     => 'des-bajo',
-                                    default              => 'des-sin',
+                                    'Superior' => 'des-superior',
+                                    'Alto'     => 'des-alto',
+                                    'Básico'   => 'des-basico',
+                                    'Bajo'     => 'des-bajo',
+                                    default    => 'des-sin',
                                 };
                             @endphp
                             <span class="badge-desempeno {{ $cls }}">
