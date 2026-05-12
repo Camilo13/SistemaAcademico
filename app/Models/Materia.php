@@ -13,6 +13,9 @@ class Materia extends Model
 {
     use HasFactory;
 
+    const TIPO_NORMAL      = 'normal';
+    const TIPO_OBSERVACION = 'observacion';
+
     protected $table = 'materias';
 
     /*
@@ -26,6 +29,8 @@ class Materia extends Model
         'codigo',
         'nombre',
         'intensidad_horaria',
+        'descripcion',
+        'tipo',
         'activa',
     ];
 
@@ -38,6 +43,7 @@ class Materia extends Model
     protected $casts = [
         'activa'             => 'boolean',
         'intensidad_horaria' => 'integer',
+        'tipo'               => 'string',
     ];
 
     /*
@@ -94,6 +100,16 @@ class Materia extends Model
     public function scopeOrdenadas(Builder $query): Builder
     {
         return $query->orderBy('nombre');
+    }
+
+    public function scopeNormales(Builder $query): Builder
+    {
+        return $query->where('tipo', self::TIPO_NORMAL);
+    }
+
+    public function scopeObservacion(Builder $query): Builder
+    {
+        return $query->where('tipo', self::TIPO_OBSERVACION);
     }
 
     /*

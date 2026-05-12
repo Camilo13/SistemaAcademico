@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use App\Models\User;
 
 class Grado extends Model
 {
@@ -26,6 +27,7 @@ class Grado extends Model
         'nivel',
         'tipo',
         'activo',
+        'director_id',
     ];
 
     /*
@@ -35,8 +37,9 @@ class Grado extends Model
     */
 
     protected $casts = [
-        'activo' => 'boolean',
-        'nivel'  => 'integer',
+        'activo'      => 'boolean',
+        'nivel'       => 'integer',
+        'director_id' => 'integer',
     ];
 
     /*
@@ -72,6 +75,14 @@ class Grado extends Model
     public function sede(): BelongsTo
     {
         return $this->belongsTo(Sede::class);
+    }
+
+    /**
+     * Docente designado como director de grado.
+     */
+    public function director(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'director_id');
     }
 
     /**

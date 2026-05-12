@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\Models\Grado;
 
 /*
 |--------------------------------------------------------------------------
@@ -66,6 +67,7 @@ class User extends Authenticatable
         'password',
         'rol',
         'activo',
+        'firma',
     ];
 
     /*
@@ -131,6 +133,14 @@ class User extends Authenticatable
     public function inscripciones(): HasMany
     {
         return $this->hasMany(Inscripcion::class, 'estudiante_id');
+    }
+
+    /**
+     * Grados donde este usuario es director.
+     */
+    public function gradosComoDirector(): HasMany
+    {
+        return $this->hasMany(Grado::class, 'director_id');
     }
 
     /*
