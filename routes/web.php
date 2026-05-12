@@ -28,6 +28,7 @@ use App\Http\Controllers\Modulos\Solicitudes\GestionController;
 
 // ── Usuarios (gestión admin) ───────────────────────────────────────────────
 use App\Http\Controllers\Modulos\Admin\UsuarioController;
+use App\Http\Controllers\Modulos\Admin\ConfiguracionController;
 
 // ── Biblioteca Digital — Lectura (docente + estudiante) ───────────────────
 use App\Http\Controllers\Modulos\Biblioteca\Lectura\MateriaController as LecturaMateriaController;
@@ -184,6 +185,13 @@ Route::controller(GestionController::class)
         Route::patch('/{usuario}/password',    'password')    ->name('password');
         Route::delete('/{usuario}',            'destroy')     ->name('destroy');
     });
+
+        // ── Configuración ──
+        Route::prefix('configuracion')->name('configuracion.')->group(function () {
+            Route::get('/',       [ConfiguracionController::class, 'index'])      ->name('index');
+            Route::put('/',       [ConfiguracionController::class, 'update'])     ->name('update');
+            Route::post('/firma', [ConfiguracionController::class, 'firmaUpdate'])->name('firma');
+        });
 
     });
 

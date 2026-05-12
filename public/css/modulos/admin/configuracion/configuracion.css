@@ -1,0 +1,38 @@
+/* ============================================================
+   modulos/admin/configuracion/configuracion.css
+   Vista: Configuración del sistema.
+
+   Reutiliza del layout global:
+     academico-form.css  → .contenedor-modulo, .cabecera,
+                           .tarjeta-form, .grid-campos, .campo,
+                           .campo-ancho, .nota-campo, .acciones-form,
+                           .error-campo, .alerta-error
+     botones.css         → todas las variantes de .btn
+
+   Este archivo aporta solo estilos exclusivos de esta vista.
+   ============================================================ */
+
+/* ── Preview de firma del rector ── */
+.config-firma-preview {
+    display       : flex;
+    align-items   : center;
+    gap           : 1rem;
+    flex-wrap     : wrap;
+    margin-bottom : 0.75rem;
+}
+
+.config-firma-img {
+    max-width     : 200px;
+    max-height    : 80px;
+    border        : 1px solid var(--borde-color);
+    border-radius : var(--radio-md);
+    background    : #f9fafb;
+    padding       : 0.4rem;
+    object-fit    : contain;
+}
+
+.config-firma-vacia {
+    font-size  : var(--texto-sm);
+    color      : var(--color-texto-secundario);
+    font-style : italic;
+}

@@ -204,6 +204,15 @@
                     </ul>
                 </li>
 
+                {{-- ── Configuración ── --}}
+                <li>
+                    <a href="{{ route('admin.configuracion.index') }}"
+                       class="{{ request()->routeIs('admin.configuracion.*') ? 'activo' : '' }}">
+                        <i class="fas fa-sliders icono"></i>
+                        Configuración
+                    </a>
+                </li>
+
             </ul>
         </nav>
 
