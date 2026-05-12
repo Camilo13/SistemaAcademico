@@ -49,11 +49,11 @@ class RiesgoController extends Controller
             mkdir($outputDir, 0755, true);
         }
 
-        // Detectar python3 en el sistema
-        $pythonBin = trim(shell_exec('which python3 2>/dev/null') ?? '');
-        if (empty($pythonBin)) {
-            $pythonBin = trim(shell_exec('which python 2>/dev/null') ?? 'python3');
-        }
+        // En Railway (Nix), PHP no hereda el PATH del sistema.
+        // Forzamos las rutas donde Nix instala Python.
+        $nixPath = '/nix/var/nix/profiles/default/bin:'
+                 . '/root/.nix-profile/bin:'
+                 . '/usr/local/bin:/usr/bin:/bin';
 
         $pythonScript = base_path('python/modelo_riesgo.py');
         $p1 = (float)$request->p1 / 100;
@@ -61,8 +61,8 @@ class RiesgoController extends Controller
         $p3 = (float)$request->p3 / 100;
 
         $cmd = sprintf(
-            '%s %s %s %d %.4f %.4f %.4f %s 2>&1',
-            escapeshellcmd($pythonBin),
+            'export PATH="%s:$PATH" && python3 %s %s %d %.4f %.4f %.4f %s 2>&1',
+            $nixPath,
             escapeshellarg($pythonScript),
             escapeshellarg($excelAbs),
             (int)$request->periodo,
