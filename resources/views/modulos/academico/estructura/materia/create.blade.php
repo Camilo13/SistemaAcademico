@@ -104,6 +104,38 @@
                     @enderror
                 </div>
 
+                {{-- Tipo ── --}}
+                <div class="campo">
+                    <label for="tipo">
+                        <i class="fa-solid fa-list"></i>
+                        Tipo <span>*</span>
+                    </label>
+                    <select id="tipo" name="tipo" required>
+                        <option value="normal"      {{ old('tipo', 'normal') === 'normal'      ? 'selected' : '' }}>Normal</option>
+                        <option value="observacion" {{ old('tipo') === 'observacion' ? 'selected' : '' }}>Especial (Observación)</option>
+                    </select>
+                    <span class="nota-campo">Normal: aparece en la tabla del boletín. Especial: aparece como observación al final.</span>
+                    @error('tipo')
+                        <span class="error-campo"><i class="fa-solid fa-circle-exclamation"></i> {{ $message }}</span>
+                    @enderror
+                </div>
+
+                {{-- Descripción ── --}}
+                <div class="campo campo-ancho">
+                    <label for="descripcion">
+                        <i class="fa-solid fa-align-left"></i>
+                        Descripción <small>(Maduración del Fruto)</small>
+                    </label>
+                    <textarea id="descripcion" name="descripcion"
+                              rows="3"
+                              maxlength="1000"
+                              placeholder="Texto descriptivo que aparecerá en el boletín académico...">{{ old('descripcion') }}</textarea>
+                    <span class="nota-campo">Aparecerá en la columna "Maduración del Fruto" del boletín.</span>
+                    @error('descripcion')
+                        <span class="error-campo">{{ $message }}</span>
+                    @enderror
+                </div>
+
                 {{-- Activa — hidden + checkbox ── --}}
                 <div class="campo-check">
                     <input type="hidden" name="activa" value="0">

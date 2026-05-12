@@ -85,6 +85,8 @@ class MateriaController extends Controller
                     'codigo'             => $validated['codigo'] ?: null,
                     'nombre'             => $validated['nombre'],
                     'intensidad_horaria' => $validated['intensidad_horaria'] ?? null,
+                    'descripcion'        => $validated['descripcion'] ?? null,
+                    'tipo'               => $validated['tipo'],
                     'activa'             => $request->boolean('activa', true),
                 ]);
             });
@@ -142,6 +144,8 @@ class MateriaController extends Controller
                     'codigo'             => $validated['codigo'] ?: null,
                     'nombre'             => $validated['nombre'],
                     'intensidad_horaria' => $validated['intensidad_horaria'] ?? null,
+                    'descripcion'        => $validated['descripcion'] ?? null,
+                    'tipo'               => $validated['tipo'],
                 ]);
             });
 
@@ -249,6 +253,8 @@ class MateriaController extends Controller
                 ),
             ],
             'intensidad_horaria' => ['nullable', 'integer', 'min:1', 'max:40'],
+            'descripcion'        => ['nullable', 'string', 'max:1000'],
+            'tipo'               => ['required', 'in:normal,observacion'],
             'activa'             => ['nullable', 'boolean'],
         ];
     }
@@ -275,6 +281,8 @@ class MateriaController extends Controller
                     ->ignore($materia->id),
             ],
             'intensidad_horaria' => ['nullable', 'integer', 'min:1', 'max:40'],
+            'descripcion'        => ['nullable', 'string', 'max:1000'],
+            'tipo'               => ['required', 'in:normal,observacion'],
         ];
     }
 
@@ -296,6 +304,8 @@ class MateriaController extends Controller
             'intensidad_horaria.integer' => 'La intensidad horaria debe ser un número.',
             'intensidad_horaria.min'     => 'La intensidad mínima es 1 hora.',
             'intensidad_horaria.max'     => 'La intensidad máxima es 40 horas.',
+            'tipo.required'             => 'El tipo de materia es obligatorio.',
+            'tipo.in'                   => 'El tipo debe ser Normal o Especial (observación).',
         ];
     }
 }
