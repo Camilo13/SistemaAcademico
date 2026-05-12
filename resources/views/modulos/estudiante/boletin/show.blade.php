@@ -13,7 +13,7 @@
         <div>
             <h2><i class="fa-solid fa-file-lines"></i> Boletín Académico</h2>
             <p class="cabecera-subtitulo">
-                Generado el {{ \Carbon\Carbon::parse($boletin['fecha_generacion'])->format('d/m/Y H:i') }}
+                Generado el {{ \Carbon\Carbon::parse($boletin['fecha_generacion_iso'])->format('d/m/Y H:i') }}
             </p>
         </div>
         <div style="display:flex;gap:.6rem;flex-wrap:wrap;">
@@ -104,11 +104,11 @@
                 @forelse($boletin['materias'] as $materia)
                     @php
                         $cls = match($materia['estado_academico']) {
-                            'Desempeño Superior' => 'des-superior',
-                            'Desempeño Alto'     => 'des-alto',
-                            'Desempeño Básico'   => 'des-basico',
-                            'Desempeño Bajo'     => 'des-bajo',
-                            default              => 'des-sin',
+                            'Superior' => 'des-superior',
+                            'Alto'     => 'des-alto',
+                            'Básico'   => 'des-basico',
+                            'Bajo'     => 'des-bajo',
+                            default    => 'des-sin',
                         };
                     @endphp
                     <tr class="{{ $materia['aprobada'] ? '' : 'fila-alerta' }}">

@@ -108,6 +108,7 @@ class BoletinService
 
             // Meta
             'fecha_generacion' => now()->format('d/m/Y'),
+            'fecha_generacion_iso' => now()->format('Y-m-d H:i:s'),
 
             // Compatibilidad con vistas anteriores
             'grupo'              => $inscripcion->grupo->grado->nombre ?? '—',
