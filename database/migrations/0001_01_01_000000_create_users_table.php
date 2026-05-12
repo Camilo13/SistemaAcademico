@@ -51,6 +51,10 @@ return new class extends Migration
                   ->default(true)
                   ->index();
 
+            $table->string('firma', 500)
+                  ->nullable()
+                  ->comment('Ruta de la imagen de firma — solo aplica para docentes y administrador');
+
             /* =====================================================
              | Tokens y marcas de tiempo
              ===================================================== */

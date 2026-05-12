@@ -88,6 +88,12 @@ return new class extends Migration
                   ->index()
                   ->comment('Indica si el grado está habilitado');
 
+            $table->foreignId('director_id')
+                  ->nullable()
+                  ->constrained('users')
+                  ->nullOnDelete()
+                  ->comment('Docente designado como director de grado');
+
             /*
             |--------------------------------------------------------------------------
             | Auditoría

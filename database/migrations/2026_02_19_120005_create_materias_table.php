@@ -66,6 +66,15 @@ return new class extends Migration
                   ->nullable()
                   ->comment('Número de horas semanales asignadas');
 
+            $table->text('descripcion')
+                  ->nullable()
+                  ->comment('Texto descriptivo de la materia para el boletín académico');
+
+            $table->string('tipo', 20)
+                  ->default('normal')
+                  ->index()
+                  ->comment('normal = aparece en tabla del boletín | observacion = aparece al final del boletín');
+
             /*
             |--------------------------------------------------------------------------
             | Estado
