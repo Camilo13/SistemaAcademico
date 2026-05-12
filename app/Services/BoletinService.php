@@ -151,6 +151,7 @@ class BoletinService
                 'desempeno'              => $this->resolverDesempeno($promedio),
                 'desempeno_corto'        => $this->resolverDesempenoCorto($promedio),
                 'estado_academico'       => $this->resolverDesempeno($promedio),
+                'docente_nombre'         => $im->asignacion->docente->nombre_completo ?? 'N/A',
             ];
         })->values();
     }
