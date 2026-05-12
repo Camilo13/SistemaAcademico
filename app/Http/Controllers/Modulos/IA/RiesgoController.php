@@ -17,7 +17,6 @@ class RiesgoController extends Controller
 
     public function analizar(Request $request)
     {
-        // ── 1. Validar inputs ────────────────────────────────────────
         $request->validate([
             'excel'   => ['required', 'file', 'mimes:xlsx,xls', 'max:5120'],
             'periodo' => ['required', 'integer', 'in:1,2,3'],
@@ -35,7 +34,6 @@ class RiesgoController extends Controller
             'p3.required'      => 'Ingresa el porcentaje de la Actividad 3.',
         ]);
 
-        // ── 2. Validar porcentajes ───────────────────────────────────
         $suma = (float)$request->p1 + (float)$request->p2 + (float)$request->p3;
         if (round($suma, 2) !== 100.00) {
             return back()->withErrors([
@@ -44,75 +42,20 @@ class RiesgoController extends Controller
         }
 
         try {
-            // ── 3. Guardar Excel temporal ────────────────────────────
-            $excelPath = $request->file('excel')->store('ia_temp', 'local');
-            $excelAbs  = storage_path('app/' . $excelPath);
+            // ── DIAGNÓSTICO: encontrar ruta real de python3 ──────────
+            $d1 = shell_exec('find /nix/store -name "python3" -type f 2>/dev/null | head -3');
+            $d2 = shell_exec('find /nix -name "python3" 2>/dev/null | head -3');
+            $d3 = shell_exec('which python3 2>&1');
+            $d4 = shell_exec('ls /root/.nix-profile/bin/ 2>&1 | grep -i python');
+            $d5 = base_path('python/modelo_riesgo.py');
+            $d6 = file_exists($d5) ? 'SCRIPT SI EXISTE' : 'SCRIPT NO EXISTE';
 
-            // ── 4. Directorio de salida ──────────────────────────────
-            $outputDir = storage_path('app/ia_resultados');
-            if (!is_dir($outputDir)) {
-                mkdir($outputDir, 0755, true);
-            }
+            $info = "FIND NIX STORE: {$d1} | FIND NIX: {$d2} | WHICH: {$d3} | NIX PROFILE: {$d4} | SCRIPT: {$d6} en {$d5}";
 
-            // ── 5. Python bin desde variable de entorno ──────────────
-            $python       = env('PYTHON_BIN', '/root/.nix-profile/bin/python3');
-            $pythonScript = base_path('python/modelo_riesgo.py');
-            $p1           = round((float)$request->p1 / 100, 4);
-            $p2           = round((float)$request->p2 / 100, 4);
-            $p3           = round((float)$request->p3 / 100, 4);
-
-            // ── 6. Construir comando ─────────────────────────────────
-            $cmd = escapeshellcmd($python)
-                 . ' ' . escapeshellarg($pythonScript)
-                 . ' ' . escapeshellarg($excelAbs)
-                 . ' ' . (int)$request->periodo
-                 . ' ' . $p1
-                 . ' ' . $p2
-                 . ' ' . $p3
-                 . ' ' . escapeshellarg($outputDir)
-                 . ' 2>&1';
-
-            // ── 7. Ejecutar Python ───────────────────────────────────
-            $jsonOutput = shell_exec($cmd);
-
-            // ── 8. Limpiar Excel temporal ────────────────────────────
-            Storage::disk('local')->delete($excelPath);
-
-            // ── 9. Parsear respuesta ─────────────────────────────────
-            $resultado = json_decode($jsonOutput, true);
-
-            if (!$resultado || ($resultado['status'] ?? '') !== 'ok') {
-                Log::error('IA Pipeline error', [
-                    'script_existe' => file_exists($pythonScript) ? 'SI' : 'NO',
-                    'python'        => $python,
-                    'output'        => substr($jsonOutput ?? 'null', 0, 600),
-                ]);
-
-                $detalle = $resultado['mensaje']
-                    ?? substr($jsonOutput ?? 'Sin respuesta del script Python.', 0, 400);
-
-                return back()
-                    ->withErrors(['python' => 'Error en el modelo. Detalle: ' . $detalle])
-                    ->withInput();
-            }
-
-            // ── 10. Retornar vista con resultados ────────────────────
-            return view('modulos.ia.riesgo.index', [
-                'metricas'    => $resultado['metricas'],
-                'estudiantes' => $resultado['estudiantes'],
-                'periodo'     => $request->periodo,
-                'p1'          => $request->p1,
-                'p2'          => $request->p2,
-                'p3'          => $request->p3,
-            ]);
+            return back()->withErrors(['python' => $info])->withInput();
+            // ── FIN DIAGNÓSTICO ──────────────────────────────────────
 
         } catch (\Throwable $e) {
-            Log::error('IA Pipeline excepción PHP', [
-                'mensaje' => $e->getMessage(),
-                'linea'   => $e->getLine(),
-                'archivo' => $e->getFile(),
-            ]);
-
             return back()
                 ->withErrors(['python' => 'Error interno: ' . $e->getMessage()])
                 ->withInput();
@@ -122,11 +65,9 @@ class RiesgoController extends Controller
     public function descargarPdf(): BinaryFileResponse
     {
         $pdfPath = storage_path('app/ia_resultados/reporte_analitico.pdf');
-
         if (!file_exists($pdfPath)) {
             abort(404, 'El reporte aún no ha sido generado.');
         }
-
         return response()->download($pdfPath, 'reporte_riesgo_academico.pdf');
     }
 }
