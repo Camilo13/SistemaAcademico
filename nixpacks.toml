@@ -1,18 +1,7 @@
 # Configuracion de build para Railway - Laravel 12
 
 [phases.setup]
-nixPkgs = [
-    "php82Extensions.gd",
-    "python311",
-    "python311Packages.pandas",
-    "python311Packages.scikit-learn",
-    "python311Packages.scipy",
-    "python311Packages.reportlab",
-    "python311Packages.openpyxl"
-]
-
-[variables]
-PYTHON_BIN = "/root/.nix-profile/bin/python3"
+nixPkgs = ["php82Extensions.gd"]
 
 [phases.build]
 cmds = [
