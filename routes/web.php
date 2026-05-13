@@ -681,8 +681,18 @@ Route::middleware(['auth', 'rol:estudiante'])
 
 use App\Http\Controllers\ModeloController;
 
-Route::get('/modelo', [ModeloController::class, 'index'])
-    ->name('modelo.index');
+Route::prefix('admin')
+    ->middleware(['auth'])
+    ->group(function () {
 
-Route::post('/modelo/procesar', [ModeloController::class, 'procesar'])
-    ->name('modelo.procesar');
+        Route::get(
+            '/ia/riesgo',
+            [ModeloController::class, 'index']
+        )->name('admin.ia.riesgo.index');
+
+        Route::post(
+            '/ia/riesgo/procesar',
+            [ModeloController::class, 'procesar']
+        )->name('admin.ia.riesgo.procesar');
+
+    });

@@ -213,11 +213,14 @@
                     </a>
                 </li>
                 
-                {{-- ── Inteligencia Artificial ── --}}
+
+{{-- ── Inteligencia Artificial ── --}}
 <li>
-    <a href="{{ route('ia.riesgo.index') }}"
-       class="{{ request()->routeIs('ia.*') ? 'activo' : '' }}">
+    <a href="{{ route('admin.ia.riesgo.index') }}"
+       class="{{ request()->routeIs('admin.ia.riesgo.*') ? 'activo' : '' }}">
+
         <i class="fas fa-brain icono"></i>
+
         Análisis IA
     </a>
 </li>
