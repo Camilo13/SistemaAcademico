@@ -30,7 +30,7 @@ class ModeloController extends Controller
 
         $pythonScript = base_path('python/app.py');
 
-        $command = "python3 \"$pythonScript\" "
+        $command = "python \"$pythonScript\" "
             . escapeshellarg($request->materia) . " "
             . escapeshellarg($request->corte) . " "
             . escapeshellarg($request->p1) . " "
