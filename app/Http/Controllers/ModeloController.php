@@ -28,9 +28,9 @@ class ModeloController extends Controller
             'app/' . $excel->store('excels')
         );
 
-        $pythonScript = base_path('python3/app.py');
+        $pythonScript = base_path('python/app.py');
 
-        $command = "python \"$pythonScript\" "
+        $command = "python3 \"$pythonScript\" "
             . escapeshellarg($request->materia) . " "
             . escapeshellarg($request->corte) . " "
             . escapeshellarg($request->p1) . " "
@@ -38,14 +38,19 @@ class ModeloController extends Controller
             . escapeshellarg($request->p3) . " "
             . escapeshellarg($excelPath);
 
-        exec($command, $output, $resultCode);
+        exec($command . " 2>&1", $output, $resultCode);
+
+        dd($output);
 
         if ($resultCode !== 0) {
-            return back()->with('error', 'Error ejecutando Python');
+            return back()->with(
+                'error',
+                implode("\n", $output)
+            );
         }
 
-        $pdfPath = storage_path(
-            'app/resultados_modelo/reporte_analitico.pdf'
+        $pdfPath = base_path(
+            'python/resultados_modelo/reporte_analitico.pdf'
         );
 
         return response()->download($pdfPath);
