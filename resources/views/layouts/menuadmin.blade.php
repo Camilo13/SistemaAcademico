@@ -212,7 +212,15 @@
                         Configuración
                     </a>
                 </li>
-
+                
+                {{-- ── Inteligencia Artificial ── --}}
+<li>
+    <a href="{{ route('ia.riesgo.index') }}"
+       class="{{ request()->routeIs('ia.*') ? 'activo' : '' }}">
+        <i class="fas fa-brain icono"></i>
+        Análisis IA
+    </a>
+</li>
             </ul>
         </nav>
 

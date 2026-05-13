@@ -675,3 +675,13 @@ Route::middleware(['auth', 'rol:estudiante'])
             ->name('horario.index');
 
     });
+
+
+
+
+    // ── Módulo IA · Análisis de Riesgo Académico ─────────────────
+Route::prefix('ia')->name('ia.')->middleware(['auth'])->group(function () {
+    Route::get('riesgo',           [App\Http\Controllers\Modulos\IA\RiesgoController::class, 'index'])->name('riesgo.index');
+    Route::post('riesgo/analizar', [App\Http\Controllers\Modulos\IA\RiesgoController::class, 'analizar'])->name('riesgo.analizar');
+    Route::get('riesgo/pdf',       [App\Http\Controllers\Modulos\IA\RiesgoController::class, 'descargarPdf'])->name('riesgo.pdf');
+});
