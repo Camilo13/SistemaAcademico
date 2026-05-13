@@ -18,7 +18,6 @@ class RiesgoController extends Controller
 
     public function analizar(Request $request)
     {
-        // ── 1. Validar inputs ────────────────────────────────────────
         $request->validate([
             'excel'   => ['required', 'file', 'mimes:xlsx,xls', 'max:5120'],
             'periodo' => ['required', 'integer', 'in:1,2,3'],
@@ -36,7 +35,6 @@ class RiesgoController extends Controller
             'p3.required'      => 'Ingresa el porcentaje de la Actividad 3.',
         ]);
 
-        // ── 2. Validar porcentajes ───────────────────────────────────
         $suma = (float)$request->p1 + (float)$request->p2 + (float)$request->p3;
         if (round($suma, 2) !== 100.00) {
             return back()->withErrors([
@@ -45,83 +43,26 @@ class RiesgoController extends Controller
         }
 
         try {
-            // ── 3. Guardar Excel temporal ────────────────────────────
-            $excelPath = $request->file('excel')->store('ia_temp', 'local');
-            $excelAbs  = storage_path('app/' . $excelPath);
+            // ── DIAGNÓSTICO FINAL ────────────────────────────────────
+            $p1 = new Process(['which', 'python3']);
+            $p1->run();
+            $which = trim($p1->getOutput());
 
-            // ── 4. Directorio de salida ──────────────────────────────
-            $outputDir = storage_path('app/ia_resultados');
-            if (!is_dir($outputDir)) {
-                mkdir($outputDir, 0755, true);
-            }
+            $p2 = new Process(['find', '/nix', '-name', 'python3', '-type', 'f']);
+            $p2->setTimeout(10);
+            $p2->run();
+            $find = trim($p2->getOutput());
 
-            // ── 5. Preparar argumentos JSON para Python ──────────────
-            $args = json_encode([
-                'excel_path' => $excelAbs,
-                'periodo'    => (int)$request->periodo,
-                'p1'         => round((float)$request->p1 / 100, 4),
-                'p2'         => round((float)$request->p2 / 100, 4),
-                'p3'         => round((float)$request->p3 / 100, 4),
-                'output_dir' => $outputDir,
-            ]);
+            $p3 = new Process(['env']);
+            $p3->run();
+            $env = substr($p3->getOutput(), 0, 400);
 
-            // ── 6. Detectar python3 compatible Windows/Linux ─────────
-            $pythonScript = base_path('python/modelo_riesgo.py');
-            $pythonBin    = $this->detectarPython();
-
-            // ── 7. Ejecutar con Symfony Process ─────────────────────
-            $process = new Process(
-                [$pythonBin, $pythonScript, $args],
-                base_path(),        // working directory
-                $this->getEnv(),    // environment con PATH correcto
-                null,
-                120                 // timeout 2 minutos
-            );
-
-            $process->run();
-
-            // ── 8. Limpiar Excel temporal ────────────────────────────
-            Storage::disk('local')->delete($excelPath);
-
-            // ── 9. Verificar ejecución ───────────────────────────────
-            if (!$process->isSuccessful()) {
-                Log::error('IA Pipeline - Process failed', [
-                    'exit_code' => $process->getExitCode(),
-                    'stderr'    => $process->getErrorOutput(),
-                    'stdout'    => $process->getOutput(),
-                ]);
-
-                $detalle = $process->getErrorOutput() ?: $process->getOutput();
-                return back()
-                    ->withErrors(['python' => 'Error en Python: ' . substr($detalle, 0, 400)])
-                    ->withInput();
-            }
-
-            // ── 10. Parsear JSON ─────────────────────────────────────
-            $resultado = json_decode($process->getOutput(), true);
-
-            if (!$resultado || ($resultado['status'] ?? '') !== 'ok') {
-                $msg = $resultado['mensaje'] ?? $process->getOutput();
-                return back()
-                    ->withErrors(['python' => 'Error en el modelo: ' . substr($msg, 0, 400)])
-                    ->withInput();
-            }
-
-            // ── 11. Retornar vista ───────────────────────────────────
-            return view('modulos.ia.riesgo.index', [
-                'metricas'    => $resultado['metricas'],
-                'estudiantes' => $resultado['estudiantes'],
-                'periodo'     => $request->periodo,
-                'p1'          => $request->p1,
-                'p2'          => $request->p2,
-                'p3'          => $request->p3,
-            ]);
+            return back()->withErrors([
+                'python' => "WHICH:[{$which}] | FIND:[{$find}] | ENV:[{$env}]"
+            ])->withInput();
+            // ── FIN DIAGNÓSTICO ──────────────────────────────────────
 
         } catch (\Throwable $e) {
-            Log::error('IA Pipeline excepción', [
-                'mensaje' => $e->getMessage(),
-                'linea'   => $e->getLine(),
-            ]);
             return back()
                 ->withErrors(['python' => 'Error interno: ' . $e->getMessage()])
                 ->withInput();
@@ -137,26 +78,22 @@ class RiesgoController extends Controller
         return response()->download($pdfPath, 'reporte_riesgo_academico.pdf');
     }
 
-    // ── Detectar binario Python (Windows y Linux) ────────────────────
     private function detectarPython(): string
     {
-        // Windows XAMPP / PATH local
         $candidatos = [
-            'python',                                          // Windows PATH
-            'python3',                                         // Linux/Mac PATH
-            'C:\\Python311\\python.exe',                       // Windows instalación típica
+            'python',
+            'python3',
+            'C:\\Python311\\python.exe',
             'C:\\Python310\\python.exe',
-            'C:\\Users\\' . get_current_user() . '\\AppData\\Local\\Programs\\Python\\Python311\\python.exe',
-            '/usr/bin/python3',                                // Linux
+            '/usr/bin/python3',
             '/usr/local/bin/python3',
-            '/nix/var/nix/profiles/default/bin/python3',       // Railway Nix
+            '/nix/var/nix/profiles/default/bin/python3',
         ];
 
         foreach ($candidatos as $bin) {
             if (str_contains($bin, '\\') || str_contains($bin, '/')) {
                 if (file_exists($bin)) return $bin;
             } else {
-                // Verificar en PATH con Process
                 $check = new Process([$bin, '--version']);
                 try {
                     $check->run();
@@ -166,11 +103,9 @@ class RiesgoController extends Controller
                 }
             }
         }
-
-        return 'python3'; // fallback
+        return 'python3';
     }
 
-    // ── Environment con PATH extendido para Railway ──────────────────
     private function getEnv(): array
     {
         $pathExtra = implode(PATH_SEPARATOR, [
