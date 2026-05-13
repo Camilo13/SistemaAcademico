@@ -28,7 +28,7 @@ class ModeloController extends Controller
             'app/' . $excel->store('excels')
         );
 
-        $pythonScript = base_path('python/app.py');
+        $pythonScript = base_path('python3/app.py');
 
         $command = "python \"$pythonScript\" "
             . escapeshellarg($request->materia) . " "
