@@ -440,6 +440,7 @@ Route::middleware(['auth', 'rol:administrador'])
                 Route::get('/', 'index')->name('index');
                 Route::get('/create', 'create')->name('create');
                 Route::post('/', 'store')->name('store');
+                Route::get('/buscar-docentes', 'buscarDocentes')->name('buscarDocentes');
                 Route::get('/{asignacion}/edit', 'edit')->name('edit');
                 Route::put('/{asignacion}', 'update')->name('update');
                 Route::patch('/{asignacion}/activar', 'activar')->name('activar');
@@ -460,6 +461,7 @@ Route::middleware(['auth', 'rol:administrador'])
                 Route::get('/', 'index')->name('index');
                 Route::get('/create', 'create')->name('create');
                 Route::post('/', 'store')->name('store');
+                Route::get('/buscar-estudiantes', 'buscarEstudiantes')->name('buscarEstudiantes');
                 Route::get('/{inscripcion}/edit', 'edit')->name('edit');
                 Route::put('/{inscripcion}', 'update')->name('update');
                 Route::patch('/{inscripcion}/retirar', 'retirar')->name('retirar');

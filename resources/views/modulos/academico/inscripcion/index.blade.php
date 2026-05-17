@@ -54,7 +54,9 @@
             @foreach($grupos as $grupo)
                 <option value="{{ $grupo->id }}"
                     {{ request('grupo') == $grupo->id ? 'selected' : '' }}>
-                    {{ optional($grupo->grado)->nombre }} {{ $grupo->nombre }}
+                    {{ optional($grupo->grado->sede)->nombre ?? '—' }}
+                    — {{ optional($grupo->grado)->nombre }}
+                    {{ $grupo->nombre }}
                     — {{ optional($grupo->anioLectivo)->nombre }}
                 </option>
             @endforeach
@@ -121,6 +123,7 @@
                         <input type="checkbox" class="checkbox-todos" title="Seleccionar todos">
                     </th>
                     <th>Estudiante</th>
+                    <th>Sede</th>
                     <th>Grado</th>
                     <th>Grupo</th>
                     <th>Año Lectivo</th>
@@ -142,6 +145,10 @@
                         <td data-label="Estudiante">
                             {{ optional($inscripcion->estudiante)->nombre }}
                             {{ optional($inscripcion->estudiante)->apellidos }}
+                        </td>
+
+                        <td data-label="Sede">
+                            {{ optional($inscripcion->grupo->grado->sede)->nombre ?? '—' }}
                         </td>
 
                         <td data-label="Grado">
@@ -186,7 +193,7 @@
                     </tr>
                 @empty
                     <tr class="fila-vacia">
-                        <td colspan="7">
+                        <td colspan="8">
                             <i class="fa-solid fa-circle-info"></i>
                             No hay inscripciones con los filtros aplicados.
                         </td>

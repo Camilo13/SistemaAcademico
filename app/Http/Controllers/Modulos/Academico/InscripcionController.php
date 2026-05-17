@@ -61,11 +61,6 @@ class InscripcionController extends Controller
     */
     public function create()
     {
-        // User::rol() — scope correcto del modelo
-        $estudiantes = User::rol('estudiante')
-            ->orderBy('apellidos')
-            ->get();
-
         $grupos = Grupo::with(['grado.sede', 'anioLectivo'])
             ->activo()
             ->ordenados()
@@ -73,8 +68,37 @@ class InscripcionController extends Controller
 
         return view(
             'modulos.academico.inscripcion.create',
-            compact('estudiantes', 'grupos')
+            compact('grupos')
         );
+    }
+
+    /*
+    |----------------------------------------------------------------------
+    | buscarEstudiantes — endpoint AJAX para búsqueda en tiempo real
+    |----------------------------------------------------------------------
+    */
+    public function buscarEstudiantes(Request $request)
+    {
+        $buscar = trim($request->get('q', ''));
+
+        if (strlen($buscar) < 2) {
+            return response()->json([]);
+        }
+
+        $estudiantes = User::rol('estudiante')
+            ->where(function ($q) use ($buscar) {
+                $q->where('nombre',         'like', "%{$buscar}%")
+                  ->orWhere('apellidos',     'like', "%{$buscar}%")
+                  ->orWhere('identificacion','like', "%{$buscar}%");
+            })
+            ->orderBy('apellidos')
+            ->limit(15)
+            ->get(['id', 'nombre', 'apellidos', 'identificacion']);
+
+        return response()->json($estudiantes->map(fn($e) => [
+            'id'    => $e->id,
+            'texto' => "{$e->apellidos}, {$e->nombre} — {$e->identificacion}",
+        ]));
     }
 
     /*

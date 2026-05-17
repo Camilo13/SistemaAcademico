@@ -34,21 +34,21 @@
 
             <div class="grid-campos">
 
-                {{-- Docente ── --}}
-                <div class="campo campo-ancho">
-                    <label for="docente_id">
-                        <i class="fa-solid fa-user-tie"></i>
+                {{-- Docente — buscador en tiempo real ── --}}
+                <div class="campo campo-ancho campo-buscador">
+                    <label for="docente_buscar">
+                        <i class="fa-solid fa-chalkboard-user"></i>
                         Docente <span>*</span>
                     </label>
-                    <select id="docente_id" name="docente_id" required>
-                        <option value="">Seleccione un docente</option>
-                        @foreach($docentes as $docente)
-                            <option value="{{ $docente->id }}"
-                                {{ old('docente_id') == $docente->id ? 'selected' : '' }}>
-                                {{ $docente->nombre }} {{ $docente->apellidos }}
-                            </option>
-                        @endforeach
-                    </select>
+                    <input type="text"
+                           id="docente_buscar"
+                           placeholder="Buscar por nombre, apellido o identificación…"
+                           autocomplete="off">
+                    <div id="docente_resultados" class="buscador-resultados"></div>
+                    <input type="hidden" id="docente_id" name="docente_id"
+                           value="{{ old('docente_id') }}" required>
+                    <div id="docente_seleccionado" class="buscador-seleccionado"></div>
+                    <span class="nota-campo">Mínimo 2 caracteres para buscar.</span>
                     @error('docente_id')
                         <span class="error-campo">
                             <i class="fa-solid fa-circle-exclamation"></i> {{ $message }}
@@ -68,7 +68,10 @@
                             <option value="{{ $materia->id }}"
                                 {{ old('materia_id') == $materia->id ? 'selected' : '' }}>
                                 {{ $materia->nombre }}
-                                @if($materia->grado) — {{ $materia->grado->nombre }} @endif
+                                @if($materia->grado)
+                                    — {{ optional($materia->grado->sede)->nombre ?? '—' }}
+                                    · {{ $materia->grado->nombre }}
+                                @endif
                             </option>
                         @endforeach
                     </select>
@@ -90,7 +93,9 @@
                         @foreach($grupos as $grupo)
                             <option value="{{ $grupo->id }}"
                                 {{ old('grupo_id') == $grupo->id ? 'selected' : '' }}>
-                                {{ optional($grupo->grado)->nombre }} {{ $grupo->nombre }}
+                                {{ optional($grupo->grado->sede)->nombre ?? '—' }}
+                                — {{ optional($grupo->grado)->nombre }}
+                                {{ $grupo->nombre }}
                                 — {{ optional($grupo->anioLectivo)->nombre }}
                             </option>
                         @endforeach
@@ -129,6 +134,9 @@
 @endsection
 
 @push('scripts')
+    <script>
+        window.BUSCAR_DOCENTES_URL = "{{ route('admin.academico.asignaciones.buscarDocentes') }}";
+    </script>
     <script src="{{ asset('js/componentes/academico.js') }}"></script>
     <script src="{{ asset('js/modulos/academico/asignacion.js') }}"></script>
 @endpush

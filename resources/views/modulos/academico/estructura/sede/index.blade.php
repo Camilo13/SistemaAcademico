@@ -4,6 +4,7 @@
 
 @push('styles')
     {{-- academico-index.css ya está en el layout global --}}
+    <link rel="stylesheet" href="{{ asset('css/modulos/academico/estructura/sede/sede.css') }}">
 @endpush
 
 @section('content')
@@ -22,6 +23,36 @@
             <i class="fa-solid fa-plus"></i> Nueva Sede
         </a>
     </div>
+
+    {{-- ── Filtros ── --}}
+    <form method="GET"
+          action="{{ route('admin.academico.sedes.index') }}"
+          class="sede-filtros">
+
+        <input type="text"
+               name="buscar"
+               value="{{ $buscar }}"
+               placeholder="Buscar por nombre, código o teléfono…"
+               autocomplete="off">
+
+        <select name="estado" onchange="this.form.submit()">
+            <option value="">Todos los estados</option>
+            <option value="activa"   {{ $estado === 'activa'   ? 'selected' : '' }}>Activa</option>
+            <option value="inactiva" {{ $estado === 'inactiva' ? 'selected' : '' }}>Inactiva</option>
+        </select>
+
+        <button type="submit" class="btn btn-secundario btn-sm">
+            <i class="fa-solid fa-magnifying-glass"></i> Buscar
+        </button>
+
+        @if($buscar || $estado)
+            <a href="{{ route('admin.academico.sedes.index') }}"
+               class="btn btn-neutro btn-sm">
+                <i class="fa-solid fa-xmark"></i> Limpiar
+            </a>
+        @endif
+
+    </form>
 
     {{-- ══════════════════════════════════════════
          BARRA DE ACCIONES BULK
@@ -121,7 +152,11 @@
                     <tr class="fila-vacia">
                         <td colspan="6">
                             <i class="fa-solid fa-circle-info"></i>
-                            No hay sedes registradas aún.
+                            @if($buscar || $estado)
+                                No se encontraron sedes con los filtros aplicados.
+                            @else
+                                No hay sedes registradas aún.
+                            @endif
                         </td>
                     </tr>
                 @endforelse

@@ -64,7 +64,9 @@
             @foreach($grupos as $grupo)
                 <option value="{{ $grupo->id }}"
                     {{ request('grupo') == $grupo->id ? 'selected' : '' }}>
-                    {{ optional($grupo->grado)->nombre }} {{ $grupo->nombre }}
+                    {{ optional($grupo->grado->sede)->nombre ?? '—' }}
+                    — {{ optional($grupo->grado)->nombre }}
+                    {{ $grupo->nombre }}
                     — {{ optional($grupo->anioLectivo)->nombre }}
                 </option>
             @endforeach
@@ -128,6 +130,7 @@
                         <input type="checkbox" class="checkbox-todos" title="Seleccionar todos">
                     </th>
                     <th>Docente</th>
+                    <th>Sede</th>
                     <th>Materia</th>
                     <th>Grado</th>
                     <th>Grupo</th>
@@ -149,6 +152,10 @@
                         <td data-label="Docente">
                             {{ optional($asignacion->docente)->nombre }}
                             {{ optional($asignacion->docente)->apellidos }}
+                        </td>
+
+                        <td data-label="Sede">
+                            {{ optional($asignacion->grupo->grado->sede)->nombre ?? '—' }}
                         </td>
 
                         <td data-label="Materia">
@@ -182,7 +189,7 @@
                     </tr>
                 @empty
                     <tr class="fila-vacia">
-                        <td colspan="7">
+                        <td colspan="8">
                             <i class="fa-solid fa-circle-info"></i>
                             No hay asignaciones con los filtros aplicados.
                         </td>

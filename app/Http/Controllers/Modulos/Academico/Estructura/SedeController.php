@@ -17,13 +17,27 @@ class SedeController extends Controller
     | LISTADO DE SEDES
     |--------------------------------------------------------------------------
     */
-    public function index()
+    public function index(Request $request)
     {
-        $sedes = Sede::orderBy('nombre')->get();
+        $buscar = trim($request->get('buscar', ''));
+        $estado = $request->get('estado', '');
+
+        $sedes = Sede::when($buscar !== '', function ($q) use ($buscar) {
+                $q->where(function ($sub) use ($buscar) {
+                    $sub->where('nombre',   'like', "%{$buscar}%")
+                        ->orWhere('codigo',   'like', "%{$buscar}%")
+                        ->orWhere('telefono', 'like', "%{$buscar}%");
+                });
+            })
+            ->when($estado !== '', function ($q) use ($estado) {
+                $q->where('activa', $estado === 'activa');
+            })
+            ->orderBy('nombre')
+            ->get();
 
         return view(
             'modulos.academico.estructura.sede.index',
-            compact('sedes')
+            compact('sedes', 'buscar', 'estado')
         );
     }
 

@@ -72,7 +72,7 @@ class AsignacionController extends Controller
         // User::rol() — scope correcto (no role())
         $docentes = User::rol('docente')->orderBy('apellidos')->get();
 
-        $materias = Materia::with('grado')
+        $materias = Materia::with('grado.sede')
             ->activas()
             ->orderBy('nombre')
             ->get();
@@ -86,6 +86,35 @@ class AsignacionController extends Controller
             'modulos.academico.asignacion.create',
             compact('docentes', 'materias', 'grupos')
         );
+    }
+
+    /*
+    |----------------------------------------------------------------------
+    | buscarDocentes — endpoint AJAX para búsqueda en tiempo real
+    |----------------------------------------------------------------------
+    */
+    public function buscarDocentes(Request $request)
+    {
+        $buscar = trim($request->get('q', ''));
+
+        if (strlen($buscar) < 2) {
+            return response()->json([]);
+        }
+
+        $docentes = User::rol('docente')
+            ->where(function ($q) use ($buscar) {
+                $q->where('nombre',          'like', "%{$buscar}%")
+                  ->orWhere('apellidos',      'like', "%{$buscar}%")
+                  ->orWhere('identificacion', 'like', "%{$buscar}%");
+            })
+            ->orderBy('apellidos')
+            ->limit(15)
+            ->get(['id', 'nombre', 'apellidos', 'identificacion']);
+
+        return response()->json($docentes->map(fn($d) => [
+            'id'    => $d->id,
+            'texto' => "{$d->apellidos}, {$d->nombre} — {$d->identificacion}",
+        ]));
     }
 
     /*
@@ -139,7 +168,7 @@ class AsignacionController extends Controller
         // User::rol() — scope correcto
         $docentes = User::rol('docente')->orderBy('apellidos')->get();
 
-        $materias = Materia::with('grado')
+        $materias = Materia::with('grado.sede')
             ->activas()
             ->orderBy('nombre')
             ->get();

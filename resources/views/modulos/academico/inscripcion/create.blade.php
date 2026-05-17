@@ -33,21 +33,21 @@
 
             <div class="grid-campos">
 
-                {{-- Estudiante ── --}}
-                <div class="campo campo-ancho">
-                    <label for="estudiante_id">
+                {{-- Estudiante — buscador en tiempo real ── --}}
+                <div class="campo campo-ancho campo-buscador">
+                    <label for="estudiante_buscar">
                         <i class="fa-solid fa-user-graduate"></i>
                         Estudiante <span>*</span>
                     </label>
-                    <select id="estudiante_id" name="estudiante_id" required>
-                        <option value="">Seleccione un estudiante</option>
-                        @foreach($estudiantes as $est)
-                            <option value="{{ $est->id }}"
-                                {{ old('estudiante_id') == $est->id ? 'selected' : '' }}>
-                                {{ $est->nombre }} {{ $est->apellidos }}
-                            </option>
-                        @endforeach
-                    </select>
+                    <input type="text"
+                           id="estudiante_buscar"
+                           placeholder="Buscar por nombre, apellido o identificación…"
+                           autocomplete="off">
+                    <div id="estudiante_resultados" class="buscador-resultados"></div>
+                    <input type="hidden" id="estudiante_id" name="estudiante_id"
+                           value="{{ old('estudiante_id') }}" required>
+                    <div id="estudiante_seleccionado" class="buscador-seleccionado"></div>
+                    <span class="nota-campo">Mínimo 2 caracteres para buscar.</span>
                     @error('estudiante_id')
                         <span class="error-campo">
                             <i class="fa-solid fa-circle-exclamation"></i> {{ $message }}
@@ -66,7 +66,9 @@
                         @foreach($grupos as $grupo)
                             <option value="{{ $grupo->id }}"
                                 {{ old('grupo_id') == $grupo->id ? 'selected' : '' }}>
-                                {{ optional($grupo->grado)->nombre }} {{ $grupo->nombre }}
+                                {{ optional($grupo->grado->sede)->nombre ?? '—' }}
+                                — {{ optional($grupo->grado)->nombre }}
+                                {{ $grupo->nombre }}
                                 — {{ optional($grupo->anioLectivo)->nombre }}
                                 @if($grupo->cupo_maximo)
                                     ({{ $grupo->cupoDisponible() }} disponibles)
@@ -123,6 +125,9 @@
 @endsection
 
 @push('scripts')
+    <script>
+        window.BUSCAR_ESTUDIANTES_URL = "{{ route('admin.academico.inscripciones.buscarEstudiantes') }}";
+    </script>
     <script src="{{ asset('js/componentes/academico.js') }}"></script>
     <script src="{{ asset('js/modulos/academico/inscripcion.js') }}"></script>
 @endpush

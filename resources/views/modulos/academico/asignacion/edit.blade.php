@@ -83,7 +83,10 @@
                             <option value="{{ $materia->id }}"
                                 {{ old('materia_id', $asignacion->materia_id) == $materia->id ? 'selected' : '' }}>
                                 {{ $materia->nombre }}
-                                @if($materia->grado) — {{ $materia->grado->nombre }} @endif
+                                @if($materia->grado)
+                                    — {{ optional($materia->grado->sede)->nombre ?? '—' }}
+                                    · {{ $materia->grado->nombre }}
+                                @endif
                             </option>
                         @endforeach
                     </select>
@@ -105,7 +108,9 @@
                         @foreach($grupos as $grupo)
                             <option value="{{ $grupo->id }}"
                                 {{ old('grupo_id', $asignacion->grupo_id) == $grupo->id ? 'selected' : '' }}>
-                                {{ optional($grupo->grado)->nombre }} {{ $grupo->nombre }}
+                                {{ optional($grupo->grado->sede)->nombre ?? '—' }}
+                                — {{ optional($grupo->grado)->nombre }}
+                                {{ $grupo->nombre }}
                                 — {{ optional($grupo->anioLectivo)->nombre }}
                             </option>
                         @endforeach

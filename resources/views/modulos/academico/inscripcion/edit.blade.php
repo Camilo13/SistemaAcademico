@@ -78,7 +78,9 @@
                         @foreach($grupos as $grupo)
                             <option value="{{ $grupo->id }}"
                                 {{ old('grupo_id', $inscripcion->grupo_id) == $grupo->id ? 'selected' : '' }}>
-                                {{ optional($grupo->grado)->nombre }} {{ $grupo->nombre }}
+                                {{ optional($grupo->grado->sede)->nombre ?? '—' }}
+                                — {{ optional($grupo->grado)->nombre }}
+                                {{ $grupo->nombre }}
                                 — {{ optional($grupo->anioLectivo)->nombre }}
                             </option>
                         @endforeach

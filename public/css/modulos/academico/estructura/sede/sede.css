@@ -1,0 +1,62 @@
+/* ============================================================
+   modulos/academico/estructura/sede/sede.css
+   Vista: Índice y formularios de Sedes.
+
+   Reutiliza del layout global:
+     academico-index.css → .contenedor-modulo, .cabecera,
+                           .barra-bulk, .tabla-contenedor
+     tablas.css          → .tabla, .estado, .fila-vacia
+     botones.css         → todas las variantes de .btn
+
+   Este archivo aporta solo los filtros del index.
+   ============================================================ */
+
+/* ── Barra de filtros ── */
+.sede-filtros {
+    display     : flex;
+    align-items : center;
+    gap         : 0.6rem;
+    flex-wrap   : wrap;
+}
+
+.sede-filtros input[type="text"] {
+    flex          : 1;
+    min-width     : 220px;
+    padding       : 0.45rem 0.75rem;
+    border        : 1px solid var(--borde-color);
+    border-radius : var(--radio-md);
+    font-size     : var(--texto-sm);
+    font-family   : var(--fuente-base);
+    color         : var(--color-texto-cuerpo);
+    background    : var(--fondo-tarjeta);
+    transition    : border-color var(--transicion-normal);
+}
+
+.sede-filtros input[type="text"]:focus {
+    outline      : none;
+    border-color : #22c55e;
+}
+
+.sede-filtros select {
+    padding       : 0.45rem 0.75rem;
+    border        : 1px solid var(--borde-color);
+    border-radius : var(--radio-md);
+    font-size     : var(--texto-sm);
+    color         : var(--color-texto-cuerpo);
+    background    : var(--fondo-tarjeta);
+    cursor        : pointer;
+    transition    : border-color var(--transicion-normal);
+    min-width     : 180px;
+}
+
+.sede-filtros select:focus {
+    outline      : none;
+    border-color : #22c55e;
+}
+
+/* ── Responsive ── */
+@media (max-width: 480px) {
+    .sede-filtros                  { flex-direction: column; align-items: stretch; }
+    .sede-filtros input[type="text"],
+    .sede-filtros select           { width: 100%; }
+}
