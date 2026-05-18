@@ -83,7 +83,6 @@
                     <th>Periodo</th>
                     <th>Nota</th>
                     <th>Desempeño</th>
-                    <th>Observación</th>
                     <th class="col-acciones">Acciones</th>
                 </tr>
             </thead>
@@ -120,10 +119,6 @@
                             </span>
                         </td>
 
-                        <td data-label="Observación" class="celda-obs">
-                            {{ $nota->observacion ?: '—' }}
-                        </td>
-
                         <td class="col-acciones">
                             <div class="acciones">
                                 <a href="{{ route('admin.academico.notas.edit', [$nota->inscripcion_materia_id, $nota->id]) }}"
@@ -136,7 +131,7 @@
                     </tr>
                 @empty
                     <tr class="fila-vacia">
-                        <td colspan="5">
+                        <td colspan="4">
                             <i class="fa-solid fa-circle-info"></i>
                             No hay notas registradas para esta materia.
                         </td>

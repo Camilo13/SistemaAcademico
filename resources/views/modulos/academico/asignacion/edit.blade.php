@@ -189,46 +189,6 @@
 
     </div>
 
-    {{-- ══════════════════════════════════════════
-         TARJETA PELIGRO — Eliminar
-    ══════════════════════════════════════════ --}}
-    <div class="tarjeta-form tarjeta-peligro">
-
-        <h3 class="seccion-titulo-form peligro">
-            <i class="fa-solid fa-triangle-exclamation"></i> Zona de peligro
-        </h3>
-
-        @php $totalNotas = $asignacion->notas()->count(); @endphp
-
-        <p class="seccion-desc">
-            Eliminar esta asignación es una acción <strong>permanente</strong>.
-            Solo es posible si no tiene notas registradas.
-            @if($totalNotas > 0)
-                <br>
-                <span style="color:#991b1b;">
-                    <i class="fa-solid fa-circle-xmark"></i>
-                    Tiene <strong>{{ $totalNotas }} nota(s)</strong>
-                    registrada(s) y no puede eliminarse.
-                </span>
-            @endif
-        </p>
-
-        <div class="acciones-secundarias">
-            <form method="POST"
-                  action="{{ route('admin.academico.asignaciones.destroy', $asignacion->id) }}"
-                  class="form-eliminar"
-                  data-nombre="la asignación">
-                @csrf @method('DELETE')
-                <button type="submit"
-                        class="btn btn-peligro"
-                        {{ $totalNotas > 0 ? 'disabled' : '' }}>
-                    <i class="fa-solid fa-trash"></i> Eliminar asignación
-                </button>
-            </form>
-        </div>
-
-    </div>
-
 </div>
 
 @endsection

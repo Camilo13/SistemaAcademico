@@ -682,3 +682,145 @@ html.modo-oscuro .swal2-title {
 html.modo-oscuro .swal2-timer-progress-bar {
     background: #22c55e;
 }
+
+/* ── Modo oscuro: desempeño admin notas (prefijo desempeno-) ── */
+html.modo-oscuro .desempeno-badge {
+    color : #e0e0e0;
+}
+
+html.modo-oscuro .desempeno-superior {
+    background : #1a3a2a;
+    color      : #81c784;
+}
+
+html.modo-oscuro .desempeno-alto {
+    background : #1a2a3a;
+    color      : #60a5fa;
+}
+
+html.modo-oscuro .desempeno-basico {
+    background : #2a3a1e;
+    color      : #fbbf24;
+}
+
+html.modo-oscuro .desempeno-bajo {
+    background : #3a1e1e;
+    color      : #f87171;
+}
+
+/* ── Modo oscuro: carrusel btn-icono ── */
+html.modo-oscuro .btn-icono.editar {
+    background : #1e3a2e;
+    color      : #81c784;
+    border-color: #2a4a3e;
+}
+
+html.modo-oscuro .btn-icono.editar:hover {
+    background : #2a4a3e;
+    color      : #a7f3d0;
+}
+
+/* ── Modo oscuro: campos readonly (perfil, inscripción) ── */
+html.modo-oscuro .campo-readonly .campo-valor {
+    background : #1e3a2e;
+    border-color: #2a4a3e;
+    color      : #e0e0e0;
+}
+
+html.modo-oscuro .campo-readonly .campo-label {
+    color : #94a3b8;
+}
+
+html.modo-oscuro .perfil-nota-readonly {
+    color : #94a3b8;
+}
+
+/* ── Modo oscuro: desempeño bajo y básico ── */
+html.modo-oscuro .des-basico {
+    background : #2a3a1e;
+    color      : #fbbf24;
+}
+
+html.modo-oscuro .des-bajo {
+    background : #3a1e1e;
+    color      : #f87171;
+}
+
+/* ── Modo oscuro: buscadores AJAX ── */
+html.modo-oscuro .buscador-resultados {
+    background   : #1a2e24;
+    border-color : #2a4a3e;
+}
+
+html.modo-oscuro .buscador-resultado-item {
+    color : #e0e0e0;
+}
+
+html.modo-oscuro .buscador-resultado-item:hover {
+    background : #2a4a3e;
+    color      : #81c784;
+}
+
+html.modo-oscuro .buscador-resultado-vacio {
+    color : #94a3b8;
+}
+
+html.modo-oscuro .buscador-seleccionado {
+    background   : #1a2e24;
+    border-color : #2a4a3e;
+    color        : #81c784;
+}
+
+/* ── Modo oscuro: ficha boletín estudiante ── */
+html.modo-oscuro .boletin-ficha {
+    background   : #1a2e24;
+    border-color : #2a4a3e;
+}
+
+html.modo-oscuro .boletin-ficha-item span {
+    color : #94a3b8;
+}
+
+html.modo-oscuro .boletin-ficha-item strong {
+    color : #e0e0e0;
+}
+
+/* ── Modo oscuro: resumen boletín ── */
+html.modo-oscuro .boletin-res-card span {
+    color : #94a3b8;
+}
+
+html.modo-oscuro .boletin-res-card strong {
+    color : #e0e0e0;
+}
+
+/* ── Modo oscuro: dato-item (ficha boletin PDF) ── */
+html.modo-oscuro .dato-item {
+    border-color : #2a4a3e;
+    background   : #1a2e24;
+}
+
+html.modo-oscuro .dato-item span {
+    color : #94a3b8;
+}
+
+html.modo-oscuro .dato-item strong {
+    color : #e0e0e0;
+}
+
+/* ── Modo oscuro: campo-readonly contenedor ── */
+html.modo-oscuro .campo-readonly {
+    background : transparent;
+}
+
+/* ── Modo oscuro: perfil firma preview ── */
+html.modo-oscuro .perfil-firma-img,
+html.modo-oscuro .config-firma-img {
+    background   : #1a2e24;
+    border-color : #2a4a3e;
+}
+
+html.modo-oscuro .perfil-firma-vacia,
+html.modo-oscuro .config-firma-vacia {
+    color : #94a3b8;
+}
