@@ -72,7 +72,7 @@
                                 {{ $im->asignacion->materia->nombre ?? '—' }}
                             </div>
                             <div class="materia-docente">
-                                <i class="fa-solid fa-chalkboard-teacher" style="color:#10b981;font-size:0.78rem;"></i>
+                                <i class="fa-solid fa-chalkboard-teacher icono-docente"></i>
                                 {{ $im->asignacion->docente->nombre_completo ?? '—' }}
                             </div>
                         </div>

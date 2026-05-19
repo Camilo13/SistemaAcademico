@@ -184,3 +184,9 @@
     .resumen-boletin    { grid-template-columns: 1fr; }
     .resumen-card       { padding: 0.75rem; }
 }
+/* ── Acciones de cabecera ── */
+.cabecera-acciones {
+    display   : flex;
+    gap       : 0.6rem;
+    flex-wrap : wrap;
+}

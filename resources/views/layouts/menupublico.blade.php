@@ -37,7 +37,7 @@
             {{-- Logo institucional --}}
             <div class="logo">
                 <a href="{{ route('inicio') }}">
-                    <i class="fas fa-leaf"></i>
+                    <img src="{{ asset('img/logo.png') }}" alt="Logo institucional" class="navbar-logo">
                     Institución Educativa Agroambiental
                 </a>
             </div>

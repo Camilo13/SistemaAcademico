@@ -220,43 +220,6 @@
 
     </div>
 
-    {{-- ══════════════════════════════════════════
-         TARJETA PELIGRO — Eliminar
-    ══════════════════════════════════════════ --}}
-    <div class="tarjeta-form tarjeta-peligro">
-
-        <h3 class="seccion-titulo-form peligro">
-            <i class="fa-solid fa-triangle-exclamation"></i> Zona de peligro
-        </h3>
-
-        <p class="seccion-desc">
-            Eliminar esta materia es una acción <strong>permanente</strong>.
-            Solo es posible si no tiene asignaciones registradas.
-            @if($materia->asignaciones()->count() > 0)
-                <br>
-                <span style="color:#991b1b;">
-                    <i class="fa-solid fa-circle-xmark"></i>
-                    Tiene <strong>{{ $materia->asignaciones()->count() }} asignación(es)</strong>
-                    y no puede eliminarse.
-                </span>
-            @endif
-        </p>
-
-        <div class="acciones-secundarias">
-            <form method="POST"
-                  action="{{ route('admin.academico.estructura.materias.destroy', $materia->id) }}"
-                  class="form-eliminar"
-                  data-nombre="{{ $materia->nombre }}">
-                @csrf @method('DELETE')
-                <button type="submit"
-                        class="btn btn-peligro"
-                        {{ $materia->asignaciones()->count() > 0 ? 'disabled' : '' }}>
-                    <i class="fa-solid fa-trash"></i> Eliminar materia
-                </button>
-            </form>
-        </div>
-
-    </div>
 
 </div>
 

@@ -210,51 +210,6 @@
 
     </div>
 
-    {{-- ══════════════════════════════════════════
-         TARJETA PELIGRO — Eliminar
-    ══════════════════════════════════════════ --}}
-    <div class="tarjeta-form tarjeta-peligro">
-
-        <h3 class="seccion-titulo-form peligro">
-            <i class="fa-solid fa-triangle-exclamation"></i> Zona de peligro
-        </h3>
-
-        <p class="seccion-desc">
-            Eliminar este grado es una acción <strong>permanente</strong>.
-            Solo es posible si no tiene grupos ni materias asociadas.
-            @if($grado->grupos()->count() > 0 || $grado->materias()->count() > 0)
-                <br>
-                <span style="color:#991b1b;">
-                    <i class="fa-solid fa-circle-xmark"></i>
-                    Tiene
-                    @if($grado->grupos()->count() > 0)
-                        <strong>{{ $grado->grupos()->count() }} grupo(s)</strong>
-                    @endif
-                    @if($grado->materias()->count() > 0)
-                        @if($grado->grupos()->count() > 0) y @endif
-                        <strong>{{ $grado->materias()->count() }} materia(s)</strong>
-                    @endif
-                    asociada(s) y no puede eliminarse.
-                </span>
-            @endif
-        </p>
-
-        <div class="acciones-secundarias">
-            <form method="POST"
-                  action="{{ route('admin.academico.grados.destroy', $grado->id) }}"
-                  class="form-eliminar"
-                  data-nombre="{{ $grado->nombre }}">
-                @csrf @method('DELETE')
-                <button type="submit"
-                        class="btn btn-peligro"
-                        {{ ($grado->grupos()->count() > 0 || $grado->materias()->count() > 0) ? 'disabled' : '' }}>
-                    <i class="fa-solid fa-trash"></i> Eliminar grado
-                </button>
-            </form>
-        </div>
-
-    </div>
-
 </div>
 
 @endsection

@@ -38,4 +38,20 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
+
+    // ── Barra bulk notas (sobreescribe acciones-tabla.js para esta vista) ──
+    const barraBulk = document.querySelector('.barra-bulk');
+    if (barraBulk) {
+        const btnEditar   = barraBulk.querySelector('.btn-bulk-editar');
+        const urlEditar   = barraBulk.dataset.urlEditar ?? '';
+        const urlDestroy  = barraBulk.dataset.urlDestroy ?? '';
+
+        document.addEventListener('bulk:seleccion', e => {
+            const seleccionados = e.detail?.seleccionados ?? [];
+            if (seleccionados.length === 1 && btnEditar) {
+                const id  = seleccionados[0].dataset.id;
+                btnEditar.href = urlEditar.replace(':id', id);
+            }
+        });
+    }
 });

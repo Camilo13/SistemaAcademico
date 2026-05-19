@@ -155,3 +155,8 @@
 @media (max-width: 480px) {
     .contenedor-asistencia-est { padding: 0.9rem; }
 }
+/* ── Icono docente en tarjeta materia ── */
+.icono-docente {
+    color     : #10b981;
+    font-size : 0.78rem;
+}

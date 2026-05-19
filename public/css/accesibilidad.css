@@ -824,3 +824,437 @@ html.modo-oscuro .perfil-firma-vacia,
 html.modo-oscuro .config-firma-vacia {
     color : #94a3b8;
 }
+
+/* ── Modo oscuro: portal público — navbar y footer ── */
+html.modo-oscuro .navbar {
+    background : linear-gradient(90deg, #022c1e, #065f46);
+}
+
+html.modo-oscuro .nav-links li a {
+    color : #d1fae5;
+}
+
+html.modo-oscuro .nav-links li a:hover {
+    background : #1a3a2e;
+    color      : #81c784;
+}
+
+html.modo-oscuro .nav-links li a.activo {
+    background : #1a3a2e;
+    color      : #81c784;
+}
+
+html.modo-oscuro footer {
+    background : #022c1e;
+    color      : #94a3b8;
+}
+
+html.modo-oscuro main {
+    background : #0f1f17;
+    color      : #e0e0e0;
+}
+
+/* ── Modo oscuro: nota ficha (edit admin) ── */
+html.modo-oscuro .nota-ficha {
+    background   : #1a2e24;
+    border-color : #2a4a3e;
+}
+
+html.modo-oscuro .nota-ficha-item span {
+    color : #94a3b8;
+}
+
+html.modo-oscuro .nota-ficha-item strong {
+    color : #e0e0e0;
+}
+
+/* ── Modo oscuro: materia-nota-card (estudiante notas) ── */
+html.modo-oscuro .materia-nota-card {
+    background   : #1a2e24;
+    border-color : #2a4a3e;
+}
+
+html.modo-oscuro .materia-nombre {
+    color : #e0e0e0;
+}
+
+html.modo-oscuro .materia-docente {
+    color : #94a3b8;
+}
+
+html.modo-oscuro .icono-docente {
+    color : #4ade80;
+}
+
+/* ── Modo oscuro: materia-asistencia-card (estudiante faltas) ── */
+html.modo-oscuro .materia-asistencia-card {
+    background   : #1a2e24;
+    border-color : #2a4a3e;
+}
+
+html.modo-oscuro .materia-info .materia-nombre {
+    color : #e0e0e0;
+}
+
+html.modo-oscuro .materia-info .materia-docente {
+    color : #94a3b8;
+}
+
+/* ── Modo oscuro: ficha-estudiante boletín ── */
+html.modo-oscuro .ficha-estudiante {
+    background   : #1a2e24;
+    border-color : #2a4a3e;
+}
+
+html.modo-oscuro .ficha-dato span {
+    color : #94a3b8;
+}
+
+html.modo-oscuro .ficha-dato strong {
+    color : #e0e0e0;
+}
+
+/* ── Modo oscuro: resumen-boletin (estudiante) ── */
+html.modo-oscuro .resumen-boletin .resumen-card {
+    background   : #1a2e24;
+    border-color : #2a4a3e;
+}
+
+html.modo-oscuro .resumen-boletin .resumen-card span {
+    color : #94a3b8;
+}
+
+html.modo-oscuro .resumen-boletin .resumen-card strong {
+    color : #e0e0e0;
+}
+
+html.modo-oscuro .resumen-boletin .resumen-card i {
+    color : #4ade80;
+}
+
+/* ── Modo oscuro: ficha-asignacion docente ── */
+html.modo-oscuro .ficha-asignacion {
+    background   : #1a2e24;
+    border-color : #2a4a3e;
+}
+
+html.modo-oscuro .ficha-dato span,
+html.modo-oscuro .ficha-asignacion .ficha-dato span {
+    color : #94a3b8;
+}
+
+html.modo-oscuro .ficha-dato strong,
+html.modo-oscuro .ficha-asignacion .ficha-dato strong {
+    color : #e0e0e0;
+}
+
+/* ── Modo oscuro: docente-comun — asignaciones y fichas ── */
+html.modo-oscuro .asignacion-item {
+    background   : #1a2e24;
+    border-color : #2a4a3e;
+}
+
+html.modo-oscuro .asignacion-materia {
+    color : #e0e0e0;
+}
+
+html.modo-oscuro .asignacion-grupo {
+    color : #94a3b8;
+}
+
+html.modo-oscuro .asignacion-icono {
+    background   : #1a3a2e;
+    border-color : #2a4a3e;
+    color        : #4ade80;
+}
+
+html.modo-oscuro .ficha-contexto {
+    background   : #1a2e24;
+    border-color : #2a4a3e;
+}
+
+html.modo-oscuro .ficha-contexto .ficha-dato span {
+    color : #94a3b8;
+}
+
+html.modo-oscuro .ficha-contexto .ficha-dato strong {
+    color : #e0e0e0;
+}
+
+html.modo-oscuro .resumen-faltas {
+    background   : #1a2e24;
+    border-color : #2a4a3e;
+    color        : #e0e0e0;
+}
+
+/* ── Modo oscuro: docente notas — preview y chips ── */
+html.modo-oscuro .preview-nota {
+    background   : #1a2e24;
+    border-color : #2a4a3e;
+    color        : #e0e0e0;
+}
+
+html.modo-oscuro .preview-nota.superior { color: #4ade80; }
+html.modo-oscuro .preview-nota.alto     { color: #60a5fa; }
+html.modo-oscuro .preview-nota.basico   { color: #fbbf24; }
+html.modo-oscuro .preview-nota.bajo     { color: #f87171; }
+
+html.modo-oscuro .nota-chip {
+    color : #e0e0e0;
+}
+
+html.modo-oscuro .nota-aprobada {
+    background : #1a3a2e;
+    color      : #4ade80;
+}
+
+html.modo-oscuro .nota-reprobada {
+    background : #3a1e1e;
+    color      : #f87171;
+}
+
+html.modo-oscuro .promedio-chip {
+    color : #e0e0e0;
+}
+
+html.modo-oscuro .promedio-aprobado {
+    background : #1a3a2e;
+    color      : #4ade80;
+}
+
+html.modo-oscuro .promedio-reprobado {
+    background : #3a1e1e;
+    color      : #f87171;
+}
+
+html.modo-oscuro .periodo-lock {
+    color : #94a3b8;
+}
+
+html.modo-oscuro .alerta-advertencia {
+    background   : #2a2a1a;
+    border-color : #854d0e;
+    color        : #fbbf24;
+}
+
+/* ── Modo oscuro: faltas chips ── */
+html.modo-oscuro .faltas-chip {
+    color : #e0e0e0;
+}
+
+html.modo-oscuro .faltas-chip.faltas-ok    { background: #1a3a2e; color: #4ade80; }
+html.modo-oscuro .faltas-chip.faltas-bajo  { background: #2a3a1e; color: #fbbf24; }
+html.modo-oscuro .faltas-chip.faltas-alto  { background: #3a1e1e; color: #f87171; }
+html.modo-oscuro .faltas-chip.faltas-sin   { background: #1e2a24; color: #94a3b8; }
+
+html.modo-oscuro .total-chip.total-ok      { background: #1a3a2e; color: #4ade80; }
+html.modo-oscuro .total-chip.total-medio   { background: #2a3a1e; color: #fbbf24; }
+html.modo-oscuro .total-chip.total-alto    { background: #3a1e1e; color: #f87171; }
+html.modo-oscuro .total-chip.total-sin     { background: #1e2a24; color: #94a3b8; }
+
+html.modo-oscuro .badge-cerrado {
+    background : #3a1e1e;
+    color      : #f87171;
+}
+
+/* ── Modo oscuro: resumen componente ── */
+html.modo-oscuro .resumen-bloque {
+    background   : #1a2e24;
+    border-color : #2a4a3e;
+}
+
+html.modo-oscuro .resumen-bloque h4 {
+    color : #4ade80;
+}
+
+html.modo-oscuro .resumen-bloque p {
+    color : #94a3b8;
+}
+
+html.modo-oscuro .resumen-bloque p strong {
+    color : #e0e0e0;
+}
+
+html.modo-oscuro .resumen-seguridad {
+    background        : #1a2a3a;
+    border-left-color : #60a5fa;
+}
+
+/* ── Modo oscuro: resumen-card docente grupo ── */
+html.modo-oscuro .resumen-card {
+    background   : #1a2e24;
+    border-color : #2a4a3e;
+}
+
+html.modo-oscuro .resumen-card span {
+    color : #94a3b8;
+}
+
+html.modo-oscuro .resumen-card strong {
+    color : #e0e0e0;
+}
+
+/* ── Modo oscuro: nota-sin chip (fondo blanco) ── */
+html.modo-oscuro .nota-sin {
+    background : #1e2a24;
+    color      : #94a3b8;
+    border-color: #2a4a3e;
+}
+
+html.modo-oscuro .promedio-sin {
+    background : #1e2a24;
+    color      : #94a3b8;
+    border-color: #2a4a3e;
+}
+
+/* ── Modo oscuro: info-registro inscripcion ── */
+html.modo-oscuro .info-registro {
+    background   : #1a2e24;
+    border-color : #2a4a3e;
+    color        : #e0e0e0;
+}
+
+html.modo-oscuro .info-registro strong {
+    color : #4ade80;
+}
+
+/* ── Modo oscuro: im-notas-chip (estrella con número) ── */
+html.modo-oscuro .im-notas-chip {
+    background   : #1a2e24;
+    border-color : #2a4a3e;
+    color        : #4ade80;
+}
+
+html.modo-oscuro .im-notas-chip:hover {
+    background   : #2a4a3e;
+    border-color : #4ade80;
+}
+
+/* ── Modo oscuro: resumen-card variantes aprobado/reprobado ── */
+html.modo-oscuro .resumen-card.aprobado {
+    background   : #1a3a2e;
+    border-color : #2a4a3e;
+}
+
+html.modo-oscuro .resumen-card.aprobado > i,
+html.modo-oscuro .resumen-card.aprobado strong {
+    color : #4ade80;
+}
+
+html.modo-oscuro .resumen-card.reprobado {
+    background   : #3a1e1e;
+    border-color : #5a2e2e;
+}
+
+html.modo-oscuro .resumen-card.reprobado > i,
+html.modo-oscuro .resumen-card.reprobado strong {
+    color : #f87171;
+}
+
+html.modo-oscuro .resumen-card.aprobadas > i {
+    color : #4ade80;
+}
+
+html.modo-oscuro .resumen-card.reprobadas > i {
+    color : #f87171;
+}
+
+/* ── Modo oscuro: im-ficha (ficha resumen materias inscritas) ── */
+html.modo-oscuro .im-ficha {
+    background   : #1a2e24;
+    border-color : #2a4a3e;
+}
+
+html.modo-oscuro .im-ficha-item > span:first-child {
+    color : #94a3b8;
+}
+
+html.modo-oscuro .im-ficha-item strong {
+    color : #e0e0e0;
+}
+
+/* ── Modo oscuro: formularios.css inputs disabled ── */
+html.modo-oscuro .grupo-formulario input:disabled,
+html.modo-oscuro .grupo-formulario select:disabled {
+    background : #1a2e24;
+    color      : #94a3b8;
+    border-color: #2a4a3e;
+}
+
+html.modo-oscuro .grupo-formulario input,
+html.modo-oscuro .grupo-formulario select,
+html.modo-oscuro .grupo-formulario textarea {
+    background   : #1a2e24;
+    color        : #e0e0e0;
+    border-color : #2a4a3e;
+}
+
+html.modo-oscuro .grupo-formulario label {
+    color : #94a3b8;
+}
+
+html.modo-oscuro .grupo-formulario input:focus,
+html.modo-oscuro .grupo-formulario select:focus,
+html.modo-oscuro .grupo-formulario textarea:focus {
+    border-color : #22c55e;
+    background   : #1e3a2e;
+}
+
+/* ── Modo oscuro: academico-form inputs disabled ── */
+html.modo-oscuro .campo input:disabled,
+html.modo-oscuro .campo select:disabled,
+html.modo-oscuro .campo textarea:disabled {
+    background   : #1a2e24;
+    color        : #94a3b8;
+    border-color : #2a4a3e;
+}
+
+html.modo-oscuro .campo input[type="date"]:disabled {
+    background   : #1a2e24;
+    color        : #94a3b8;
+}
+
+/* ── Modo oscuro: boletin index estudiante ── */
+html.modo-oscuro .boletin-card {
+    background   : #1a2e24;
+    border-color : #2a4a3e;
+}
+
+html.modo-oscuro .boletin-anio {
+    background   : #1a3a2e;
+    border-color : #2a4a3e;
+    color        : #4ade80;
+}
+
+html.modo-oscuro .boletin-anio i {
+    color : #4ade80;
+}
+
+html.modo-oscuro .boletin-titulo {
+    color : #e0e0e0;
+}
+
+html.modo-oscuro .boletin-grupo {
+    color : #94a3b8;
+}
+
+html.modo-oscuro .badge-vigente {
+    background : #1a3a2e;
+    color      : #4ade80;
+    border-color: #2a4a3e;
+}
+
+html.modo-oscuro .estado-activa {
+    background : #1a3a2e;
+    color      : #4ade80;
+}
+
+html.modo-oscuro .estado-retirada {
+    background : #3a1e1e;
+    color      : #f87171;
+}
+
+html.modo-oscuro .estado-finalizada {
+    background : #1a2e24;
+    color      : #94a3b8;
+}

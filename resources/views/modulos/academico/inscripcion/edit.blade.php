@@ -34,14 +34,14 @@
             Año: <strong>{{ optional($inscripcion->grupo->anioLectivo)->nombre ?? '—' }}</strong>
             &nbsp;·&nbsp;
             @php
-                $estadoClase = match($inscripcion->estado) {
-                    'activa'     => 'color:#047857',
-                    'retirada'   => 'color:#991b1b',
-                    'finalizada' => 'color:#374151',
-                    default      => 'color:#6b7280',
-                };
+                $estadoClaseMap = [
+                    'activa'     => 'estado-activo',
+                    'retirada'   => 'estado-inactivo',
+                    'finalizada' => 'estado-pendiente',
+                ];
+                $estadoClase = $estadoClaseMap[$inscripcion->estado] ?? 'estado-pendiente';
             @endphp
-            <span style="{{ $estadoClase }};">
+            <span class="estado {{ $estadoClase }}">
                 <i class="fa-solid fa-circle-dot"></i>
                 {{ ucfirst($inscripcion->estado) }}
             </span>

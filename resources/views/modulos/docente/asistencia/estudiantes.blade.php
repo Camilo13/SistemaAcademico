@@ -65,7 +65,7 @@
                             </th>
                         @endforeach
                         <th>Total</th>
-                        <th class="col-acciones">Registrar falta</th>
+                        <th class="col-acciones">Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -122,37 +122,17 @@
                             {{-- Acciones --}}
                             <td class="col-acciones" data-label="Acciones">
                                 <div class="acciones">
-                                    {{-- Registrar falta en nuevo periodo --}}
                                     <a href="{{ route('docente.asistencia.create', [$asignacion->id, $im->id]) }}"
                                        class="btn-icono activar"
                                        title="Registrar faltas">
                                         <i class="fa-solid fa-plus"></i>
                                     </a>
-
-                                    {{-- Editar cada registro existente --}}
                                     @foreach($asistencias as $reg)
                                         <a href="{{ route('docente.asistencia.edit', $reg->id) }}"
                                            class="btn-icono editar"
                                            title="Editar {{ $reg->periodo->nombre ?? 'período' }}">
                                             <i class="fa-solid fa-pen"></i>
                                         </a>
-                                    @endforeach
-
-                                    {{-- Eliminar cada registro --}}
-                                    @foreach($asistencias as $reg)
-                                        @if($reg->periodo && $reg->periodo->estaAbierto())
-                                            <form method="POST"
-                                                  action="{{ route('docente.asistencia.destroy', $reg->id) }}"
-                                                  class="form-eliminar">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit"
-                                                        class="btn-icono eliminar"
-                                                        title="Eliminar {{ $reg->periodo->nombre ?? 'período' }}">
-                                                    <i class="fa-solid fa-trash"></i>
-                                                </button>
-                                            </form>
-                                        @endif
                                     @endforeach
                                 </div>
                             </td>

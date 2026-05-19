@@ -75,15 +75,45 @@
         </div>
     </div>
 
+    {{-- ── Barra bulk ── --}}
+    <div class="barra-bulk"
+         data-bulk-modo="usuarios"
+         data-entidad="nota(s)"
+         data-url-editar="{{ route('admin.academico.notas.edit', [$inscripcionMateria->id, ':id']) }}"
+         data-url-destroy="{{ route('admin.academico.notas.destroy', [$inscripcionMateria->id, ':id']) }}">
+
+        <div class="bulk-info">
+            <i class="fa-solid fa-check-square"></i>
+            <span class="bulk-contador">0</span>
+            seleccionada(s)
+        </div>
+
+        <div class="bulk-acciones">
+            <a href="#" class="btn-bulk btn-bulk-editar">
+                <i class="fa-solid fa-pen"></i> Editar
+            </a>
+            <button type="button" class="btn-bulk btn-bulk-eliminar">
+                <i class="fa-solid fa-trash"></i> Eliminar
+            </button>
+            <div class="bulk-separador"></div>
+            <button type="button" class="btn-bulk btn-bulk-limpiar">
+                <i class="fa-solid fa-xmark"></i> Limpiar
+            </button>
+        </div>
+
+    </div>
+
     {{-- ── Tabla de notas ── --}}
     <div class="tabla-contenedor">
         <table class="tabla">
             <thead>
                 <tr>
+                    <th class="col-check">
+                        <input type="checkbox" class="checkbox-todos" title="Seleccionar todas">
+                    </th>
                     <th>Periodo</th>
                     <th>Nota</th>
                     <th>Desempeño</th>
-                    <th class="col-acciones">Acciones</th>
                 </tr>
             </thead>
             <tbody>
@@ -97,7 +127,13 @@
                             default     => ['Bajo',        'desempeno-bajo'],
                         };
                     @endphp
-                    <tr>
+                    <tr class="fila-seleccionable" data-id="{{ $nota->id }}">
+                        <td class="col-check">
+                            <input type="checkbox"
+                                   class="checkbox-tabla"
+                                   data-id="{{ $nota->id }}"
+                                   title="Seleccionar nota">
+                        </td>
                         <td data-label="Periodo">
                             {{ optional($nota->periodo)->nombre ?? '—' }}
                             @if(optional($nota->periodo)->estaCerrado())
@@ -117,16 +153,6 @@
                             <span class="desempeno-badge {{ $desempenoClase }}">
                                 {{ $desempenoLabel }}
                             </span>
-                        </td>
-
-                        <td class="col-acciones">
-                            <div class="acciones">
-                                <a href="{{ route('admin.academico.notas.edit', [$nota->inscripcion_materia_id, $nota->id]) }}"
-                                   class="btn-icono editar"
-                                   title="Editar nota">
-                                    <i class="fa-solid fa-pen"></i>
-                                </a>
-                            </div>
                         </td>
                     </tr>
                 @empty
@@ -148,4 +174,5 @@
 @push('scripts')
     <script src="{{ asset('js/componentes/academico.js') }}"></script>
     <script src="{{ asset('js/modulos/academico/nota.js') }}"></script>
+    <script src="{{ asset('js/componentes/acciones-tabla.js') }}"></script>
 @endpush

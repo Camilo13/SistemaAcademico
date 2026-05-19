@@ -279,3 +279,21 @@
         padding   : 0.65rem 0.8rem;
     }
 }
+
+/* ── Logo sidebar ── */
+.barra-logo {
+    display     : flex;
+    align-items : center;
+    gap         : 0.6rem;
+}
+
+.sidebar-logo {
+    height        : 36px;
+    width         : auto;
+    object-fit    : contain;
+    border-radius : 50%;
+    background    : #fff;
+    padding       : 2px;
+    box-shadow    : 0 0 0 2px rgba(255,255,255,0.25);
+    flex-shrink   : 0;
+}

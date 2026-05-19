@@ -183,7 +183,7 @@
                     </tr>
                 @empty
                     <tr class="fila-vacia">
-                        <td colspan="5">
+                        <td colspan="4">
                             <i class="fa-solid fa-circle-info"></i>
                             No hay materias inscritas aún.
                         </td>

@@ -118,7 +118,7 @@
     color      : var(--color-texto-cuerpo);
     font-weight: var(--peso-medio);
     padding    : 0.55rem 0.8rem;
-    background : #f3f4f6;
+    background : var(--fondo-input);
     border-radius: var(--radio-md);
     border     : 1px solid var(--borde-color);
 }

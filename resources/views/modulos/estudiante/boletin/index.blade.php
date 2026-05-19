@@ -54,8 +54,7 @@
                             <i class="fa-solid fa-eye"></i> Ver
                         </a>
                         <a href="{{ route('estudiante.boletin.pdf', $inscripcion->id) }}"
-                           id="btn-descargar-pdf"
-                           class="btn btn-neutro btn-sm"
+                           class="btn btn-neutro btn-sm btn-descargar-pdf"
                            target="_blank">
                             <i class="fa-solid fa-file-pdf"></i> PDF
                         </a>

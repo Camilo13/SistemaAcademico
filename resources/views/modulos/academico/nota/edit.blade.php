@@ -141,46 +141,6 @@
 
     </div>
 
-    {{-- ══════════════════════════════════════════
-         TARJETA PELIGRO — Eliminar nota
-    ══════════════════════════════════════════ --}}
-    <div class="tarjeta-form tarjeta-peligro">
-
-        <h3 class="seccion-titulo-form peligro">
-            <i class="fa-solid fa-triangle-exclamation"></i> Zona de peligro
-        </h3>
-
-        @php
-            $periodoAbierto = optional($nota->periodo)->estaAbierto();
-        @endphp
-
-        <p class="seccion-desc">
-            Eliminar esta nota es una acción <strong>permanente</strong>.
-            Solo es posible si el periodo está abierto.
-            @if(!$periodoAbierto)
-                <br>
-                <span class="texto-peligro">
-                    <i class="fa-solid fa-circle-xmark"></i>
-                    El periodo está cerrado y no permite eliminación.
-                </span>
-            @endif
-        </p>
-
-        <div class="acciones-secundarias">
-            <form method="POST"
-                  action="{{ route('admin.academico.notas.destroy', [$nota->inscripcion_materia_id, $nota->id]) }}"
-                  class="form-eliminar"
-                  data-nombre="Nota {{ optional($nota->periodo)->nombre }} — {{ number_format($valActual, 1) }}">
-                @csrf @method('DELETE')
-                <button type="submit"
-                        class="btn btn-peligro"
-                        {{ !$periodoAbierto ? 'disabled' : '' }}>
-                    <i class="fa-solid fa-trash"></i> Eliminar nota
-                </button>
-            </form>
-        </div>
-
-    </div>
 
 </div>
 

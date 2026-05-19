@@ -58,6 +58,17 @@ main {
     gap: 0.5rem;
 }
 
+/* Logo imagen en navbar */
+.navbar-logo {
+    height        : 42px;
+    width         : auto;
+    object-fit    : contain;
+    border-radius : 50%;
+    background    : #fff;
+    padding       : 2px;
+    box-shadow    : 0 0 0 2px rgba(255,255,255,0.3);
+}
+
 /* Enlaces */
 .nav-links {
     list-style: none;

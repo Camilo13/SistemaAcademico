@@ -16,7 +16,7 @@
                 Generado el {{ \Carbon\Carbon::parse($boletin['fecha_generacion_iso'])->format('d/m/Y H:i') }}
             </p>
         </div>
-        <div style="display:flex;gap:.6rem;flex-wrap:wrap;">
+        <div class="cabecera-acciones">
             <a href="{{ route('estudiante.boletin.index') }}" class="btn btn-neutro btn-sm">
                 <i class="fa-solid fa-arrow-left"></i> Mis Boletines
             </a>

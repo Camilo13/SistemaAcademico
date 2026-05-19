@@ -43,6 +43,7 @@
 
         {{-- Logo --}}
         <div class="barra-logo">
+            <img src="{{ asset('img/logo.png') }}" alt="Logo institucional" class="sidebar-logo">
             I.E.A. Akwe Uus Yat
         </div>
 
